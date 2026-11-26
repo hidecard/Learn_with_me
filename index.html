@@ -12714,6 +12714,24 @@ void main() {
           <p class="lede">စာမျက်နှာ မတက်ခြင်း၊ API မှားခြင်း၊ image ပျောက်ခြင်းတွေမှာ Network panel က request တစ်ခုချင်းရဲ့ အခြေအနေကိုပြပါတယ်။</p>
           <h2>Request တစ်ခုကိုဖတ်ပါ</h2><p>Network ကိုဖွင့်ပြီး page ကို reload လုပ်ပါ။ Status, Type, Initiator နဲ့ Timing ကိုကြည့်ပါ။ 2xx အောင်မြင်၊ 3xx redirect၊ 4xx client/request အမှား၊ 5xx server အမှားဖြစ်တတ်ပါတယ်။</p><h2>Headers နှင့် Response</h2><p>Request URL/method, status, request/response headers, payload နဲ့ response body ကိုစစ်ပါ။ API 401/403 ဖြစ်ရင် authentication/permission, 404 ဖြစ်ရင် URL/route, CORS error ဖြစ်ရင် server allow-origin setting ကိုစစ်ပါ။</p><h2>အသုံးဝင်တဲ့နည်းလမ်းများ</h2><p>Preserve log နဲ့ navigation ကျော်ပြီး log ထိန်းထားပါ။ Disable cache ကို DevTools ဖွင့်ထားစဉ်သာ သုံးပါ။ Slow network profile နဲ့ loading ကိုစမ်းပြီး၊ sensitive request ကို HAR အဖြစ် export/share မလုပ်မီ token နဲ့ personal data ဖယ်ရှားပါ။</p>
         </article>
+        <article class="page" id="page-devtools-sources" data-group="devtools" data-title="Sources Panel နှင့် Breakpoint Debugging">
+          <div class="progress-line"><div></div></div>
+          <h1>Sources Panel နှင့် Breakpoint Debugging</h1>
+          <p class="lede">Sources panel က JavaScript ကို line-by-line ရပ်ကြည့်ပြီး error ဖြစ်တဲ့အချိန် state ဘယ်လိုရှိသလဲ စစ်ပေးနိုင်ပါတယ်။</p>
+          <h2>Breakpoint ထားပါ</h2><p>Source file ထဲက line number ကိုနှိပ်ပြီး breakpoint တင်ပါ။ Page မှာ action လုပ်တဲ့အခါ code က ရပ်သွားပြီး scope, local variable နဲ့ call stack ကိုစစ်နိုင်ပါတယ်။</p><h2>Step ဖြင့် လိုက်စစ်ပါ</h2><p>Resume, step over, step into, step out ကိုသုံးပြီး execution ကိုလိုက်ပါ။ Conditional breakpoint နဲ့ expression မှန်တဲ့အခါမှရပ်စေပါ။ DOM event handler မီးမောင်းထိုးမရရင် Event Listener Breakpoints ကိုစမ်းပါ။</p><h2>Source map နှင့် error</h2><p>Production bundle ကို minify လုပ်ထားရင် source map က မူရင်း source ကိုညွှန်ပေးနိုင်ပါတယ်။ Source map ကို build ထဲမှာမှန်ကန်စွာတင်ထားကြောင်းစစ်ပါ။ Sensitive source map ကို public မဖြစ်စေပါနဲ့။</p>
+        </article>
+        <article class="page" id="page-devtools-device" data-group="devtools" data-title="Device Mode နှင့် Responsive စမ်းသပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Device Mode နှင့် Responsive စမ်းသပ်ခြင်း</h1>
+          <p class="lede">DevTools Device Toolbar က viewport, pixel ratio, touch input နဲ့ network speed ကိုအတုယူပြီး responsive layout ကိုစမ်းစေပါတယ်။ Emulator စမ်းသပ်မှုတစ်ခုတည်းက စက်အမှန်စမ်းသပ်မှုကို မအစားထိုးနိုင်ပါ။</p>
+          <h2>Viewport စစ်ပါ</h2><p>Device toolbar ဖွင့်ပြီး width အမျိုးမျိုး၊ portrait/landscape၊ zoom နဲ့ touch emulation ကိုစမ်းပါ။ Breakpoint တစ်ခုတည်းမှာမဟုတ်ဘဲ content ပျက်စပြုတဲ့အရွယ်အစားအနီးမှာလည်းစမ်းပါ။</p><h2>Network စမ်းသပ်ပါ</h2><p>Slow network profile နဲ့ cache ပိတ်ပြီး initial load ကိုစစ်ပါ။ Form, navigation, long Burmese text, overflow, fixed/sticky header နဲ့ keyboard focus ကို mobile width မှာကြည့်ပါ။</p><h2>သတိပြုရန်</h2><p>Device emulation က font rendering, hardware, browser behavior အားလုံးကိုမတူညီအောင် အတိအကျမတုပနိုင်ပါ။ iOS/Android browser နဲ့ အနည်းဆုံး screen အရွယ်အစားတချို့ကို အမှန်စမ်းပါ။</p>
+        </article>
+        <article class="page" id="page-devtools-performance" data-group="devtools" data-title="Performance Trace နှင့် Memory Leak ရှာခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Performance Trace နှင့် Memory Leak ရှာခြင်း</h1>
+          <p class="lede">Performance panel က main-thread အလုပ်၊ rendering, layout နဲ့ script အချိန်တွေကို timeline အဖြစ်ပြပါတယ်။ အရင်တိုင်းတာပြီးမှ bottleneck ကိုခွဲထုတ်ပါ။</p>
+          <h2>Trace ဖမ်းပါ</h2><p>Performance panel မှာ recording စပြီး အခက်အခဲဖြစ်တဲ့ user action ကိုတစ်ကြိမ်လုပ်၊ ရပ်ပြီး timeline ကိုစစ်ပါ။ Long task, repeated layout/recalculate style နဲ့ မလိုတဲ့ script ကိုရှာပါ။</p><h2>Memory စစ်ပါ</h2><p>Memory panel heap snapshot ကို တူညီတဲ့ action မလုပ်မီ/လုပ်ပြီး နှိုင်းယှဉ်ပါ။ Event listener မဖြုတ်ခြင်း၊ detached DOM node၊ ကြီးထွားနေတဲ့ cache/array တွေက leak ဖြစ်နိုင်ပါတယ်။</p><h2>ရလဒ်ကိုသိမ်းပါ</h2><p>Trace ကိုပြန်ဖွင့်လို့ရတဲ့ bug သေးသေးနဲ့တွဲမှတ်ပါ။ Snapshot/trace ထဲမှာ user data, URL, token ပါနိုင်တာကြောင့် public issue မှာမျှဝေမီ လျှို့ဝှက်အချက်အလက်တွေကို ဖယ်ရှားပါ။</p>
+        </article>
         <article class="page" id="page-security-basics" data-group="security" data-title="Web Security အခြေခံ စဉ်းစားပုံ">
           <div class="progress-line"><div></div></div>
           <h1>Web Security အခြေခံ စဉ်းစားပုံ</h1>
@@ -12738,6 +12756,30 @@ void main() {
           <p class="lede">API key, database password, signing key တွေဟာ source code ထဲမှာမထည့်သင့်တဲ့ secret ဖြစ်ပါတယ်။ Public repository ထဲတစ်ခါတင်မိရင် ဖျက်ရုံနဲ့ မလုံခြုံတော့ပါ။</p>
           <h2>Secrets ကိုစီမံပါ</h2><p>Local <code>.env</code> ကို <code>.gitignore</code> ထဲထည့်ပြီး <code>.env.example</code> မှာ value အတုသာထားပါ။ Production မှာ hosting provider ရဲ့ secret store/environment settings ကိုသုံးပါ။ Secret leak ဖြစ်လျှင် ချက်ချင်း revoke/rotate လုပ်ပြီး logs/history စစ်ပါ။</p><h2>HTTPS နှင့် Security Headers</h2><p>Production ကို HTTPS နဲ့သာဖွင့်ပါ။ HSTS ကို HTTPS အပြည့်အဝသေချာပြီးမှ စတင်ပါ။ Content-Security-Policy, frame-ancestors, X-Content-Type-Options စတဲ့ header တွေကို app နဲ့ကိုက်ညီအောင်စမ်းသပ်ပြီးမှတင်ပါ။</p><h2>Dependency များ</h2><p>Lockfile ကို commit လုပ်ပါ။ Dependency update ကို review/test လုပ်ပြီး audit tool ဖြင့် known vulnerability စစ်ပါ။ မသိတဲ့ package ကိုအလွယ်တကူမထည့်ပါနဲ့။</p><ul><li>Secret ကို public issue, screenshot, terminal output ထဲ မတင်ပါနဲ့။</li><li>အသုံးမပြုတဲ့ permission/token scope ကိုဖယ်ပါ။</li><li>Production error log ထဲ password, token, personal data မသိမ်းပါနဲ့။</li></ul>
         </article>
+        <article class="page" id="page-security-headers-csp" data-group="security" data-title="Content Security Policy နှင့် Security Headers">
+          <div class="progress-line"><div></div></div>
+          <h1>Content Security Policy နှင့် Security Headers</h1>
+          <p class="lede">Security header တွေက browser မှာ content အလုပ်လုပ်ပုံကို ထိန်းချုပ်ပေးတယ်။ အရင် <code>Content-Security-Policy-Report-Only</code> နဲ့ စမ်းပြီးမှ enforce လုပ်ပါ။</p>
+          <h2>CSP ကိုတဖြည်းဖြည်းတင်းကျပ်ပါ</h2><p><code>default-src</code> ကိုအခြေခံ allowlist အဖြစ်ထား၊ script ကို nonce/hash နဲ့ခွင့်ပြု၊ inline <code>unsafe-inline</code> ကိုမလိုအပ်ဘဲမဖွင့်ပါနဲ့။ Report ကိုစောင့်ကြည့်ပြီး legitimate asset မပျက်ကြောင်းအတည်ပြုပါ။</p><h2>Header များရဲ့ရည်ရွယ်ချက်</h2><p><code>frame-ancestors</code> က clickjacking ကိုကန့်သတ်၊ <code>X-Content-Type-Options: nosniff</code> က MIME sniffing လျှော့၊ <code>Referrer-Policy</code> က referrer data လျှော့နိုင်ပါတယ်။ HSTS ကို HTTPS ပြည့်စုံကြောင်းသေချာပြီးမှအသုံးပြုပါ။</p><h2>စမ်းသပ်ခြင်း</h2><p>Staging မှာ console CSP violation နဲ့ report ကိုစစ်ပါ။ Policy တင်းလွန်းပြီး script/font/image ပိတ်သွားနိုင်သလို <code>*</code> အလွန်ကျယ်အောင်ပေးတာက ကာကွယ်မှုကိုအားနည်းစေပါတယ်။</p>
+        </article>
+        <article class="page" id="page-security-upload" data-group="security" data-title="File Upload နှင့် Path Traversal ကာကွယ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>File Upload နှင့် Path Traversal ကာကွယ်ခြင်း</h1>
+          <p class="lede">ဖိုင်တင်ခွင့်က malware, storage exhaustion နဲ့ server ပေါ် code run ဖြစ်နိုင်ခြေကိုဖွင့်ပေးနိုင်ပါတယ်။ Extension ကိုကြည့်တာတစ်ခုတည်းနဲ့ ဖိုင်အမျိုးအစားကို မယုံကြည်ပါနဲ့။</p>
+          <h2>Upload စစ်ဆေးမှု</h2><p>Authentication/permission စစ်ပြီး file size, allowed extension, server-side MIME/content signature ကိုစစ်ပါ။ Random server filename သုံးပါ။ Upload limit, rate limit နဲ့ malware scanning လိုအပ်ချက်တွေ သတ်မှတ်ပါ။</p><h2>သိမ်းဆည်းခြင်းနှင့် download</h2><p>ဖိုင်ကို web root အပြင်ဘက်မှာသိမ်းပြီး user ပေးတဲ့ filename နဲ့ filesystem path တိုက်ရိုက်မတည်ဆောက်ပါနဲ့။ Download လုပ်ချိန် permission ထပ်စစ်ပြီး Content-Disposition နဲ့ nosniff စတဲ့ ကာကွယ်မှုအသုံးပြုပါ။</p><h2>Path Traversal</h2><p><code>../</code> လို path segment ကို filename မှာမလက်ခံပါနဲ့။ ကိုယ်တိုင်ရေးတဲ့ sanitize regex တစ်ခုတည်းကိုမယုံဘဲ framework ရဲ့ လုံခြုံတဲ့ file storage API နဲ့ ခန့်မှန်းရခက်တဲ့ opaque ID သုံးပါ။</p>
+        </article>
+        <article class="page" id="page-security-api" data-group="security" data-title="API Authorization, Rate Limit နှင့် Token စီမံခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>API Authorization, Rate Limit နှင့် Token စီမံခြင်း</h1>
+          <p class="lede">API တိုင်းမှာ resource အဆင့် permission စစ်ဖို့လိုပါတယ်။ Endpoint ကို login ပြထားရုံက record တစ်ခုချင်းဝင်ခွင့်ကို အတည်မပြုနိုင်ပါ။</p>
+          <h2>Object-level authorization</h2><p>User A ရဲ့ ID ကို User B ရဲ့ request ထဲအစားထိုးပြီး data ပြောင်း/ဖတ်လို့ရသလားစမ်းပါ။ Server က authenticated user နဲ့ requested object ကိုတိုက်စစ်ပါ။ Mass assignment မဖြစ်အောင် လက်ခံတဲ့ field ကို allowlist လုပ်ပါ။</p><h2>Abuse လျှော့ချပါ</h2><p>Login, password reset, search နဲ့ ဈေးကြီးတဲ့ endpoint တွေမှာ user/IP အလိုက် rate limit နဲ့ abuse monitoring ထည့်ပါ။ API response မှာ pagination, size limit, generic error shape သုံးပါ။</p><h2>Token နှင့် CORS</h2><p>Access token ကို URL query/log ထဲမထည့်ပါနဲ့။ သက်တမ်း၊ rotation, revoke နဲ့ storage ကို threat model အလိုက်ရွေးပါ။ CORS က browser sharing policy သာဖြစ်ပြီး authentication/authorization အစားမထိုးပါ။</p>
+        </article>
+        <article class="page" id="page-security-review" data-group="security" data-title="Security Review နှင့် Vulnerability ပြန်ပြင်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Security Review နှင့် Vulnerability ပြန်ပြင်ခြင်း</h1>
+          <p class="lede">Security ကို release တစ်ခါတည်းစစ်ပြီးရပ်မထားဘဲ pull request, dependency update နဲ့ incident တိုင်းမှာ ပြန်စစ်ပါ။</p>
+          <h2>အခြေခံ automated checks</h2><p>Lockfile ပါတဲ့ dependency audit, secret scanning, static analysis နဲ့ test suite ကို CI မှာ run ပါ။ Tool ရလဒ်အားလုံးကို အမှန်လို့မယူဘဲ false positive/false negative ကို review လုပ်ပါ။</p><h2>Finding ကို ဦးစားပေးပါ</h2><p>Exploit ဖြစ်နိုင်မှု, ထိခိုက်မယ့် data, internet exposure နဲ့ remediation ရှိ/မရှိကိုစဉ်းစားပြီး severity သတ်မှတ်ပါ။ Security fix ကို owner/date နဲ့ခြေရာခံပြီး dependency pin တင်ပြီးဆုံးမသွားဘဲ update အစစ်အမှန်ကို deploy လုပ်ပါ။</p><h2>Incident အတွက်ပြင်ဆင်ပါ</h2><p>Contact/ escalation, access revoke, secret rotation, backup restore နဲ့ customer notification အစီအစဉ် ရေးထားပါ။ Log မှာစစ်ဆေးနိုင်လောက်အောင်ထားပေမယ့် password/token/full payment data မသိမ်းပါနဲ့။</p>
+        </article>
         <article class="page" id="page-deploy-plan" data-group="deploy" data-title="Deploy မလုပ်မီ Hosting ရွေးချယ်ခြင်း">
           <div class="progress-line"><div></div></div>
           <h1>Deploy မလုပ်မီ Hosting ရွေးချယ်ခြင်း</h1>
@@ -12760,7 +12802,25 @@ void main() {
           <div class="progress-line"><div></div></div>
           <h1>GitHub Actions ဖြင့် CI/CD အခြေခံ</h1>
           <p class="lede">CI က code ပြောင်းတိုင်း build/test ကိုအလိုအလျောက်စစ်ပေးပြီး CD က အောင်မြင်တဲ့ artifact ကို publish လုပ်ပေးပါတယ်။ အရင်ဆုံး automated check ကိုတည်ဆောက်ပြီးမှ deploy ကိုချိတ်ပါ။</p>
-          <h2>Workflow အစဉ်</h2><p>CI/CD pipeline ကို အောက်ပါအဆင့်တွေနဲ့ စီစဉ်ပါ။</p><ul><li>Trigger — pull request/push မှာ run ပါ။</li><li>Install — lockfile အတိုင်း dependency တင်ပါ။</li><li>Check — lint/test/build လုပ်ပါ။</li><li>Deploy — default branch မှာ check အောင်မှ publish ပါ။</li></ul><h2>Permission နဲ့ Secret</h2><p>Workflow ကိုလိုအပ်သလောက် permission သာပေးပါ။ ဥပမာ Pages deployment လုပ်ရာမှာ <code>pages: write</code> နဲ့ <code>id-token: write</code> လိုနိုင်ပါတယ်။ Token ကို log မလုပ်ပါနဲ့။ Third-party action များကို review လုပ်ပြီး version ကို သတ်မှတ်အသုံးပြုပါ။</p><h2>Failure និង Rollback</h2><p>Action run log မှ failing step ကိုပြန်စစ်ပါ၊ failed check ကိုကျော်ပြီး deploy မလုပ်ပါနဲ့။ ယခင် stable release ကိုပြန်တင်နိုင်မယ့် commit/tag မှတ်ထားပြီး rollback ကို staging မှာ လေ့ကျင့်ပါ။</p>
+          <h2>Workflow အစဉ်</h2><p>CI/CD pipeline ကို အောက်ပါအဆင့်တွေနဲ့ စီစဉ်ပါ။</p><ul><li>Trigger — pull request/push မှာ run ပါ။</li><li>Install — lockfile အတိုင်း dependency တင်ပါ။</li><li>Check — lint/test/build လုပ်ပါ။</li><li>Deploy — default branch မှာ check အောင်မှ publish ပါ။</li></ul><h2>Permission နဲ့ Secret</h2><p>Workflow ကိုလိုအပ်သလောက် permission သာပေးပါ။ ဥပမာ Pages deployment လုပ်ရာမှာ <code>pages: write</code> နဲ့ <code>id-token: write</code> လိုနိုင်ပါတယ်။ Token ကို log မလုပ်ပါနဲ့။ Third-party action များကို review လုပ်ပြီး version ကို သတ်မှတ်အသုံးပြုပါ။</p><h2>Failure နှင့် Rollback</h2><p>Action run log မှ failing step ကိုပြန်စစ်ပါ၊ failed check ကိုကျော်ပြီး deploy မလုပ်ပါနဲ့။ ယခင် stable release ကိုပြန်တင်နိုင်မယ့် commit/tag မှတ်ထားပြီး rollback ကို staging မှာ လေ့ကျင့်ပါ။</p>
+        </article>
+        <article class="page" id="page-deploy-branch-pr" data-group="deploy" data-title="Branch, Pull Request နှင့် Release Flow">
+          <div class="progress-line"><div></div></div>
+          <h1>Branch, Pull Request နှင့် Release Flow</h1>
+          <p class="lede">အပြောင်းအလဲတစ်ခုချင်းစီကို review လုပ်နိုင်အောင် branch နဲ့ pull request သုံးပါ။ Production ထဲကို တိုက်ရိုက်ပြင်တာထက် စမ်းသပ်ပြီးမှ merge လုပ်တဲ့ စနစ်က ပြဿနာရှာရလွယ်စေပါတယ်။</p>
+          <h2>Branch strategy</h2><p>အလုပ်တစ်ခုအတွက် feature branch ခွဲပြီး commit ကိုရည်ရွယ်ချက်တစ်ခုချင်းစီအလိုက် သေးငယ်စွာထားပါ။ Secret သို့မဟုတ် generated artifact ကို မလိုအပ်ဘဲ commit မလုပ်ပါနဲ့။</p><h2>Pull request အဆင့်များ</h2><p>PR description မှာ ပြောင်းလဲမှု၊ စမ်းသပ်နည်းနဲ့ အန္တရာယ်ရှိနိုင်တဲ့အပိုင်းကို ရေးပါ။ CI အောင်မြင်ပြီး code review ပြီးမှ merge လုပ်ပါ။ Conflict ဖြေရှင်းပြီးနောက် test ကို ပြန် run ပါ။</p><h2>Release ကိုခြေရာခံပါ</h2><p>Release tag သို့မဟုတ် commit SHA ကိုမှတ်ထားပါ။ ဘယ် version က production မှာရှိလဲ၊ ဘယ်သူက deploy လုပ်လဲ၊ rollback လုပ်ရင် ဘယ် SHA ကိုရွေးမလဲ မှတ်တမ်းထားပါ။</p>
+        </article>
+        <article class="page" id="page-deploy-build-artifacts" data-group="deploy" data-title="Build Artifact နှင့် Reproducible Deployment">
+          <div class="progress-line"><div></div></div>
+          <h1>Build Artifact နှင့် Reproducible Deployment</h1>
+          <p class="lede">Build ထုတ်ကုန်ကို စမ်းသပ်ပြီးနောက် တူညီတဲ့ artifact ကို deploy လုပ်ခြင်းက environment မတူတာကြောင့်ဖြစ်တဲ့ အမှားကိုလျှော့ချပေးပါတယ်။</p>
+          <h2>Build တည်ငြိမ်စေပါ</h2><p>Lockfile နဲ့ runtime version ကို repository ထဲမှာ သတ်မှတ်ပါ။ CI မှာ clean install လုပ်ပြီး build/test လုပ်ပါ။ Local machine ပေါ်မှာသာရှိတဲ့ file, global package သို့မဟုတ် secret ကို မမှီခိုစေပါနဲ့။</p><h2>Artifact စစ်ဆေးပါ</h2><p>Build directory ထဲမှာ လိုအပ်တဲ့ HTML, CSS, JS နဲ့ asset တွေပါမပါစစ်ပါ။ Bundle ထဲမှာ <code>.env</code>, private key, debug data မပါကြောင်းစစ်ပါ။ Source map ကို public ထုတ်မလား သီးခြားဆုံးဖြတ်ပါ။</p><h2>Deploy မတိုင်မီ</h2><p>Artifact version/hash ကို build run နဲ့ချိတ်ပါ။ Staging မှာ smoke test ပြီးမှ production ကို promote လုပ်ပါ။ Build ကွဲပြားနေရင် toolchain, dependency lockfile နဲ့ build-time configuration ကိုစစ်ပါ။</p>
+        </article>
+        <article class="page" id="page-deploy-monitor-rollback" data-group="deploy" data-title="Deployment စောင့်ကြည့်ခြင်း၊ Health Check နှင့် Rollback">
+          <div class="progress-line"><div></div></div>
+          <h1>Deployment စောင့်ကြည့်ခြင်း၊ Health Check နှင့် Rollback</h1>
+          <p class="lede">Deploy အောင်မြင်တယ်ဆိုတာ command ပြီးသွားတာတင်မဟုတ်ပါ။ Service အသုံးပြုနိုင်ခြင်း၊ error rate နဲ့ အရေးကြီးတဲ့ user flow တွေကို စောင့်ကြည့်ပါ။</p>
+          <h2>Health check နှင့် smoke test</h2><p>Public page တက်ခြင်း၊ API response အခြေအနေ၊ asset load နဲ့ အရေးကြီးတဲ့ flow ကို deploy ပြီးချင်းစမ်းပါ။ Health endpoint က authentication မလိုဘဲ service အဆင်ပြေကြောင်းသာပြသင့်ပါတယ်။</p><h2>Monitoring နှင့် log</h2><p>Availability, error rate, latency နဲ့ failed deployment ကိုစောင့်ကြည့်ပါ။ Log တွင် request ID ထည့်ကာ trace လုပ်ပါ၊ သို့သော် password/token သို့မဟုတ် ကိုယ်ရေးကိုယ်တာအချက်အလက် မသိမ်းပါနဲ့။ Alert တစ်ခုချင်းစီအတွက် တာဝန်ရှိသူ သတ်မှတ်ပါ။</p><h2>Rollback လုပ်ထုံးလုပ်နည်း</h2><p>Rollback trigger ကို ကြိုသတ်မှတ်ပါ—ဥပမာ error တိုးလာခြင်း သို့မဟုတ် အဓိက flow ပျက်ခြင်း။ ယခင် artifact ကိုပြန်တင်ခြင်းနဲ့ database migration အပြန်အလှန်ကို စမ်းသပ်ပါ။ Data migration ကို destructive ဖြစ်စေမယ့်အစား backward-compatible အဆင့်လိုက်ပြောင်းပါ။</p>
         </article>
         <article class="page" id="page-quality-measure" data-group="quality" data-title="Performance ကိုတိုင်းတာခြင်း">
           <div class="progress-line"><div></div></div>
@@ -12785,6 +12845,30 @@ void main() {
           <h1>Accessible Forms, Contrast နှင့် Motion</h1>
           <p class="lede">Form label, အမှားအယွင်းနဲ့ focus ကိုရှင်းလင်းစွာပြရင် လူတိုင်းဖြည့်ရလွယ်ကူပြီး အထူးသဖြင့် screen reader နဲ့ keyboard သုံးသူတွေကိုကူညီပါတယ်။</p>
           <h2>Form များ</h2><p>Input တစ်ခုချင်းစီကို <code>&amp;lt;label for&amp;gt;</code> နဲ့ချိတ်ပါ။ Required/format လိုအပ်ချက်ကို စာသားနဲ့ဖော်ပြပါ။ Error ဖြစ်ရင် ဘယ် field၊ ဘာကြောင့်၊ ဘယ်လိုပြင်ရမလဲ အတိအကျပြောပြီး field နဲ့ချိတ်ပါ။</p><h2>Contrast နှင့် Color</h2><p>စာသားနဲ့ background contrast ကိုစစ်ပါ; အရေးကြီးတဲ့အခြေအနေကို အရောင်တစ်ခုတည်းနဲ့ မပြပါနဲ့။ Link/controls တွေကို text, icon သို့မဟုတ် shape နဲ့ပါ ခွဲခြားသိနိုင်စေပါ။ Zoom 200% နဲ့ reflow ကိုစမ်းပါ။</p><h2>Motion နှင့် စမ်းသပ်မှု</h2><p>Animation များကို လိုအပ်သလောက်သာသုံးပြီး <code>prefers-reduced-motion</code> ကိုလေးစားပါ။ Automated accessibility scan ပြီးနောက် keyboard-only, zoom, screen reader စမ်းသပ်မှုကိုပါလုပ်ပါ။ Checklist တစ်ခုတည်းက user testing ကို အစားမထိုးပါ။</p>
+        </article>
+        <article class="page" id="page-quality-layout-shift" data-group="quality" data-title="Layout Shift နှင့် Loading UX">
+          <div class="progress-line"><div></div></div>
+          <h1>Layout Shift နှင့် Loading UX</h1>
+          <p class="lede">စာမျက်နှာတက်နေစဉ် content ရွေ့လျားမှုက ဖတ်ရှုမှုနဲ့ click တိကျမှုကိုထိခိုက်စေပြီး CLS ကိုလည်းတိုးစေနိုင်ပါတယ်။</p>
+          <h2>နေရာကြိုသတ်မှတ်ပါ</h2><p>Image/video အတွက် width/height သို့မဟုတ် aspect-ratio သတ်မှတ်ပါ။ ကြော်ငြာ၊ embed နဲ့ asynchronous content အတွက်လည်း နေရာကိုကြိုဖယ်ထားပါ။</p><h2>Font နှင့် dynamic UI</h2><p>Web font ပြောင်းချိန် layout မခုန်အောင် fallback font နဲ့ metrics ကိုညှိပါ။ Banner, toast သို့မဟုတ် form error ပေါ်လာလျှင် content ကို မမျှော်လင့်ဘဲတွန်းမရွှေ့စေဘဲ နေရာနဲ့ focus ကို စီမံပါ။</p><h2>Loading state</h2><p>လှည့်နေတဲ့ spinner တစ်ခုတည်းမဟုတ်ဘဲ loading ပြီးမပြီး သိသာစေပါ။ Skeleton ကိုနောက်ဆုံး layout နဲ့နီးစပ်စေပြီး data ရောက်လာချိန် အရွယ်အစားမပြောင်းအောင်လုပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-quality-responsive-reflow" data-group="quality" data-title="Responsive Reflow နှင့် Zoom">
+          <div class="progress-line"><div></div></div>
+          <h1>Responsive Reflow နှင့် Zoom</h1>
+          <p class="lede">ဝဘ်စာမျက်နှာကို အကျယ်ကျဉ်း၊ စာလုံးကြီး သို့မဟုတ် မတူညီသော input နဲ့အသုံးပြုသူများအတွက် content ကို ဖြတ်တောက်မထားဘဲ ပြန်စီနိုင်ရပါမယ်။</p>
+          <h2>Layout အရွယ်အစား</h2><p>Fixed width အစား flexible width, max-width နဲ့ responsive layout သုံးပါ။ 320 CSS pixel အကျယ်အနီးမှာ အလျားလိုက် scroll မလိုဘဲ စာသားနဲ့ form ကိုအသုံးပြုနိုင်သလား စစ်ပါ။</p><h2>Zoom နှင့် text spacing</h2><p>Browser zoom 200% အထိတိုးပြီး heading, menu, dialog နဲ့ control တွေ မပျောက်ကြောင်းစမ်းပါ။ User text spacing တိုးလျှင် clipping/overlap မဖြစ်စေဖို့ fixed height ကိုရှောင်ပါ။</p><h2>Touch နှင့် pointer</h2><p>Control တွေမှာ ခွဲခြားရလွယ်တဲ့အကွာအဝေးနဲ့ လုံလောက်တဲ့ hit area ပေးပါ။ Hover ပေါ်မှသာရနိုင်တဲ့ အချက်အလက်ကို touch/keyboard မှာလည်း ရနိုင်အောင်လုပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-quality-accessible-navigation" data-group="quality" data-title="Accessible Navigation နှင့် Dynamic Content">
+          <div class="progress-line"><div></div></div>
+          <h1>Accessible Navigation နှင့် Dynamic Content</h1>
+          <p class="lede">Navigation, menu နဲ့ page update တွေကို keyboard နဲ့ assistive technology သုံးသူများအတွက်လည်း နားလည်လွယ်စေရန် state နဲ့ focus ကိုရှင်းလင်းစွာစီမံပါ။</p>
+          <h2>Menu interaction</h2><p>ရိုးရှင်းတဲ့ site navigation ကို ပုံမှန် link အဖြစ်ထားပါ။ Menu button ဖြစ်လျှင် expanded/collapsed state ကို <code>aria-expanded</code> နဲ့ဖော်ပြပြီး Enter/Space နဲ့ toggle လုပ်နိုင်ပါစေ။</p><h2>Focus ကိုထိန်းပါ</h2><p>Dialog ဖွင့်လျှင် focus ကို dialog ထဲပို့၊ ပိတ်လျှင် မူလ trigger သို့ပြန်ပို့ပါ။ SPA route ပြောင်းလဲမှုမှာ title/update ကို screen reader သိနိုင်အောင်လုပ်ပြီး focus မပျောက်စေပါနဲ့။</p><h2>အသိပေးချက်များ</h2><p>အရေးပေါ်မဟုတ်တဲ့ status ကို သင့်တော်တဲ့ live region နဲ့ဖော်ပြပါ။ Error သို့မဟုတ် အောင်မြင်မှုကို အရောင်တစ်ခုတည်းမသုံးဘဲ ဖတ်ရှုနိုင်တဲ့စာသားနဲ့ဖော်ပြပါ။</p>
+        </article>
+        <article class="page" id="page-quality-testing-budget" data-group="quality" data-title="Accessibility စမ်းသပ်မှုနှင့် ပြုပြင်မှုဦးစားပေးခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Accessibility စမ်းသပ်မှုနှင့် ပြုပြင်မှုဦးစားပေးခြင်း</h1>
+          <p class="lede">Accessibility ကို automated scanner တစ်ခုတည်းနဲ့ မဆုံးဖြတ်နိုင်ပါ။ Tool စစ်ဆေးမှု၊ လက်တွေ့အသုံးပြုမှုနဲ့ လူသုံးစမ်းသပ်မှုတို့ကို ပေါင်းစပ်ပါ။</p>
+          <h2>စမ်းသပ်မှုအလွှာ</h2><p>Automated scanner ဖြင့် ထင်ရှားတဲ့ violation ရှာပါ။ ထို့နောက် keyboard-only, zoom/reflow နဲ့ screen reader ဖြင့် အဓိက user journey ကို စမ်းပါ။ Browser/assistive technology ပေါင်းစပ်မှု အနည်းဆုံးတစ်ခုထက်ပိုစမ်းပါ။</p><h2>ပြဿနာကိုမှတ်တမ်းတင်ပါ</h2><p>ဘယ်စာမျက်နှာ၊ ဘယ် element၊ ဘယ် input နည်းလမ်း၊ ဘာဖြစ်ခဲ့သလဲနဲ့ မျှော်မှန်းရလဒ်ကို မှတ်ပါ။ Screenshot တစ်ခုတည်းမဟုတ်ဘဲ keyboard sequence သို့မဟုတ် screen reader အဆင့်များကိုလည်းရေးပါ။</p><h2>ဦးစားပေးပြင်ဆင်ပါ</h2><p>အဓိက task ကိုပိတ်ဆို့ခြင်း၊ အကြိမ်များစွာပြန်ဖြစ်ခြင်းနဲ့ user အများအပြားကိုထိခိုက်ခြင်းကို ဦးစားပေးပါ။ Fix ပြီးနောက် မူလနည်းလမ်းနဲ့ regression ကို ပြန်စမ်းပြီး ကျန်ရှိတဲ့ကန့်သတ်ချက်ကို သတ်မှတ်ပါ။</p>
         </article>
       </main>
     </div>

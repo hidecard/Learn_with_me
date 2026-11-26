@@ -19,7 +19,7 @@ The docs include guided lessons and editable, runnable examples for:
 - Deployment, GitHub Pages, environment configuration and CI/CD
 - Performance measurement, asset optimization and accessibility
 
-The course contains 191 lessons across 16 topics. Use the built-in topic navigation and search to find a lesson. Many examples can be edited, run, copied, and previewed in the page. The layout supports mobile screens and light/dark system themes.
+The course contains 205 lessons across 16 topics. Use the built-in topic navigation and search to find a lesson. Many examples can be edited, run, copied, and previewed in the page. The layout supports mobile screens and light/dark system themes.
 
 ## Run it
 
