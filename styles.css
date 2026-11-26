@@ -154,6 +154,37 @@
       @media (prefers-color-scheme: dark) { .copy-payment { color: var(--accent); } }
       .copy-hint { min-height: 1.5em; margin-top: .75rem !important; font-size: .85rem; }
 
+      body.welcome-view .layout { display: none; }
+      body.welcome-view .toolbar { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: 3.5rem; min-height: 4.2rem; }
+      body.welcome-view .toolbar .menu, body.welcome-view .toolbar .tabs, body.welcome-view .toolbar .search-wrap { display: none; }
+      body.welcome-view .brand-link { grid-column: 1; grid-row: 1; }
+      body.welcome-view .toolbar-actions { grid-column: 3; grid-row: 1; }
+      .welcome-screen {
+        display: grid; place-items: center; min-height: calc(100vh - 4.2rem); min-height: calc(100svh - 4.2rem);
+        padding: clamp(2.2rem, 6vw, 5rem) 1.25rem;
+        background: radial-gradient(ellipse at 50% 5%, var(--accent-soft), transparent 55%), var(--surface);
+      }
+      body:not(.welcome-view) .welcome-screen { display: none; }
+      .welcome-content { width: min(100%, 68rem); margin: 0 auto; text-align: center; }
+      .welcome-eyebrow { display: inline-flex; align-items: center; gap: .55rem; margin: 0 0 1.1rem; color: var(--accent-dark); font: 600 .74rem "JetBrains Mono", monospace; letter-spacing: .12em; }
+      @media (prefers-color-scheme: dark) { .welcome-eyebrow { color: var(--accent); } }
+      .welcome-eyebrow span { width: .55rem; height: .55rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 .28rem var(--accent-soft); }
+      .welcome-content h1 { margin: 0; font-size: clamp(2.15rem, 5.5vw, 4rem); line-height: 1.35; letter-spacing: -.035em; }
+      .welcome-content h1 span { color: var(--accent-dark); }
+      @media (prefers-color-scheme: dark) { .welcome-content h1 span { color: var(--accent); } }
+      .welcome-description { max-width: 43rem; margin: 1rem auto 1.45rem; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.15rem); }
+      .welcome-start { display: inline-flex; align-items: center; justify-content: center; gap: .7rem; min-height: 3.2rem; padding: .7rem 1.35rem; border: 0; border-radius: .8rem; background: var(--accent); color: #fff; font: inherit; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 .55rem 1.25rem rgba(4,170,109,.24); transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
+      .welcome-start:hover { transform: translateY(-2px); background: var(--accent-dark); box-shadow: 0 .75rem 1.5rem rgba(4,170,109,.3); }
+      .welcome-start:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+      .welcome-start svg { width: 1.2rem; height: 1.2rem; }
+      .welcome-note { margin: .8rem 0 0; color: var(--muted); font-size: .86rem; }
+      .welcome-features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; max-width: 59rem; margin: clamp(2rem, 5vw, 3.4rem) auto 0; text-align: left; }
+      .welcome-features > div { display: grid; grid-template-columns: auto 1fr; align-items: baseline; column-gap: .6rem; row-gap: .15rem; padding: 1rem 1.1rem; border: 1px solid var(--border); border-radius: .9rem; background: color-mix(in srgb, var(--bg) 88%, transparent); }
+      .feature-number { grid-row: span 2; color: var(--accent-dark); font: 600 .75rem "JetBrains Mono", monospace; }
+      @media (prefers-color-scheme: dark) { .feature-number { color: var(--accent); } }
+      .welcome-features strong { font-size: .98rem; }
+      .welcome-features small { color: var(--muted); font-size: .84rem; }
+
       /* ---------- Layout ---------- */
       .layout { display: flex; align-items: flex-start; }
       .sidebar {
@@ -385,6 +416,14 @@
         .info-dialog { width: min(94vw, 34rem); }
         .dialog-head { padding: 1.1rem 1rem .85rem; }
         .dialog-body { padding: .95rem 1rem 1.1rem; }
+        body.welcome-view .toolbar { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: 3rem; min-height: 3.7rem; padding: .3rem .7rem; column-gap: .4rem; }
+        body.welcome-view .brand-link { grid-column: 1; grid-row: 1; }
+        body.welcome-view .brand-name { font-size: 1.05rem; }
+        body.welcome-view .toolbar-actions { grid-column: 3; grid-row: 1; align-self: center; gap: .3rem; }
+        body.welcome-view .toolbar-actions .nav-action { min-height: 2rem; padding: .25rem .55rem; font-size: .78rem; }
+        .welcome-screen { min-height: calc(100vh - 3.7rem); min-height: calc(100svh - 3.7rem); padding: 2.5rem 1rem; }
+        .welcome-features { grid-template-columns: 1fr; max-width: 27rem; gap: .55rem; margin-top: 2rem; }
+        .welcome-features > div { padding: .75rem .9rem; }
         .sidebar {
           position: fixed; top: 0; left: 0; z-index: 80;
           height: 100dvh; display: none;

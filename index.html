@@ -4,27 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="မြန်မာဘာသာဖြင့် Web Development သင်ခန်းစာ 300 ခု လေ့လာပါ။ Laravel, React, Flutter, Deployment, CI/CD, Security နှင့် Accessibility ပါဝင်သည်။" />
+    <meta name="description" content="မြန်မာဘာသာဖြင့် Programming နှင့် နည်းပညာသင်ခန်းစာ 300 ခုကို အဆင့်လိုက်လေ့လာပါ။ Web/App development, database, Git, deployment နှင့် အခြားအကြောင်းအရာများ ပါဝင်သည်။" />
     <link rel="canonical" href="https://learnwithme.arkaryan.net/" />
-    <meta name="keywords" content="Burmese web development, HTML, CSS, JavaScript, Laravel, React, Flutter, web security, deployment, CI/CD, GitHub Actions, web performance, web accessibility" />
+    <meta name="keywords" content="Burmese programming tutorials, web development, app development, HTML, CSS, JavaScript, Laravel, React, Flutter, database, Git, developer tools, deployment, CI/CD, security, accessibility" />
     <meta name="author" content="Learn_with_me" />
     <meta name="theme-color" content="#04aa6d" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://learnwithme.arkaryan.net/" />
     <meta property="og:site_name" content="Learn_with_me" />
-    <meta property="og:title" content="Learn_with_me — မြန်မာ Web Development သင်ခန်းစာများ" />
-    <meta property="og:description" content="မြန်မာဘာသာဖြင့် Laravel, React, Flutter, Web Security, Deployment, CI/CD, Performance နှင့် Accessibility သင်ခန်းစာ 300 ခု လေ့လာပါ။" />
+    <meta property="og:title" content="Learn_with_me — မြန်မာ Programming နှင့် နည်းပညာသင်ခန်းစာများ" />
+    <meta property="og:description" content="Programming, Web/App development, database, Git, deployment နှင့် အခြားနည်းပညာများကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Learn_with_me — မြန်မာ Web Development သင်ခန်းစာများ" />
-    <meta name="twitter:description" content="Laravel, React, Flutter, Deployment နှင့် CI/CD အပါအဝင် Web Development သင်ခန်းစာ 300 ခုကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
+    <meta name="twitter:title" content="Learn_with_me — မြန်မာ Programming နှင့် နည်းပညာသင်ခန်းစာများ" />
+    <meta name="twitter:description" content="Programming, Web/App development, database, Git နှင့် အခြားနည်းပညာသင်ခန်းစာများကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
     <link rel="icon" href="data:," />
-    <title>Learn_with_me | မြန်မာ Web Development သင်ခန်းစာများ</title>
+    <title>Learn_with_me | မြန်မာ Programming နှင့် နည်းပညာသင်ခန်းစာများ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="welcome-view">
     <header class="toolbar">
       <button class="icon-btn menu" id="menuBtn" aria-label="သင်ခန်းစာစာရင်း ဖွင့်/ပိတ်">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -61,6 +61,24 @@
       </div>
     </header>
 
+    <section class="welcome-screen" id="welcomeScreen" aria-labelledby="welcomeTitle">
+      <div class="welcome-content">
+        <p class="welcome-eyebrow"><span></span> LEARN · BUILD · GROW</p>
+        <h1 id="welcomeTitle">Programming နဲ့ နည်းပညာကို<br /><span>မြန်မာလို လေ့လာပါ</span></h1>
+        <p class="welcome-description">Web နဲ့ App development ကနေ programming tools၊ database နဲ့ deployment အထိ နည်းပညာသင်ခန်းစာတွေကို အခြေခံကစပြီး ကိုယ့်အရှိန်အတိုင်း လေ့လာလိုက်ပါ။</p>
+        <button class="welcome-start" id="startLearning" type="button">
+          Get Started
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="welcome-note">သင်ခန်းစာတွေကို အဆင့်လိုက်ရွေးပြီး ကိုယ်တိုင်စမ်းသပ်လေ့လာနိုင်ပါတယ်</p>
+        <div class="welcome-features" aria-label="သင်ယူမှုပုံစံများ">
+          <div><span class="feature-number">01</span><strong>အခြေခံမှစပါ</strong><small>နားလည်လွယ်တဲ့ ရှင်းလင်းချက်များ</small></div>
+          <div><span class="feature-number">02</span><strong>ကိုယ်တိုင်စမ်းပါ</strong><small>ပြင်ဆင်စမ်းသပ်နိုင်တဲ့ code ဥပမာများ</small></div>
+          <div><span class="feature-number">03</span><strong>အဆင့်လိုက်တိုးတက်ပါ</strong><small>ကိုယ့်အချိန်နဲ့ကိုယ် လေ့လာပါ</small></div>
+        </div>
+      </div>
+    </section>
+
     <dialog class="info-dialog" id="aboutDialog" aria-labelledby="aboutTitle">
       <div class="dialog-head">
         <div>
@@ -70,8 +88,8 @@
         <button class="dialog-close" type="button" data-close-dialog aria-label="ပိတ်ရန်">×</button>
       </div>
       <div class="dialog-body">
-        <p><strong>Learn With me</strong> က Web Development ကို မြန်မာဘာသာနဲ့ အခြေခံကစပြီး နားလည်လွယ်အောင် လေ့လာနိုင်ဖို့ ဖန်တီးထားတဲ့ သင်ယူရေး website ဖြစ်ပါတယ်။ သင်ခန်းစာတွေကို အဆင့်လိုက် စီစဉ်ထားလို့ ကိုယ့်အရှိန်နဲ့ကိုယ် ဆက်လက်လေ့လာနိုင်ပါတယ်။</p>
-        <p>HTML, CSS နဲ့ JavaScript အခြေခံတွေကနေ React, Laravel, database, API, deployment နဲ့ web security အထိ အကြောင်းအရာမျိုးစုံ ပါဝင်ပါတယ်။ သင်ခန်းစာတစ်ခုချင်းစီမှာ ရှင်းလင်းချက်၊ code ဥပမာနဲ့ လက်တွေ့အသုံးချနိုင်မယ့် အချက်တွေကို ဖော်ပြထားပါတယ်။</p>
+        <p><strong>Learn With me</strong> က Programming နဲ့ နည်းပညာအကြောင်းအရာတွေကို မြန်မာဘာသာနဲ့ အခြေခံကစပြီး နားလည်လွယ်အောင် လေ့လာနိုင်ဖို့ ဖန်တီးထားတဲ့ သင်ယူရေး website ဖြစ်ပါတယ်။ သင်ခန်းစာတွေကို အဆင့်လိုက် စီစဉ်ထားလို့ ကိုယ့်အရှိန်နဲ့ကိုယ် ဆက်လက်လေ့လာနိုင်ပါတယ်။</p>
+        <p>Web နဲ့ App development, HTML, CSS, JavaScript, React, Laravel, Flutter, database, API, Git, deployment နဲ့ security စတဲ့ အကြောင်းအရာတွေ ပါဝင်ပါတယ်။ သင်ခန်းစာတစ်ခုချင်းစီမှာ ရှင်းလင်းချက်၊ code ဥပမာနဲ့ လက်တွေ့အသုံးချနိုင်မယ့် အချက်တွေကို ဖော်ပြထားပါတယ်။</p>
         <p>Code ဥပမာတွေကို ကိုယ်တိုင်ပြင်ဆင်ပြီး စမ်းသပ်ကြည့်ပါ။ ရှာဖွေရေးနဲ့ topic menu ကိုသုံးပြီး လိုချင်တဲ့အကြောင်းအရာကို အလွယ်တကူ ရှာနိုင်ပါတယ်။</p>
       </div>
     </dialog>
@@ -13365,7 +13383,7 @@ void main() {
             <div>
               <p class="footer-kicker">Learn · Build · Grow</p>
               <h2>Learn With me</h2>
-              <p>မြန်မာဘာသာဖြင့် Web Development ကို အခြေခံမှ လက်တွေ့အထိ အဆင့်ဆင့်လေ့လာပါ။</p>
+              <p>Programming နဲ့ နည်းပညာတွေကို မြန်မာဘာသာဖြင့် အခြေခံမှ လက်တွေ့အထိ လေ့လာပါ။</p>
             </div>
           </div>
           <nav class="footer-actions" aria-label="Footer links">

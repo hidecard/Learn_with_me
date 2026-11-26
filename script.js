@@ -2781,6 +2781,9 @@
           });
         });
 
-        showPage(pages[0].id);
+        document.getElementById('startLearning').addEventListener('click', function () {
+          document.body.classList.remove('welcome-view');
+          showPage(pages[0].id);
+        });
       })();
     
