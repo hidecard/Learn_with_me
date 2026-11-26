@@ -19,9 +19,10 @@ The docs include guided lessons and editable, runnable examples for:
 - Browser Developer Tools and debugging
 - Web security: XSS, SQL injection, CSRF, sessions, secrets and HTTPS
 - Deployment, GitHub Pages, environment configuration and CI/CD
+- Dedicated Continuous Integration and Delivery workflows
 - Performance measurement, asset optimization and accessibility
 
-The course contains 205 lessons across 16 topics. Use the built-in topic navigation and search to find a lesson. Many examples can be edited, run, copied, and previewed in the page. The layout supports mobile screens and light/dark system themes.
+The course contains 300 lessons across 17 topics. Use the built-in topic navigation and search to find a lesson. Many examples can be edited, run, copied, and previewed in the page. The layout supports mobile screens and light/dark system themes.
 
 ## Run it
 

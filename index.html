@@ -4,19 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="မြန်မာဘာသာဖြင့် Web Development ကို interactive သင်ခန်းစာများဖြင့် လေ့လာပါ။ HTML, JavaScript, Web Security, Deployment, Performance နှင့် Accessibility ပါဝင်သည်။" />
+    <meta name="description" content="မြန်မာဘာသာဖြင့် Web Development သင်ခန်းစာ 300 ခု လေ့လာပါ။ Laravel, React, Flutter, Deployment, CI/CD, Security နှင့် Accessibility ပါဝင်သည်။" />
     <link rel="canonical" href="https://learnwithme.arkaryan.net/" />
-    <meta name="keywords" content="Burmese web development, HTML tutorial, CSS tutorial, JavaScript tutorial, web security, GitHub Actions, web performance, web accessibility" />
+    <meta name="keywords" content="Burmese web development, HTML, CSS, JavaScript, Laravel, React, Flutter, web security, deployment, CI/CD, GitHub Actions, web performance, web accessibility" />
     <meta name="author" content="Learn_with_me" />
     <meta name="theme-color" content="#04aa6d" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://learnwithme.arkaryan.net/" />
     <meta property="og:site_name" content="Learn_with_me" />
     <meta property="og:title" content="Learn_with_me — မြန်မာ Web Development သင်ခန်းစာများ" />
-    <meta property="og:description" content="HTML မှ Flutter အထိ၊ Developer Tools, Web Security, CI/CD, Performance နှင့် Accessibility ကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
+    <meta property="og:description" content="မြန်မာဘာသာဖြင့် Laravel, React, Flutter, Web Security, Deployment, CI/CD, Performance နှင့် Accessibility သင်ခန်းစာ 300 ခု လေ့လာပါ။" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Learn_with_me — မြန်မာ Web Development သင်ခန်းစာများ" />
-    <meta name="twitter:description" content="Web Development, Security, Deployment, Performance နှင့် Accessibility ကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
+    <meta name="twitter:description" content="Laravel, React, Flutter, Deployment နှင့် CI/CD အပါအဝင် Web Development သင်ခန်းစာ 300 ခုကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
     <link rel="icon" href="data:," />
     <title>Learn_with_me | မြန်မာ Web Development သင်ခန်းစာများ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -412,6 +412,7 @@
         <button class="tab-btn" data-tab="devtools">DevTools</button>
         <button class="tab-btn" data-tab="security">Security</button>
         <button class="tab-btn" data-tab="deploy">Deploy</button>
+        <button class="tab-btn" data-tab="ci">CI/CD</button>
         <button class="tab-btn" data-tab="quality">Performance &amp; A11y</button>
       </nav>
       <div class="search-wrap">
@@ -454,6 +455,8 @@
         <div data-nav-group="security"></div>
         <h2>DEPLOYMENT &amp; CI/CD</h2>
         <div data-nav-group="deploy"></div>
+        <h2>CONTINUOUS INTEGRATION &amp; DELIVERY</h2>
+        <div data-nav-group="ci"></div>
         <h2>PERFORMANCE &amp; ACCESSIBILITY</h2>
         <div data-nav-group="quality"></div>
         <p class="nav-empty" id="navEmpty">ရှာမတွေ့ပါ — တခြား keyword နဲ့ ရှာကြည့်ပါ။</p>
@@ -8491,6 +8494,183 @@ Route::middleware(["auth", "admin"])-&gt;group(function () {
           </tbody></table></div>
           <div class="tip"><strong>ဂုဏ်ယူပါတယ်!</strong>Module 8 — Laravel ပြီးပါပြီ။ အခုဆိုရင် MVC ပုံစံနဲ့ CRUD web application အပြည့်အစုံ တည်ဆောက်နိုင်ပါပြီ။ နောက် Module 9 မှာတော့ page (HTML) မဟုတ်ဘဲ data (JSON) ပြန်ပေးတဲ့ REST API ကို ဒီ Laravel နဲ့ပဲ တည်ဆောက်ပါမယ် — React နဲ့ Flutter app တွေက အဲဒီ API ကို သုံးမှာပါ။</div>
         </article>
+        <article class="page" id="page-extra-laravel-request-lifecycle-and-bootstrap" data-group="laravel" data-title="Request Lifecycle နှင့် Application Bootstrap ကိုလိုက်လံနားလည်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Request Lifecycle နှင့် Application Bootstrap ကိုလိုက်လံနားလည်ခြင်း</h1>
+          <p class="lede">Laravel request တစ်ခုက entry point မှ middleware, route, response အထိ ဖြတ်သန်းသည့်လမ်းကြောင်းကို သိထားလျှင် ပြဿနာရှာဖွေရာတွင် အချိန်သက်သာစေသည်။ bootstrap နှင့် route registration တို့၏ တာဝန်ကိုလည်း ခွဲခြားနိုင်မည်။</p>
+          <h2>Request ၏ အဆင့်ဆင့်</h2><p>Web request သည် ပုံမှန်အားဖြင့် <code>public/index.php</code> မှတစ်ဆင့် application ကိုစတင်ပြီး HTTP kernel/middleware လမ်းကြောင်းကို ဖြတ်ကာ route နှင့် handler သို့ရောက်သည်။ Handler က response ပြန်ပေးပြီး middleware များမှတစ်ဆင့် client ဆီပြန်ထွက်သည်။ ဒီစဉ်ကိုသိခြင်းက exception, authentication သို့မဟုတ် response header ပြဿနာ ဘယ်အဆင့်မှာဖြစ်သလဲ ခွဲသိစေသည်။</p>
+          <h2>Bootstrap နှင့် Provider</h2><p>Application configuration နှင့် route file ချိတ်ဆက်မှုကို project ရဲ့ bootstrap configuration မှာ တွေ့နိုင်ပြီး service provider များက framework အစိတ်အပိုင်းများကို စတင်ပြင်ဆင်ပေးသည်။ Provider ရဲ့ register အဆင့်မှာ service binding များ၊ boot အဆင့်မှာ လိုအပ်သော runtime setup များကို ထည့်သွင်းရန် ရည်ရွယ်ပါ။ Framework ဖိုင်ကို တိုက်ရိုက်ပြင်ခြင်းထက် application-level extension point ကိုသုံးပါ။</p>
+          <h2>ပြဿနာရှာဖွေမှု</h2><p>Route မရောက်မီပိတ်ဆို့နေပါက route definition တစ်ခုတည်းကိုသာမကြည့်ဘဲ middleware နှင့် bootstrap မှ route registration ကိုပါ စစ်ပါ။ <code>php artisan route:list -v</code> ဖြင့် route နှင့် middleware ဆက်စပ်မှုကိုကြည့်နိုင်သည်။ Request တစ်ခုတည်းတွင် log context သို့မဟုတ် correlation identifier ထည့်လျှင် ဖြတ်သန်းမှုကို လိုက်ရှာရလွယ်သည်။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-route-design-and-inspection" data-group="laravel" data-title="Route အုပ်စုဖွဲ့ခြင်း၊ အမည်ပေးခြင်းနှင့် စစ်ဆေးခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Route အုပ်စုဖွဲ့ခြင်း၊ အမည်ပေးခြင်းနှင့် စစ်ဆေးခြင်း</h1>
+          <p class="lede">အခြေခံ URL သတ်မှတ်မှုထက်ကျော်လွန်ပြီး route များကို စနစ်တကျ စီမံခြင်းက application ကြီးလာသောအခါ ထိန်းသိမ်းရလွယ်စေသည်။ Route group, name prefix နှင့် route inspection ကို လက်တွေ့အသုံးချမည်။</p>
+          <h2>Group ဖြင့် မူဝါဒမျှဝေခြင်း</h2><p>တူညီသော prefix သို့မဟုတ် middleware ရှိသည့် endpoint များကို <code>Route::middleware(...)-&gt;prefix(...)-&gt;group(...)</code> ဖြင့် တစ်စုတည်းသတ်မှတ်နိုင်သည်။ ဥပမာ admin route များကို <code>admin</code> prefix နှင့် authentication middleware အောက်တွင်စုပါ။ Group အသုံးပြုခြင်းက သက်ဆိုင်ရာ route အားလုံးတွင် မူဝါဒမေ့ကျန်မှုကို လျှော့ချပေးသည်။</p>
+          <h2>Named route ဖြင့် ချိတ်ဆက်မှု</h2><p>URL ကို view သို့မဟုတ် redirect ထဲတွင် တိုက်ရိုက်ထပ်ရေးမည့်အစား route name ဖြင့် <code>route('orders.show', $order)</code> ကဲ့သို့ URL တည်ဆောက်ပါ။ Path ပြောင်းသော်လည်း name မပြောင်းလျှင် ခေါ်ဆိုသူများကို အများအားဖြင့် မပြင်ရပါ။ Name များကို ထူးခြားပြီး ရည်ရွယ်ချက်ပေါ်လွင်အောင် စီမံပါ။</p>
+          <h2>Route စာရင်းစစ်ခြင်း</h2><p><code>php artisan route:list</code> သည် route များ၏ method နှင့် URI ကို စစ်ဆေးရန် အသုံးဝင်ပြီး <code>-v</code> ဖြင့် middleware များကိုပါ ဖော်ပြနိုင်သည်။ API လမ်းကြောင်းကိုသာကြည့်ရန် <code>--path=api</code> ကို သုံးနိုင်သည်။ ထပ်နေသည့် URI, မမျှော်လင့်သော middleware သို့မဟုတ် name ကို release မတိုင်မီ ရှာဖွေပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-middleware-order-and-termination" data-group="laravel" data-title="Middleware အစဉ်၊ Request Context နှင့် Response ပြုပြင်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Middleware အစဉ်၊ Request Context နှင့် Response ပြုပြင်ခြင်း</h1>
+          <p class="lede">Middleware သည် request ကို controller မရောက်မီနှင့် response ပြန်မထွက်မီ ကိုင်တွယ်နိုင်သည်။ အစဉ်လိုက်သက်ရောက်မှုနှင့် သင့်တော်သောတာဝန်ခွဲဝေမှုကို အဆင့်မြင့်လက်တွေ့တွင် အသုံးချမည်။</p>
+          <h2>Before နှင့် after လုပ်ဆောင်ချက်</h2><p>Middleware ၏ <code>handle</code> method သည် <code>$next($request)</code> မခေါ်မီ request ကိုစစ်ဆေးနိုင်ပြီး ပြန်လာသော response ကို ထပ်မံပြင်ဆင်နိုင်သည်။ ဥပမာ request identifier ကို context ထဲထည့်ခြင်း၊ သတ်မှတ်ထားသော header ထည့်ခြင်း သို့မဟုတ် policy မကိုက်သည့် request ကိုတိုက်ရိုက်ပယ်ချခြင်းဖြစ်သည်။ Middleware တစ်ခုကို တစ်ခုတည်းသော cross-cutting တာဝန်အတွက်ထားပါ။</p>
+          <h2>အစဉ်လိုက်နှင့် group</h2><p>Middleware အစဉ်သည် authentication, session သို့မဟုတ် request transformation တို့ အချင်းချင်းအပေါ် သက်ရောက်နိုင်သည်။ Route group တွင် middleware ထည့်သောအခါ <code>route:list -v</code> ဖြင့် အမှန်တကယ်တပ်ဆင်ထားမှုကို ပြန်စစ်ပါ။ Middleware ကို ထည့်ထားခြင်းတစ်ခုတည်းဖြင့် record ပိုင်ဆိုင်မှု သို့မဟုတ် business authorization ပြည့်စုံသည်ဟု မယူဆပါနှင့်။</p>
+          <h2>Request attribute နှင့် test</h2><p>Request တစ်ခုအတွင်း လိုအပ်သော context ကို request attribute ဖြင့် downstream code သို့ ပေးနိုင်သော်လည်း global mutable state သုံးခြင်းကိုရှောင်ပါ။ Middleware rejection အတွက် status code, response body နှင့် header များကို feature test တွင် စစ်ဆေးပါ။ Logging middleware သည် password သို့မဟုတ် token ကဲ့သို့ sensitive input များကို မှတ်တမ်းတင်မိခြင်းမရှိကြောင်းပါ စစ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-service-container-bindings" data-group="laravel" data-title="Service Container Binding နှင့် Interface အခြေပြုဒီဇိုင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Service Container Binding နှင့် Interface အခြေပြုဒီဇိုင်း</h1>
+          <p class="lede">Laravel container သည် concrete class များကို အလိုအလျောက်ဖြေရှင်းပေးနိုင်ပြီး interface အတွက် သတ်မှတ်ထားသော implementation ကိုလည်း ချိတ်ဆက်နိုင်သည်။ External service ကို အစားထိုးစမ်းသပ်နိုင်သော ဖွဲ့စည်းပုံကို တည်ဆောက်မည်။</p>
+          <h2>Automatic resolution</h2><p>Class တစ်ခုတွင် dependency မရှိခြင်း သို့မဟုတ် concrete dependency များသာရှိလျှင် container က reflection ဖြင့် အလိုအလျောက်ဖန်တီးပေးနိုင်သည်။ Controller သို့မဟုတ် service constructor တွင် dependency ကို type-hint လုပ်ခြင်းက လက်ဖြင့် <code>new</code> လုပ်ခြင်းထက် test တွင် အစားထိုးရလွယ်စေသည်။ Interface ကို type-hint လုပ်သည့်အခါ implementation ကို container ထံ မှတ်ပုံတင်ရန်လိုနိုင်သည်။</p>
+          <h2>Interface ကို implementation နှင့်ချိတ်ခြင်း</h2><p>ဥပမာ <code>PaymentGateway</code> contract နှင့် <code>StripeGateway</code> implementation ကို service provider တွင် <code>$this-&gt;app-&gt;bind(PaymentGateway::class, StripeGateway::class)</code> ဖြင့်ချိတ်နိုင်သည်။ Business service သည် vendor class ကိုတိုက်ရိုက်မသိဘဲ contract ကိုသာ မှီခိုစေခြင်းဖြင့် implementation ကိုအစားထိုးနိုင်သည်။ Test environment တွင် fake implementation အသုံးပြုရန်လည်း လွယ်ကူလာသည်။</p>
+          <h2>Binding lifetime ရွေးချယ်ခြင်း</h2><p><code>bind</code> သည် resolution တစ်ခုချင်းစီတွင် အသစ်ရနိုင်ပြီး <code>singleton</code> သည် တစ်ကြိမ်ဖန်တီးထားသော instance ကို ပြန်သုံးသည်။ Long-running worker သို့မဟုတ် request lifecycle အလိုက် state များကို ခွဲထားရန် scoped lifetime လိုနိုင်သည်။ Mutable user/request data ကို singleton service ထဲတွင် မသိမ်းပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-eloquent-mass-assignment-and-casts" data-group="laravel" data-title="Eloquent Mass Assignment၊ Cast နှင့် Attribute Boundary">
+          <div class="progress-line"><div></div></div>
+          <h1>Eloquent Mass Assignment၊ Cast နှင့် Attribute Boundary</h1>
+          <p class="lede">Model attribute များကို လက်ခံသည့်နည်းလမ်းသည် လုံခြုံရေးနှင့် data consistency ကို တိုက်ရိုက်သက်ရောက်သည်။ Mass assignment စည်းမျဉ်းနှင့် cast များကို ရည်ရွယ်ချက်ရှိရှိ သတ်မှတ်မည်။</p>
+          <h2>Mass assignment အန္တရာယ်</h2><p><code>Model::create($request-&gt;all())</code> သည် client မပို့သင့်သော <code>is_admin</code> ကဲ့သို့ field များကိုပါ သိမ်းမိနိုင်သည်။ Model ၏ fillable/guarded policy ကိုသတ်မှတ်ပြီး controller တွင် validated field များကိုသာ ပေးပို့ပါ။ Database schema ရှိခြင်းက field တစ်ခုကို client ပြင်ခွင့်ရှိသည်ဟု မဆိုလိုပါ။</p>
+          <h2>Attribute cast ကို တိကျစွာသုံးခြင်း</h2><p>Boolean, date, array သို့မဟုတ် enum အဖြစ်သုံးသော field များအတွက် cast သတ်မှတ်ခြင်းက PHP ဘက်ရှိတန်ဖိုးကို တသမတ်တည်းဖတ်နိုင်စေသည်။ JSON column ကို array အဖြစ်ဖတ်မည်ဆိုလျှင် null နှင့် malformed data အခြေအနေကိုပါ စဉ်းစားပါ။ Cast သည် database constraint သို့မဟုတ် input validation ကို အစားမထိုးပါ။</p>
+          <h2>Accessor, mutator နှင့် hidden field</h2><p>Accessor/mutator သည် attribute ဖတ်ခြင်းနှင့်သိမ်းခြင်းကို စံတကျပြောင်းလဲစေနိုင်သော်လည်း မရှင်းလင်းသော implicit side effect မဖြစ်စေရန် အလွယ်တကူနားလည်နိုင်သည့်အလုပ်များအတွက်သာ သုံးပါ။ JSON serialize လုပ်သည့်အခါ password hash သို့မဟုတ် private field များ မထွက်စေရန် hidden/visible ကိုစီမံပါ။ API response တွင် ထုတ်ပေးမည့် field များကို အထူးစစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-eloquent-n-plus-one-prevention" data-group="laravel" data-title="Eloquent N+1 ပြဿနာနှင့် Eager Loading စီမံခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Eloquent N+1 ပြဿနာနှင့် Eager Loading စီမံခြင်း</h1>
+          <p class="lede">List တစ်ခုစီ၏ relation ကို loop ထဲမှခေါ်ခြင်းက query အရေအတွက်ကို မျှော်မှန်းမထားဘဲတိုးစေနိုင်သည်။ Eager loading နှင့် query စောင့်ကြည့်မှုဖြင့် ထိုကုန်ကျစရိတ်ကိုထိန်းမည်။</p>
+          <h2>N+1 ဖြစ်ပုံကိုသိခြင်း</h2><p>Post ၁၀ ခုကိုယူပြီး တစ်ခုချင်းစီ၏ author ကို lazy load လုပ်လျှင် post query တစ်ခုအပြင် author query များစွာ ဖြစ်နိုင်သည်။ Loop အတွင်း relation property ကိုအသုံးပြုသည့်နေရာများကိုရှာပြီး request တစ်ခုအတွက် query count ကိုစစ်ပါ။ အချက်အလက်နည်းသော local database တွင်လည်း query pattern ကိုသိရှိစေပါ။</p>
+          <h2>လိုအပ်သော relation ကို ကြိုတင်တင်ခြင်း</h2><p><code>Post::with('author')-&gt;get()</code> ကဲ့သို့ eager loading သုံးလျှင် relation data ကို သီးခြား query အနည်းငယ်ဖြင့် ကြိုတင်ရယူနိုင်သည်။ Nested relation အတွက် <code>with('comments.author')</code> ကဲ့သို့ အမှန်တကယ်လိုသော graph ကိုသာရွေးပါ။ Column များကိုကန့်သတ်လျှင် matching key များကိုပါ ရွေးထားကြောင်း သေချာပါစေ။</p>
+          <h2>Query ကိုတိုင်းတာပြီးတားဆီးခြင်း</h2><p>Pagination, eager loading နှင့် aggregate တို့ကိုပေါင်းစပ်ပြီး အကြီးစား collection ကို တစ်ခါတည်းမတင်ပါနှင့်။ Local သို့မဟုတ် test environment တွင် lazy loading ကိုတင်းကျပ်စွာတားမြစ်ခြင်းက မတော်တဆ N+1 ကို တွေ့စေနိုင်သည်။ Query log/monitoring ကိုအသုံးပြုပြီး latency နှင့် query count ကို လက်တွေ့တိုင်းတာပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-schema-migration-safe-evolution" data-group="laravel" data-title="Schema Migration ကို အဆင့်လိုက်နှင့် နောက်ပြန်လှည့်နိုင်အောင်ပြင်ဆင်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Schema Migration ကို အဆင့်လိုက်နှင့် နောက်ပြန်လှည့်နိုင်အောင်ပြင်ဆင်ခြင်း</h1>
+          <p class="lede">Migration သည် schema ပြောင်းလဲမှုမှတ်တမ်းဖြစ်ပြီး production data အပေါ်သက်ရောက်မှုကို ကြိုတင်စီမံရသည်။ Column ပြင်ဆင်ခြင်း၊ rollback နှင့် backward compatibility တို့ကို ချိတ်ဆက်လေ့လာမည်။</p>
+          <h2>Migration ကို ရည်ရွယ်ချက်တစ်ခုစီထားခြင်း</h2><p>Migration တစ်ခုတွင် column ထည့်ခြင်း သို့မဟုတ် index တည်ဆောက်ခြင်းကဲ့သို့ ဆက်စပ်ပြောင်းလဲမှုတစ်ခုကိုသာ ထားပါ။ <code>up()</code> နှင့် <code>down()</code> ကို အဓိပ္ပာယ်တူညီစွာရေးပြီး rollback လုပ်နိုင်မှုကို local/test database တွင် စစ်ပါ။ Data ကို ဖျက်ပစ်သည့် rollback သည် အမှန်တကယ်ပြန်မရနိုင်နိုင်ကြောင်း သတိပြုပါ။</p>
+          <h2>Nullable နှင့် staged schema change</h2><p>အသုံးပြုနေသော table တွင် non-null column အသစ်ထည့်ပါက ရှိပြီးသား row များအတွက် တန်ဖိုးမရှိခြင်းကို စဉ်းစားရသည်။ ပထမအဆင့် nullable column ထည့်၊ application က နှစ်မျိုးလုံးကိုကိုင်တွယ်၊ နောက်မှ backfill လုပ်ပြီး constraint တင်းကျပ်စေသည့် staged rollout ကိုစဉ်းစားပါ။ Migration lock time နှင့် table အရွယ်အစားကို database အလိုက်စမ်းသပ်ပါ။</p>
+          <h2>Index နှင့် key constraint</h2><p>Query filter နှင့် join များအပေါ်အခြေခံ၍ index သို့မဟုတ် foreign key ကိုတည်ဆောက်ပါ။ Index များစွာသည် read ကိုကူညီသော်လည်း write cost နှင့် disk ကိုတိုးစေသည်။ Uniqueness ကို application validation တစ်ခုတည်းအပေါ်မမူတည်ဘဲ လိုအပ်ပါက database unique constraint ဖြင့်ပါကာကွယ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-factories-seeders-repeatable-data" data-group="laravel" data-title="Factory နှင့် Seeder ဖြင့် ထပ်မံတည်ဆောက်နိုင်သော Data ပြင်ဆင်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Factory နှင့် Seeder ဖြင့် ထပ်မံတည်ဆောက်နိုင်သော Data ပြင်ဆင်ခြင်း</h1>
+          <p class="lede">Seeder သည် production data ထည့်ရန်မဟုတ်ဘဲ ပတ်ဝန်းကျင်အလိုက် ရည်ရွယ်ချက်ရှိသောအစပြု data ဖန်တီးရန်အသုံးဝင်သည်။ Factory state နှင့် idempotent seed များဖြင့် test/development data ကို စီမံမည်။</p>
+          <h2>Factory သည် စမ်းသပ်ဒေတာကိုဖော်ပြခြင်း</h2><p>Model factory သည် လိုအပ်သော default attribute များနှင့် relation များကို တစ်နေရာတည်းတွင် သတ်မှတ်ပေးသည်။ <code>Post::factory()-&gt;count(5)-&gt;create()</code> ကဲ့သို့ အသုံးပြုပြီး published သို့မဟုတ် draft ကဲ့သို့ state method များဖြင့် scenario ကိုရှင်းလင်းစွာဖော်ပြပါ။ Factory data သည် production အတွက် ယုံကြည်စိတ်ချရသော business record ဟုမယူဆပါနှင့်။</p>
+          <h2>Seeder များကို အုပ်စုဖွဲ့ခြင်း</h2><p><code>DatabaseSeeder</code> မှ သက်ဆိုင်ရာ seeder များကိုခေါ်ပြီး lookup/reference data နှင့် demo data ကို သီးခြားထားပါ။ Development data ကိုသာလိုအပ်သည့်အခါ environment သို့မဟုတ် command အဆင့်တွင် ရှင်းလင်းစွာကန့်သတ်ပါ။ Production credentials သို့မဟုတ် ကိုယ်ရေးကိုယ်တာအချက်အလက်ကို seed ထဲမထည့်ပါနှင့်။</p>
+          <h2>ထပ်ခါတလဲလဲ run လုပ်နိုင်မှု</h2><p>Seeder ကို ထပ်မံ run လုပ်ရာတွင် duplicate record များ မဖြစ်စေရန် <code>updateOrCreate</code> သို့မဟုတ် ကြိုတင်သတ်မှတ်ထားသော unique key ကိုသုံးနိုင်သည်။ Transaction လိုအပ်မှုနှင့် factory relation side effect များကို စဉ်းစားပါ။ Fresh database တစ်ခုမှ migration နှင့် seeding အစဉ်အတိုင်း ပြန်တည်ဆောက်နိုင်ကြောင်း CI တွင် စမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-transactions-locking-and-retry" data-group="laravel" data-title="Transaction၊ Row Lock နှင့် Concurrency ပြဿနာများ">
+          <div class="progress-line"><div></div></div>
+          <h1>Transaction၊ Row Lock နှင့် Concurrency ပြဿနာများ</h1>
+          <p class="lede">ငွေပေးချေမှု သို့မဟုတ် inventory ကဲ့သို့ ဆက်စပ်ပြောင်းလဲမှုများကို atomic ဖြစ်စေရန် transaction အသုံးပြုသည်။ Concurrent request များတပြိုင်နက်ဝင်လာသည့်အခါ consistency ထိန်းနည်းကိုလည်း လေ့လာမည်။</p>
+          <h2>Transaction ဖြင့် atomic operation</h2><p><code>DB::transaction(function () { ... })</code> အတွင်း database operation များကို စုစည်းနိုင်ပြီး exception ဖြစ်ပါက transaction ကို rollback လုပ်သည်။ Order နှင့် order line တို့ကို အတူသိမ်းခြင်းကဲ့သို့ တစ်ခုလုံးအောင်မြင်ရမည့် workflow ကို transaction တစ်ခုအတွင်း ထည့်ပါ။ Email သို့မဟုတ် external API ခေါ်ဆိုမှုကို transaction အတွင်းအချိန်ကြာအောင်မလုပ်ပါနှင့်။</p>
+          <h2>Locking နှင့် race condition</h2><p>တူညီသော stock row ကို request နှစ်ခုတပြိုင်နက်ဖတ်ပြီး လျှော့ချပါက oversell ဖြစ်နိုင်သည်။ Transaction အတွင်း <code>lockForUpdate()</code> ကဲ့သို့ pessimistic lock အသုံးပြုနိုင်သော်လည်း database အပြုအမူနှင့် lock အချိန်ကို စမ်းသပ်ပါ။ Unique constraint သို့မဟုတ် atomic update သည် ပိုသင့်တော်သည့်အခြေအနေများလည်းရှိသည်။</p>
+          <h2>Deadlock နှင့် retry</h2><p>Concurrent transaction များသည် row များကို မတူညီသောအစဉ်ဖြင့် lock လုပ်ပါက deadlock ဖြစ်နိုင်သည်။ Laravel transaction API တွင် deadlock အတွက် retry attempts သတ်မှတ်နိုင်သော်လည်း closure အတွင်း ထပ်လုပ်ပါက side effect မထပ်စေရန် သေချာပါစေ။ Database ပြင်ပအလုပ်ကို commit ပြီးနောက် dispatch လုပ်ခြင်းက ပိုလုံခြုံသည်။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-auth-guards-and-session-security" data-group="laravel" data-title="Authentication Guard၊ Session နှင့် Account Lifecycle">
+          <div class="progress-line"><div></div></div>
+          <h1>Authentication Guard၊ Session နှင့် Account Lifecycle</h1>
+          <p class="lede">Login အခြေခံပြီးနောက် web session နှင့် API token authentication တို့၏ ကွာခြားချက်ကို နားလည်ရန်လိုသည်။ Session လုံခြုံရေးနှင့် account lifecycle ကို အလွှာလိုက်စီမံမည်။</p>
+          <h2>Guard နှင့် provider အဓိပ္ပာယ်</h2><p>Guard သည် request တစ်ခုအတွက် user ကို authenticate လုပ်ပုံကို သတ်မှတ်ပြီး provider သည် user record များကို ရယူပုံကို ဆုံးဖြတ်သည်။ Browser session နှင့် token-based API တို့တွင် အလားတူ user model ကိုသုံးနိုင်သော်လည်း credential နှင့် request flow မတူနိုင်သည်။ <code>config/auth.php</code> ကိုဖတ်ပြီး route middleware နှင့် guard ကိုက်ညီကြောင်းစစ်ပါ။</p>
+          <h2>Session lifecycle ကာကွယ်မှု</h2><p>Authentication အောင်မြင်ပြီးနောက် session identifier ကို regenerate လုပ်ခြင်းသည် session fixation အန္တရာယ်ကိုလျှော့ချရာတွင် အရေးကြီးသည်။ Logout အချိန်တွင် session ကို invalidate လုပ်ပြီး CSRF token ကိုပြန်လည်ထုတ်ပေးသည့် flow ကိုသုံးပါ။ Cookie secure, httpOnly နှင့် same-site ဆိုင်ရာ production setting များကို HTTPS အခြေအနေတွင် စစ်ဆေးပါ။</p>
+          <h2>Account recovery နှင့် verification</h2><p>Password reset သို့မဟုတ် email verification flow များတွင် token သက်တမ်း၊ အသုံးပြုပြီးနောက် ပယ်ဖျက်မှုနှင့် response မှ user ရှိ/မရှိ ပေါက်ကြားမှုကို စဉ်းစားပါ။ Login rate limit နှင့် password hashing ကို framework ၏ သက်ဆိုင်ရာ feature များဖြင့် စီမံပါ။ Sensitive action များတွင် re-authentication သို့မဟုတ် password confirmation လိုအပ်မှုကို သတ်မှတ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-authorization-policy-boundaries" data-group="laravel" data-title="Policy ဖြင့် Resource Authorization Boundary ချမှတ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Policy ဖြင့် Resource Authorization Boundary ချမှတ်ခြင်း</h1>
+          <p class="lede">Authenticated ဖြစ်ခြင်းသည် record တစ်ခုကိုကြည့်ခွင့်ရှိခြင်းနှင့် မတူပါ။ Policy ကို resource နှင့် operation အလိုက်သတ်မှတ်ပြီး deny-by-default စဉ်းစားပုံကို လက်တွေ့လုပ်မည်။</p>
+          <h2>Authentication နှင့် authorization ကွာခြားချက်</h2><p><code>auth</code> middleware သည် user ဝင်ရောက်ထားခြင်းကိုစစ်သော်လည်း ထို user က သတ်မှတ်ထားသော post ကိုပြင်ခွင့်ရှိမရှိ မဆုံးဖြတ်ပေးပါ။ Policy method တစ်ခုစီတွင် owner, role သို့မဟုတ် resource state ကိုစစ်ဆေးပါ။ Route model binding သည် record ကိုရှာပေးခြင်းသာဖြစ်၍ permission မပေးပါ။</p>
+          <h2>Policy ကို action နှင့်ချိတ်ခြင်း</h2><p><code>view</code>, <code>update</code>, <code>delete</code> ကဲ့သို့ operation များကို model policy ထဲတွင်ရေးပြီး controller သို့မဟုတ် route authorization မှတစ်ဆင့် အသုံးပြုပါ။ တူညီသော access rule ကို controller အများအပြားတွင် ကူးရေးခြင်းထက် policy တစ်ခုတွင် ထိန်းသိမ်းပါ။ Admin exception ရှိလျှင် တိကျစွာဖော်ပြပြီး မလိုလားအပ်သော bypass မဖြစ်စေပါနှင့်။</p>
+          <h2>အငြင်းခံရမှုကို စမ်းသပ်ခြင်း</h2><p>ခွင့်ရှိသူနှင့် ခွင့်မရှိသူ user များဖြင့် feature test ရေးပြီး unauthorized request က data ကိုမပြောင်းကြောင်းစစ်ပါ။ 403 နှင့် 404 တုံ့ပြန်မှုရွေးချယ်မှုသည် resource ရှိကြောင်းဖော်ပြမိနိုင်မှုနှင့် API contract အပေါ်မူတည်သည်။ Policy တွင် edge case များကိုထည့်ပြီး test များက ထိုစည်းမျဉ်းကို တိုက်ရိုက်ဖော်ပြပါစေ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-api-auth-and-versioning" data-group="laravel" data-title="API Authentication၊ Versioning နှင့် Error Contract">
+          <div class="progress-line"><div></div></div>
+          <h1>API Authentication၊ Versioning နှင့် Error Contract</h1>
+          <p class="lede">API resource များကို ပြန်ပေးရုံထက် client အမျိုးမျိုးအတွက် တည်ငြိမ်သော contract တစ်ခုလိုအပ်သည်။ Token authentication, version strategy နှင့် error response များကို စနစ်တကျ ဒီဇိုင်းဆွဲမည်။</p>
+          <h2>Stateless API နှင့် token</h2><p>Stateless endpoint များတွင် browser session ကို မမှီခိုသော authentication လမ်းကြောင်းလိုသည်။ Laravel API routing setup နှင့် Sanctum သည် first-party SPA သို့မဟုတ် personal access token အခြေအနေများအတွက် ရွေးချယ်စရာပေးသည်။ Client အမျိုးအစားနှင့် threat model ကိုစဉ်းစားပြီး token scope, revoke နှင့် သက်တမ်းကို သတ်မှတ်ပါ။</p>
+          <h2>Version ကို ဘယ်အချိန်သုံးမလဲ</h2><p>API response field ဖယ်ရှားခြင်း သို့မဟုတ် အဓိပ္ပာယ်ပြောင်းခြင်းသည် client ကိုချိုးဖျက်နိုင်သည်။ Breaking change များအတွက် <code>/api/v1</code> ကဲ့သို့ version boundary ကို စဉ်းစားပြီး additive field ပြောင်းလဲမှုများကို compatibility ဖြင့်စီမံပါ။ API contract test ဖြင့် အရေးကြီးသော status, field နှင့် serialization ကို အတည်ပြုပါ။</p>
+          <h2>Error နှင့် status code</h2><p>Validation failure, unauthenticated, forbidden နှင့် missing resource တို့ကို ကွဲပြားသော HTTP status ဖြင့် တုံ့ပြန်ပြီး client အတွက် တသမတ်တည်း error shape သတ်မှတ်ပါ။ Internal exception message သို့မဟုတ် stack trace ကို public response ထဲမထုတ်ပါနှင့်။ Pagination metadata နှင့် content type တို့သည် success/error path နှစ်ခုလုံးတွင် တည်ငြိမ်ကြောင်းစစ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-api-idempotency-and-webhooks" data-group="laravel" data-title="Webhook နှင့် Idempotent API Operation များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Webhook နှင့် Idempotent API Operation များ</h1>
+          <p class="lede">Network retry ကြောင့် တူညီသော request သို့မဟုတ် webhook event ကို အကြိမ်ကြိမ်လက်ခံရနိုင်သည်။ Signature စစ်ခြင်းနှင့် idempotency key ဖြင့် duplicate side effect ကိုကာကွယ်မည်။</p>
+          <h2>Webhook အထောက်အထားစစ်ဆေးခြင်း</h2><p>Provider ပို့လာသော webhook payload ကိုယုံကြည်မထားဘဲ signature verification ကို raw request body နှင့် သက်ဆိုင်ရာ secret ဖြင့် လုပ်ဆောင်ပါ။ Timestamp သို့မဟုတ် replay protection ကို provider protocol ကပေးပါက အသုံးပြုပါ။ Secret ကို source code ထဲမထားဘဲ environment/configuration မှ စီမံပါ။</p>
+          <h2>Duplicate event ကိုခံနိုင်ခြင်း</h2><p>Provider event ID ကို unique key ဖြင့်သိမ်းပြီး တူညီသော event ပြန်လာလျှင် business action ကို ထပ်မလုပ်စေပါ။ Idempotency key သည် database constraint နှင့် transaction တို့ဖြင့် ထောက်ခံထားလျှင် concurrent delivery ကိုလည်း ပိုလုံခြုံစေသည်။ Duplicate အဖြစ်ပယ်ချခြင်းကို log တွင် ခြေရာခံပါ။</p>
+          <h2>မြန်မြန်အတည်ပြုပြီး နောက်ခံလုပ်ခြင်း</h2><p>Webhook endpoint သည် signature စစ်ပြီး event လက်ခံမှုကို လျင်မြန်စွာ အတည်ပြုကာ အချိန်ကြာသောလုပ်ငန်းကို queue သို့ပို့နိုင်သည်။ Queue dispatch ကို database commit နှင့် အစဉ်လိုက်ညှိပါ၊ မဟုတ်လျှင် worker က မcommitရသေးသော record ကိုမတွေ့နိုင်ပါ။ Failed delivery ပြန်ကြိုးစားမှုအတွက် operation သည် idempotent ဖြစ်ရမည်။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-file-storage-private-downloads" data-group="laravel" data-title="File Storage Disk၊ Private File နှင့် Temporary URL">
+          <div class="progress-line"><div></div></div>
+          <h1>File Storage Disk၊ Private File နှင့် Temporary URL</h1>
+          <p class="lede">Uploaded file ကို public path တစ်ခုတွင်သာသိမ်းခြင်းမဟုတ်ဘဲ disk abstraction နှင့် access policy အလိုက်နေရာချသင့်သည်။ Private download, file naming နှင့် storage driver ကို စီမံမည်။</p>
+          <h2>Disk abstraction ကို အသုံးချခြင်း</h2><p>Laravel filesystem သည် local သို့မဟုတ် cloud disk ကို configuration ဖြင့် ရွေးချယ်နိုင်စေပြီး application code ကို storage backend တစ်ခုတည်းနှင့် မချိတ်မိစေပါ။ <code>Storage::disk('...')</code> မှတစ်ဆင့် သိမ်း/ဖတ်ပြီး environment အလိုက် disk ကိုသတ်မှတ်ပါ။ Local path ကို public URL ဟု မယူဆပါနှင့်။</p>
+          <h2>Private file access</h2><p>Invoice သို့မဟုတ် profile document ကဲ့သို့ private asset ကို public disk တွင်မထားဘဲ private disk တွင်သိမ်းပြီး download တိုင်း user ၏ခွင့်ပြုချက်ကိုစစ်ပါ။ Controller သို့မဟုတ် policy က user ၏ခွင့်ပြုချက်ကို အတည်ပြုပြီးမှ <code>Storage::download</code> ဖြင့် ဖိုင်တုံ့ပြန်မှု ပေးနိုင်သည်၊ သို့မဟုတ် သက်တမ်းတို ယာယီ URL တစ်ခု ဖန်တီးနိုင်သည်။ URL သက်တမ်းနှင့် ပေါက်ကြားနိုင်သည့်အန္တရာယ်ကိုလည်း ထည့်တွက်ပါ။</p>
+          <h2>File name နှင့် upload စစ်ဆေးမှု</h2><p>Client ပေးလာသော မူရင်း file name ကို path အဖြစ်တိုက်ရိုက်မသုံးဘဲ framework-generated name သို့မဟုတ် သီးခြား safe name သုံးပါ။ MIME/type, size နှင့် business အဓိပ္ပာယ်ကို validation လုပ်ပြီး extension ကိုသာ ယုံကြည်ခြင်းကိုရှောင်ပါ။ Storage failure နှင့် database record မကိုက်ညီမှုအတွက် cleanup/retry နည်းလမ်းထားပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-queue-retries-failures-and-after-commit" data-group="laravel" data-title="Queue Retry၊ Failed Job နှင့် Database Commit အစဉ်">
+          <div class="progress-line"><div></div></div>
+          <h1>Queue Retry၊ Failed Job နှင့် Database Commit အစဉ်</h1>
+          <p class="lede">Queue သည် အချိန်ကြာသောအလုပ်ကို request-response လမ်းကြောင်းမှခွဲပေးသော်လည်း job ကို အကြိမ်ကြိမ်လုပ်နိုင်သည်ဟု ဒီဇိုင်းဆွဲရသည်။ Retry, timeout နှင့် commit အစဉ်ကို လက်တွေ့ထိန်းမည်။</p>
+          <h2>Job ကို ထပ်လုပ်နိုင်ရန်ရေးခြင်း</h2><p>Worker ပျက်သွားခြင်း သို့မဟုတ် acknowledgement မရခြင်းကြောင့် job တစ်ခု ထပ်မံပြေးနိုင်သည်။ Job handler ကို idempotent လုပ်ပြီး unique business key သို့မဟုတ် processed marker ဖြင့် duplicate side effect ကိုကာကွယ်ပါ။ Job အတွင်း ပြင်ပ API ခေါ်ဆိုမှုအတွက် provider idempotency ကိုလည်းအသုံးချပါ။</p>
+          <h2>Retry, timeout နှင့် failed job</h2><p>Job ၏ attempts/backoff နှင့် timeout ကို external dependency ၏ latency နှင့် queue connection configuration နှင့်ကိုက်ညီစေပါ။ အမြဲတမ်းမအောင်မြင်သော input ကို အဆုံးမဲ့ retry မလုပ်ဘဲ failed job အဖြစ်စစ်ဆေးနိုင်အောင်ထားပါ။ Failure log တွင် လိုအပ်သော identifier ထည့်ပြီး secret သို့မဟုတ် full private payload မထည့်ပါနှင့်။</p>
+          <h2>Transaction commit ပြီးမှ dispatch</h2><p>Transaction ထဲတွင် record ဖန်တီးပြီး ချက်ချင်း job dispatch လုပ်လျှင် worker သည် commit မဖြစ်သေးသော row ကို ဖတ်မရနိုင်သည်။ Dispatch ကို transaction commit ပြီးနောက်လုပ်ရန် after-commit သဘောတရားကိုသုံးပါ။ Transaction rollback ဖြစ်သည့်အခါ မရှိတော့မည့် record ကိုအခြေခံသော job မထွက်ကြောင်း test ဖြင့်စစ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-events-outbox-and-notifications" data-group="laravel" data-title="Event Boundary၊ After-Commit Listener နှင့် Notification Delivery">
+          <div class="progress-line"><div></div></div>
+          <h1>Event Boundary၊ After-Commit Listener နှင့် Notification Delivery</h1>
+          <p class="lede">Event နှင့် notification တို့ကို ခွဲသုံးခြင်းက domain ပြောင်းလဲမှုနှင့် ဆက်သွယ်ပို့ဆောင်မှုကို သီးခြားထိန်းသိမ်းစေသည်။ Failure နှင့် transaction အစဉ်ကိုလည်း ထည့်တွက်ရမည်။</p>
+          <h2>Event သည် ဖြစ်ရပ်ကိုဖော်ပြခြင်း</h2><p><code>OrderPlaced</code> ကဲ့သို့ event သည် ဖြစ်ပြီးသား domain event ကိုဖော်ပြပြီး listener များက analytics သို့မဟုတ် follow-up workflow ကို လုပ်နိုင်သည်။ Event ထဲတွင် လိုအပ်သော identifier နှင့် အချက်အလက်သာထည့်ပြီး mutable model state ကို မလိုအပ်ဘဲ မှီခိုခြင်းကိုရှောင်ပါ။ Listener များကို auto-discovery သို့မဟုတ် ကိုယ်တိုင်မှတ်ပုံတင်သည့်ပုံစံဖြင့် ချိတ်ထားမှုကို project configuration မှ စစ်ဆေးပါ။</p>
+          <h2>Commit နောက်မှ listener လုပ်ဆောင်ခြင်း</h2><p>Event ကို transaction အတွင်း dispatch လုပ်လျှင် listener က မcommitရသေးသော data ကိုမြင်နိုင်သည် သို့မဟုတ် rollback ဖြစ်သည့် event ကိုလုပ်ဆောင်မိနိုင်သည်။ After-commit listener/dispatch ကိုသုံးပြီး event တစ်ခု၏ lifecycle ကို transaction နှင့်ချိတ်ပါ။ Database change နှင့် message delivery ကို အပြည့်အဝ atomic လိုအပ်သည့် system တွင် outbox pattern ကဲ့သို့ architecture ကိုစဉ်းစားပါ။</p>
+          <h2>Notification channel နှင့် privacy</h2><p>Notification သည် mail, database သို့မဟုတ် အခြား channel များမှ ပို့နိုင်ပြီး queue လုပ်နိုင်သည်။ Channel တစ်ခုချင်းစီတွင် retry နှင့် failure မတူနိုင်သောကြောင့် recipient နှင့် message data ကို privacy အရစစ်ဆေးပါ။ Notification content ထဲတွင် secret သို့မဟုတ် မလိုအပ်သော personal data မထည့်ပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-cache-invalidation-and-stampede" data-group="laravel" data-title="Cache Key၊ Invalidation နှင့် Cache Stampede ကာကွယ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Cache Key၊ Invalidation နှင့် Cache Stampede ကာကွယ်ခြင်း</h1>
+          <p class="lede">Cache ထည့်ခြင်းက query များကို မြန်စေနိုင်သော်လည်း stale data နှင့် တပြိုင်နက် cache miss ဖြစ်ခြင်းကို စီမံရသည်။ Key design, TTL နှင့် invalidation ကို business data နှင့်ကိုက်ညီစေမည်။</p>
+          <h2>Key နှင့် TTL ကို အဓိပ္ပာယ်ရှိစွာရွေးခြင်း</h2><p>Cache key တွင် resource ID နှင့် filter/version လိုအပ်ချက်ကို ထင်ရှားစွာထည့်ပြီး မတူညီသော tenant သို့မဟုတ် user data များ key တူမသွားစေရန်သတိထားပါ။ TTL သည် အသစ်ပြောင်းရန်လိုအပ်သည့်အကြိမ်နှုန်းနှင့်ကိုက်ညီရမည်။ Sensitive data ကို cache ထဲသိမ်းမည်ဆိုလျှင် encryption, driver နှင့် access boundary တို့ကို စစ်ဆေးပါ။</p>
+          <h2>Invalidation မူဝါဒ</h2><p>Record ပြောင်းလဲသည့်အခါ cache ကိုဖျက်မည်၊ version တိုးမည် သို့မဟုတ် short TTL ဖြင့် stale window ကိုလက်ခံမည်ဆိုသည်ကို ကြိုတင်ဆုံးဖြတ်ပါ။ Write path အားလုံးတွင် invalidation မေ့မကျန်စေရန် model event သို့မဟုတ် application service တစ်ခုတွင် စီမံနိုင်သည်။ Cache miss နှင့် stale response ကို test လုပ်ပါ။</p>
+          <h2>Stampede နှင့် lock</h2><p>လူသုံးများသော key တစ်ခု expire ချိန်တွင် request အများအပြားက တစ်ပြိုင်နက် database query လုပ်ခြင်းသည် cache stampede ဖြစ်စေသည်။ Cache lock သို့မဟုတ် stale-while-revalidate စနစ်ကို သင့်တော်သည့်နေရာတွင် အသုံးပြုပြီး lock TTL နှင့် failure fallback သတ်မှတ်ပါ။ Cache ပျက်သည့်အခါ application သည်မှန်ကန်စွာလုပ်ဆောင်နိုင်ရန်လည်း စစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-rate-limits-and-abuse-controls" data-group="laravel" data-title="Rate Limit ကို User၊ IP နှင့် Endpoint အလိုက်ဒီဇိုင်းဆွဲခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Rate Limit ကို User၊ IP နှင့် Endpoint အလိုက်ဒီဇိုင်းဆွဲခြင်း</h1>
+          <p class="lede">Rate limit သည် brute force နှင့် မတော်တဆ overload ကိုလျှော့ချနိုင်သော်လည်း key မှားလျှင် တရားဝင်အသုံးပြုသူများကိုပါ ပိတ်နိုင်သည်။ Limiter key, response နှင့် shared cache ကို စီမံမည်။</p>
+          <h2>Limiter သတ်မှတ်ခြင်း</h2><p>Laravel rate limiter တွင် endpoint အမျိုးအစားအလိုက် attempt အရေအတွက်နှင့် အချိန်ကာလကို သတ်မှတ်နိုင်သည်။ Login, password reset နှင့် public search တို့၏ abuse risk မတူသောကြောင့် limit တစ်ခုတည်းကို အားလုံးအတွက်မကူးပါနှင့်။ Limit ကို route middleware သို့မဟုတ် application သင့်လျော်ရာနေရာတွင် ချိတ်ပါ။</p>
+          <h2>Key နှင့် user experience</h2><p>Authenticated endpoint တွင် user ID ကိုအခြေခံသော key၊ anonymous endpoint တွင် IP သို့မဟုတ် အခြား identifier ကို စဉ်းစားနိုင်သော်လည်း proxy နောက်က IP ယုံကြည်မှုကို မှန်ကန်စွာ configure လုပ်ရမည်။ Shared public IP အသုံးပြုသူများကို မမျှတစွာပိတ်မိနိုင်မှုကို ထည့်စဉ်းစားပါ။ Limit ကျော်လျှင် 429 status နှင့် retry အချက်အလက်ကို တသမတ်တည်းပြန်ပါ။</p>
+          <h2>Distributed cache နှင့် test</h2><p>Server အများအပြားရှိပါက counter များအားလုံးမြင်နိုင်သော shared cache backend ကိုသုံးရန်လိုနိုင်သည်။ Rate limit unit test တွင် clock/counter ကို ထိန်းချုပ်ပြီး allowed နှင့် blocked path များကိုစစ်ပါ။ Operational dashboard တွင် rejection များကိုစောင့်ကြည့်သော်လည်း sensitive identifier များကို မလိုအပ်ဘဲ log မလုပ်ပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-feature-tests-database-isolation" data-group="laravel" data-title="Feature Test၊ Database Isolation နှင့် HTTP Boundary စမ်းသပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Feature Test၊ Database Isolation နှင့် HTTP Boundary စမ်းသပ်ခြင်း</h1>
+          <p class="lede">Unit test တစ်ခုတည်းက middleware, database နှင့် response serialization တို့ အတူအလုပ်လုပ်ပုံကို မဖုံးလွှမ်းနိုင်ပါ။ Feature test ကို boundary အလိုက်တည်ဆောက်ပြီး data isolation ထိန်းမည်။</p>
+          <h2>HTTP behavior ကို အပြင်ဘက်မှစမ်းခြင်း</h2><p>Feature test တွင် request ပို့ပြီး status, JSON/view data, redirect နှင့် database state ကို စစ်နိုင်သည်။ Happy path သာမက unauthenticated, forbidden, validation error နှင့် missing model တို့ကိုပါ စမ်းပါ။ Test သည် implementation method ခေါ်ခဲ့/မခေါ်ခဲ့ကိုသာမက user မြင်ရမည့် behavior ကိုအတည်ပြုပါ။</p>
+          <h2>Database test ကို သီးခြားထားခြင်း</h2><p>RefreshDatabase သို့မဟုတ် သင့် project အတွက်သင့်လျော်သော database reset strategy ကို အသုံးပြုပြီး test တစ်ခု၏ data က နောက်တစ်ခုကိုမညစ်ညမ်းစေပါစေ။ Factory ဖြင့် လိုအပ်သော record များကိုဖန်တီးပြီး assertion ကို တိကျစွာရေးပါ။ Production နှင့် မတူညီသော SQLite behavior သည် အရေးကြီးသည့်အခါ production database engine ဖြင့် CI စမ်းသပ်ပါ။</p>
+          <h2>External effect ကို ထိန်းချုပ်ခြင်း</h2><p>Mail, notification, event, queue နှင့် storage အတွက် framework fake များကိုသုံးပြီး test ကို အပြင်ဝန်ဆောင်မှုများအပေါ် မမှီခိုစေပါနှင့်။ Fake ကိုသုံးရာတွင် dispatch ဖြစ်ခြင်းသာမက payload နှင့် recipient မှန်ကန်မှုကိုပါ assert လုပ်ပါ။ Concurrency, transaction သို့မဟုတ် real integration ကိုလိုအပ်သည့်အပိုင်းများကို သီးခြား integration test ဖြင့်စမ်းပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-logging-context-and-exception-observability" data-group="laravel" data-title="Structured Logging၊ Context နှင့် Exception Observability">
+          <div class="progress-line"><div></div></div>
+          <h1>Structured Logging၊ Context နှင့် Exception Observability</h1>
+          <p class="lede">Production ပြဿနာတစ်ခုကို ပြန်လည်တည်ဆောက်ရန် log ထဲတွင် သက်ဆိုင်ရာ context ရှိရန်လိုသော်လည်း secret များမပေါက်ကြားစေရပါ။ Log channel, context နှင့် exception ကို စနစ်တကျသုံးမည်။</p>
+          <h2>Log level နှင့် channel</h2><p>အချက်အလက်အဆင့်၊ သတိပေးချက်နှင့် error များကို သက်ဆိုင်ရာ log level ဖြင့်ခွဲပါ။ Laravel logging channel configuration သည် file သို့မဟုတ် အခြား handler များသို့ ပို့နိုင်သောကြောင့် production အတွက် rotation နှင့် retention ကိုလည်းစီစဉ်ပါ။ အသုံးပြုသူမြင်ရမည့် error message နှင့် internal log အသေးစိတ်ကို ခွဲထားပါ။</p>
+          <h2>Context ကိုတစ်သမတ်တည်းထည့်ခြင်း</h2><p>Request ID, user ID သို့မဟုတ် job ID ကဲ့သို့ non-sensitive identifier များသည် log event များကို ဆက်စပ်ဖတ်ရှုရာတွင် အထောက်အကူပြုသည်။ Request input အားလုံးကို context ထဲထည့်ခြင်းကိုရှောင်ပြီး password, token, payment data များကို redact လုပ်ပါ။ Queue job များတွင်လည်း request ပြီးသွားသော်လည်း trace လုပ်နိုင်သော identifier ထည့်ပါ။</p>
+          <h2>Exception နှင့် alert</h2><p>Exception ကို ဖမ်းပြီး တိတ်တဆိတ်ပစ်ချခြင်းထက် သင့်လျော်သောအဆင့်တွင် report လုပ်၍ client ထံ generic response ပြန်ပါ။ ထပ်ခါတလဲလဲဖြစ်သော failure, queue backlog နှင့် health check အခြေအနေတို့အတွက် alert threshold ကိုသတ်မှတ်ပါ။ Log retention, access permission နှင့် personal data မူဝါဒကို လုပ်ငန်းလိုအပ်ချက်နှင့်ကိုက်ညီစေပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-production-secrets-config-and-https" data-group="laravel" data-title="Production Configuration၊ Secret နှင့် HTTPS လုံခြုံရေး">
+          <div class="progress-line"><div></div></div>
+          <h1>Production Configuration၊ Secret နှင့် HTTPS လုံခြုံရေး</h1>
+          <p class="lede">Production တွင် debug အချက်အလက်၊ secret နှင့် မသင့်တော်သော environment value များသည် အရေးကြီးသောတိုက်ခိုက်မှုမျက်နှာပြင်ဖြစ်သည်။ Config cache နှင့် deployment environment ကို သေချာခွဲခြားမည်။</p>
+          <h2>Debug နှင့် secret ကိုကာကွယ်ခြင်း</h2><p>Production တွင် <code>APP_DEBUG=false</code> ထားရန် Laravel deployment documentation ကညွှန်ပြထားပြီး debug ဖွင့်ထားပါက sensitive configuration ကိုဖော်ထုတ်နိုင်သည်။ <code>.env</code> ကို repository ထဲမထည့်ဘဲ deployment secret store သို့မဟုတ် ခွင့်ပြုချက်ကန့်သတ်ထားသော environment ဖြင့်ပေးပါ။ Log, error page နှင့် backup ထဲတွင်လည်း secret မကျန်စေရန်စစ်ဆေးပါ။</p>
+          <h2>Config cache ၏ သက်ရောက်မှု</h2><p><code>php artisan config:cache</code> ပြီးနောက် application က <code>.env</code> ကို request တိုင်းဖတ်သည်ဟု မယူဆရပါ။ <code>env()</code> ကို configuration file များအတွင်းသာသုံးပြီး application code တွင် <code>config()</code> မှတစ်ဆင့်ဖတ်ပါ။ Environment variable ပြောင်းလဲပြီးနောက် cache ကိုပြန်တည်ဆောက်ရန် deployment flow တွင် ထည့်သွင်းပါ။</p>
+          <h2>HTTPS နှင့် file exposure</h2><p>TLS ကို web server သို့မဟုတ် trusted proxy အလွှာတွင် မှန်ကန်စွာထားပြီး secure cookie နှင့် URL generation ကို production domain အတွက်စစ်ဆေးပါ။ Web root သည် project root မဟုတ်ဘဲ <code>public</code> directory ဖြစ်ရမည်၊ သို့မှသာ <code>.env</code> သို့မဟုတ် source file များကို web မှမဖော်ထုတ်မိမည်။ Storage, <code>bootstrap/cache</code> နှင့် log directory permissions ကို လိုအပ်သလောက်သာပေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-laravel-deployment-readiness-checklist" data-group="laravel" data-title="Laravel Deployment Readiness နှင့် Health Check">
+          <div class="progress-line"><div></div></div>
+          <h1>Laravel Deployment Readiness နှင့် Health Check</h1>
+          <p class="lede">Deployment အခြေခံသင်ခန်းစာထက် တစ်ဆင့်မြှင့်ပြီး release တစ်ခုကို လည်ပတ်နိုင်ရန်လိုအပ်သော cache, worker, permission နှင့် health verification များကို စစ်ဆေးမည်။ Rollout ပြီးနောက် စနစ်တကျအတည်ပြုနိုင်မည်။</p>
+          <h2>Release မတိုင်မီ စစ်ဆေးရန်</h2><p>CI တွင် test များအောင်မြင်မှု၊ dependency install၊ migration plan နှင့် runtime PHP extension လိုအပ်ချက်များကို အတည်ပြုပါ။ Laravel deployment docs တွင် production optimization အဖြစ် <code>php artisan optimize</code> ကို deployment process တွင်သုံးနိုင်ကြောင်း ဖော်ပြထားသည်။ Config cache လုပ်မည်ဆိုလျှင် deployment variable များမှန်ကန်ကြောင်းအရင်စစ်ပါ။</p>
+          <h2>Worker နှင့် writable path</h2><p>Queue worker သို့မဟုတ် အခြား long-running process များသည် code အသစ်ကိုအသုံးပြုရန် release ပြီးနောက် graceful reload/restart လိုနိုင်သည်။ Web process သည် <code>storage</code> နှင့် <code>bootstrap/cache</code> ကိုရေးနိုင်သော်လည်း project တစ်ခုလုံးကို မလိုအပ်ဘဲ writable မလုပ်ပါနှင့်။ Migration နှင့် worker rollout အစဉ်ကို backward-compatible schema ပြောင်းလဲမှုနှင့်ညှိပါ။</p>
+          <h2>Health နှင့် rollback readiness</h2><p>Laravel ၏ health route သည် ပုံမှန်အားဖြင့် <code>/up</code> တွင် application boot အောင်မြင်မှုအတွက် 200 သို့မဟုတ် exception ရှိပါက 500 ပြန်နိုင်ပြီး uptime monitor သို့မဟုတ် load balancer ကစစ်နိုင်သည်။ Database/cache စစ်ဆေးမှုလိုပါက health event/listener ဖြင့် သင့်လိုအပ်ချက်ကိုထည့်ပါ။ Release ပြီးနောက် error rate, queue backlog နှင့် critical endpoint များကိုကြည့်ပြီး ပြဿနာဖြစ်လျှင် rollback လမ်းကြောင်းအဆင်သင့်ထားပါ။</p>
+        </article>
+
 
         <!-- ================= API: INTRO ================= -->
         <article class="page" id="page-api-intro" data-group="api" data-title="API & JSON မိတ်ဆက်">
@@ -10464,6 +10644,183 @@ test("ခလုတ် နှိပ်ရင် count တိုးတယ်", asy
           </tbody></table></div>
           <div class="tip"><strong>ဂုဏ်ယူပါတယ်!</strong>Module 10 — React ပြီးပါပြီ။ အခု Laravel API + React Web App full-stack ပုံစံ ဆောက်နိုင်ပါပြီ။ နောက် Module 11 မှာ Flutter ရဲ့ language ဖြစ်တဲ့ Dart ကို သီးသန့် သင်ပြီး၊ Module 12 မှာ အဲဒီ API ကိုပဲ Flutter mobile app ကနေ သုံးပါမယ်။</div>
         </article>
+        <article class="page" id="page-extra-react-component-boundaries" data-group="react" data-title="Component Boundary ကို ရည်ရွယ်ချက်ရှိရှိ သတ်မှတ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Component Boundary ကို ရည်ရွယ်ချက်ရှိရှိ သတ်မှတ်ခြင်း</h1>
+          <p class="lede">Component တစ်ခုစီကို UI အပိုင်းတစ်ခုသာမက တာဝန်ယူမှုနယ်နိမိတ်အဖြစ် စဉ်းစားပါ။ သင့်လျော်သော boundary က ပြောင်းလဲမှုကို ကန့်သတ်ပြီး စမ်းသပ်ရလွယ်စေသည်။</p>
+          <h2>တာဝန်ကို ရှင်းလင်းစွာ ခွဲပါ</h2><p>Component တစ်ခုတွင် UI တင်ပြခြင်း၊ input တုံ့ပြန်ခြင်း၊ ဒေတာရယူခြင်းတို့အားလုံး ရောနှောနေပါက ပြင်ဆင်ရခက်လာနိုင်သည်။ <code>ProductRow</code> က ပစ္စည်းတစ်ကြောင်းကို ပြသပြီး <code>ProductList</code> က အစုလိုက်ဖော်ပြမှုကို စီမံသကဲ့သို့ တာဝန်အလိုက် ခွဲပါ။</p>
+          <h2>အလွန်သေးငယ်ခြင်းကိုလည်း ရှောင်ပါ</h2><p>DOM element တစ်ခုစီအတွက် component သီးသန့်လုပ်ရန် မလိုအပ်ပါ။ အဓိပ္ပာယ်ပြည့်ဝသော ပြန်သုံးနိုင်မှု၊ ရှုပ်ထွေးသောအပြုအမူ၊ သို့မဟုတ် သီးခြားပြင်ဆင်ရမည့်နေရာရှိမှ ခွဲထုတ်ပါ။</p>
+          <h2>နယ်နိမိတ်ကို စမ်းသပ်ပါ</h2><p>Component တစ်ခုကို ၎င်း၏အပြင်ဘက်အတွင်းပိုင်းကို မသိဘဲ အသုံးပြုနိုင်သလား စဉ်းစားပါ။ Props သို့မဟုတ် callback များက လိုအပ်သည့်သဘောတူညီချက်ဖြစ်ပြီး implementation အသေးစိတ်ကို ဝှက်ထားနိုင်သည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-composition-and-children" data-group="react" data-title="Composition ဖြင့် UI ကို ပေါင်းစပ်တည်ဆောက်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Composition ဖြင့် UI ကို ပေါင်းစပ်တည်ဆောက်ခြင်း</h1>
+          <p class="lede">ကြီးမားသော component တစ်ခုထဲတွင် အခြေအနေအားလုံးကို ထည့်မည့်အစား သေးငယ်သောအစိတ်အပိုင်းများကို ပေါင်းစပ်ပါ။ <code>children</code> နှင့် slot ပုံစံ props များက layout ကို ပြောင်းလွယ်ပြင်လွယ်ဖြစ်စေသည်။</p>
+          <h2>children ကို အကြောင်းအရာနေရာအဖြစ် သုံးပါ</h2><p><code>&lt;Card&gt;&lt;Profile /&gt;&lt;/Card&gt;</code> ကဲ့သို့ရေးလျှင် <code>Card</code> သည် အတွင်းပိုင်းကို ဘယ်လိုတည်ဆောက်ထားသည်ကို မသိဘဲ ထုပ်ပိုးနိုင်သည်။ ခေါင်းစဉ်နှင့် body ကဲ့သို့ ထပ်တလဲလဲအသုံးဝင်သည့် layout ကို သီးခြား component ထဲတွင် ထားပါ။</p>
+          <h2>Slot အမည်ပေးခြင်း</h2><p>ကွဲပြားသောနေရာများစွာ ထည့်လိုသည့်အခါ <code>header</code>, <code>footer</code> ကဲ့သို့ node props များပေးနိုင်သည်။ ထိုနည်းလမ်းသည် အစားထိုးနိုင်သော UI နေရာများကို တိတိကျကျဖော်ပြပြီး အသုံးပြုသူဘက်မှ စိတ်ကြိုက်အကြောင်းအရာ ထည့်ခွင့်ပေးသည်။</p>
+          <h2>အခြေအနေများကို props အဖြစ် မဖောင်းပွစေပါနှင့်</h2><p><code>isBlue</code>, <code>isLarge</code>, <code>isCompact</code> စသည့် flag များအလွန်များလာလျှင် component တစ်ခုတည်းက မတူညီသောဒီဇိုင်းများစွာကို ထမ်းထားနိုင်သည်။ တစ်ခုချင်းစီ၏ရည်ရွယ်ချက်ကို စစ်ဆေးပြီး composition သို့မဟုတ် သီးခြား variant component ဖြင့် ဖော်ပြပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-props-contracts-and-immutability" data-group="react" data-title="Props Contract နှင့် မပြောင်းလဲနိုင်သော Data စီးဆင်းမှု">
+          <div class="progress-line"><div></div></div>
+          <h1>Props Contract နှင့် မပြောင်းလဲနိုင်သော Data စီးဆင်းမှု</h1>
+          <p class="lede">Props ကို component ၏ အပြင်ဘက်မှပေးလာသော input အဖြစ် သဘောထားပါ။ ၎င်းကို တိုက်ရိုက်ပြင်ဆင်မည့်အစား callback ဖြင့် ပြောင်းလဲမှုတောင်းဆိုခြင်းက data flow ကို ထင်ရှားစေသည်။</p>
+          <h2>လိုအပ်သည့် props ကို ရှင်းပြပါ</h2><p>Component API တစ်ခုတွင် မဖြစ်မနေလိုသည့်တန်ဖိုး၊ ရွေးချယ်နိုင်သည့်တန်ဖိုးနှင့် callback တို့ကို သီးခြားနားလည်လွယ်စွာ သတ်မှတ်ပါ။ <code>onSave</code> သို့မဟုတ် <code>isDisabled</code> ကဲ့သို့ အမည်များသည် ရည်ရွယ်ချက်ကို ခန့်မှန်းစရာမလိုစေပါ။</p>
+          <h2>Props ကို မပြင်ဆင်ပါနှင့်</h2><p>Array သို့မဟုတ် object prop ကို <code>push</code> လုပ်ခြင်း၊ field တန်ဖိုးကို တိုက်ရိုက်ပြောင်းခြင်းသည် မူလပိုင်ရှင်၏ data ကိုပါ ပြောင်းစေနိုင်သည်။ မူလတန်ဖိုးကို မပြောင်းဘဲ အသစ်တစ်ခု ပြန်ပေးသည့် <code>map</code> သို့မဟုတ် spread ပုံစံကို သုံးပါ။</p>
+          <h2>ပြောင်းလဲမှုအတွက် callback ပေးပါ</h2><p>Child က parent ပိုင် state ကို ပြောင်းလိုပါက <code>onChange</code> သို့မဟုတ် <code>onRemove(id)</code> ကိုခေါ်ပြီး intent ကို အပေါ်သို့ တင်ပါ။ ထိုနည်းဖြင့် data ကို မည်သူပိုင်သလဲနှင့် ပြောင်းလဲမှု မည်သို့စီးဆင်းသလဲကို ရှင်းလင်းစေသည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-event-propagation" data-group="react" data-title="Event Propagation နှင့် Handler ဒီဇိုင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Event Propagation နှင့် Handler ဒီဇိုင်း</h1>
+          <p class="lede">Event handler သည် အသုံးပြုသူလုပ်ဆောင်ချက်၏ အကြောင်းရင်းနှင့် ကိုက်ညီသောနေရာတွင် ရှိသင့်သည်။ Event bubbling ကို သိထားခြင်းက nested control များ၏ မမျှော်လင့်သောတုံ့ပြန်မှုကို ကာကွယ်ပေးသည်။</p>
+          <h2>လုပ်ဆောင်ချက်နှင့် side effect ကို ချိတ်ပါ</h2><p>Save ခလုတ်နှိပ်မှုကြောင့် server သို့ သိမ်းဆည်းခြင်းဖြစ်လျှင် ထိုအလုပ်ကို click သို့မဟုတ် form submit handler ထဲတွင် စတင်ပါ။ UI မှတွက်ချက်နိုင်သောတန်ဖိုးကို နောက်မှ Effect ဖြင့် ပြန်တွက်ရန် မလိုပါ။</p>
+          <h2>Bubbling ကို ထိန်းချုပ်ပါ</h2><p>အတွင်းခလုတ်နှိပ်မှုသည် အပြင်ဘက် clickable row သို့လည်း တက်ရောက်နိုင်သည်။ သီးခြားလုပ်ဆောင်ချက်များ တိုက်မိလျှင် လိုအပ်သည့် handler တွင် <code>event.stopPropagation()</code> ကို သုံးပါ၊ သို့သော် မလိုအပ်ဘဲ propagation ကို ပိတ်မထားပါနှင့်။</p>
+          <h2>Handler ကို အချိန်မှန်ခေါ်ပါ</h2><p><code>onClick={save()}</code> သည် render လုပ်ချိန်တွင် function ကို ချက်ချင်းခေါ်နိုင်သည်။ <code>onClick={save}</code> သို့မဟုတ် လိုအပ်သည့် argument အတွက် <code>onClick={() =&gt; save(id)}</code> ဟု ပေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-controlled-form-validation" data-group="react" data-title="Controlled Form တွင် Validation နှင့် Submit ကို စီမံခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Controlled Form တွင် Validation နှင့် Submit ကို စီမံခြင်း</h1>
+          <p class="lede">Form input များကို React state နှင့် တစ်ပြိုင်တည်းထားပြီး validation ကို အသုံးပြုသူနားလည်လွယ်သည့်အချိန်တွင် ပြပါ။ Submit ကို browser ၏ default လုပ်ဆောင်ချက်နှင့် ရည်ရွယ်ချက်ရှိရှိ ကိုင်တွယ်ပါ။</p>
+          <h2>Input တန်ဖိုးကို တစ်နေရာတည်းမှ ထိန်းပါ</h2><p>Text input တစ်ခုတွင် <code>value={name}</code> နှင့် <code>onChange</code> ကို တွဲသုံးပါ။ Checkbox အတွက် <code>checked</code> ကို state မှထိန်းပြီး <code>event.target.checked</code> ကို ဖတ်ပါ၊ text အဖြစ် မယူဆပါနှင့်။</p>
+          <h2>Validation ကို ခွဲခြားစဉ်းစားပါ</h2><p>လိုအပ်ချက်ကို စာရိုက်စဉ်စစ်မလား၊ blur ဖြစ်ချိန်စစ်မလား၊ submit ချိန်စစ်မလား ဆုံးဖြတ်ပါ။ Error စာသားကို သက်ဆိုင်ရာ field နှင့် ချိတ်ပြီး အမှားအခြေအနေတစ်ခုစီကို state မှ သို့မဟုတ် input များမှတွက်ချက်ပါ။</p>
+          <h2>Submit လုပ်ပြီး အခြေအနေပြပါ</h2><p>Form ၏ <code>onSubmit</code> handler တွင် <code>event.preventDefault()</code> ကို သုံးကာ browser navigation ကို မိမိစီမံလိုသည့်အခါ တားနိုင်သည်။ Submit လုပ်နေစဉ် ခလုတ်ကိုပိတ်ခြင်း၊ ပြီးဆုံးမှုနှင့် server error ကို ဖော်ပြခြင်းတို့ကို သီးခြား UI state အဖြစ် ပြပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-state-structure-derived-values" data-group="react" data-title="State ကို ရိုးရှင်းစွာ ဖွဲ့စည်းပြီး Derived Value တွက်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>State ကို ရိုးရှင်းစွာ ဖွဲ့စည်းပြီး Derived Value တွက်ခြင်း</h1>
+          <p class="lede">State ထဲတွင် မူရင်းအချက်အလက်ကိုသာ ထားပြီး အခြားတန်ဖိုးများကို render အချိန်တွင် တွက်ပါ။ ထပ်နေသော state ကို လျှော့ခြင်းက data မညီမှုနှင့် အပို update များကို ကာကွယ်သည်။</p>
+          <h2>အမှန်တရားတစ်ခုတည်းကို ထားပါ</h2><p><code>firstName</code>, <code>lastName</code> နှင့် <code>fullName</code> သုံးခုလုံးကို state ထဲသိမ်းလျှင် တစ်ခုမေ့ပြင်သောအခါ မညီနိုင်သည်။ <code>fullName = firstName + ' ' + lastName</code> ဟု render အတွင်းတွက်ပါ။</p>
+          <h2>State shape ကို ရွေးပါ</h2><p>ဆက်စပ်တန်ဖိုးများကို object တစ်ခုထဲ စုစည်းနိုင်သော်လည်း မကြာခဏ သီးခြားပြောင်းလဲသည့်အရာများကို မလိုအပ်ဘဲ ချိတ်ဆက်မထားပါနှင့်။ Nested object ကို ပြင်သည့်အခါ လိုအပ်သောအဆင့်တိုင်းကို copy လုပ်ပြီး state အသစ်ဖြင့် အစားထိုးပါ။</p>
+          <h2>Reset လုပ်မည့်အချိန်ကို သိပါ</h2><p>React သည် UI tree ထဲရှိ component ၏နေရာနှင့် identity အပေါ်မူတည်၍ state ကို ထိန်းသိမ်းနိုင်သည်။ မတူသော record တစ်ခုဖွင့်သည့်အခါ form ကို အစမှပြန်စလိုပါက သက်ဆိုင်ရာ component တွင် record ကိုယ်စားပြု <code>key</code> ပြောင်းပေးနိုင်သည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-lifting-state-coordination" data-group="react" data-title="Lifting State Up ဖြင့် အပြန်အလှန်ချိတ်ဆက်သော UI ကို ညှိနှိုင်းခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Lifting State Up ဖြင့် အပြန်အလှန်ချိတ်ဆက်သော UI ကို ညှိနှိုင်းခြင်း</h1>
+          <p class="lede">ညီညွတ်စွာပြောင်းလဲရမည့် sibling component များ၏ state ကို အနီးဆုံး common parent ထံ ရွှေ့ပါ။ Parent က value ကိုပေးပြီး child က ပြောင်းလိုသည့်ရည်ရွယ်ချက်ကို callback ဖြင့် ပြန်တင်ပို့သည်။</p>
+          <h2>အနီးဆုံးပိုင်ရှင်ကို ရွေးပါ</h2><p>Tab နှစ်ခုအနက် တစ်ခုသာ active ဖြစ်ရမည်ဆိုလျှင် နှစ်ခုလုံး၏ parent က <code>activeTab</code> ကို ပိုင်ဆိုင်သင့်သည်။ State ကို အမြစ်ဆုံးသို့ အလိုအလျောက်မရွှေ့ဘဲ လိုအပ်သည့်အစိတ်အပိုင်းအားလုံး၏ အနီးဆုံးဘုံမိဘကို ရွေးပါ။</p>
+          <h2>Value နှင့် event ကို တွဲပို့ပါ</h2><p>Parent က <code>isActive</code> value ကိုပေးပြီး <code>onActivate</code> callback ကိုလည်း ပေးနိုင်သည်။ Child သည် အခြေအနေကို ကိုယ်တိုင်ထပ်သိမ်းမည့်အစား click ဖြစ်ကြောင်း အသိပေးရုံဖြင့် တစ်ခုတည်းသော state ကို ထိန်းနိုင်သည်။</p>
+          <h2>တည်ငြိမ်သော state flow ကို စစ်ဆေးပါ</h2><p>Value ကို child မှ parent သို့ ပြန်ပို့၊ ထို parent က အခြား child များထံ ဖြန့်ဝေသည့် loop မလိုအပ်အောင် ဒီဇိုင်းလုပ်ပါ။ State ပိုင်ရှင်နှင့် update လမ်းကြောင်းကို ရေးဆွဲကြည့်ခြင်းက မလိုအပ်သော duplication ကို တွေ့စေသည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-reducer-actions-and-purity" data-group="react" data-title="Reducer၊ Action နှင့် Pure State Transition များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Reducer၊ Action နှင့် Pure State Transition များ</h1>
+          <p class="lede">Event handler များတွင် update logic ပျံ့နှံ့လာပါက <code>useReducer</code> ဖြင့် state transition များကို တစ်နေရာတည်းစုပါ။ Reducer သည် လက်ရှိ state နှင့် action ကိုယူကာ နောက် state ကို ပြန်ပေးသည့် pure function ဖြစ်ရမည်။</p>
+          <h2>Action ကို intent အဖြစ် ဖော်ပြပါ</h2><p><code>dispatch({ type: 'task_added', text })</code> ကဲ့သို့ action သည် အသုံးပြုသူဘာလုပ်ခဲ့သည်ကို ဖော်ပြသည်။ Handler က action ကို dispatch လုပ်ပြီး reducer က ထို action အလိုက် state အသစ်ကို တွက်ချက်သည်။</p>
+          <h2>Reducer ကို pure ထားပါ</h2><p>Reducer အတွင်း network request၊ random number ထုတ်ခြင်း၊ မူလ state ကို တိုက်ရိုက်ပြင်ခြင်းတို့ မလုပ်ပါနှင့်။ State နှင့် action တူညီလျှင် ရလဒ်တူညီစေရန် array သို့မဟုတ် object အသစ်တစ်ခု ပြန်ပေးပါ။</p>
+          <h2>Unknown action ကို ဖော်ထုတ်ပါ</h2><p>Action တစ်ခုချင်းစီအတွက် ပြန်လာမည့် state ကို တိတိကျကျ သတ်မှတ်ပါ။ မသိသော action ကို တိတ်တဆိတ် လက်ခံမည့်အစား error ထုတ်ခြင်းက typo သို့မဟုတ် မပြည့်စုံသော branch ကို စမ်းသပ်ချိန်တွင် တွေ့စေသည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-context-provider-boundaries" data-group="react" data-title="Context ကို လိုအပ်သည့် Subtree အတွင်းသာ ကန့်သတ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Context ကို လိုအပ်သည့် Subtree အတွင်းသာ ကန့်သတ်ခြင်း</h1>
+          <p class="lede">Context သည် component အလွှာများစွာကို ဖြတ်၍ တူညီသောအချက်အလက်ပေးရန် အသုံးဝင်သော်လည်း global state အားလုံးအတွက် အစားထိုးမဟုတ်ပါ။ Provider ကို တကယ်လိုအပ်သည့် subtree အနီးတွင်ထားပါ။</p>
+          <h2>Context သုံးရန် အကြောင်းပြချက်ရှိပါစေ</h2><p>Theme သို့မဟုတ် လက်ရှိအကောင့်လို နက်ရှိုင်းသောအစိတ်အပိုင်းများစွာက လိုအပ်သည့်တန်ဖိုးကို context ပေးနိုင်သည်။ Parent မှ child တစ်ဆင့်သာ ဖြတ်ရသည့်အခါ props သည် ရှင်းလင်းသောရွေးချယ်မှုဖြစ်နေတတ်သည်။</p>
+          <h2>Provider ကို နယ်နိမိတ်အဖြစ်ထားပါ</h2><p><code>&lt;ThemeProvider&gt;</code> ကို သက်ဆိုင်ရာ feature subtree ပတ်လည်ထားလျှင် အခြား screen များတွင် မလိုအပ်သော dependency မဖြစ်စေပါ။ Context တစ်ခုစီ၏ ရည်ရွယ်ချက်နှင့် ပြောင်းလဲပေးသူကို သတ်မှတ်ထားပါ။</p>
+          <h2>Context နှင့် reducer ကို ခွဲတာဝန်ပေးပါ</h2><p>Complex screen တစ်ခုတွင် reducer က transition logic ကို ထိန်းနိုင်ပြီး context က နက်ရှိုင်းသော child များထံ state နှင့် dispatch ကို ဖြန့်နိုင်သည်။ Context ကိုယ်တိုင်က data architecture သို့မဟုတ် server cache ကို အလိုအလျောက်မပေးကြောင်း သတိပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-effects-sync-and-dependencies" data-group="react" data-title="Effect ဖြင့် External System ကို Synchronize လုပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Effect ဖြင့် External System ကို Synchronize လုပ်ခြင်း</h1>
+          <p class="lede">Effect ကို React ပြင်ပရှိ system နှင့် ချိတ်ဆက်ရန် အသုံးပြုပါ၊ render မှတွက်နိုင်သည့်အရာတိုင်းအတွက် မသုံးပါနှင့်။ Dependency စာရင်းသည် Effect အသုံးပြုသော reactive value များကို ထင်ဟပ်ရမည်။</p>
+          <h2>Effect ၏ ရည်ရွယ်ချက်ကို စစ်ပါ</h2><p>WebSocket ချိတ်ဆက်ခြင်း၊ browser API နှင့် အပြန်အလှန်လုပ်ခြင်းကဲ့သို့ external system ရှိမှ Effect လိုတတ်သည်။ <code>filteredItems</code> ကဲ့သို့ state နှင့် props မှတွက်နိုင်သောတန်ဖိုးကို Effect မှတစ်ဆင့် state ထဲပြန်ရေးခြင်းကို ရှောင်ပါ။</p>
+          <h2>Dependency များကို ပြည့်စုံစွာ ရေးပါ</h2><p>Effect အတွင်းအသုံးပြုသော props, state နှင့် component ထဲတွင် ကြေညာထားသည့် variable၊ function များသည် reactive value ဖြစ်နိုင်သည်။ ၎င်းတို့ကို dependency array ထဲ အပြည့်အစုံထည့်ပြီး lint သတိပေးချက်ကို ဖုံးကွယ်မည့်အစား code ၏ dependency ကို ပြင်ဆင်ပါ။</p>
+          <h2>Effect တစ်ခုစီကို သီးခြားလုပ်ငန်းစဉ်အဖြစ်ထားပါ</h2><p><code>useEffect(setup, dependencies)</code> တွင် dependency ပြောင်းလဲသောအခါ ယခင် cleanup ပြီးမှ setup အသစ် လုပ်ဆောင်သည်။ စတင်ခြင်းနှင့် ရပ်တန့်ခြင်းကို တစ်ခုတည်းသော Effect ထဲတွင် တွဲထားခြင်းက connection ထပ်နေခြင်းနှင့် subscription ဟောင်းကျန်ခြင်းကို ကာကွယ်ပေးသည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-effect-cleanup-strict-mode" data-group="react" data-title="Effect Cleanup နှင့် Development Strict Mode ကို နားလည်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Effect Cleanup နှင့် Development Strict Mode ကို နားလည်ခြင်း</h1>
+          <p class="lede">Timer, event listener သို့မဟုတ် connection စတင်သည့် Effect သည် component မလိုတော့သည့်အခါ ရပ်တန့်ပေးရမည်။ Development Strict Mode တွင် setup နှင့် cleanup အပိုတစ်ကြိမ်လည်ပတ်ခြင်းကို bug ရှာဖွေရန် stress test အဖြစ် နားလည်ပါ။</p>
+          <h2>Setup ကို သန့်ရှင်းစွာ ပြန်ရုပ်သိမ်းပါ</h2><p><code>addEventListener</code> လုပ်လျှင် cleanup တွင် တူညီသော listener ဖြင့် <code>removeEventListener</code> လုပ်ပါ။ <code>setInterval</code> လုပ်လျှင် interval id ကို မှတ်ထားပြီး <code>clearInterval</code> ခေါ်ပါ။</p>
+          <h2>အစီအစဉ်ကို မှန်ကန်စွာ မျှော်လင့်ပါ</h2><p>Component ပေါ်လာချိန် setup အလုပ်လုပ်ပြီး dependency ပြောင်းသည့် commit နောက်တွင် React သည် ယခင်တန်ဖိုးများဖြင့် cleanup လုပ်ကာ setup အသစ်လုပ်သည်။ Unmount ဖြစ်သည့်အခါ cleanup ကို နောက်ဆုံးအကြိမ် လုပ်ဆောင်သည်။</p>
+          <h2>Strict Mode ပြဿနာကို ဖုံးကွယ်မထားပါနှင့်</h2><p>Development တွင် React က ပထမဆုံး setup မတိုင်မီ setup-cleanup အပိုစက်ဝန်းတစ်ခု လုပ်နိုင်သည်။ UI သည် ထိုအစီအစဉ်ဖြင့် မတူညီသွားပါက cleanup မပြည့်စုံခြင်း သို့မဟုတ် side effect မသင့်တော်ခြင်းကို ပြင်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-data-fetching-race-cancellation" data-group="react" data-title="Data Fetching State၊ Race Condition နှင့် Cancellation">
+          <div class="progress-line"><div></div></div>
+          <h1>Data Fetching State၊ Race Condition နှင့် Cancellation</h1>
+          <p class="lede">Network request တစ်ခုတွင် loading, success, empty နှင့် error အခြေအနေများကို ရှင်းလင်းစွာကိုယ်စားပြုပါ။ Query ပြောင်းလဲသည့်အခါ ဟောင်းသော response က အသစ်သော UI ကို အစားမထိုးနိုင်စေရန် cleanup သို့မဟုတ် cancellation ကို စီမံပါ။</p>
+          <h2>Request state ကို ပြည့်စုံစွာ ဖော်ပြပါ</h2><p><code>status</code> ကို <code>idle</code>, <code>loading</code>, <code>success</code>, <code>error</code> အဖြစ်ထားနိုင်ပြီး data နှင့် error ကို သင့်လျော်သလို ပူးတွဲထားပါ။ ရလဒ်မရှိခြင်းသည် request error မဟုတ်ကြောင်း UI တွင် သီးခြားဖော်ပြပါ။</p>
+          <h2>ဟောင်းသော response ကြောင့် UI မမှားစေရန် ကာကွယ်ပါ</h2><p>အသုံးပြုသူက ရှာဖွေစကားလုံးကို မြန်မြန်ပြောင်းလျှင် ယခင် request က နောက်ကျမှပြီးနိုင်သည်။ Effect cleanup တွင် ထိုရလဒ်ကို လျစ်လျူရှုရန် အမှတ်အသားထားနိုင်သလို <code>AbortController</code> ကို fetch ထံပေးပြီး abort လုပ်ကာ ယခင် query ၏ရလဒ်က UI အသစ်ကို အစားမထိုးစေရန် ကာကွယ်ပါ။</p>
+          <h2>Data fetching ၏ နယ်နိမိတ်ကို ရွေးချယ်ပါ</h2><p>Effect ဖြင့် ကိုယ်တိုင် fetch လုပ်နိုင်သော်လည်း cache၊ ထပ်နေသော request များကို ပေါင်းစည်းခြင်းနှင့် server rendering ကဲ့သို့ ပြဿနာအားလုံးကို တစ်ခုတည်းဖြင့် မဖြေရှင်းနိုင်ပါ။ လိုအပ်ချက်အရ framework သို့မဟုတ် data-fetching library ကို ရွေးပြီး သုံးမည့် client ၏ cancellation ပံ့ပိုးမှုကို စစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-refs-dom-focus-and-measurement" data-group="react" data-title="Refs ဖြင့် DOM Focus နှင့် Imperative အလုပ်များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Refs ဖြင့် DOM Focus နှင့် Imperative အလုပ်များ</h1>
+          <p class="lede">Ref သည် render အတွက်မဟုတ်သော တန်ဖိုးကို render များကြား သိမ်းထားပြီး DOM node ကို လိုအပ်ချိန်ရယူနိုင်သည်။ DOM ကို တိုက်ရိုက်ထိန်းချုပ်ခြင်းကို focus ကဲ့သို့ လိုအပ်သည့် imperative လုပ်ဆောင်ချက်များတွင် ကန့်သတ်ပါ။</p>
+          <h2>UI ကို မပြောင်းစေသည့်တန်ဖိုးထားပါ</h2><p><code>useRef(null)</code> သည် တည်ငြိမ်သော object ပြန်ပေးပြီး <code>current</code> ကိုပြောင်းသော်လည်း React ကို rerender မဖြစ်စေပါ။ Interval id သို့မဟုတ် နောက်ဆုံးဖတ်ထားသည့် DOM node ကဲ့သို့ ပြသရန်မလိုသည့်အချက်အလက်ကို သိမ်းပါ။</p>
+          <h2>DOM node ကို ရည်ညွှန်းပါ</h2><p><code>&lt;input ref={inputRef} /&gt;</code> ဖြင့် ချိတ်ထားလျှင် node ပေါ်လာသောအခါ <code>inputRef.current</code> တွင် ရရှိပြီး <code>focus()</code> ခေါ်နိုင်သည်။ အစပိုင်းတွင် <code>null</code> ဖြစ်နိုင်သဖြင့် အသုံးပြုမည့်အချိန်၌ node ရှိမှုကို စဉ်းစားပါ။</p>
+          <h2>Render အတွင်း ref ကို မပြောင်းပါနှင့်</h2><p><code>ref.current</code> ကို render အတွင်းဖတ်ရေးခြင်းက render ရလဒ်ကို ကြိုတင်မခန့်မှန်းနိုင်စေနိုင်သည်။ Ref ပြောင်းလဲမှုကြောင့် UI အသစ်ပြရမည်ဆိုလျှင် ref မဟုတ်ဘဲ state ကို သုံးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-custom-hooks-reusable-logic" data-group="react" data-title="Custom Hook ဖြင့် Reusable Behavior ကို ထုတ်ယူခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Custom Hook ဖြင့် Reusable Behavior ကို ထုတ်ယူခြင်း</h1>
+          <p class="lede">Component အများအပြားက တူညီသော stateful behavior လိုအပ်လျှင် အမည်တပ်ထားသော custom Hook အဖြစ် ထုတ်ယူပါ။ Custom Hook သည် logic ကို မျှဝေသော်လည်း component တစ်ခုချင်းစီ၏ state ကို အလိုအလျောက် မျှဝေခြင်းမဟုတ်ပါ။</p>
+          <h2>Behavior ကို abstraction လုပ်ပါ</h2><p><code>useOnlineStatus()</code> သည် event listener ထည့်/ဖယ်သည့် အသေးစိတ်ကို ဖုံးကွယ်ပြီး online အခြေအနေကို ဖတ်ရလွယ်သော API ဖြင့် ပေးနိုင်သည်။ Component နှစ်ခုက Hook ကိုခေါ်လျှင် Hook logic ကို ပြန်သုံးသော်လည်း local state သီးခြားရှိတတ်သည်။</p>
+          <h2>Hook စည်းမျဉ်းကို လိုက်နာပါ</h2><p>Custom Hook ကို component သို့မဟုတ် အခြား Hook ၏ top level တွင်သာ ခေါ်ပါ။ <code>use</code> ဖြင့် စသည့်အမည်နှင့် dependency lint စည်းမျဉ်းများက Hook အဖြစ် စစ်ဆေးရန်နှင့် မှန်ကန်သောအသုံးပြုမှုကို ကူညီသည်။</p>
+          <h2>API ကို လိုအပ်ချက်အလိုက် ဒီဇိုင်းလုပ်ပါ</h2><p>Hook သို့ parameter ပေးသည့်အခါ caller အတွက် အဓိပ္ပာယ်ရှိသော input ကို ရွေးပြီး ပြန်ပေးမည့်တန်ဖိုးနှင့် callback များကို မလိုအပ်ဘဲ မများစေပါနှင့်။ တစ်ကြိမ်သာအသုံးပြုသည့် logic ကို မကြာမီ generic library ပုံစံသို့ အလွန်စောစွာ မချဲ့ပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-react-error-boundary-resilience" data-group="react" data-title="Error Boundary ဖြင့် UI အပိုင်းကို ခံနိုင်ရည်ရှိစေခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Error Boundary ဖြင့် UI အပိုင်းကို ခံနိုင်ရည်ရှိစေခြင်း</h1>
+          <p class="lede">Render လုပ်ချိန်အမှားတစ်ခုကြောင့် အက်ပ်တစ်ခုလုံး မရနိုင်သည့်အစား သက်ဆိုင်ရာ UI အပိုင်းတွင် fallback ပြပါ။ Error Boundary သည် အမှားအမျိုးအစားအားလုံးကို မဖမ်းနိုင်ကြောင်း သိထားပါ။</p>
+          <h2>Boundary ကို သင့်တော်ရာတွင်ထားပါ</h2><p>စာမျက်နှာတစ်ခုလုံးကို fallback ပြမလား၊ widget တစ်ခုတည်းကို အစားထိုးမလား ဆုံးဖြတ်ပြီး component tree တွင် boundary ထားပါ။ React Error Boundary သည် descendant များ၏ render အမှားကို ဖမ်းရန်ဖြစ်ပြီး ပုံမှန် event handler ထဲက error ကို အလိုအလျောက်မဖမ်းပါ။</p>
+          <h2>အသုံးဝင်သော Recovery UI ပေးပါ</h2><p>Fallback တွင် အမှားဖြစ်ကြောင်း ရှင်းပြပြီး ပြန်ကြိုးစားရန် သို့မဟုတ် ပင်မနေရာသို့ ပြန်ရန် လုပ်ဆောင်ချက်ပေးပါ။ အမှားအသေးစိတ်အပြည့်ကို သုံးစွဲသူထံ မဖော်ပြဘဲ logging လုပ်ရာတွင် အထောက်အကူဖြစ်စေမည့်အချက်အလက်ကို သီးခြားစီမံပါ။</p>
+          <h2>အမှားလမ်းကြောင်းကို စမ်းသပ်ပါ</h2><p>အောင်မြင်သည့် UI ကိုသာမက descendant က render error ထုတ်သည့်အခါ fallback ပေါ်မပေါ် စမ်းသပ်ပါ။ Network error နှင့် form validation error တို့သည် မတူညီသော failure path ဖြစ်ပြီး Error Boundary တစ်ခုတည်းဖြင့် အားလုံးဖြေရှင်းမည်မဟုတ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-accessibility-interactive-components" data-group="react" data-title="Accessible Interactive Component များ တည်ဆောက်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Accessible Interactive Component များ တည်ဆောက်ခြင်း</h1>
+          <p class="lede">React သည် UI တည်ဆောက်မှုကို ကူညီသော်လည်း semantic HTML၊ keyboard access နှင့် screen reader ဆက်သွယ်မှုကို အလိုအလျောက်မဖြည့်ဆည်းပါ။ Native element များကို ဦးစားပေးပြီး custom behavior ကို စစ်ဆေးပါ။</p>
+          <h2>မှန်ကန်သော element ကို ရွေးပါ</h2><p>လုပ်ဆောင်ချက်အတွက် <code>&lt;button&gt;</code> နှင့် သွားလာရန် <code>&lt;a&gt;</code> ကို သုံးပါ၊ clickable <code>&lt;div&gt;</code> ဖြင့် native အပြုအမူကို ကိုယ်တိုင်ပြန်မတည်ဆောက်ပါနှင့်။ Form field တစ်ခုစီကို ရှင်းလင်းသော <code>&lt;label&gt;</code> နှင့် ချိတ်ပါ။</p>
+          <h2>Keyboard ဖြင့် အသုံးပြုနိုင်စေပါ</h2><p>Tab ဖြင့် focus ရောက်နိုင်မှုနှင့် Enter/Space ကဲ့သို့ သက်ဆိုင်ရာ key ဖြင့် လုပ်ဆောင်နိုင်မှုကို စစ်ပါ။ Custom control တည်ဆောက်ရလျှင် focus indicator နှင့် keyboard behavior ကိုလည်း ပေးရမည်။</p>
+          <h2>Dynamic feedback ကို အားလုံးအလွယ်တကူ သိရှိနိုင်အောင် ပြပါ</h2><p>Validation error ကို input နှင့် ဆက်စပ်သောစာသားအဖြစ် ပြပြီး လိုအပ်သည့် <code>aria-describedby</code> သို့မဟုတ် <code>aria-invalid</code> ကို စဉ်းစားပါ။ Loading နှင့် result update များကို screen reader အသုံးပြုသူများ သိရှိနိုင်စေရန် <code>role="status"</code> သို့မဟုတ် <code>aria-live="polite"</code> ကဲ့သို့ သင့်လျော်သော status semantics ဖြင့် ဖော်ပြပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-testing-user-behavior" data-group="react" data-title="React UI ကို User Behavior အလိုက် စမ်းသပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>React UI ကို User Behavior အလိုက် စမ်းသပ်ခြင်း</h1>
+          <p class="lede">Component စမ်းသပ်မှုတွင် အတွင်းပိုင်း implementation ထက် အသုံးပြုသူမြင်ရသည့် ရလဒ်ကို ဦးစားပေးပါ။ Input, interaction နှင့် async state အဓိကလမ်းကြောင်းများကို စမ်းသပ်ခြင်းက regression ကို ဖမ်းနိုင်သည်။</p>
+          <h2>မြင်ရသည့်အရာကို ရှာပါ</h2><p>Button တစ်ခုကို text သို့မဟုတ် accessible role ဖြင့် ရှာပြီး click လုပ်ကာ သက်ဆိုင်ရာရလဒ် ပေါ်မပေါ် စစ်ပါ။ Component ၏ private state variable သို့မဟုတ် DOM structure အသေးစိတ်ကို မလိုအပ်ဘဲ assert မလုပ်ပါနှင့်။</p>
+          <h2>Async state ကို စမ်းပါ</h2><p>Data request အတွက် loading, success နှင့် error UI ကို သီးခြားစစ်ပြီး test မှာ ရလဒ်ရောက်လာသည့်အထိ စောင့်ပါ။ Request အချိန်မတူနိုင်သောကြောင့် စမ်းသပ်မှုတွင် အချိန်ကို ခန့်မှန်းမည့် fixed sleep များကို ရှောင်ပါ။</p>
+          <h2>စမ်းသပ်မှုကို ယုံကြည်စိတ်ချရစေပါ</h2><p>Test တစ်ခုစီတွင် လိုအပ်သော setup ကို သီးခြားပြင်ဆင်ပြီး တစ်ခု၏ state သို့မဟုတ် mock သည် နောက်တစ်ခုကို မထိခိုက်စေရန် ရှင်းလင်းပါ။ Accessibility အရအသုံးပြုသည့် role နှင့် label ကို ရွေးခြင်းက test ကိုလည်း ပိုမိုအသုံးဝင်စေသည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-performance-measure-before-optimizing" data-group="react" data-title="React Performance ကို တိုင်းတာပြီးမှ Optimize လုပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>React Performance ကို တိုင်းတာပြီးမှ Optimize လုပ်ခြင်း</h1>
+          <p class="lede">Rerender တိုင်းသည် အမှားမဟုတ်သကဲ့သို့ memoization လုပ်ခြင်းတိုင်းလည်း မြန်စေမည်မဟုတ်ပါ။ အမှန်တကယ်နှေးသည့်နေရာကို တိုင်းတာပြီး အကျိုးရှိမည့်နေရာတွင်သာ optimization လုပ်ပါ။</p>
+          <h2>မူလအကြောင်းရင်းကို အရင်ပြင်ပါ</h2><p>State ကို လိုအပ်ချက်မရှိဘဲ အပေါ်ဆုံး parent တွင်ထားခြင်းက သက်ဆိုင်မှုမရှိသော component များကိုပါ ပြန် render လုပ်စေနိုင်သည်။ State ကို အသုံးပြုသည့် component နီးရာတွင်ထားပြီး မလိုအပ်သော Effect နှင့် ထပ်နေသော state များကို ဖယ်ရှားပါ။</p>
+          <h2>Memo ကို အတိုင်းအတာရှိရှိ သုံးပါ</h2><p><code>memo</code>, <code>useMemo</code> နှင့် <code>useCallback</code> တို့ကို အမြဲတပ်ရမည့်စည်းမျဉ်းအဖြစ် မယူဆပါနှင့်။ Props identity တည်ငြိမ်မှု သို့မဟုတ် တွက်ချက်မှုကုန်ကျစရိတ်က အရေးပါသည့်အခါသာ profiler နှင့်စမ်းသပ်ချက်အပေါ် အခြေခံ၍ သုံးပါ။</p>
+          <h2>စာရင်းကြီးများကို အထူးစဉ်းစားပါ</h2><p>ကြီးမားသော list တွင် filter/pagination လုပ်ခြင်း၊ row component များကို ခွဲခြားခြင်း သို့မဟုတ် windowing နည်းလမ်းသုံးခြင်းတို့က အကျိုးရှိနိုင်သည်။ Optimization ပြီးနောက်လည်း တူညီသောလုပ်ဆောင်ချက်ဖြင့် တိုင်းတာကာ အမှန်တကယ်တိုးတက်မှုရှိကြောင်း အတည်ပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-code-splitting-lazy-loading" data-group="react" data-title="Code Splitting နှင့် Lazy Loading ဖြင့် Bundle ကို ခွဲခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Code Splitting နှင့် Lazy Loading ဖြင့် Bundle ကို ခွဲခြင်း</h1>
+          <p class="lede">အက်ပ်၏ အစပိုင်းတွင် မလိုအပ်သေးသော code ကို နောက်မှတင်ရန် module boundary များ စီစဉ်နိုင်သည်။ React <code>lazy</code> နှင့် <code>Suspense</code> ကို သုံးသည့်အခါ loading fallback နှင့် failure handling ကိုလည်း ထည့်သွင်းစဉ်းစားပါ။</p>
+          <h2>အပိုင်းလိုက် import လုပ်ပါ</h2><p>ကြီးမားသော route သို့မဟုတ် հազရှားသော feature ကို dynamic <code>import()</code> ဖြင့် ခွဲထုတ်ရန် bundler အထောက်အပံ့လိုနိုင်သည်။ ထိုသို့ခွဲခြင်းက initial JavaScript ကို လျော့စေနိုင်သော်လည်း file များစွာတင်ရသည့် latency ကိုလည်း ထည့်တွက်ပါ။</p>
+          <h2>Suspense fallback ထည့်ပါ</h2><p><code>lazy(() =&gt; import('./Reports'))</code> ဖြင့် နောက်မှတင်သော component ကို render လုပ်ရာတွင် သင့်လျော်သည့် boundary အတွင်း <code>&lt;Suspense fallback={...}&gt;</code> ထားပါ။ User သည် component ပြင်ဆင်နေစဉ် blank screen မမြင်စေရန် အခြေအနေကို အဓိပ္ပာယ်ရှိစွာ ပြပါ။</p>
+          <h2>Build output ကို စစ်ဆေးပါ</h2><p>Code splitting ကို ထည့်ပြီးရုံဖြင့် bundle သေးသွားသည်ဟု မယူဆပါနှင့်။ Production build ၏ chunk များ၊ initial request နှင့် route ပြောင်းသည့်အခါ tảiမှုကို စစ်ပြီး ထပ်နေသော dependency များကိုလည်း ရှာပါ။</p>
+        </article>
+        <article class="page" id="page-extra-react-routing-architecture-boundaries" data-group="react" data-title="Routing ကို React အပြင်ဘက် Architecture အဖြစ် စီစဉ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Routing ကို React အပြင်ဘက် Architecture အဖြစ် စီစဉ်ခြင်း</h1>
+          <p class="lede">React သည် UI component များကို တည်ဆောက်သော်လည်း routing ကို သီးခြား library သို့မဟုတ် framework က ကိုင်တွယ်နိုင်သည်။ URL၊ navigation နှင့် route data ၏ပိုင်ရှင်ကို ရှင်းလင်းစွာရွေးပြီး React ကို built-in router ပါသည်ဟု မယူဆပါနှင့်။</p>
+          <h2>URL ကို UI state အဖြစ် စဉ်းစားပါ</h2><p>စာမျက်နှာ၊ filter သို့မဟုတ် pagination သည် share လုပ်နိုင်သည့်အချက်အလက်ဖြစ်လျှင် query သို့မဟုတ် path ထဲ ထည့်သင့်မသင့် ဆုံးဖြတ်ပါ။ URL ပြောင်းသည့်အခါ browser back/forward လုပ်ဆောင်ချက်နှင့် UI ကို ညှိနှိုင်းရမည်။</p>
+          <h2>Router တာဝန်ကို ခွဲသတ်မှတ်ပါ</h2><p>Router library သည် route matching, navigation နှင့် nested layout စသည့် အလုပ်များကို ပံ့ပိုးနိုင်သည်။ ရွေးချယ်ရာတွင် client-only လိုအပ်ချက်လား၊ server rendering သို့ data loading လိုအပ်သလားကို စိစစ်ပြီး သက်ဆိုင်ရာစာရွက်စာတမ်းကို လိုက်နာပါ။</p>
+          <h2>Route component များကို စီစဉ်ပါ</h2><p>Route တစ်ခုစီ၏ page component, layout နှင့် loading/error boundary ကို ခွဲစဉ်းစားပါ။ Router configuration ကို feature အလိုက် ဖတ်ရလွယ်စွာ ထားပြီး navigation target များကို hard-code နေရာအများကြီး မပွားစေပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-react-ssr-hydration-consistency" data-group="react" data-title="Server Rendering နှင့် Hydration အခြေခံသဘောတရား">
+          <div class="progress-line"><div></div></div>
+          <h1>Server Rendering နှင့် Hydration အခြေခံသဘောတရား</h1>
+          <p class="lede">Server rendering သည် React tree မှ HTML ထုတ်ပေးပြီး client တွင် hydration လုပ်ခြင်းက ထို HTML ကို interactive ဖြစ်စေသည်။ Server နှင့် client ပထမ render မတူပါက hydration ပြဿနာ ဖြစ်နိုင်သည်။</p>
+          <h2>HTML ကို server တွင် ထုတ်လုပ်ခြင်း</h2><p><code>react-dom/server</code> တွင် server ပတ်ဝန်းကျင်အလိုက် stream သို့မဟုတ် string ထုတ်ပေးသည့် API များရှိသည်။ Framework က ထိုအလုပ်ကို ကိုယ်စားလုပ်ပေးနိုင်ပြီး app component အများစုသည် server API ကို ကိုယ်တိုင်ခေါ်ရန်မလိုပါ။</p>
+          <h2>Hydrate လုပ်ပြီး event ချိတ်ပါ</h2><p>Client တွင် <code>hydrateRoot</code> သည် server ထုတ် HTML ကို React အဖြစ် ချိတ်ဆက်ကာ အပြန်အလှန်လုပ်ဆောင်နိုင်စေသည်။ ပထမ render တွင် server နှင့် client output ကို ကိုက်ညီစေရန် data နှင့် rendering logic ကို တည်ငြိမ်စွာ စီမံပါ။</p>
+          <h2>Browser-only code ကို သတိထားပါ</h2><p><code>useEffect</code> သည် client တွင်သာ လုပ်ဆောင်သဖြင့် browser API နှင့်ချိတ်ဆက်မှုကို ထိုနေရာတွင် စီမံနိုင်သည်။ Server နှင့် client တို့က မတူသည့်အချိန်၊ locale သို့မဟုတ် random value ကို ပထမ render တွင် ထည့်ခြင်းက markup ကွာခြားစေနိုင်သည်။</p>
+        </article>
+        <article class="page" id="page-extra-react-maintainable-project-quality" data-group="react" data-title="Maintainable React Project နှင့် Quality Gate များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Maintainable React Project နှင့် Quality Gate များ</h1>
+          <p class="lede">Project ဖွဲ့စည်းပုံသည် feature များတိုးလာသောအခါ ပြောင်းလဲရလွယ်ကူမှုကို ထောက်ပံ့သင့်သည်။ File နေရာချထားမှုတစ်ခုတည်းထက် dependency boundary၊ test နှင့် review စည်းမျဉ်းများက ပိုအရေးကြီးသည်။</p>
+          <h2>Feature အလိုက် ဆက်စပ်ဖိုင်များ စုပါ</h2><p>Page, component, hook, test နှင့် data logic တို့ကို feature အလိုက် အနီးကပ်ထားနိုင်သော်လည်း shared code ကို တကယ်ပြန်သုံးသည့်အခါသာ အထွေထွေ folder သို့ ရွှေ့ပါ။ Project အားလုံးအတွက် အကောင်းဆုံးဟုဆိုနိုင်သည့် folder tree တစ်ခု မရှိပါ။</p>
+          <h2>အရည်အသွေးစစ်ဆေးမှုကို ပုံမှန်လုပ်ပါ</h2><p>Type checking, linting နှင့် automated test များကို ပြောင်းလဲမှုတိုင်းတွင် လုပ်ဆောင်ပါ။ Dependency ပြောင်းလဲမှုကို review လုပ်ပြီး secret များကို source code ထဲမထည့်ဘဲ environment အလိုက် စီမံပါ။</p>
+          <h2>Production release ကို အတည်ပြုပါ</h2><p>Deploy မလုပ်မီ production build အောင်မြင်မှုနှင့် browser console/network error များကို စစ်ပါ။ Routing သုံးပါက hosting တွင် deep link များမှ app သို့ fallback ရှိမရှိ၊ server-rendered app ဖြစ်ပါက သက်ဆိုင်ရာ server/runtime ကို စမ်းသပ်ပါ။</p>
+        </article>
+
 
         <!-- ================= DART: BASICS ================= -->
         <article class="page" id="page-dart-basics" data-group="dart" data-title="Dart မိတ်ဆက် & Variables">
@@ -12733,6 +13090,167 @@ void main() {
           </tbody></table></div>
           <div class="tip"><strong>ဂုဏ်ယူပါတယ် — Course ပြီးဆုံးပါပြီ!</strong>Module 12 — Flutter ပြီးပါပြီ။ Module 1 HTML ကနေ စပြီး အခု သင်ဟာ HTML/CSS/Tailwind နဲ့ page ဆောက်၊ JavaScript နဲ့ အသက်သွင်း၊ Laravel + MySQL နဲ့ backend/API ဆောက်၊ React web app နဲ့ Flutter mobile app ကနေ အဲဒီ API ကို သုံးနိုင်တဲ့ full-stack developer တစ်ယောက် ဖြစ်ပါပြီ။ ဆက်လေ့လာဖို့ — ဒီ Docs ကို reference အဖြစ် ပြန်သုံး၊ ကိုယ်ပိုင် project တွေ ဆောက်ပြီး GitHub မှာ တင်ပြ၊ portfolio ကို ကြီးထွားအောင် လုပ်သွားပါ။</div>
         </article>
+        <article class="page" id="page-extra-flutter-widget-composition-keys" data-group="flutter" data-title="Widget Composition နှင့် Key များကို မှန်ကန်စွာအသုံးပြုခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Widget Composition နှင့် Key များကို မှန်ကန်စွာအသုံးပြုခြင်း</h1>
+          <p class="lede">Widget သေးသေးများကို တာဝန်ခွဲပြီး ပေါင်းစပ်ခြင်းက UI ကို ပြန်သုံးရလွယ်ကူစေသော်လည်း element များကို မည်သို့ပြန်သုံးမည်ကို Flutter က ခွဲခြားသိရန်လိုသည်။ <code>Key</code> ကို လိုအပ်သည့်နေရာတွင်သာ သတ်မှတ်ပြီး state မမှားယွင်းစေရန် လေ့ကျင့်ပါ။</p>
+          <h2>Composition ဖြင့်တာဝန်ခွဲပါ</h2><p>ကြီးမားသော <code>build</code> method တစ်ခုထဲတွင် အရာအားလုံးရေးမည့်အစား အဓိပ္ပာယ်ရှိသည့် UI အပိုင်းများကို သီးခြား widget များအဖြစ် ထုတ်ပါ။ Widget တစ်ခုချင်းစီက input ကို widget constructor မှလက်ခံပြီး ပြသမှုတာဝန်ကိုသာ ကိုင်တွယ်လျှင် စမ်းသပ်ခြင်းနှင့် ပြန်သုံးခြင်း ပိုလွယ်သည်။</p>
+          <h2>Key သည် identity ကိုဖော်ပြသည်</h2><p>Sibling widget များကို အစီအစဉ်ပြောင်းခြင်း၊ ထည့်ခြင်း၊ ဖျက်ခြင်းရှိပါက type တူသည့် widget များကို Flutter က မည်သူမည်ဝါဖြစ်ကြောင်း <code>Key</code> ဖြင့် ဆက်စပ်နိုင်သည်။ <code>ValueKey(item.id)</code> ကဲ့သို့ တည်ငြိမ်သော domain identifier ကိုသုံးပြီး list index ကိုသာ identity အဖြစ် မယူပါနှင့်။</p>
+          <h2>GlobalKey ကို ချင့်ချိန်သုံးပါ</h2><p><code>GlobalKey</code> သည် widget subtree တစ်ခုလုံးအတွင်း global identity ပေးပြီး <code>FormState</code> သို့မဟုတ် state ကို နေရာပြောင်း၍ ဆက်ထိန်းရာတွင် အသုံးဝင်နိုင်သည်။ သို့သော် မကြာခဏမလိုအပ်သော global lookup နှင့် lifecycle ရှုပ်ထွေးမှုကို ဖြစ်စေနိုင်သောကြောင့် ပုံမှန်အားဖြင့် local key သို့မဟုတ် callback ကို ဦးစားပေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-state-lifecycle-async" data-group="flutter" data-title="State Lifecycle၊ Controller နှင့် Async Callback များ">
+          <div class="progress-line"><div></div></div>
+          <h1>State Lifecycle၊ Controller နှင့် Async Callback များ</h1>
+          <p class="lede"><code>State</code> ၏ lifecycle ကိုနားလည်ခြင်းက listener များကျန်နေခြင်း၊ disposed controller ကိုအသုံးပြုခြင်းနှင့် အဟောင်း widget အချက်အလက်ကို အသုံးပြုမိခြင်းတို့ကို ကာကွယ်ပေးသည်။ Lifecycle method တစ်ခုချင်းစီတွင် မည်သည့်အလုပ်ကိုလုပ်သင့်သည်ကို လက်တွေ့ခွဲခြားပါ။</p>
+          <h2>အရင်းအမြစ်များကို lifecycle နှင့်ချိတ်ပါ</h2><p>Controller သို့မဟုတ် subscription ကို <code>initState</code> တွင်ဖန်တီးပြီး <code>dispose</code> တွင် listener ဖြုတ်ကာ ပိတ်ပါ။ <code>dispose</code> ပြီးနောက် <code>setState</code> မခေါ်ရသကဲ့သို့ မပိတ်ရသေးသော timer သို့မဟုတ် stream သည် memory နှင့် bug များဖြစ်စေနိုင်သည်။</p>
+          <h2>Widget အသစ်ရောက်လာသည့်အခါ update လုပ်ပါ</h2><p>Parent က တူညီသော <code>State</code> ကိုထားပြီး widget configuration အသစ်ပေးနိုင်သဖြင့် <code>didUpdateWidget</code> တွင် ယခင်နှင့်အသစ် input မတူတော့ပါက ချိတ်ဆက်ထားသည့် listener သို့မဟုတ် resource ကို ပြန်ညှိပါ။ ဥပမာ <code>widget.userId</code> ပြောင်းလဲလျှင် အဟောင်း subscription ကိုဖြုတ်ပြီး အသစ်ကို subscribe လုပ်ပါ။</p>
+          <h2>Await ပြီးနောက် mounted ကိုစစ်ပါ</h2><p>Async အလုပ်ပြီးချိန်တွင် မူလ screen သည် ပိတ်သွားပြီးဖြစ်နိုင်သဖြင့် <code>await</code> နောက် <code>if (!mounted) return;</code> ဖြင့် UI update မလုပ်မီ စစ်ဆေးပါ။ <code>BuildContext</code> ကို async gap ကျော်ပြီး အသုံးပြုရာတွင်လည်း context သက်တမ်းရှိမရှိ သေချာစစ်ပြီး မလိုအပ်လျှင် context ကို async method ထဲမသယ်ပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-layout-constraints-debugging" data-group="flutter" data-title="Layout Constraints ကိုဖတ်ပြီး Overflow ကိုရှာဖွေခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Layout Constraints ကိုဖတ်ပြီး Overflow ကိုရှာဖွေခြင်း</h1>
+          <p class="lede">Flutter layout သည် constraints ကို အပေါ်မှအောက်သို့ပေးပြီး size ကို အောက်မှအပေါ်သို့ပြန်တင်သည့် စည်းမျဉ်းဖြင့် အလုပ်လုပ်သည်။ Constraint ကိုနားလည်လျှင် overflow နှင့် unbounded-size error များကို ခန့်မှန်းချက်မဟုတ်ဘဲ အကြောင်းရင်းအလိုက် ဖြေရှင်းနိုင်သည်။</p>
+          <h2>Parent က child ၏ ဖြစ်နိုင်သည့်အရွယ်ကိုသတ်မှတ်သည်</h2><p>Parent render object က min/max width နှင့် height ပါဝင်သော constraints ကို child ထံပေးပြီး child က ထိုအကန့်အသတ်အတွင်း size တစ်ခုရွေးသည်။ ထို့ကြောင့် <code>Container(width: ...)</code> တစ်ခုက အမြဲတမ်းထို width ရမည်မဟုတ်ဘဲ parent က ပေးသောကန့်သတ်ချက်က ပိုအရေးကြီးသည်။</p>
+          <h2>Unbounded axis ကိုသတိပြုပါ</h2><p><code>Column</code> အတွင်း vertical scrollable တစ်ခုကို သတ်မှတ်ထားသောအမြင့်မရှိဘဲ ထည့်လျှင် scrollable က အဆုံးမရှိသောအမြင့်လိုအပ်ပြီး unbounded constraint error ဖြစ်နိုင်သည်။ <code>Expanded</code> သို့မဟုတ် <code>Flexible</code> ကို finite constraint ရှိသည့် flex parent အတွင်းသုံးပါ၊ သို့မဟုတ် သင့်တော်သည့် bounded height/scrolling structure ကိုရွေးပါ။</p>
+          <h2>Error message မှ widget ancestor ကိုလိုက်ပါ</h2><p>Overflow ဖြစ်လျှင် အနီရောင်/အဝါရောင် debug indicator နှင့် exception ထဲက render object chain ကိုစစ်ပြီး မည်သည့် parent က အရွယ်ကန့်သတ်ချက်ပေးခဲ့သည်ကို ရှာပါ။ Flutter Inspector ၏ layout explorer နှင့် widget tree ကိုသုံးကာ child တစ်ခုချင်းစီ၏ constraints ကိုကြည့်ပြီး နောက်ဆုံးမှ padding သို့မဟုတ် size ကို ပြင်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-responsive-adaptive-breakpoints" data-group="flutter" data-title="Responsive နှင့် Adaptive UI ကို Breakpoint ဖြင့်တည်ဆောက်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Responsive နှင့် Adaptive UI ကို Breakpoint ဖြင့်တည်ဆောက်ခြင်း</h1>
+          <p class="lede">Responsive UI သည် ရရှိနိုင်သောနေရာအလိုက် layout ကိုညှိပြီး adaptive UI သည် platform သို့မဟုတ် input ပုံစံနှင့်သင့်တော်သော interaction ကိုရွေးသည်။ Screen အရွယ်တစ်ခုချင်းအတွက် သီးခြားမျက်နှာပြင်မရေးဘဲ content လိုအပ်ချက်ပေါ်အခြေခံသည့် breakpoint များသတ်မှတ်ပါ။</p>
+          <h2>စက်အမျိုးအစားမဟုတ်ဘဲ ရရှိနိုင်သည့်နေရာကိုတိုင်းပါ</h2><p>Widget အတွင်း <code>LayoutBuilder</code> သုံး၍ parent ပေးသည့် <code>constraints.maxWidth</code> ကိုတိုင်းပါ၊ အက်ပ်တစ်ခုလုံးနှင့်သက်ဆိုင်သည့်နေရာတွင် <code>MediaQuery.sizeOf(context)</code> ကိုသုံးပါ။ တူညီသောဖုန်းတစ်လုံးကို split-screen သို့မဟုတ် browser window ကျဉ်းကျဉ်းဖြင့်ဖွင့်လျှင် width ပြောင်းနိုင်သဖြင့် “ဖုန်း/တက်ဘလက်” label တစ်ခုတည်းကို မမှီခိုပါနှင့်။</p>
+          <h2>Breakpoint ကို content ကဆုံးဖြတ်စေပါ</h2><p>ဥပမာ list နှင့် detail ကို ဘေးချင်းယှဉ်ပြသနိုင်သည့်အကျယ်ရောက်မှ navigation rail သို့မဟုတ် two-pane layout သို့ပြောင်းပါ။ Breakpoint တန်ဖိုးကို device name မှမကူးယူဘဲ အနည်းဆုံး width တွင် text မညှစ်ဘဲလုပ်ဆောင်ချက်များကိုပြသနိုင်မနိုင် စမ်းသပ်ပြီးရွေးပါ။</p>
+          <h2>Adaptive behavior ကို input နှင့် platform အလိုက်စမ်းပါ</h2><p>Pointer ရှိသည့် desktop နှင့် touch အခြေပြု phone တို့တွင် hover၊ keyboard focus၊ hit target နှင့် navigation affordance များ ကွာနိုင်သည်။ Flutter ၏ platform information ကို လိုအပ်သည့်နေရာတွင်အသုံးပြုပြီး layout logic ကို widget တစ်ခုထဲ အလွန်အကျွံမပေါင်းစည်းဘဲ ခွဲစမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-navigation-deep-links-restoration" data-group="flutter" data-title="Navigation၊ Deep Link နှင့် Back Stack ကိုဒီဇိုင်းဆွဲခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Navigation၊ Deep Link နှင့် Back Stack ကိုဒီဇိုင်းဆွဲခြင်း</h1>
+          <p class="lede">Navigation ကို screen ပြောင်းခြင်းတစ်ခုတည်းအဖြစ်မဟုတ်ဘဲ URL၊ back stack၊ state restoration နှင့် app entry point များပါဝင်သည့် အတွေ့အကြုံအဖြစ်စဉ်းစားပါ။ ရှိပြီးသား navigation အခြေခံနှင့် go_router မိတ်ဆက်ကို ထပ်မပြောဘဲ route များကို စနစ်တကျချိတ်ဆက်ပါ။</p>
+          <h2>Route ကို app state နှင့်ကိုက်ညီအောင်ထားပါ</h2><p>Route တစ်ခုတွင်လိုအပ်သည့် identifier ကိုသယ်ပြီး ဥပမာ <code>/orders/42</code> ကဲ့သို့ detail ကိုဖော်ပြပါ၊ ရှုပ်ထွေးသော mutable object ကို route ထဲတိုက်ရိုက်ထည့်မည့်အစား identifier ဖြင့် repository မှယူပါ။ ထိုနည်းက deep link၊ app restart နှင့် route ကိုပြန်ဖွင့်သည့်အခါ အခြေအနေကိုပြန်တည်ဆောက်နိုင်စေသည်။</p>
+          <h2>Nested navigation ကိုရှင်းလင်းစွာစီမံပါ</h2><p>Tab တစ်ခုစီတွင် ကိုယ်ပိုင် history လိုအပ်လျှင် nested navigator သို့မဟုတ် router ၏ shell route ပုံစံကိုအသုံးပြုပြီး tab ပြောင်းတိုင်း အခြား tab ၏ stack မပျောက်အောင်လုပ်ပါ။ Back action က လက်ရှိ nested stack ကိုအရင် pop လုပ်မည်လား၊ tab/root မှထွက်မည်လားကို သတ်မှတ်ပြီး စမ်းသပ်ပါ။</p>
+          <h2>Deep link နှင့် unauthorized route ကိုစစ်ပါ</h2><p>App ကို external URL တစ်ခုမှဖွင့်ခြင်း၊ မမှန်သော identifier၊ မရှိသည့် resource နှင့် login လိုအပ်သော route တို့အတွက် behavior သတ်မှတ်ပါ။ Authentication ပြောင်းလဲမှုအပေါ် redirect လုပ်ရာတွင် redirect loop မဖြစ်စေရန် return location ကိုထိန်းသိမ်းပြီး route test များရေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-robust-form-workflows" data-group="flutter" data-title="Robust Form များ — Input၊ Validation နှင့် Submission State">
+          <div class="progress-line"><div></div></div>
+          <h1>Robust Form များ — Input၊ Validation နှင့် Submission State</h1>
+          <p class="lede">Form တစ်ခုသည် field validation သာမက focus၊ keyboard၊ server error၊ ထပ်ခါတလဲလဲ submit နှင့် draft state တို့ကိုပါ ကိုင်တွယ်ရသည်။ ရှိပြီးသား forms မိတ်ဆက်ကိုမထပ်ဘဲ အသုံးပြုသူမှားယွင်းမှုနှင့် request race ကိုကာကွယ်သည့် flow တည်ဆောက်ပါ။</p>
+          <h2>Input state ကိုသီးခြားစီမံပါ</h2><p><code>TextEditingController</code> သည် field value နှင့် selection ကိုလိုအပ်သည့်အခါ ထိန်းနိုင်သော်လည်း controller တစ်ခုစီကို dispose လုပ်ရန်လိုသည်။ Field အများအပြားတွင် validation လုပ်ရာ၌ <code>Form</code> နှင့် <code>GlobalKey&lt;FormState&gt;</code> ကိုသုံးပြီး validator သည် input ကိုစစ်ဆေးကာ error message ကိုတိုက်ရိုက်ပြန်ပေးစေပါ။</p>
+          <h2>Local နှင့် server validation ကိုခွဲပါ</h2><p>Local validation ဖြင့် မဖြည့်ထားသော field သို့မဟုတ် format မှားမှုကို submit မလုပ်မီပြပြီး၊ server ကပြန်လာသည့် business rule error ကို သက်ဆိုင်ရာ field သို့မဟုတ် form အပေါ်တွင်ပြပါ။ Error စာသားတွင် ဘာမှားသည်သာမက ပြင်ဆင်ရန်နည်းလမ်းကိုလည်းရှင်းပြပြီး input ပြောင်းလဲသောအခါ အဟောင်း error ကိုဖယ်ရှားပါ။</p>
+          <h2>Submission ကို ထပ်မပို့နိုင်အောင်ကာကွယ်ပါ</h2><p>Submit စတင်သောအခါ loading state သတ်မှတ်ပြီး button ကိုယာယီ disable လုပ်ပါ၊ request ပြီးချိန်တွင် success သို့မဟုတ် recoverable error ကိုပြပါ။ Focus ကို error ရှိသည့် field သို့ရွှေ့ခြင်း၊ <code>TextInputAction.next</code> ဖြင့် keyboard flow ချိတ်ခြင်းနှင့် cancel/back ဖြစ်လျှင် pending result ကို UI ထဲမတင်ခြင်းတို့ကို စမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-async-timeouts-cancellation-errors" data-group="flutter" data-title="Async အလုပ်များတွင် Timeout၊ Cancellation နှင့် Error Recovery">
+          <div class="progress-line"><div></div></div>
+          <h1>Async အလုပ်များတွင် Timeout၊ Cancellation နှင့် Error Recovery</h1>
+          <p class="lede">Network သို့မဟုတ် disk အလုပ်တစ်ခုသည် အောင်မြင်မည်ဟု မသတ်မှတ်နိုင်သောကြောင့် timeout၊ retry နှင့် stale result ကိုရှင်းလင်းစွာစီမံပါ။ Error ကိုဖမ်းရုံမက အသုံးပြုသူ ပြန်လည်ကြိုးစားနိုင်သည့် UI အဖြစ်ပြောင်းလဲရန် လေ့ကျင့်ပါ။</p>
+          <h2>Error ကို အလွှာမှန်တွင်ကိုင်တွယ်ပါ</h2><p>Service သည် transport သို့မဟုတ် parsing failure ကိုသိရှိပြီး repository က app အတွက်အဓိပ္ပာယ်ရှိသော failure အဖြစ်ပြောင်းနိုင်သည်။ UI က exception string ကိုတိုက်ရိုက်ပြမည့်အစား loading၊ success၊ empty နှင့် recoverable failure အခြေအနေများကို သီးခြားဖော်ပြပြီး retry လုပ်ဆောင်ချက်ပေးပါ။</p>
+          <h2>Timeout နှင့် retry ကို ရည်ရွယ်ချက်ရှိရှိသတ်မှတ်ပါ</h2><p>Dart <code>Future.timeout</code> က သတ်မှတ်ချိန်ကျော်ပါက timeout error ပြန်ပေးသော်လည်း မူလအလုပ်ကို အလိုအလျောက်ရပ်တန့်ပေးမည်ဟု မယူဆပါနှင့်။ Retry ကို transient failure များအတွက်သာ ကန့်သတ်အကြိမ်နှင့် backoff ဖြင့်လုပ်ပြီး user ၏ submit action ကို idempotent မဖြစ်မီ ထပ်ပို့ခြင်းက duplicate ရလဒ်ဖြစ်မဖြစ် စစ်ပါ။</p>
+          <h2>အဟောင်း response ကို လက်မခံပါနှင့်</h2><p>Search query အမြန်ပြောင်းသည့်အခါ အဟောင်း request ၏ response က အသစ်ထက်နောက်ကျမှရောက်နိုင်သည်။ Request token သို့မဟုတ် လက်ရှိ query ကိုနှိုင်းယှဉ်ပြီး လက်ရှိ intent နှင့်ကိုက်ညီသော result ကိုသာပြပါ၊ screen ပိတ်သွားလျှင် <code>mounted</code> စစ်ဆေးမှုနှင့် လိုအပ်ပါက cancel လုပ်နိုင်သည့် API ကိုအသုံးပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-rest-repository-model-boundaries" data-group="flutter" data-title="REST Data၊ Immutable Model နှင့် Repository Boundary">
+          <div class="progress-line"><div></div></div>
+          <h1>REST Data၊ Immutable Model နှင့် Repository Boundary</h1>
+          <p class="lede">JSON parsing အခြေခံထက်ကျော်လွန်၍ API payload၊ domain model နှင့် UI ကို ခွဲထားခြင်းက API ပြောင်းလဲမှုကို ကာကွယ်ပေးသည်။ Data source တစ်ခုကို repository နောက်ကွယ်တွင်ဖုံးကွယ်ပြီး error နှင့် test ကို ကြိုတင်ဒီဇိုင်းဆွဲပါ။</p>
+          <h2>API payload ကို တိုက်ရိုက် UI မသုံးစေပါနှင့်</h2><p>JSON ကို type မသတ်မှတ်ထားသော map အဖြစ် screen တစ်ခုချင်းဖတ်မည့်အစား transport layer မှ typed DTO သို့ပြောင်းပြီး လိုအပ်ပါက domain model သို့ map လုပ်ပါ။ API field အမည်၊ nullable value သို့မဟုတ် date format ပြောင်းလဲလျှင် mapping boundary တစ်နေရာတွင် ပြင်နိုင်သည်။</p>
+          <h2>Repository ကို data source ၏ source of truth လုပ်ပါ</h2><p>Official Flutter architecture guidance က UI နှင့် data layer ခွဲခြားပြီး repository pattern အသုံးပြုရန် အလေးပေးထားသည်။ <code>UserRepository</code> က network service၊ local cache နှင့် model conversion ကိုဖုံးကွယ်ကာ ViewModel/UI ထံ app သုံးနိုင်သည့် immutable data ကိုပေးပါ။</p>
+          <h2>မမှန်သော payload ကိုလည်း စမ်းသပ်ပါ</h2><p>Required field ပျောက်နေခြင်း၊ null ဖြစ်ခြင်း၊ type မကိုက်ခြင်းနှင့် server error response များကို parser/repository unit test ဖြင့်စစ်ပါ။ Repository interface ကိုအသုံးပြုသော fake ဖြင့် UI ကို network မခေါ်ဘဲ စမ်းနိုင်ပြီး API schema ကိုကိုယ်စားပြုသည့် fixture များကို version control ထဲတွင်ထိန်းပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-state-management-boundaries" data-group="flutter" data-title="State Management Boundary — UI၊ ViewModel နှင့် Repository">
+          <div class="progress-line"><div></div></div>
+          <h1>State Management Boundary — UI၊ ViewModel နှင့် Repository</h1>
+          <p class="lede">State management package ရွေးချယ်မှုထက် ဘယ် state ကို ဘယ်အလွှာကပိုင်ဆိုင်သလဲဆိုသည့် boundary က ပိုအရေးကြီးသည်။ Widget ကို logic နှင့် data access များဖြင့် မပြည့်စေဘဲ user action မှ UI update သို့ ဦးတည်ချက်တစ်ခုတည်းဖြင့် စီးဆင်းပါစေ။</p>
+          <h2>Ephemeral state နှင့် app data ကိုခွဲပါ</h2><p>Text field focus သို့မဟုတ် ယာယီ tab selection ကဲ့သို့ state ကိုအသုံးပြုသူသည် screen မှထွက်သည့်အခါ မလိုတော့ပါက widget အနီးတွင်ထားနိုင်သည်။ Login user၊ server မှရသောစာရင်း သို့မဟုတ် feature အများအပြားတွင်သုံးသည့် data ကို repository/ViewModel boundary ထဲတွင်စီမံရန် စဉ်းစားပါ။</p>
+          <h2>Unidirectional data flow ထားပါ</h2><p>Flutter architecture recommendations အရ UI သည် data ကိုပြသပြီး user event ကို ViewModel သို့ပို့ကာ data layer ကအလုပ်လုပ်ပြီး state အသစ်ကိုပြန်ထုတ်ပေးသည့် ဦးတည်ချက်တစ်ခုတည်းကိုအသုံးပြုပါ။ Widget ထဲတွင် HTTP ခေါ်ခြင်း၊ business rule ဆုံးဖြတ်ခြင်းနှင့် navigation state အားလုံးကိုပေါင်းထည့်ခြင်းကိုရှောင်ပါ။</p>
+          <h2>Boundary သည် package ထက်အရေးကြီးသည်</h2><p><code>ChangeNotifier</code>၊ <code>ValueListenable</code> သို့မဟုတ် အခြား state library တစ်ခုကိုရွေးနိုင်သော်လည်း ViewModel ကို widget tree တစ်ခုလုံးနှင့် global singleton အဖြစ်မချိတ်ပါနှင့်။ Dependency injection ဖြင့် repository ကိုထည့်ပေးပြီး notification ပြန်ပို့မည့်အချိန်၊ immutable state ကိုထုတ်မည့်အချိန်နှင့် domain logic ကိုထားမည့်နေရာကို ရှင်းလင်းစွာသတ်မှတ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-persistence-cache-offline" data-group="flutter" data-title="Persistence နှင့် Offline Cache ကို Data Layer တွင်စီမံခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Persistence နှင့် Offline Cache ကို Data Layer တွင်စီမံခြင်း</h1>
+          <p class="lede">“သိမ်းထားရန်” လိုအပ်သည့် data အမျိုးအစားကိုခွဲခြားမှသာ storage နည်းလမ်းနှင့် လုံခြုံရေးကို မှန်ကန်စွာရွေးနိုင်သည်။ App restart၊ offline အသုံးပြုမှုနှင့် cache ဟောင်းသွားသည့်အခြေအနေတို့အတွက် စည်းမျဉ်းတစ်ခုချင်းသတ်မှတ်ပါ။</p>
+          <h2>Data sensitivity နှင့် lifetime ကိုခွဲပါ</h2><p>Theme သို့မဟုတ် နောက်ဆုံးရွေးချယ်ထားသည့် filter ကဲ့သို့ သေးငယ်သော preference ကို key-value preference storage တွင်၊ structured collection ကို local database တွင် သိမ်းနိုင်သည်။ Authentication secret နှင့် ကိုယ်ရေးအချက်အလက်များအတွက် သာမန် preference storage ကို လုံခြုံသော secret storage ဟုမယူဆဘဲ သင့်တော်သည့် platform-backed secure storage ကိုရွေးပါ။</p>
+          <h2>Cache policy ကို သတ်မှတ်ပါ</h2><p>Repository သည် network မရချိန်တွင် cache ကိုပြမည်လား၊ cache ကိုဘယ်အချိန်တွင် invalid လုပ်မည်လားနှင့် refresh လုပ်နေချိန်တွင် အဟောင်း data ကိုထိန်းပြမည်လားကို ဆုံးဖြတ်ပါ။ Cache timestamp သို့မဟုတ် version ထိန်းပြီး schema ပြောင်းသည့်အခါ migration သို့မဟုတ် cache ဖျက်သည့် behavior ကိုထည့်ပါ။</p>
+          <h2>Persistence ကို repository နောက်ကွယ်တွင်ထားပါ</h2><p>UI က file/database API ကိုတိုက်ရိုက်ခေါ်မည့်အစား abstract repository သို့မဟုတ် local data source ကိုသုံးလျှင် storage implementation ကိုအစားထိုးရလွယ်သည်။ Restart ပြီး data ပြန်ရခြင်း၊ write failure၊ corrupted record နှင့် offline refresh အတွက် test များရေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-accessibility-release-checks" data-group="flutter" data-title="Accessibility — Screen Reader၊ Contrast နှင့် Keyboard">
+          <div class="progress-line"><div></div></div>
+          <h1>Accessibility — Screen Reader၊ Contrast နှင့် Keyboard</h1>
+          <p class="lede">Accessibility ကို release မတိုင်မီပြင်ဆင်ရမည့်အလုပ်မဟုတ်ဘဲ UI တည်ဆောက်ချိန်မှစ၍ ထည့်သွင်းစဉ်းစားပါ။ Screen reader၊ text scale၊ contrast နှင့် touch target တို့ကို လက်တွေ့စမ်းသပ်နိုင်သည့် checklist အဖြစ်ပြောင်းလဲပါ။</p>
+          <h2>Semantics ကို အဓိပ္ပာယ်ပြည့်စုံစေပါ</h2><p>Flutter built-in controls များသည် assistive technology အတွက် semantics ပံ့ပိုးသော်လည်း custom icon သို့မဟုတ် gesture-only control ကို screen reader က နားလည်နိုင်မည်ဟု မယူဆပါနှင့်။ <code>Semantics</code> သို့မဟုတ် သင့်တော်သော button widget ဖြင့် control ၏ label၊ action နှင့် အခြေအနေကို ဖော်ပြပြီး TalkBack နှင့် VoiceOver ဖြင့်စမ်းပါ။</p>
+          <h2>မြင်နိုင်မှုနှင့် target size ကိုတိုင်းပါ</h2><p>Flutter accessibility guidance က tappable target အနည်းဆုံး 48×48 pixels ဖြစ်ရန်နှင့် စာသား/နောက်ခံ contrast ကို 4.5:1 အနည်းဆုံးရည်မှန်းရန် အကြံပြုထားသည်။ အရောင်တစ်မျိုးတည်းဖြင့် success/error မခွဲဘဲ icon သို့မဟုတ် label ထည့်ပြီး ကြီးမားသော text scale နှင့် grayscale တွင်လည်း စစ်ဆေးပါ။</p>
+          <h2>Context နှင့် focus ကိုမပျောက်စေပါနှင့်</h2><p>အသုံးပြုသူစာရိုက်နေစဉ် အလိုအလျောက် screen ပြောင်းခြင်း သို့မဟုတ် focus ရွှေ့ခြင်းက context ပျက်စေနိုင်သဖြင့် အတည်ပြုချက်လိုအပ်သည့် behavior ကိုရှောင်ပါ။ Keyboard အသုံးပြုသူအတွက် focus order၊ visible focus နှင့် error ဖြစ်သည့် field သို့ ပြန်ရောက်နိုင်မှုကို စမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-theme-localization-design-system" data-group="flutter" data-title="Theme၊ Design Token နှင့် Localization ကို အတူတကွစီမံခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Theme၊ Design Token နှင့် Localization ကို အတူတကွစီမံခြင်း</h1>
+          <p class="lede">ရှိပြီးသား theming အခြေခံကို မထပ်ဘဲ color၊ typography နှင့် spacing ကို စနစ်တကျစုစည်းကာ ဘာသာစကားပြောင်းလဲမှုကို layout ထဲထည့်သွင်းပါ။ Theme နှင့် localization တို့ကို screen တစ်ခုချင်း hard-code မလုပ်ဘဲ app-level configuration အဖြစ်တည်ဆောက်ပါ။</p>
+          <h2>Semantic token များသတ်မှတ်ပါ</h2><p>Widget တစ်ခုချင်းစီတွင် hex color သို့မဟုတ် font size ထပ်ရေးမည့်အစား <code>ThemeData</code> ၏ color scheme နှင့် text theme ကိုအသုံးပြုပါ။ “primary”၊ “surface”၊ “error” ကဲ့သို့ အဓိပ္ပာယ်ရှိသော token သုံးလျှင် light/dark theme နှစ်မျိုးကို တစ်ပြိုင်နက်ညှိနိုင်သည်။</p>
+          <h2>Localized message ကို generated API ဖြင့်ယူပါ</h2><p>Flutter official localization workflow တွင် <code>flutter_localizations</code>၊ ARB resource file နှင့် <code>gen_l10n</code> မှထုတ်ပေးသော localization class ကို အသုံးပြုသည်။ User-facing စာသားကို widget ထဲတွင် hard-code မလုပ်ဘဲ generated getter/method မှယူကာ placeholder၊ plural နှင့် locale-specific format များကို resource ထဲတွင်ဖော်ပြပါ။</p>
+          <h2>ဘာသာစကားနှင့် text scale အလိုက် layout စမ်းပါ</h2><p>ဘာသာပြန်စာသားသည် မူရင်းထက်ရှည်နိုင်ပြီး locale ကြောင့် date၊ number နှင့် text direction ပြောင်းနိုင်သဖြင့် fixed-width label များကိုရှောင်ပါ။ <code>supportedLocales</code> နှင့် delegates ကို app တွင်ပြင်ဆင်ပြီး အရှည်ဆုံးဘာသာ၊ RTL နှင့် စနစ် text scale ကြီးသည့်အခြေအနေတို့တွင် screen များကိုစမ်းပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-testing-fakes-widget-contracts" data-group="flutter" data-title="Widget Test၊ Fake Repository နှင့် UI Contract စမ်းသပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Widget Test၊ Fake Repository နှင့် UI Contract စမ်းသပ်ခြင်း</h1>
+          <p class="lede">Testing မိတ်ဆက်အဆင့်ထက်ကျော်လွန်၍ UI၊ ViewModel နှင့် repository တို့၏ contract ကို အလွှာလိုက်စမ်းသပ်ပါ။ Network မလိုသော fake dependency ဖြင့် loading မှ error/success သို့ပြောင်းလဲမှုကို repeatable test အဖြစ်ဖန်တီးပါ။</p>
+          <h2>Test တစ်ခုစီ၏ တာဝန်ကိုခွဲပါ</h2><p>Repository နှင့် ViewModel ၏ logic ကို unit test ဖြင့်သီးခြားစစ်ပြီး widget test တွင် မြင်ရသည့် output နှင့် user interaction ကိုစစ်ပါ။ အလွှာများကိုတစ်ခါတည်းစမ်းသပ်မည့် test အနည်းငယ်ကိုထားသော်လည်း failure ဖြစ်သည့်နေရာကို တိတိကျကျသိနိုင်အောင် component-level test များကိုအခြေခံပါ။</p>
+          <h2>Fake ဖြင့် deterministic state ဖန်တီးပါ</h2><p><code>FakeProductRepository</code> သည် success၊ empty နှင့် error response ကိုစမ်းသပ်မှုက ထိန်းချုပ်နိုင်အောင် interface ကို implement လုပ်ပါ။ Flutter architecture guidance က component များကိုသီးခြားစမ်းသပ်ရန်နှင့် fake ကိုအသုံးပြုနိုင်သည့် code ရေးရန် အကြံပြုထားပြီး test များကို network သို့မဟုတ် real database ပေါ်မမှီခိုစေပါ။</p>
+          <h2>Widget test မှ interaction ကိုအတည်ပြုပါ</h2><p><code>WidgetTester</code> ဖြင့် widget ကို pump လုပ်၊ button သို့မဟုတ် text field နှင့် interact လုပ်ပြီး <code>pumpAndSettle</code> သို့မဟုတ် သင့်တော်သည့် pump ဖြင့် state update ကိုစောင့်ပါ။ စာသားမြင်ရမှုသာမက error ပြသခြင်း၊ submit disabled ဖြစ်ခြင်း၊ route ပြောင်းခြင်းနှင့် accessibility semantics တို့ကိုလည်း စစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-performance-rebuild-profiling" data-group="flutter" data-title="Rebuild များနှင့် Frame Jank ကို DevTools ဖြင့် Profile လုပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Rebuild များနှင့် Frame Jank ကို DevTools ဖြင့် Profile လုပ်ခြင်း</h1>
+          <p class="lede">အမြင်အာရုံအရနှေးသည်ဟုထင်ရုံဖြင့် optimization မလုပ်ဘဲ profile mode တွင် အမှန်တကယ် bottleneck ကိုတိုင်းပါ။ Flutter Performance view နှင့် overlay က UI thread ပြဿနာနှင့် rasterization ပြဿနာကိုခွဲခြားရန် ကူညီပေးသည်။</p>
+          <h2>Debug mode ထက် profile mode ကိုသုံးပါ</h2><p>Flutter performance guidance အရ performance ကို physical device ပေါ်တွင် profile mode ဖြင့်တိုင်းတာခြင်းက release behavior-နှင့်နီးစပ်ပြီး debug mode သို့မဟုတ် emulator ရလဒ်သည် ကိုယ်စားပြုမှုနည်းနိုင်သည်။ အသုံးပြုသူများသုံးနိုင်သည့် အနိမ့်ဆုံးစွမ်းဆောင်ရည် device တစ်လုံးကိုရွေးပြီး တူညီသော scenario ကိုထပ်တလဲလဲ run ပါ။</p>
+          <h2>UI နှင့် raster graph ကိုဖတ်ပါ</h2><p>Performance overlay တွင် UI graph သည် Dart/UI thread အလုပ်ချိန်ကိုပြပြီး raster graph သည် scene ကို rasterize လုပ်သည့်အချိန်ကိုဖော်ပြသည်။ UI graph ပိုနှေးလျှင် build/Dart logic ကိုစစ်ပါ၊ raster graph ပိုနှေးလျှင် clipping၊ opacity၊ shadow သို့မဟုတ် <code>saveLayer</code> ကဲ့သို့ paint cost ကိုစစ်ပါ။</p>
+          <h2>အကြောင်းရင်းကိုရှာပြီးမှ rebuild လျှော့ပါ</h2><p>Flutter Inspector သို့မဟုတ် IDE widget rebuild profiler ဖြင့် မျှော်လင့်ထားသည်ထက်မကြာခဏ rebuild ဖြစ်သော subtree ကိုရှာပါ။ Immutable input၊ သေးငယ်သော widget boundary နှင့်လိုအပ်သည့် state ပမာဏသာ listen လုပ်ခြင်းဖြင့်ပြင်ပြီး profile ကိုပြန်တိုင်းကာ ပြောင်းလဲမှုက တကယ်တိုးတက်မှုရှိမရှိ အတည်ပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-image-list-memory-optimization" data-group="flutter" data-title="Image နှင့် Long List များ၏ Memory/Rendering Cost လျှော့ချခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Image နှင့် Long List များ၏ Memory/Rendering Cost လျှော့ချခြင်း</h1>
+          <p class="lede">Image ဖိုင်၏ compressed size သေးငယ်ခြင်းက memory သုံးစွဲမှုလည်းသေးငယ်မည်ဟု မဆိုလိုပါ၊ list item အားလုံးကိုတစ်ခါတည်းတည်ဆောက်ခြင်းလည်း UI ကိုလေးစေနိုင်သည်။ Decode size၊ lazy construction နှင့် placeholder/error behavior ကို စနစ်တကျညှိပါ။</p>
+          <h2>Image ကိုပြသမည့် pixel size နှင့်ကိုက်ညီစေပါ</h2><p>ကြီးမားသော source image ကို thumbnail အဖြစ်သာပြသလျှင် <code>cacheWidth</code> သို့မဟုတ် <code>cacheHeight</code> ကဲ့သို့ decode target ကိုစဉ်းစားပြီး asset/network payload ကို လိုအပ်သည့် resolution ဖြင့်ပေးပါ။ Device pixel ratio နှင့် crop လုပ်မည့်ပုံစံကိုတွက်ကာ image quality မပျက်သည့်အရွယ်ကိုရွေးပြီး memory အသုံးပြုမှုကိုစစ်ပါ။</p>
+          <h2>Lazy list တည်ဆောက်မှုကိုထိန်းသိမ်းပါ</h2><p>Long collection အတွက် <code>ListView.builder</code> သို့မဟုတ် <code>SliverList</code> ဖြင့် မြင်ကွင်းအနီးက item များကိုသာတည်ဆောက်ပါ။ Item တစ်ခုစီအတွင်း ရှုပ်ထွေးသော synchronous parse သို့မဟုတ် အလွန်ကြီးမားသည့် widget subtree မထည့်ဘဲ scroll လုပ်စဉ် frame time နှင့် state preservation ကိုစမ်းသပ်ပါ။</p>
+          <h2>Loading၊ error နှင့် cache ကိုသေချာလုပ်ပါ</h2><p>Network image တစ်ခုတွင် placeholder နှင့် error fallback ပေးပါ၊ တူညီသော resource ကိုမကြာခဏ fetch/decode မလုပ်စေရန် image provider နှင့် cache behavior ကိုစစ်ပါ။ Raster cache သို့မဟုတ် <code>RepaintBoundary</code> ကိုအလွန်အကျွံထည့်ခြင်းက memory ကုန်နိုင်သဖြင့် profile ဖြင့်အကျိုးရှိသည့် subtree တွင်သာအသုံးပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-config-flavors-environments" data-group="flutter" data-title="Environment Configuration၊ Flavors နှင့် Dependency Injection">
+          <div class="progress-line"><div></div></div>
+          <h1>Environment Configuration၊ Flavors နှင့် Dependency Injection</h1>
+          <p class="lede">Development၊ staging နှင့် production တို့သည် endpoint၊ app identity နှင့် feature setting ကွာသော်လည်း codebase တစ်ခုတည်းကိုသုံးနိုင်သည်။ Environment value များကို source ထဲတွင်မရောထွေးစေဘဲ build အချိန်တွင် ရှင်းလင်းစွာရွေးချယ်ပါ။</p>
+          <h2>Configuration ကို code မှခွဲထားပါ</h2><p>API base URL ကဲ့သို့ environment အလိုက်ပြောင်းသည့် value ကို <code>--dart-define</code> သို့မဟုတ် သင့် project ၏ build configuration ဖြင့်ပေးနိုင်ပြီး compile-time constant ဖြင့်ဖတ်နိုင်သည်။ Secret key များကို client app ထဲထည့်ခြင်းက လုံခြုံစေမည်မဟုတ်ကြောင်း မှတ်သားပြီး server-side secret ကို app bundle ထဲမထည့်ပါနှင့်။</p>
+          <h2>Flavor တစ်ခုစီ၏ identity ကိုစစ်ပါ</h2><p>Android product flavor နှင့် iOS scheme/configuration တို့ဖြင့် app name၊ application identifier နှင့် environment endpoint ကို ခွဲနိုင်သည်။ Development build ကို production app နဲ့တူညီသည့် icon/identity ဖြင့်မှားတင်ခြင်းမဖြစ်စေရန် launch screen၊ app label နှင့် backend environment ကို တစ်ပြိုင်နက်စစ်ပါ။</p>
+          <h2>Repository implementation ကို environment အလိုက်ထည့်ပါ</h2><p>Flutter architecture recommendations သည် abstract repository class များကိုသုံးခြင်းက development/staging ကဲ့သို့ environment များအတွက် implementation အစားထိုးရာတွင် အထောက်အကူဖြစ်ကြောင်းဖော်ပြသည်။ App startup တွင် config ကိုဖတ်ပြီး dependency injection ဖြင့် implementation ကိုတစ်ကြိမ်ထည့်ကာ test တွင် fake ကိုထည့်နိုင်အောင်လုပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-android-release-signing-artifacts" data-group="flutter" data-title="Android Release၊ Upload Key နှင့် Play Store Artifact">
+          <div class="progress-line"><div></div></div>
+          <h1>Android Release၊ Upload Key နှင့် Play Store Artifact</h1>
+          <p class="lede">Android release ထုတ်ရာတွင် build အောင်မြင်ခြင်းထက် app ကိုမှန်ကန်သော identity ဖြင့် sign လုပ်ပြီး လျှို့ဝှက် key ကိုကာကွယ်ခြင်းက အရေးကြီးသည်။ APK နှင့် App Bundle ၏အသုံးပြုပုံ၊ version နှင့် manifest ကို release checklist ဖြင့်စစ်ပါ။</p>
+          <h2>Upload key ကိုသီးခြားကာကွယ်ပါ</h2><p>Flutter Android release guide အရ Play Store သို့တင်မည့် <code>.aab</code> သို့မဟုတ် <code>.apk</code> ကို upload key ဖြင့် sign လုပ်ပြီး Play App Signing သုံးပါက နောက်ဆုံးအသုံးပြုသူရရှိသည့် APK ကို app signing key ဖြင့် sign လုပ်သည်။ Keystore ကို private နေရာတွင်ထားပြီး <code>key.properties</code> နှင့် password များကို public source control ထဲမထည့်ပါနှင့်။</p>
+          <h2>Release build configuration ကိုစစ်ပါ</h2><p>Gradle release build type တွင် release signing config ကိုချိတ်ဆက်ပြီး app label၊ <code>applicationId</code>၊ manifest permission နှင့် version number ကိုစစ်ဆေးပါ။ Release credential မရရှိလျှင် build ကိုပိတ်မည်လားဆိုသည့် CI behavior ကိုရွေးချယ်ပြီး debug signing key ဖြင့် production artifact ထွက်မသွားစေပါနှင့်။</p>
+          <h2>Google Play သို့ ဖြန့်ချိမည့် artifact ကို စစ်ဆေးပါ</h2><p>Google Play သို့ ဖြန့်ချိရန် Flutter လမ်းညွှန်တွင် <code>flutter build appbundle</code> ဖြင့် App Bundle တည်ဆောက်နိုင်ပြီး local စမ်းသပ်ရန် APK ကို သီးခြားထုတ်နိုင်သည်။ Release artifact ကို စက်အမှန် သို့မဟုတ် internal testing track တွင်တင်ပြီး login၊ permission၊ icon၊ network နှင့် upgrade/version behavior ကိုစစ်ဆေးကာ မှန်ကန်သော artifact ကိုသာ ဖြန့်ချိပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-ios-release-signing-archive" data-group="flutter" data-title="iOS Release၊ Signing၊ Archive နှင့် TestFlight">
+          <div class="progress-line"><div></div></div>
+          <h1>iOS Release၊ Signing၊ Archive နှင့် TestFlight</h1>
+          <p class="lede">iOS ဖြန့်ချိမှုတွင် Xcode signing identity၊ provisioning နှင့် bundle identifier တို့ကို တစ်ညီတစ်ညွတ်တည်းထားရန်လိုသည်။ Flutter build output ကို App Store Connect သို့မပို့မီ archive နှင့် signing ကို Xcode workflow နှင့်တွဲဖက်စစ်ဆေးပါ။</p>
+          <h2>Bundle identity နှင့် signing team ကိုညှိပါ</h2><p>iOS Runner target ၏ Bundle Identifier ကို Apple Developer configuration နှင့်ကိုက်ညီစေပြီး Xcode Signing &amp; Capabilities တွင် သက်ဆိုင်ရာ Team နှင့် signing mode ကိုရွေးပါ။ Push notification သို့မဟုတ် associated domains ကဲ့သို့ capability သုံးလျှင် entitlement နှင့် provisioning profile အတွင်းပါဝင်မှုကိုစစ်ပါ။</p>
+          <h2>Release build ကို archive အဖြစ်စစ်ပါ</h2><p>Flutter iOS release workflow တွင် <code>flutter build ios --release</code> ဖြင့် iOS build ပြင်ဆင်နိုင်သော်လည်း App Store ဖြန့်ချိရန် Xcode မှ archive နှင့် distribution upload အဆင့်များကိုလိုက်နာပါ။ Signing certificate သို့မဟုတ် profile သက်တမ်းကုန်ခြင်း၊ bundle ID မကိုက်ခြင်းတို့ကို upload မတိုင်မီရှင်းလင်းပြီး release version/build number ကိုမြှင့်ပါ။</p>
+          <h2>TestFlight ဖြင့် အမှန်တကယ်စမ်းသပ်ပါ</h2><p>App Store Connect သို့တင်ပြီး TestFlight မှ internal tester များထံ ဖြန့်ချိကာ clean install၊ update၊ permission prompt၊ deep link နှင့် crash reporting ကိုစစ်ပါ။ CI တွင် certificate/private credential ကိုလုံခြုံစွာသိမ်းပြီး developer workstation ပေါ်မှ key material ကို repository ထဲသို့မကူးပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-web-release-caching-deployment" data-group="flutter" data-title="Flutter Web Release Build၊ Cache နှင့် Hosting">
+          <div class="progress-line"><div></div></div>
+          <h1>Flutter Web Release Build၊ Cache နှင့် Hosting</h1>
+          <p class="lede">Flutter web ကို build လုပ်ပြီး static hosting သို့တင်ရုံဖြင့် release ပြီးပြည့်စုံသည်ဟု မဆိုနိုင်ပါ။ Compiled asset၊ bootstrap file၊ browser cache နှင့် single-page routing တို့ကို rollout အချိန်ပါ ထည့်စဉ်းစားပါ။</p>
+          <h2>Release bundle ကို build နှင့် local test လုပ်ပါ</h2><p>Official Flutter web guide အရ <code>flutter build web</code> သည် deployment အတွက် ဖိုင်များကို <code>build/web</code> အတွင်းထုတ်ပေးသည်။ ထွက်လာသည့် release ကို local web server ဖြင့်ပြသပြီး browser တွင်စစ်ပါ၊ development <code>flutter run -d chrome</code> ၏ debug behavior တစ်ခုတည်းကိုသာ မမှီခိုပါနှင့်။</p>
+          <h2>Cache header နှင့် content hash ကို နားလည်ပါ</h2><p><code>--web-content-hash</code> သုံးလျှင် compiled entrypoint နှင့် asset တချို့တွင် content hash ပါနိုင်ပြီး URL ပြောင်းခြင်းက cache busting ကိုကူညီသည်။ Hashed immutable asset များနှင့် <code>index.html</code>၊ bootstrap ကဲ့သို့ entry file များ၏ cache policy မတူသဖြင့် hosting/CDN တွင် cache header ကို file အမျိုးအစားအလိုက်သတ်မှတ်ပါ။</p>
+          <h2>Rollout နှင့် client-side route ကိုကာကွယ်ပါ</h2><p>အသုံးပြုသူ browser tab အဟောင်းက lazy asset တောင်းနိုင်သဖြင့် deploy အသစ်ချိန်တွင် အဟောင်း hash asset များကို grace period အတွင်းထိန်းထားပြီး entry file များကို နောက်ဆုံး atomic update လုပ်ပါ။ SPA rewrite သည် <code>/assets/</code> ကဲ့သို့ ပျောက်နေသော asset ကို <code>index.html</code> အဖြစ်ပြန်မပေးစေရန် သီးခြားစစ်ပြီး direct URL refresh ကိုလည်း စမ်းပါ။</p>
+        </article>
+        <article class="page" id="page-extra-flutter-ci-build-release-pipeline" data-group="flutter" data-title="Flutter CI Pipeline — Analyze၊ Test နှင့် Release Artifact">
+          <div class="progress-line"><div></div></div>
+          <h1>Flutter CI Pipeline — Analyze၊ Test နှင့် Release Artifact</h1>
+          <p class="lede">CI pipeline သည် code ကို build လုပ်ရုံမက လူတိုင်းအတွက်တူညီသော quality gate နှင့် release artifact ထုတ်လုပ်မှုကို အလိုအလျောက်ပြန်လုပ်နိုင်စေသည်။ Existing deployment/CI introductory lessons ကိုမထပ်ဘဲ Flutter-specific command၊ secret နှင့် artifact verification ကိုအာရုံစိုက်ပါ။</p>
+          <h2>တူညီသော quality gate ကိုစဉ်လိုက်လုပ်ပါ</h2><p>Pull request တွင် dependency resolve၊ <code>dart format --output=none --set-exit-if-changed</code>၊ <code>flutter analyze</code> နှင့် unit/widget test များကို run လုပ်ပါ။ Failure တစ်ခုခုရှိလျှင် release stage သို့မဆက်စေဘဲ cache ကို dependency lockfile အပေါ်မူတည်စေကာ build environment ကွာခြားမှုကိုလျှော့ပါ။</p>
+          <h2>Target platform နှင့် flavor ကို explicit လုပ်ပါ</h2><p>Android၊ iOS နှင့် web ကိုသီးခြား job သို့မဟုတ် matrix အဖြစ်စီမံပြီး <code>--flavor</code> နှင့် <code>--dart-define</code> value များကို build log ထဲတွင်လျှို့ဝှက်ချက်မပါဘဲ မှန်ကန်စွာပေးပါ။ Release workflow သည် branch/tag policy၊ version number နှင့် မည်သည့် environment သို့ publish လုပ်မည်ကို အတိအလင်းစစ်ပါ။</p>
+          <h2>Credential နှင့် artifact ကိုစနစ်တကျထိန်းပါ</h2><p>Android keystore၊ iOS signing material နှင့် store credential များကို CI secret store ထဲတွင်ထားပြီး log သို့မဟုတ် repository ထဲမထုတ်ပါနှင့်။ ထုတ်လုပ်သည့် AAB၊ IPA archive သို့မဟုတ် web bundle ကို artifact အဖြစ်သိမ်း၊ checksum/build metadata မှတ်တမ်းတင်ပြီး publish မလုပ်မီ test/install လုပ်ထားသည့် artifact နှင့် တူညီကြောင်းစစ်ပါ။</p>
+        </article>
+
 
         <article class="page" id="page-devtools-start" data-group="devtools" data-title="Browser DevTools မိတ်ဆက်">
           <div class="progress-line"><div></div></div>
@@ -12860,6 +13378,256 @@ void main() {
           <p class="lede">Deploy အောင်မြင်တယ်ဆိုတာ command ပြီးသွားတာတင်မဟုတ်ပါ။ Service အသုံးပြုနိုင်ခြင်း၊ error rate နဲ့ အရေးကြီးတဲ့ user flow တွေကို စောင့်ကြည့်ပါ။</p>
           <h2>Health check နှင့် smoke test</h2><p>Public page တက်ခြင်း၊ API response အခြေအနေ၊ asset load နဲ့ အရေးကြီးတဲ့ flow ကို deploy ပြီးချင်းစမ်းပါ။ Health endpoint က authentication မလိုဘဲ service အဆင်ပြေကြောင်းသာပြသင့်ပါတယ်။</p><h2>Monitoring နှင့် log</h2><p>Availability, error rate, latency နဲ့ failed deployment ကိုစောင့်ကြည့်ပါ။ Log တွင် request ID ထည့်ကာ trace လုပ်ပါ၊ သို့သော် password/token သို့မဟုတ် ကိုယ်ရေးကိုယ်တာအချက်အလက် မသိမ်းပါနဲ့။ Alert တစ်ခုချင်းစီအတွက် တာဝန်ရှိသူ သတ်မှတ်ပါ။</p><h2>Rollback လုပ်ထုံးလုပ်နည်း</h2><p>Rollback trigger ကို ကြိုသတ်မှတ်ပါ—ဥပမာ error တိုးလာခြင်း သို့မဟုတ် အဓိက flow ပျက်ခြင်း။ ယခင် artifact ကိုပြန်တင်ခြင်းနဲ့ database migration အပြန်အလှန်ကို စမ်းသပ်ပါ။ Data migration ကို destructive ဖြစ်စေမယ့်အစား backward-compatible အဆင့်လိုက်ပြောင်းပါ။</p>
         </article>
+        <article class="page" id="page-extra-deploy-environment-boundaries" data-group="deploy" data-title="Development၊ Staging နှင့် Production ပတ်ဝန်းကျင်ခွဲခြားခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Development၊ Staging နှင့် Production ပတ်ဝန်းကျင်ခွဲခြားခြင်း</h1>
+          <p class="lede">Deployment တစ်ခုစီသည် မည်သည့်ပတ်ဝန်းကျင်သို့ သွားမည်ကို ကြိုတင်သတ်မှတ်ထားခြင်းက မှားယွင်းသောဒေတာနှင့် ဝန်ဆောင်မှုကို ထိခိုက်စေမှုကို လျှော့ချသည်။ Staging ကို production နှင့် ဆင်တူအောင်ထားသော်လည်း ချိတ်ဆက်ရမည့်စနစ်များနှင့် ခွင့်ပြုချက်များကို သီးခြားထားပါ။</p>
+          <h2>ရည်ရွယ်ချက်နှင့် ကွာခြားချက်</h2><p>Development သည် ပြောင်းလဲမှုစမ်းသပ်ရန်၊ staging သည် ဖြန့်ချိမည့်ပုံစံကို production မတိုင်မီ စစ်ဆေးရန်၊ production သည် အမှန်တကယ်အသုံးပြုသူများအတွက် ဖြစ်သည်။ အမည်တူ config ကို သုံးနိုင်သော်လည်း database၊ storage၊ mail နှင့် API endpoint များကို ပတ်ဝန်းကျင်အလိုက် ခွဲပါ။</p>
+          <h2>သီးခြားအရင်းအမြစ်များ</h2><p>Staging က production database သို့ မတော်တဆရေးသားနိုင်လျှင် စမ်းသပ်မှုသည် အန္တရာယ်ဖြစ်လာသည်။ သီးခြား database နှင့် test data သုံးပြီး production တူညီမှုလိုအပ်ပါက ကိုယ်ရေးအချက်အလက်ဖယ်ရှားထားသော မိတ္တူကိုသာ အသုံးပြုပါ။</p>
+          <h2>Deployment ခွင့်ပြုချက်</h2><p>ပတ်ဝန်းကျင်တစ်ခုစီအတွက် ဘယ် branch သို့မဟုတ် tag က deploy လုပ်ခွင့်ရှိသည်၊ approval လိုမလိုကို သတ်မှတ်ပါ။ ဥပမာ GitHub Actions environment ကို job က ရည်ညွှန်းစေပြီး approval ပြီးမှ environment secrets ရနိုင်စေရန် ကန့်သတ်နိုင်သည်။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-artifact-contract" data-group="deploy" data-title="Build Artifact Contract နှင့် Runtime တာဝန်ခွဲဝေမှု">
+          <div class="progress-line"><div></div></div>
+          <h1>Build Artifact Contract နှင့် Runtime တာဝန်ခွဲဝေမှု</h1>
+          <p class="lede">Deployment သည် source code ကို host ပေါ်တွင် မည်သို့ပင်ပြန်တည်ဆောက်စေခြင်းထက် စမ်းသပ်ပြီးသား artifact ကို တိကျစွာ လက်ခံနိုင်သည့် contract ပေါ်တွင် အခြေခံသင့်သည်။ Artifact ထဲတွင် ဘာပါမည်၊ runtime က ဘာဖြည့်ပေးရမည်ကို ရှင်းလင်းပါ။</p>
+          <h2>Artifact ထဲတွင် ပါဝင်ရမည့်အရာ</h2><p>Build output သည် deploy လုပ်နိုင်သော application ဖိုင်များ၊ static assets နှင့် လိုအပ်သော runtime metadata ကို သတ်မှတ်ချက်တစ်ခုအတိုင်း ထည့်သွင်းရသည်။ Secret များကို artifact ထဲတွင် မထည့်ဘဲ runtime configuration အဖြစ် ပေးပါ။</p>
+          <h2>Build တစ်ကြိမ်၊ ပတ်ဝန်းကျင်အလိုက် အသုံးပြု</h2><p>တူညီသော artifact ကို staging တွင်စမ်းပြီး production တွင်ပြန်သုံးပါက build ကွာခြားမှုကြောင့် bug ဖြစ်နိုင်ခြေ လျော့သည်။ သို့သော် frontend bundle ထဲတွင် build အချိန်ကတည်းက config ကို ထည့်ထားသော framework များရှိသဖြင့် public config နှင့် လျှို့ဝှက် config ကို ခွဲစဉ်းစားပါ။</p>
+          <h2>Contract ကို အတည်ပြုခြင်း</h2><p>Artifact တစ်ခုတွင် commit SHA သို့မဟုတ် immutable version တစ်ခုချိတ်ပြီး မည်သည့် runtime version နှင့် launch command လိုသလဲကို မှတ်တမ်းတင်ပါ။ Deployment အရင်ဆုံး smoke test လုပ်ပြီး အလုပ်မလုပ်သည့် artifact ကို production traffic မပေးပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-runtime-config-secrets" data-group="deploy" data-title="Runtime Configuration နှင့် Secret များကို လုံခြုံစွာပေးခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Runtime Configuration နှင့် Secret များကို လုံခြုံစွာပေးခြင်း</h1>
+          <p class="lede">Environment variable များသည် deployment တစ်ခုနှင့်တစ်ခု ကွဲပြားသော runtime တန်ဖိုးများကို ပေးနိုင်သော်လည်း ၎င်းတို့အားလုံးသည် လျှို့ဝှက်ချက်မဟုတ်ပါ။ Secret များကို source code၊ build artifact နှင့် log များမှ ခွဲထားပြီး လိုအပ်သလောက်သာ ခွင့်ပြုပါ။</p>
+          <h2>Config နှင့် secret ကွာခြားချက်</h2><p>Public site URL သို့မဟုတ် feature flag ကဲ့သို့ လျှို့ဝှက်မဟုတ်သည့် setting များကို config အဖြစ်ထားနိုင်သည်။ Database password၊ signing key နှင့် access token များသည် secret ဖြစ်ပြီး browser သို့မဟုတ် client bundle ထဲသို့ မပို့ရပါ။</p>
+          <h2>Scope နှင့် ဝင်ရောက်ခွင့်</h2><p>တူညီသော secret ကို အဖွဲ့အစည်းတစ်ခုလုံးတွင် မျှဝေမည့်အစား လိုအပ်သည့် repository၊ environment နှင့် job ကိုသာ ခွင့်ပြုပါ။ GitHub ၏ environment secrets သည် ထို environment ကို သုံးသော job များအတွက်သာဖြစ်ပြီး protection rule ဖြတ်ပြီးမှ ရရှိနိုင်သည်။</p>
+          <h2>လည်ပတ်မှုဆိုင်ရာစည်းကမ်း</h2><p>Secret ကို log ထဲထုတ်ခြင်း၊ error message ထဲထည့်ခြင်းနှင့် command argument အဖြစ် မှတ်တမ်းတင်မိခြင်းတို့ကို ရှောင်ပါ။ Secret ပြောင်းလဲသည့်အခါ အဟောင်းကို ပယ်ဖျက်ပြီး အသစ်သုံးသော service များအားလုံးကို စစ်ဆေးကာ အရေးပေါ် rotation လုပ်နိုင်သည့် လုပ်ထုံးလုပ်နည်းကို ကြိုတင်ထားပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-custom-domain-dns-cutover" data-group="deploy" data-title="Custom Domain DNS Cutover ကို စီမံခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Custom Domain DNS Cutover ကို စီမံခြင်း</h1>
+          <p class="lede">Domain ကို application သို့ညွှန်ခြင်းသည် DNS record ပြောင်းရုံသာမက ownership validation၊ propagation နှင့် cutover အန္တရာယ်တို့ကို စီစဉ်ရသည့် လုပ်ငန်းစဉ်ဖြစ်သည်။ Existing service ကို မဖြတ်ခင် DNS နှင့် hosting provider နှစ်ဖက်လုံး အဆင်သင့်ဖြစ်ကြောင်း သေချာပါစေ။</p>
+          <h2>Record နှင့် hostname ကို စစ်ဆေးပါ</h2><p>A/AAAA record သည် host ကို IP address သို့၊ CNAME သည် အခြား hostname သို့ ညွှန်လေ့ရှိသည်။ Root domain ကို CNAME ထားခွင့်ရှိ/မရှိမှာ provider ပေါ်မူတည်သောကြောင့် DNS provider ၏ apex-domain လမ်းညွှန်ချက်ကို စစ်ဆေးပါ။ <code>www.example.com</code> နှင့် root domain တို့အနက် canonical address ကို သတ်မှတ်ပြီး ကျန်တစ်ခုကို ထိုလိပ်စာသို့ redirect လုပ်ပါ။</p>
+          <h2>Cutover မတိုင်မီ စမ်းသပ်ခြင်း</h2><p>Hosting provider ၏ domain verification ကို အရင်ပြီးစီးစေပြီး DNS ပြောင်းမည့် record များကို လက်ရှိတန်ဖိုးများနှင့်အတူ သိမ်းထားပါ။ TTL ကို ကြိုတင်လျှော့ထားနိုင်သော်လည်း update ချက်ချင်းဖြစ်မည်ဟု မအာမခံနိုင်ပါ။ DNS resolver အချို့တွင် record အဟောင်းနှင့် အသစ် တစ်ချိန်တည်း မြင်ရနိုင်သည်။</p>
+          <h2>အတည်ပြုမှုနှင့် ပြန်လည်ညွှန်ခြင်း</h2><p>Cutover ပြီးနောက် resolver အမျိုးမျိုးမှ lookup လုပ်ကာ HTTP host၊ redirect နှင့် application response ကို စစ်ပါ။ မှားယွင်းပါက ယခင် record ကို ပြန်ထားနိုင်ရန် zone အပြောင်းအလဲမှတ်တမ်းနှင့် အဟောင်း endpoint ကို ခဏဆက်လက်အသုံးပြုနိုင်မှုကို ထည့်သွင်းစီစဉ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-https-certificate-lifecycle" data-group="deploy" data-title="HTTPS Certificate Lifecycle နှင့် Secure Redirect">
+          <div class="progress-line"><div></div></div>
+          <h1>HTTPS Certificate Lifecycle နှင့် Secure Redirect</h1>
+          <p class="lede">HTTPS ကို ဖွင့်ထားခြင်းသာ မလုံလောက်ဘဲ certificate သက်တမ်း၊ hostname များနှင့် renew လုပ်ငန်းစဉ်ကို ဆက်လက်စောင့်ကြည့်ရသည်။ HTTP ကို HTTPS သို့ ပြောင်းရာတွင် application နှင့် proxy နှစ်ဖက်လုံး၏ scheme သိရှိမှုကို မှန်ကန်စွာ ကိုင်တွယ်ပါ။</p>
+          <h2>Certificate အကျုံးဝင်မှု</h2><p>Certificate သည် အသုံးပြုသူသွားမည့် hostname အားလုံးနှင့် ကိုက်ညီရပြီး သက်တမ်းမကုန်မီ renew လုပ်နိုင်ရသည်။ Root domain နှင့် subdomain ကို သီးခြားထည့်သွင်းရန်လိုနိုင်သဖြင့် domain အသစ်ထည့်သည့်အခါ certificate coverage ကိုပါ စစ်ပါ။</p>
+          <h2>TLS termination နေရာ</h2><p>Load balancer သို့မဟုတ် platform က TLS ကို အဆုံးသတ်ပေးပါက backend သို့မည်သည့် protocol ဖြင့် ချိတ်သည်ကို architecture ထဲတွင် မှတ်သားပါ။ Proxy နောက်က application သည် မူရင်း request ၏ HTTPS ဖြစ်မှုကို ယုံကြည်ရသော forwarded header ဖြင့် သိရနိုင်ပြီး header ကို arbitrary client က အတုလုပ်ခွင့်မပြုရပါ။</p>
+          <h2>Redirect နှင့် ပြန်လည်စမ်းသပ်မှု</h2><p>HTTP request ကို HTTPS သို့ redirect လုပ်ပြီး canonical hostname တစ်ခုတည်းထားပါ၊ redirect loop မဖြစ်ကြောင်း စစ်ပါ။ Renewal failure၊ certificate သက်တမ်းနီးလာမှုနှင့် mixed-content resource များကို စောစီးစွာသိနိုင်သည့် alert ထားပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-spa-static-route-fallback" data-group="deploy" data-title="SPA Static Routing နှင့် Deep Link Fallback">
+          <div class="progress-line"><div></div></div>
+          <h1>SPA Static Routing နှင့် Deep Link Fallback</h1>
+          <p class="lede">Single-page application တစ်ခုတွင် client router က URL များကို ကိုင်တွယ်သော်လည်း server သည် ပထမတောင်းဆိုမှုကို ဖြေဆိုရသည်။ Root page အလုပ်လုပ်ပေမယ့် nested URL ကို တိုက်ရိုက်ဖွင့်လျှင် 404 ဖြစ်ခြင်းကို route fallback နှင့် asset path စစ်ဆေးခြင်းဖြင့် ဖြေရှင်းနိုင်သည်။</p>
+          <h2>Browser navigation နှင့် server request</h2><p>App အတွင်း link နှိပ်ရာတွင် client router သည် history ကို ပြောင်းနိုင်သော်လည်း <code>/account/settings</code> ကို refresh လုပ်သောအခါ server သို့ path အပြည့်အစုံ တောင်းဆိုသည်။ Server တွင် route ကို မသတ်မှတ်ထားပါက index file ကို ပြန်ပေးသည့် SPA fallback မရှိလျှင် 404 ရနိုင်သည်။</p>
+          <h2>Fallback ကို တိကျစွာ သတ်မှတ်ပါ</h2><p>App route များအတွက် <code>index.html</code> သို့ rewrite လုပ်သော်လည်း မရှိသော <code>.js</code> သို့မဟုတ် image ဖိုင်ကို HTML အဖြစ် ပြန်ပေးမည့် catch-all မဖြစ်စေပါနှင့်။ API path များကို SPA fallback မှ ခွဲပြီး 404 ကို API error အဖြစ်ထားပါ။</p>
+          <h2>Deep link စမ်းသပ်ပါ</h2><p>Nested route ကို address bar ထဲထည့်ဖွင့်ခြင်း၊ refresh လုပ်ခြင်းနှင့် browser back/forward လုပ်ခြင်းကို deploy ပြီးတိုင်းစမ်းပါ။ Build base path နှင့် asset URL များသည် hosting subdirectory အောက်တွင် မှန်ကန်မှုရှိကြောင်းလည်း စစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-database-migration-expand-contract" data-group="deploy" data-title="Database Migration ကို အဆင့်လိုက် ဖြန့်ချိခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Database Migration ကို အဆင့်လိုက် ဖြန့်ချိခြင်း</h1>
+          <p class="lede">Application version အသစ်နှင့် database schema ပြောင်းလဲမှုသည် တစ်ချိန်တည်းတွင် ဖြစ်ရမည်ဟု မယူဆပါနှင့်။ အဆင့်လိုက် migration သည် deploy အလယ်တွင် အဟောင်းနှင့်အသစ် code နှစ်မျိုးလုံး database ကို အသုံးပြုရသည့်အခြေအနေကို ပိုလုံခြုံစေသည်။</p>
+          <h2>Expand၊ migrate၊ contract</h2><p>ပထမအဆင့်တွင် အဟောင်း code မပျက်စေသော column သို့မဟုတ် table ကို ထည့်ပါ၊ ထို့နောက် code အသစ်ကို အဟောင်းနှင့်အသစ် schema နှစ်မျိုးလုံး နားလည်အောင် deploy လုပ်ပါ။ Data backfill ပြီး အသုံးပြုသူအားလုံး ပြောင်းသွားမှသာ နောက်ထပ် release တွင် မလိုတော့သော column ကို ဖယ်ရှားပါ။</p>
+          <h2>Migration အန္တရာယ်ကို စမ်းသပ်ပါ</h2><p>Migration ဖိုင်များသည် schema ကိုပြောင်းသည့်လုပ်ဆောင်ချက်များကို မှတ်တမ်းတင်သော်လည်း ကြီးမားသော table ပေါ်တွင် lock သို့မဟုတ် ကြာမြင့်ချိန်ရှိနိုင်သည်။ Production နီးစပ်သော ဒေတာပမာဏဖြင့် ကြာချိန်နှင့် rollback ပြုလုပ်နိုင်မှုကို စမ်းပြီး data ဖျက်ပစ်နိုင်သည့် operation ကို အထူးစစ်ဆေးပါ။</p>
+          <h2>Migration ကို ထိန်းချုပ်စွာ လုပ်ပါ</h2><p>Application instance အများအပြားတစ်ပြိုင်တည်း migration မပြေးစေရန် release job တစ်ခုကသာ အစီအစဉ်တကျ လုပ်ဆောင်စေပါ။ Migration ပြီးဆုံးမှု၊ schema version နှင့် application compatibility ကို စစ်ပြီးမှ traffic ကို version အသစ်သို့ ဦးတည်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-database-backup-restore-drill" data-group="deploy" data-title="Database Backup၊ Restore နှင့် Recovery Drill">
+          <div class="progress-line"><div></div></div>
+          <h1>Database Backup၊ Restore နှင့် Recovery Drill</h1>
+          <p class="lede">Backup တစ်ခု ရှိနေခြင်းသည် ပြန်လည်ရယူနိုင်ကြောင်း သက်သေမဟုတ်ပါ။ Recovery လိုအပ်သည့်အခါ လက်ခံနိုင်သော data loss နှင့် ပြန်တက်ရန်ကြာချိန်ကို သိထားရန် restore ကို ပုံမှန်လေ့ကျင့်ပါ။</p>
+          <h2>RPO နှင့် RTO ကို နားလည်ပါ</h2><p>RPO သည် ပြန်လည်ရယူရာတွင် ဆုံးရှုံးနိုင်သော အချက်အလက်ပမာဏ၏ လက်ခံနိုင်သည့် ကန့်သတ်ချက်၊ RTO သည် ဝန်ဆောင်မှုပြန်ရစေရန် လက်ခံနိုင်သည့် အချိန်ကန့်သတ်ချက်ဖြစ်သည်။ လုပ်ငန်းလိုအပ်ချက်အလိုက် backup frequency နှင့် recovery လုပ်ငန်းစဉ်အတွက် ရည်မှန်းချက်များကို သတ်မှတ်ပါ။</p>
+          <h2>Backup ပါဝင်မှုနှင့် လုံခြုံရေး</h2><p>Database dump သာမက schema၊ migration အခြေအနေ၊ encryption key ရရှိနိုင်မှုနှင့် ပြန်တည်ဆောက်ရန် configuration ကိုပါ စဉ်းစားပါ။ Backup ကို production credential နှင့် ခွဲထားသော access control ဖြင့် ကာကွယ်ပြီး retention သတ်မှတ်ချက်ကို လိုက်နာပါ။</p>
+          <h2>Restore drill ပြုလုပ်ပါ</h2><p>သီးခြားနေရာတစ်ခုတွင် backup ကို restore လုပ်ပြီး application က data ကို ဖတ်နိုင်ခြင်း၊ constraint နှင့် encoding မှန်ကန်ခြင်းကို စစ်ပါ။ နောက်ဆုံး backup အချိန်၊ restore ကြာချိန်နှင့် မအောင်မြင်သည့်အဆင့်များကို မှတ်တမ်းတင်ပြီး recovery လုပ်ထုံးကို ပြင်ဆင်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-release-identity-and-compatibility" data-group="deploy" data-title="Release Identity၊ Versioning နှင့် Compatibility">
+          <div class="progress-line"><div></div></div>
+          <h1>Release Identity၊ Versioning နှင့် Compatibility</h1>
+          <p class="lede">Production တွင် လက်ရှိပြေးနေသည့် release ကို တိတိကျကျသိနိုင်ခြင်းက စုံစမ်းခြင်း၊ rollback နှင့် support အတွက် အရေးကြီးသည်။ Version label ကို source commit၊ artifact နှင့် schema အခြေအနေတို့နှင့် ချိတ်ဆက်ပါ။</p>
+          <h2>မပြောင်းလဲသော release identifier</h2><p>Semantic version သို့မဟုတ် commit SHA ကဲ့သို့ identifier တစ်ခုကို deploy မှတ်တမ်း၊ artifact နှင့် application diagnostic endpoint တို့တွင် တူညီစွာဖော်ပြပါ။ <code>latest</code> ကဲ့သို့ ရွေ့လျားသော tag တစ်ခုတည်းကို သုံးခြင်းသည် မည်သည့် binary ပြေးနေသည်ကို မသေချာစေပါ။</p>
+          <h2>Dependency နှင့် build provenance</h2><p>Dependency lockfile နှင့် build toolchain ကို source ထဲတွင် ထိန်းသိမ်းထားပြီး artifact သည် မည်သည့် commit မှ ထုတ်လုပ်ခဲ့သည်ကို မှတ်တမ်းတင်ပါ။ Attestation သို့မဟုတ် artifact checksum ကို အသုံးပြုပါက ဖြန့်ချိသည့် artifact ကို မူရင်း build နှင့် နှိုင်းယှဉ်နိုင်သည်။</p>
+          <h2>Application နှင့် schema ကိုတွဲစဉ်းစားပါ</h2><p>Release note တွင် schema ထပ်တိုးမှု၊ API ပြောင်းလဲမှုနှင့် ပြောင်းလဲထားသော config ကို ရှင်းလင်းစွာမှတ်သားပါ။ အဟောင်း application ကို အချိန်တိုအတွင်း ပြန်တင်ရနိုင်သည့်အတွက် schema နှင့် external API compatibility ကို version တစ်ခုတည်းထက် ကျော်လွန်စဉ်းစားပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-smoke-tests-and-health-probes" data-group="deploy" data-title="Deployment Smoke Test နှင့် Health Probe ခွဲခြားခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Deployment Smoke Test နှင့် Health Probe ခွဲခြားခြင်း</h1>
+          <p class="lede">Health endpoint တစ်ခုတည်းက deployment မှန်ကန်ကြောင်း မပြနိုင်ပါ။ Process အသက်ရှင်မှု၊ traffic လက်ခံနိုင်မှုနှင့် အသုံးပြုသူမြင်ရသော အဓိကလမ်းကြောင်းကို မတူညီသော စမ်းသပ်မှုများဖြင့် အတည်ပြုပါ။</p>
+          <h2>Liveness နှင့် readiness</h2><p>Liveness သည် process ဆက်လက်အသက်ရှင်နေသလားကို၊ readiness သည် instance သည် request လက်ခံရန် အသင့်ဖြစ်သလားကို ဖော်ပြရန် ရည်ရွယ်သည်။ Dependency ခဏကျသည့်အခါ liveness ကို အလွန်တင်းကျပ်စွာ သတ်မှတ်လျှင် instance များ အဆက်မပြတ် restart ဖြစ်နိုင်သည်။</p>
+          <h2>Smoke test သည် အသုံးပြုသူလမ်းကြောင်းကို စစ်</h2><p>Deploy ပြီးနောက် login မလိုသော landing page သို့မဟုတ် health endpoint တုံ့ပြန်မှုအပြင် အရေးကြီးသော API တစ်ခုကိုပါ တောင်းဆိုစမ်းပါ။ Status code တင်မက content type၊ version identifier နှင့် latency ကိုပါ စစ်ဆေးပါ။</p>
+          <h2>Timeout နှင့် dependency စည်းမျဉ်း</h2><p>Probe တစ်ခုတွင် timeout နှင့် retry ကို သတ်မှတ်၍ အကြာကြီးတုံ့ပြန်မှုကို healthy ဟု မမှတ်ပါနှင့်။ Database readiness ကို စစ်ရာတွင် connection အတည်ပြုမှုကိုသာ လုပ်ပြီး စုံစမ်းမှုကြီး သို့မဟုတ် write operation ကို မထည့်ပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-observability-alerts" data-group="deploy" data-title="Production Logs၊ Metrics နှင့် Alert များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Production Logs၊ Metrics နှင့် Alert များ</h1>
+          <p class="lede">Deploy အောင်မြင်သည်ဟု platform ပြခြင်းနှင့် အသုံးပြုသူအတွက် ဝန်ဆောင်မှုကောင်းနေခြင်းသည် မတူပါ။ Log၊ metric နှင့် alert တို့ကို release identity နှင့် ချိတ်ဆက်ပြီး အရေးယူနိုင်သော signal များကို ရွေးပါ။</p>
+          <h2>တည်ဆောက်ထားသော log များ</h2><p>Request ID၊ timestamp၊ route၊ status code၊ duration နှင့် release version ကို တူညီသော field များဖြင့် မှတ်တမ်းတင်ပါ။ Password၊ token၊ ကိုယ်ရေးအချက်အလက်နှင့် secret ပါဝင်နိုင်သည့် request body များကို log မလုပ်ပါနှင့်။</p>
+          <h2>Metric နှင့် အသုံးပြုသူအမြင်</h2><p>Error rate၊ latency percentile၊ traffic နှင့် resource saturation ကို အချိန်ကာလအလိုက်ကြည့်ပြီး deploy မတိုင်မီ baseline နှင့် နှိုင်းပါ။ Application metric များကို synthetic request သို့မဟုတ် real-user signal နှင့် ပေါင်းစပ်လျှင် backend healthy ဖြစ်သော်လည်း user journey ပျက်နေခြင်းကို သိနိုင်သည်။</p>
+          <h2>အရေးယူနိုင်သော alert</h2><p>Alert တစ်ခုစီတွင် threshold ဖြစ်ရသည့်အကြောင်း၊ အကျိုးသက်ရောက်မှုနှင့် runbook သို့မဟုတ် တာဝန်ခံလမ်းကြောင်း ပါဝင်စေပါ။ အနည်းငယ်သော transient error အတွက် အမြဲတမ်း page မလုပ်ဘဲ error budget သို့မဟုတ် ဆက်တိုက်ဖြစ်မှုကို အခြေခံ၍ noise လျှော့ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-rollback-recovery-decision" data-group="deploy" data-title="Rollback နှင့် Forward Recovery ဆုံးဖြတ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Rollback နှင့် Forward Recovery ဆုံးဖြတ်ခြင်း</h1>
+          <p class="lede">Application ကို အရင် version သို့ပြန်တင်နိုင်ခြင်းသည် database ပြောင်းလဲမှု သို့မဟုတ် data side effect ကို အလိုအလျောက် ပြန်မဖျက်ပေးပါ။ Rollback၊ roll-forward နှင့် traffic ရပ်တန့်ခြင်းတို့ကို အခြေအနေအလိုက် ဆုံးဖြတ်ရန် ပြန်လည်ရယူရေးအစီအစဉ်ကို တိကျစွာထားပါ။</p>
+          <h2>Rollback လုပ်နိုင်သည့်အရာကို ခွဲခြားပါ</h2><p>Application artifact ကို အဟောင်းသို့ပြန်ပြောင်းနိုင်သော်လည်း email ပို့ပြီးခြင်း၊ ငွေတောင်းခံခြင်း သို့မဟုတ် data ဖျက်ပြီးခြင်းကဲ့သို့ side effect များကို နောက်ပြန်မလှည့်နိုင်ပါ။ Schema ကို အဟောင်းနှင့်အသစ် code နှစ်မျိုးလုံး လက်ခံနိုင်အောင် ပြင်ဆင်ထားခြင်းက rollback အခွင့်အရေးကို ထိန်းပေးသည်။</p>
+          <h2>ပြန်တင်မလား၊ ပြင်ဆင်ပြီးရှေ့တိုးမလား</h2><p>Release အသစ်ကြောင့် error ချက်ချင်းတက်ပြီး state မပြောင်းလဲပါက အဟောင်း artifact သို့ပြန်တင်ခြင်း သင့်တော်နိုင်သည်။ Data migration ပြီးသွားပါက migration ကိုအတင်းပြန်လှန်မည့်အစား compatible fix အသစ်ထုတ်ခြင်း သို့မဟုတ် restore plan သုံးခြင်း ပိုလုံခြုံနိုင်သည်။</p>
+          <h2>ပြန်လည်ရယူမှုကို လေ့ကျင့်ပါ</h2><p>Rollback trigger၊ တာဝန်ခံသူ၊ traffic ပြန်ညွှန်ပုံနှင့် မအောင်မြင်ပါက escalation ကို runbook ထဲရေးပါ။ အရေးကြီး release များအပြီး rollback rehearsal လုပ်ပြီး အချိန်နှင့် မမျှော်လင့်သော dependency များကို မှတ်တမ်းတင်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-cache-cdn-versioning" data-group="deploy" data-title="CDN Cache၊ Asset Versioning နှင့် Invalidation">
+          <div class="progress-line"><div></div></div>
+          <h1>CDN Cache၊ Asset Versioning နှင့် Invalidation</h1>
+          <p class="lede">Cache သည် latency နှင့် origin load ကို လျှော့ပေးသော်လည်း မှားယွင်းသော cache policy သည် အသုံးပြုသူကို code အဟောင်းနှင့် asset အသစ် မကိုက်ညီမှုဖြစ်စေနိုင်သည်။ HTML၊ versioned asset နှင့် user-specific response တို့ကို မတူညီသော cache စည်းမျဉ်းဖြင့် စီမံပါ။</p>
+          <h2>Cache policy ကို အမျိုးအစားခွဲပါ</h2><p>Content hash ပါသော <code>app.abc123.js</code> ကဲ့သို့ immutable asset များကို ကြာရှည် cache လုပ်နိုင်သည်။ HTML shell ကို အချိန်အလွန်ကြာ cache မထားပါနှင့်၊ မဟုတ်လျှင် အသုံးပြုသူများသည် release အသစ်ကို မမြင်နိုင်ပါ။ Personalized response များသည် shared CDN cache ထဲသို့ မဝင်ကြောင်း header နှင့် cache key ကို စစ်ဆေးပါ။</p>
+          <h2>Versioned filename နှင့် invalidation</h2><p>CloudFront မှတ်တမ်းအရ file ကို edge cache မှ invalidate လုပ်နိုင်သော်လည်း client သို့မဟုတ် အခြား proxy cache တွင် အဟောင်းကျန်နိုင်သည်။ မကြာခဏပြောင်းသော asset အတွက် filename versioning သည် ကွဲပြားသော revision ကိုတိတိကျကျ ရွေးနိုင်ပြီး ပြန်လှည့်ခြင်းကိုလည်း လွယ်ကူစေသည်။</p>
+          <h2>Cache ပြဿနာကို စမ်းသပ်ပါ</h2><p>Release ပြီးနောက် browser cache ရှိ/မရှိ အခြေအနေနှစ်မျိုးတွင် HTML နှင့် asset version တူညီမှုကို စစ်ပါ။ CDN invalidation သည် လိုအပ်သည့် path များကိုသာ ပစ်မှတ်ထားပြီး invalidation ပြီးစီးမှုနှင့် origin တွင် ဖိုင်အသစ်ရောက်ရှိမှုကို သီးခြားအတည်ပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-user-upload-storage" data-group="deploy" data-title="User Upload များအတွက် Durable Storage နှင့် Delivery">
+          <div class="progress-line"><div></div></div>
+          <h1>User Upload များအတွက် Durable Storage နှင့် Delivery</h1>
+          <p class="lede">Application container သို့မဟုတ် instance တစ်လုံး၏ local disk ပေါ်ရှိ upload သည် instance အစားထိုးသည့်အခါ ပျောက်နိုင်သည်။ User file များကို application release lifecycle မှ ခွဲထားပြီး upload ခွင့်ပြုချက်နှင့် download ပေးပို့မှုကို ကာကွယ်ပါ။</p>
+          <h2>Object storage သို့ ခွဲထုတ်ပါ</h2><p>Upload များကို persistent object storage တွင်ထားပြီး database ထဲတွင် object key နှင့် metadata ကို သိမ်းပါ။ Local temporary file ကို upload အပြီးရှင်းလင်းနိုင်ပြီး backup၊ retention နှင့် lifecycle policy ကို application deploy နှင့် သီးခြားစီ စီမံနိုင်သည်။</p>
+          <h2>တိုတောင်းသက်တမ်းရှိ upload ခွင့်</h2><p>S3 presigned URL ဖြင့် client ကို AWS credential မပေးဘဲ အချိန်ကန့်သတ်ထားသော upload လုပ်ခွင့်ပေးနိုင်ပြီး URL သည် ဖန်တီးသူ၏ permission အတိုင်းသာ လုပ်ဆောင်သည်။ Object key တူပြီးသားရှိပါက upload အသစ်က အစားထိုးနိုင်သဖြင့် key ကို ခန့်မှန်းမရအောင် ထုတ်ပေးပြီး overwrite မဖြစ်စေရန် စဉ်းစားပါ။</p>
+          <h2>Validation နှင့် ပေးပို့ခြင်း</h2><p>File size၊ MIME type နှင့် access policy ကို server ဘက်တွင် စစ်ဆေးပြီး upload URL ကို user တစ်ဦး၏ resource နှင့် ချိတ်ပါ။ Private ဖိုင်ကို public bucket ဖြင့် မပေးဘဲ authorization စစ်ပြီးမှ signed download သို့မဟုတ် application-mediated response အသုံးပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-blue-green-canary-tradeoffs" data-group="deploy" data-title="Blue-Green၊ Canary နှင့် Zero-Downtime အလဲအလှယ်">
+          <div class="progress-line"><div></div></div>
+          <h1>Blue-Green၊ Canary နှင့် Zero-Downtime အလဲအလှယ်</h1>
+          <p class="lede">Traffic ကို တစ်ပြိုင်နက်ပြောင်းခြင်းနှင့် တဖြည်းဖြည်းခွဲပို့ခြင်းသည် အန္တရာယ်၊ ကုန်ကျစရိတ်နှင့် စောင့်ကြည့်ရမည့်ရှုပ်ထွေးမှုတို့တွင် မတူညီသည်။ Zero-downtime ဟူသောရည်မှန်းချက်ကို architecture၊ schema နှင့် traffic control အားလုံးအတွက် အာမခံချက်ဟု မယူဆပါနှင့်။</p>
+          <h2>Blue-green ၏ အားသာချက်နှင့်ကုန်ကျစရိတ်</h2><p>Blue နှင့် green environment နှစ်ခုလုံးကို တစ်ချိန်တည်းပြေးစေပြီး စမ်းသပ်ပြီးမှ traffic ပြောင်းသဖြင့် အဟောင်းကို rollback အတွက် ခဏထိန်းထားနိုင်သည်။ သို့သော် deployment ကာလအတွင်း resource နှင့်ကုန်ကျစရိတ် ပိုလိုနိုင်ပြီး shared database compatibility မရှိလျှင် traffic ပြောင်းရုံဖြင့် မလုံလောက်ပါ။</p>
+          <h2>Canary ဖြန့်ချိခြင်း</h2><p>Canary တွင် အသုံးပြုသူ သို့မဟုတ် traffic အပိုင်းငယ်ကို version အသစ်သို့ ပို့ပြီး error၊ latency နှင့် business metric များကို စောင့်ကြည့်ကာ ချဲ့ထွင်သည်။ Traffic ခွဲဝေမှု၊ session stickiness နှင့် sample အရေအတွက် မလုံလောက်မှုတို့က အကဲဖြတ်ချက်ကို လှည့်စားနိုင်သဖြင့် abort စည်းမျဉ်းကို ကြိုတင်သတ်မှတ်ပါ။</p>
+          <h2>နည်းလမ်းရွေးချယ်ရန်</h2><p>Traffic ပြောင်းပေးသည့် load balancer ရှိပြီး version နှစ်ခု တစ်ပြိုင်တည်းလည်ပတ်နိုင်ပါက blue-green သင့်တော်နိုင်သည်၊ ပိုမိုသေးငယ်သောအကျိုးသက်ရောက်မှုဖြင့် တိုင်းတာလိုပါက canary စဉ်းစားနိုင်သည်။ ECS blue/green သည် traffic shift၊ validation နှင့် rollback ကို ပံ့ပိုးသော်လည်း ပေးထားသော platform ပုံစံနှင့် resource လိုအပ်ချက်ကို လိုက်နာရသည်။</p>
+        </article>
+        <article class="page" id="page-extra-deploy-incident-postmortem-follow-up" data-group="deploy" data-title="Deployment Incident ပြီးနောက် သင်ခန်းစာနှင့် Follow-up">
+          <div class="progress-line"><div></div></div>
+          <h1>Deployment Incident ပြီးနောက် သင်ခန်းစာနှင့် Follow-up</h1>
+          <p class="lede">Incident ကို ဖြေရှင်းပြီးနောက် အပြစ်ရှာခြင်းမဟုတ်ဘဲ မည်သည့်အခြေအနေက ထိခိုက်မှုဖြစ်စေခဲ့သည်ကို နားလည်ပြီး စနစ်ကို တိုးတက်စေရသည်။ Post-incident review ကို လုပ်ဆောင်နိုင်သော ပြောင်းလဲမှုများနှင့် ပြီးစီးမှုအထောက်အထားများဖြင့် အဆုံးသတ်ပါ။</p>
+          <h2>အချိန်မျဉ်းနှင့် အကျိုးသက်ရောက်မှု</h2><p>Deploy စတင်ချိန်၊ ပထမဆုံး signal၊ mitigation၊ recovery နှင့် service ပုံမှန်ပြန်ဖြစ်ချိန်ကို log နှင့် status update များမှ ပြန်တည်ဆောက်ပါ။ ထိခိုက်သည့် user အုပ်စု၊ request များ၊ data integrity နှင့် ကြာချိန်ကို ရှင်းရှင်းလင်းလင်းဖော်ပြပါ။</p>
+          <h2>အပြစ်မတင်ဘဲ အကြောင်းရင်းကိုရှာ</h2><p>လူတစ်ဦး၏မှားယွင်းမှုတွင် ရပ်မနေဘဲ testing gap၊ မရှင်းလင်းသော alert၊ မလုံလောက်သော permission သို့မဟုတ် rollback မလွယ်ကူမှုတို့ကို စူးစမ်းပါ။ Hypothesis တစ်ခုစီကို သက်သေအထောက်အထားနှင့် ချိတ်ပြီး မသိရသေးသည့်အရာကိုလည်း မှတ်သားပါ။</p>
+          <h2>Follow-up ကို ပြီးစီးစေပါ</h2><p>Action item တစ်ခုစီတွင် တာဝန်ခံ၊ သတ်မှတ်ရက်နှင့် စစ်ဆေးနိုင်သော ရလဒ်ပါဝင်ရမည်။ ဥပမာ smoke test ထပ်ထည့်ခြင်း သို့မဟုတ် restore drill သတ်မှတ်ခြင်းဖြစ်သည်။ Alert ကိုပိတ်ပစ်မည့်အစား signal ကို ပိုကောင်းအောင်ပြင်ပြီး ပြုပြင်မှုသည် လုပ်ငန်းစဉ်ထဲဝင်သွားကြောင်း နောက် release သို့မဟုတ် drill တွင် အတည်ပြုပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-workflow-file-anatomy" data-group="ci" data-title="Workflow ဖွဲ့စည်းပုံနှင့် Trigger များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Workflow ဖွဲ့စည်းပုံနှင့် Trigger များ</h1>
+          <p class="lede">GitHub Actions workflow သည် repository ထဲက <code>.github/workflows/</code> ဖိုင်တွင် YAML ဖြင့် သတ်မှတ်ထားသော automation ဖြစ်ပြီး <code>on</code> ဖြင့် ဘယ်အချိန်စတင်မည်ကို ရွေးချယ်သည်။ <code>name</code>, <code>jobs</code>, event နှင့် filter များ၏တာဝန်ကို နားလည်ခြင်းက workflow ကို ထိရောက်စွာရေးသားရန် အခြေခံဖြစ်သည်။</p>
+          <h2>ဖိုင်တည်နေရာနှင့် အခြေခံသော့များ</h2><p>Workflow ဖိုင်ကို <code>.github/workflows/</code> အောက်တွင် <code>.yml</code> သို့မဟုတ် <code>.yaml</code> အဖြစ်ထားပါ။ <code>name</code> က Actions စာမျက်နှာတွင်ပြမည့်အမည်၊ <code>on</code> က စတင်စေမည့် event များ၊ <code>jobs</code> က လုပ်ဆောင်ရမည့်အလုပ်များကို ဖော်ပြသည်။</p>
+          <h2>Job နှင့် step ဖွဲ့စည်းပုံ</h2><p>Job တစ်ခုသည် runner ပေါ်တွင် လုပ်ဆောင်သည့်အလုပ်ဖြစ်ပြီး ၎င်းအတွင်းရှိ <code>steps</code> များသည် အစဉ်လိုက်လုပ်ဆောင်သည့် action သို့မဟုတ် shell command များဖြစ်သည်။ ဥပမာ checkout၊ dependency install နှင့် test တို့ကို သီးခြား step အဖြစ်ခွဲပြီး ရှင်းလင်းသောအမည်ပေးပါ။</p>
+          <h2>Event နှင့် Filter ရွေးချယ်ခြင်း</h2><p><code>on: [push, pull_request]</code> သည် event တစ်ခုခုဖြစ်လျှင် run စေပြီး <code>branches</code> သို့မဟုတ် <code>paths</code> ဖြင့် အကျုံးဝင်မှုကို ကျဉ်းမြောင်းနိုင်သည်။ Branch နှင့် path filter နှစ်ခုလုံးထားလျှင် နှစ်ခုစလုံးကိုက်ညီရပြီး required check ကို filter ကြောင့် skip လုပ်မိလျှင် Pending အဖြစ်ကျန်၍ merge ပိတ်နိုင်သောကြောင့် စမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-pull-request-validation" data-group="ci" data-title="Pull Request များအတွက် CI Validation">
+          <div class="progress-line"><div></div></div>
+          <h1>Pull Request များအတွက် CI Validation</h1>
+          <p class="lede">Pull request validation သည် merge မတိုင်မီ ပြောင်းလဲမှုကို checkout လုပ်ပြီး format, lint, test နှင့် build လုပ်နိုင်ကြောင်း စစ်ဆေးပေးသည်။ CI job ကို untrusted PR code အပေါ်လုံခြုံစွာလုပ်ဆောင်စေပြီး protected branch တွင် လိုအပ်သော check အဖြစ်သတ်မှတ်ပါ။</p>
+          <h2>PR event ဖြင့် စစ်ဆေးခြင်း</h2><p><code>pull_request</code> event ကိုအသုံးပြုပြီး PR အတွက် သက်ဆိုင်ရာ branch များကို ရွေးချယ်ပါ။ Job တွင် repository checkout၊ သင့် project ၏ runtime/dependency setup၊ ထို့နောက် <code>lint</code>, <code>test</code>, <code>build</code> အမိန့်များကို အစဉ်လိုက်ထည့်ပါ။</p>
+          <h2>Fork PR ကို လုံခြုံစွာ စစ်ဆေးခြင်း</h2><p>Fork မှလာသော PR ကုဒ်ကို ယုံကြည်စိတ်ချရမှုမရှိဟု ယူဆပြီး ပုံမှန် validation job တွင် မလိုအပ်သော write permission နှင့် secret များ မပေးပါနှင့်။ <code>pull_request_target</code> သည် privileged context ဖြစ်သောကြောင့် ထို event ဖြင့် untrusted PR code ကို checkout လုပ်ပြီး run ခြင်းကို ရှောင်ပါ။</p>
+          <h2>Merge အတွက် check လိုအပ်စေခြင်း</h2><p>Repository ၏ branch protection သို့မဟုတ် ruleset တွင် CI check ကို required status check အဖြစ် သတ်မှတ်နိုင်သည်။ CI အမည်နှင့် job check ကို တည်ငြိမ်စွာထားပြီး filter များကြောင့် check မတက်သည့် PR ကို သီးခြားစစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-job-step-dependencies" data-group="ci" data-title="Job နှင့် Step Dependency ချိတ်ဆက်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Job နှင့် Step Dependency ချိတ်ဆက်ခြင်း</h1>
+          <p class="lede">Workflow တစ်ခုအတွင်း step များသည် ပုံမှန်အားဖြင့် အစဉ်လိုက်လုပ်ဆောင်ပြီး job များသည် <code>needs</code> မသတ်မှတ်ထားလျှင် တစ်ပြိုင်နက်လည်ပတ်နိုင်သည်။ Dependency ကိုဖော်ပြခြင်းဖြင့် test မအောင်မြင်သည့်အခါ deploy မလုပ်စေဘဲ လုပ်ဆောင်မှုအစီအစဉ်ကို ရှင်းလင်းစေသည်။</p>
+          <h2>တစ် job အတွင်း အစီအစဉ်</h2><p>Checkout၊ setup၊ install နှင့် test ကို <code>steps</code> အတွင်း အစဉ်အလိုက်ရေးပါ။ ယခင် step မအောင်မြင်လျှင် ပုံမှန်အားဖြင့် job ၏ နောက်ဆက်တွဲ step များကို ဆက်မလုပ်ဘဲ ရပ်သွားသည်။</p>
+          <h2>`needs` ဖြင့် Job ချိတ်ဆက်ခြင်း</h2><p><code>deploy</code> job တွင် <code>needs: test</code> ထည့်လျှင် <code>test</code> အောင်မြင်မှ deploy စတင်မည်။ လွတ်လပ်သော lint နှင့် unit-test job များကို အပြိုင်ထားပြီး နောက်ဆုံး aggregate သို့မဟုတ် deploy job ကို နှစ်ခုစလုံးအပေါ် <code>needs</code> ချိတ်ခြင်းဖြင့် စောင့်ဆိုင်းချိန်လျှော့နိုင်သည်။</p>
+          <h2>အခြေအနေစစ်ဆေးမှုကို နားလည်ခြင်း</h2><p><code>if</code> ကို job သို့မဟုတ် step အဆင့်တွင် သုံး၍ အခြေအနေအလိုက် run လုပ်နိုင်သည်။ ပျက်ကွက်သော upstream job ပြီးနောက် အလုပ်ဆက်လုပ်ရန် အထူး status-check function များလိုနိုင်သဖြင့် failure ကို မရည်ရွယ်ဘဲ ဖုံးကွယ်မသွားစေရန် conditional ကို ပြန်သုံးသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-matrix-builds" data-group="ci" data-title="Matrix Build ဖြင့် ပတ်ဝန်းကျင်အမျိုးမျိုး စမ်းသပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Matrix Build ဖြင့် ပတ်ဝန်းကျင်အမျိုးမျိုး စမ်းသပ်ခြင်း</h1>
+          <p class="lede">Matrix strategy သည် job တစ်ခု၏ အဓိပ္ပာယ်တူလုပ်ဆောင်မှုကို runtime, OS သို့မဟုတ် configuration တန်ဖိုးအမျိုးမျိုးဖြင့် ထပ်လုပ်ပေးသည်။ တန်ဖိုးများကို စနစ်တကျရွေးချယ်ခြင်းက compatibility ကိုတိုင်းတာပေးပြီး မလိုအပ်သော Cartesian combination များကို ရှောင်နိုင်သည်။</p>
+          <h2>Matrix တည်ဆောက်ပုံ</h2><p><code>strategy.matrix</code> အောက်တွင် ဥပမာ <code>os: [ubuntu-latest, windows-latest]</code> နှင့် <code>node: [20, 22]</code> ကိုသတ်မှတ်ပါ။ Job တစ်ခုစီတွင် <code>${{ matrix.os }}</code> နှင့် <code>${{ matrix.node }}</code> ကိုအသုံးပြုပြီး တူညီသော test steps များကို တန်ဖိုးအလိုက်လုပ်ဆောင်နိုင်သည်။</p>
+          <h2>အရေအတွက်နှင့် ခြွင်းချက်စီမံခြင်း</h2><p>Dimension များစွာကို matrix ထဲထည့်လျှင် တန်ဖိုးတိုင်း၏ combination များ ဖန်တီးနိုင်သဖြင့် job အရေအတွက်တက်လာနိုင်သည်။ <code>include</code> နှင့် <code>exclude</code> ဖြင့် သီးခြား combination ထည့်ခြင်း သို့မဟုတ် ဖယ်ခြင်းကို လုပ်ကာ ပံ့ပိုးမည့်အရာများကိုသာ ရွေးပါ။</p>
+          <h2>Fail-fast ကို ဆုံးဖြတ်ခြင်း</h2><p>Matrix job များအတွက် <code>fail-fast</code> သည် တစ်ခုမအောင်မြင်သည့်အခါ ကျန် matrix job များကို ရပ်တန့်စေမလား သတ်မှတ်ပေးသည်။ စောစီးစွာရလဒ်လိုသည့် CI တွင်ပုံမှန်ထားနိုင်သော်လည်း အားလုံး၏ failure ကိုစုဆောင်းလိုသောအခါ ပိတ်ထားရန်စဉ်းစားပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-dependency-cache-keys" data-group="ci" data-title="Dependency Cache နှင့် Cache Key ဒီဇိုင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Dependency Cache နှင့် Cache Key ဒီဇိုင်း</h1>
+          <p class="lede">Cache သည် package များကို ပြန်လည် download လုပ်ချိန်လျှော့ပေးသော်လည်း dependency installation ကို အစားထိုးခြင်းမဟုတ်ပါ။ Key ကို OS နှင့် lockfile hash အပေါ်မူတည်စေပြီး cache အဟောင်းကို မှန်ကန်စွာပြန်သုံးနိုင်သည့် fallback ကို စီစဉ်ပါ။</p>
+          <h2>Cache Key တည်ဆောက်ခြင်း</h2><p>ဥပမာ key တစ်ခုတွင် <code>${{ runner.os }}</code> နှင့် <code>${{ hashFiles('package-lock.json') }}</code> ကိုထည့်ပါ။ OS သို့မဟုတ် lockfile ပြောင်းလဲလျှင် key အသစ်ဖြစ်ပြီး dependency state မတူသော cache ကို ရောမသုံးစေပါ။</p>
+          <h2>Restore key အသုံးဝင်ပုံ</h2><p><code>restore-keys</code> ကို ပိုတိကျရာမှ ပိုကျယ်ရာသို့ စီထားလျှင် key အတိအကျမတွေ့သော်လည်း prefix ကိုက်သော cache ကိုပြန်ရနိုင်သည်။ Cache miss ဖြစ်ချိန် dependency manager ကို ပုံမှန် run ခိုင်းထားပါ၊ cache သည် source of truth မဟုတ်ပါ။</p>
+          <h2>လုံခြုံရေးနှင့် ထိရောက်မှု</h2><p>Cache path ထဲတွင် token သို့မဟုတ် login credential ကဲ့သို့ sensitive data မထားပါနှင့်၊ cache ကို ဖတ်နိုင်သူများသည် PR မှတစ်ဆင့် ရယူနိုင်သည့်အန္တရာယ်ရှိသည်။ Lockfile hash ကို key ထဲထည့်ခြင်းဖြင့် dependency ပြောင်းလဲမှုကို ခွဲခြားပြီး cache miss/hit ကို run log တွင်စစ်ဆေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-artifact-upload-download" data-group="ci" data-title="Workflow Artifact များကို သိမ်းဆည်း၊ လွှဲပြောင်းခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Workflow Artifact များကို သိမ်းဆည်း၊ လွှဲပြောင်းခြင်း</h1>
+          <p class="lede">Cache သည် ပြန်သုံးနိုင်သော dependency ဖိုင်များအတွက်ဖြစ်ပြီး artifact သည် run တစ်ခုမှ ထွက်လာသော build output သို့မဟုတ် test report ကို သိမ်းဆည်းရန်ဖြစ်သည်။ Job များကြားဖိုင်ပို့ရာတွင် artifact ကိုသုံးခြင်းက build ရလဒ်ကို မြင်သာစေပြီး နောက်ပိုင်းအလုပ်အတွက် ရရှိနိုင်စေသည်။</p>
+          <h2>Artifact တင်ခြင်း</h2><p>Build ပြီးနောက် <code>actions/upload-artifact</code> ကဲ့သို့ action ဖြင့် <code>dist/</code> သို့မဟုတ် test report ကဲ့သို့ လိုအပ်သောဖိုင်များကို upload လုပ်ပါ။ Artifact တွင် နားလည်လွယ်သောအမည်ပေးပြီး လိုအပ်သောဖိုင်များကိုသာ ရွေးပါ။</p>
+          <h2>အခြား Job တွင် ရယူခြင်း</h2><p><code>needs: build</code> ဖြင့် build job ပြီးမှ နောက် job စတင်စေပြီး <code>actions/download-artifact</code> ဖြင့် တင်ထားသည့်ဖိုင်ကို ပြန်ရယူနိုင်သည်။ ထိုနည်းဖြင့် နောက်အဆင့်က မူရင်း source ကို ထပ် build မလုပ်ဘဲ စမ်းသပ်ရန် သို့မဟုတ် ဖြန့်ချိရန် တူညီသော output ကိုသုံးနိုင်သည်။</p>
+          <h2>အမည်နှင့် သက်တမ်းကို စီမံခြင်း</h2><p>Run တစ်ခုအတွင်း artifact အမည်ထူးခြားစေရန် matrix dimension သို့မဟုတ် platform ကို အမည်တွင်ထည့်ပါ။ သိမ်းထားချိန်ကြာမြင့်မှုနှင့် download လုပ်ခွင့်သည် artifact setting နှင့် repository policy ပေါ်မူတည်သဖြင့် လိုအပ်သည့် retention ကိုရွေးပြီး sensitive data မတင်ပါနှင့်။</p>
+        </article>
+        <article class="page" id="page-extra-ci-test-lint-build-gates" data-group="ci" data-title="Lint, Test နှင့် Build Quality Gate များ">
+          <div class="progress-line"><div></div></div>
+          <h1>Lint, Test နှင့် Build Quality Gate များ</h1>
+          <p class="lede">ယုံကြည်ရသော CI သည် အဆင့်တစ်ခုစီ၏ ရလဒ်ကို exit status ဖြင့် ဆုံးဖြတ်စေပြီး မအောင်မြင်သည့်အခါ release သို့မဟုတ် deploy ကို ဆက်မလုပ်စေပါ။ Lint, test, build ကို သီးခြား gate အဖြစ်ခွဲခြင်းက ပြဿနာအမျိုးအစားကို ချက်ချင်းခွဲခြားပေးသည်။</p>
+          <h2>အမိန့်များကို အဓိပ္ပာယ်ရှိစွာခွဲခြင်း</h2><p>ဥပမာ <code>npm run lint</code>, <code>npm test -- --run</code>, နှင့် <code>npm run build</code> ကဲ့သို့ project ၏ မှန်ကန်သော script များကို သုံးပါ။ အမိန့်တစ်ခုစီကို သီးခြား step အဖြစ်ထားပါက ဘယ်စစ်ဆေးမှုမအောင်မြင်သည်ကို log မှ မြန်မြန်သိနိုင်သည်။</p>
+          <h2>မှားယွင်းမှုကို ဖုံးမထားရန်</h2><p><code>continue-on-error: true</code> ကို မလိုအပ်ဘဲ အသုံးပြုလျှင် CI သည် test ပျက်နေသော်လည်း အစိမ်းရောင်ဖြစ်သွားနိုင်သည်။ အမှန်တကယ် non-blocking စစ်ဆေးမှုများသာ ခြွင်းချက်ပေးပြီး release gate အဖြစ်လိုအပ်သော job များကို <code>needs</code> ဖြင့်ချိတ်ပါ။</p>
+          <h2>Required gate နှင့် feedback</h2><p>Branch protection တွင် လိုအပ်သော check များကို ရွေး၍ merge မတိုင်မီ အောင်မြင်စေပါ။ Job နှင့် step အမည်ကို အဓိပ္ပာယ်ပြည့်စုံစွာထားပြီး failure log ထဲတွင် command output ကိုမြင်နိုင်အောင် စစ်ဆေးမှုများကို သင့်တော်စွာသတ်မှတ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-reusable-workflows" data-group="ci" data-title="Reusable Workflow များဖြင့် စံသတ်မှတ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Reusable Workflow များဖြင့် စံသတ်မှတ်ခြင်း</h1>
+          <p class="lede">တူညီသော CI logic ကို repository များစွာတွင် ထပ်ရေးမည့်အစား <code>workflow_call</code> ကိုလက်ခံသော reusable workflow အဖြစ်ထုတ်ယူနိုင်သည်။ Input နှင့် secret interface ကို အနည်းဆုံးထားပြီး အသုံးပြုသည့် workflow version ကို တည်ငြိမ်စွာသတ်မှတ်ပါ။</p>
+          <h2>ခေါ်ယူနိုင်သော workflow ဖန်တီးခြင်း</h2><p>Reusable workflow ကို <code>.github/workflows/</code> အတွင်းထားပြီး <code>on: workflow_call</code> ဖြင့်ခေါ်ယူနိုင်စေပါ။ <code>inputs</code> နှင့် <code>secrets</code> ကို type၊ required အခြေအနေတို့နှင့်ကြေညာပြီး အသုံးပြုမှုကို သတ်မှတ် interface အတိုင်း ထိန်းချုပ်ပါ။</p>
+          <h2>Caller မှ job အဖြစ်ခေါ်ခြင်း</h2><p>Caller workflow တွင် <code>jobs.&lt;id&gt;.uses</code> ဖြင့် reusable workflow ကို job အဆင့်မှာ ခေါ်ပြီး <code>with</code> မှ input များကိုပို့ပါ။ Reusable workflow call သည် ပုံမှန် step အတွင်း <code>uses</code> လုပ်ခြင်းမဟုတ်ကြောင်း မှတ်သားပါ။</p>
+          <h2>ပြန်လည်အသုံးပြုမှုကို လုံခြုံစေခြင်း</h2><p>အခြား repository မှခေါ်သည့် reusable workflow အတွက် branch name ထက် full commit SHA ကိုသုံးခြင်းက မျှော်လင့်မထားသောပြောင်းလဲမှုကိုကာကွယ်နိုင်သည်။ <code>secrets: inherit</code> သည် ပိုများသော secret များကို ပို့နိုင်သဖြင့် လိုအပ်သော secret ကိုသာ အမည်တပ်ပို့ရန် စဉ်းစားပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-environment-approvals-protection" data-group="ci" data-title="Environment Approval နှင့် Deployment Protection">
+          <div class="progress-line"><div></div></div>
+          <h1>Environment Approval နှင့် Deployment Protection</h1>
+          <p class="lede">GitHub environment သည် production ကဲ့သို့ deployment target တစ်ခုအတွက် reviewer approval, branch ခွင့်ပြုချက်နှင့် environment-specific secret များကို ချိတ်ပေးသည်။ Deploy job ကို သက်ဆိုင်ရာ environment နှင့်ချိတ်မှ protection rule များအကျိုးသက်ရောက်မည်ဖြစ်သည်။</p>
+          <h2>Environment တည်ဆောက်ခြင်း</h2><p>Repository settings တွင် <code>staging</code> သို့မဟုတ် <code>production</code> environment ဖန်တီးပြီး deploy ခွင့်ရှိသည့် branch သို့မဟုတ် tag များကို ကန့်သတ်ပါ။ Workflow job တွင် <code>environment: production</code> ဟုသတ်မှတ်ခြင်းဖြင့် deployment ကို ထို environment နှင့်ဆက်စပ်စေသည်။</p>
+          <h2>Approval gate ထည့်ခြင်း</h2><p>Environment တွင် required reviewers သတ်မှတ်လျှင် ထို environment ကိုသုံးသော job သည် approval ရပြီးမှ ဆက်လက်လုပ်ဆောင်နိုင်သည်။ Self-review တားမြစ်ခြင်း၊ wait timer သို့မဟုတ် protection rule များကို deployment အန္တရာယ်နှင့်ကိုက်ညီအောင်ရွေးချယ်ပါ။</p>
+          <h2>Gate ပြီးမှ Promotion လုပ်ခြင်း</h2><p>Test နှင့် build job များကို deploy job မှခွဲပြီး <code>needs</code> ဖြင့် လိုအပ်သော gate များအောင်မြင်မှ deploy စတင်စေပါ။ Staging နှင့် production ကို မတူညီသော environment အဖြစ်သုံးကာ စမ်းသပ်ပြီးသား artifact ကို နောက်အဆင့်သို့ပို့ပါ၊ production job တွင် approval, branch restriction နှင့် OIDC ကဲ့သို့ ကန့်သတ် credential ကိုတွဲသုံးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-github-token-permissions" data-group="ci" data-title="GITHUB_TOKEN ကို Least Privilege ဖြင့် သတ်မှတ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>GITHUB_TOKEN ကို Least Privilege ဖြင့် သတ်မှတ်ခြင်း</h1>
+          <p class="lede"><code>GITHUB_TOKEN</code> သည် workflow အတွက် အလိုအလျောက်ဖန်တီးပေးသော token ဖြစ်သော်လည်း ၎င်း၏ permission များကို လိုအပ်သလောက်သာပေးသင့်သည်။ Workflow သို့မဟုတ် job အဆင့်တွင် <code>permissions</code> သတ်မှတ်ခြင်းဖြင့် job တစ်ခုထိခိုက်လျှင် အခြားအခွင့်အရေးများ မလိုအပ်ဘဲ ထိတွေ့ခြင်းကိုလျှော့နိုင်သည်။</p>
+          <h2>Default permission ကို လျှော့ခြင်း</h2><p>Repository setting နှင့် workflow declaration နှစ်ခုစလုံးကို စစ်ဆေးပြီး <code>contents: read</code> လောက်သာလိုသည့် CI ကို read-only အဖြစ်ထားပါ။ Permissions သတ်မှတ်ထားသည့်အခါ လိုအပ်သော permission များကိုသာ ထည့်ပြီး မသိသော scope များကို မတောင်းပါနှင့်။</p>
+          <h2>Job အဆင့်တွင် ခွင့်ပြုချက်တိုးခြင်း</h2><p>PR မှတ်ချက်ရေးရန်လိုသည့် job တစ်ခုတွင်သာ <code>pull-requests: write</code> ကဲ့သို့ permission ပေးပြီး test job များကို read-only ထားနိုင်သည်။ Job အဆင့် permission ခွဲခြားမှုသည် token ကိုအသုံးပြုမည့်အလုပ်နှင့် scope ကို ကိုက်ညီစေသည်။</p>
+          <h2>လိုအပ်ချက်ကို စမ်းသပ်ခြင်း</h2><p>Workflow ရှိ action များသည် <code>github.token</code> context ကို တိုက်ရိုက်ဖတ်နိုင်သဖြင့် secret ကို action ထံမပို့ခဲ့သော်လည်း token access ကိုထည့်တွက်ပါ။ Permission လျှော့ပြီး run လုပ်ကာ ဘယ် API လုပ်ဆောင်မှုက လိုအပ်သည့် scope ကို တကယ်တောင်းသည်ကိုသာ ပြင်ဆင်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-secrets-handling" data-group="ci" data-title="Secrets ကို Workflow တွင် လုံခြုံစွာသုံးခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Secrets ကို Workflow တွင် လုံခြုံစွာသုံးခြင်း</h1>
+          <p class="lede">API key နှင့် deployment credential များကို workflow YAML ထဲတွင် တိုက်ရိုက်မရေးဘဲ GitHub Secrets မှ လိုအပ်သည့် job သို့ပေးပါ။ Log redaction သည် အာမခံချက်အပြည့်မဟုတ်သောကြောင့် secret ကိုထုတ်မပြခြင်းနှင့် သင့်တော်သောခွင့်ပြုချက်က အဓိကကာကွယ်မှုဖြစ်သည်။</p>
+          <h2>Secret ကို အနည်းဆုံးအလုပ်သို့ ပေးခြင်း</h2><p><code>${{ secrets.NAME }}</code> ကို လိုအပ်သည့် step သို့မဟုတ် job တွင်သာ သုံးပါ၊ အခြား workflow တစ်ခုလုံးသို့ မလိုအပ်ဘဲ ဖြန့်မပေးပါနှင့်။ Repository, organization နှင့် environment secret များ၏ အသုံးပြုခွင့်ကို သီးခြားစဉ်းစားပါ။</p>
+          <h2>Log ထဲ မပေါက်ကြားစေရန်</h2><p>Secret ကို <code>echo</code> မလုပ်ပါနှင့်၊ command failure output သို့မဟုတ် debug log များတွင် ထွက်လာနိုင်မှုကို စစ်ဆေးပါ။ Secret တန်ဖိုးကို encode သို့မဟုတ် transform လုပ်ထားလျှင် redaction က မဖမ်းမိနိုင်သဖြင့် အရင်းအမြစ်တန်ဖိုးတင်မက ဆင်းသက်လာသော sensitive value ကိုလည်း မှတ်ပုံတင်ကာကွယ်ပါ။</p>
+          <h2>ပေါက်ကြားမှုကို တုံ့ပြန်ခြင်း</h2><p>Secret ကို log ထဲတွင်ဖော်ထုတ်မိလျှင် log ကိုဖယ်ရှားခြင်းတစ်ခုတည်းမလုံလောက်ဘဲ credential ကို revoke သို့မဟုတ် rotate လုပ်ပါ။ မလိုတော့သော secret များကို ဖယ်ရှားပြီး ပုံမှန် audit လုပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-pin-third-party-actions" data-group="ci" data-title="Third-party Action များကို Version Pin လုပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Third-party Action များကို Version Pin လုပ်ခြင်း</h1>
+          <p class="lede">Workflow ရှိ <code>uses</code> action တစ်ခုစီသည် code dependency ဖြစ်ပြီး ၎င်းသည် workflow token နှင့် job ပတ်ဝန်းကျင်မှ ခွင့်ပြုထားသော အချက်အလက်များကို အသုံးပြုနိုင်သည်။ Source code နှင့် version ကို စစ်ဆေးပြီး full commit SHA ဖြင့် pin လုပ်ခြင်းက tag ပြောင်းလဲမှုကြောင့် မမျှော်လင့်သော code လည်ပတ်မှုကို လျှော့ချနိုင်သည်။</p>
+          <h2>Action source ကို စစ်ဆေးခြင်း</h2><p>အသုံးမပြုမီ action repository၊ maintainer၊ source code၊ permission တောင်းဆိုချက်နှင့် dependency များကို ကြည့်ပါ။ Action သည် workflow ထဲမှ secret သို့မဟုတ် <code>GITHUB_TOKEN</code> ကို လက်လှမ်းမီနိုင်ကြောင်းကို စဉ်းစားပြီး လိုအပ်ချက်ထက်ပိုသော access မပေးပါနှင့်။</p>
+          <h2>Full commit SHA အသုံးပြုခြင်း</h2><p><code>uses: owner/action@&lt;full-commit-SHA&gt;</code> က release tag ထက် ref ကိုတိကျစွာသတ်မှတ်ပေးပြီး မပြောင်းလဲသည့် commit ကိုညွှန်းသည်။ SHA ကို action ၏ မူရင်း repository မှန်ကန်ကြောင်း verify လုပ်ပြီး update လုပ်သည့်အခါလည်း ပြောင်းလဲမှုကို review လုပ်ပါ။</p>
+          <h2>Update ကို စီမံခြင်း</h2><p>SHA pin သည် လုံခြုံမှုကိုမြှင့်သော်လည်း action security fix များကို အလိုအလျောက်မရစေသောကြောင့် update လုပ်ငန်းစဉ်ထားပါ။ ယုံကြည်ရသော action များကို စောင့်ကြည့်၊ အသစ်သော commit ကို စစ်ဆေးပြီး workflow ပြောင်းလဲမှုကို pull request မှတစ်ဆင့် review လုပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-oidc-cloud-authentication" data-group="ci" data-title="OIDC ဖြင့် Cloud သို့ လုံခြုံစွာ Authenticate လုပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>OIDC ဖြင့် Cloud သို့ လုံခြုံစွာ Authenticate လုပ်ခြင်း</h1>
+          <p class="lede">OIDC သည် workflow မှ cloud provider ထံတိုက်ရိုက် short-lived token တောင်းနိုင်စေပြီး GitHub ထဲတွင် cloud credential အရှည်ကြီးသိမ်းထားရမှုကို လျှော့ချပေးသည်။ ယုံကြည်မှုကို workflow identity နှင့်သက်ဆိုင်သည့် claims များအပေါ် cloud ဘက်မှကန့်သတ်ပြီး <code>id-token</code> permission ကို deploy job သာရစေပါ။</p>
+          <h2>Trust relationship တည်ဆောက်ခြင်း</h2><p>Cloud provider တွင် GitHub ၏ OIDC issuer ကို ယုံကြည်ပြီး သတ်မှတ်ထားသော repository, branch သို့မဟုတ် environment မှလာသည့် token ကိုသာ ခွင့်ပြုပါ။ Workflow သည် <code>id-token: write</code> permission ရှိမှ OIDC token တောင်းနိုင်သော်လည်း ထို permission တစ်ခုတည်းက cloud resource ကို အလိုအလျောက်ပေးခွင့်မဟုတ်ပါ။</p>
+          <h2>Short-lived credential အသုံးပြုခြင်း</h2><p>Deploy job အတွင်း provider ၏ OIDC authentication flow ကိုခေါ်ပြီး GitHub token ကို provider သို့တင်ပြပါ။ Provider က configured claim များကိုစစ်ဆေးပြီး job ကာလအတွင်းသာ အသုံးပြုနိုင်သည့် short-lived access token ထုတ်ပေးနိုင်သည်။</p>
+          <h2>Claim နှင့် permission ကို ကန့်သတ်ခြင်း</h2><p>Cloud trust policy တွင် audience နှင့် subject သို့မဟုတ် အခြားသင့်လျော်သော claims များကို စစ်ဆေး၍ production credential ကိုမည်သည့် workflow က ရနိုင်ကြောင်း တိတိကျကျဖော်ပြပါ။ <code>id-token: write</code> ကို workflow အားလုံးအစား OIDC လိုအပ်သည့် deploy job အဆင့်တွင်သာပေးပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-concurrency-cancel-runs" data-group="ci" data-title="Concurrency နှင့် မလိုအပ်သော Run များကို Cancel လုပ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Concurrency နှင့် မလိုအပ်သော Run များကို Cancel လုပ်ခြင်း</h1>
+          <p class="lede">Concurrency group သည် အမည်တူ workflow သို့မဟုတ် job များကို တစ်ပြိုင်နက်လုပ်ဆောင်မှု ထိန်းချုပ်ပေးပြီး branch တစ်ခုအတွက် run အဟောင်းကို ပယ်ဖျက်နိုင်သည်။ Group key ကို event နှင့် ref အလိုက်မှန်ကန်စွာရွေးပါ၊ မဟုတ်လျှင် production deploy ကဲ့သို့ run လိုအပ်သည့်အရာကို မတော်တဆ cancel လုပ်နိုင်သည်။</p>
+          <h2>Concurrency group သတ်မှတ်ခြင်း</h2><p><code>concurrency.group</code> ကို workflow သို့မဟုတ် job အဆင့်တွင်သတ်မှတ်ပြီး <code>${{ github.workflow }}-${{ github.ref }}</code> ကဲ့သို့ ref-aware key သုံးနိုင်သည်။ Group တူသော run များကို GitHub က concurrency စည်းမျဉ်းအတိုင်း စီမံပေးသည်။</p>
+          <h2>Cancel-in-progress ကို ရွေးချယ်ခြင်း</h2><p><code>cancel-in-progress: true</code> သည် group တူသော run အသစ်လာလျှင် လုပ်ဆောင်နေသော run အဟောင်းကို cancel လုပ်ရန်သတ်မှတ်သည်။ PR CI တွင် commit အသစ်က အဟောင်းကိုအစားထိုးနိုင်သော်လည်း deployment တွင် အလယ်အလတ်အခြေအနေဖြစ်စေနိုင်သဖြင့် သီးခြားစဉ်းစားပါ။</p>
+          <h2>Key collision နှင့် run အဓိပ္ပာယ်</h2><p>PR event တွင် branch/ref context မတူနိုင်သဖြင့် concurrency key ကို event အမျိုးအစားအလိုက် fallback ပါအောင်တည်ဆောက်ပါ။ အားလုံးကို key တစ်ခုတည်းထဲမထည့်ဘဲ PR တစ်ခုနှင့်တစ်ခု သို့မဟုတ် environment တစ်ခုနှင့်တစ်ခု မတော်တဆတားဆီးခြင်းမရှိကြောင်း စမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-extra-ci-failed-run-diagnosis-security" data-group="ci" data-title="Failed Run ကို စစ်ဆေးခြင်းနှင့် Workflow Security">
+          <div class="progress-line"><div></div></div>
+          <h1>Failed Run ကို စစ်ဆေးခြင်းနှင့် Workflow Security</h1>
+          <p class="lede">CI failure ကို အမြန်ဆုံးဖြေရှင်းရန် run summary မှ စတင်ပြီး မအောင်မြင်သော job, step, exit code နှင့် log ကို အဆင့်လိုက်စစ်ဆေးပါ။ Workflow security ကို ပုံမှန်ပြန်လည်သုံးသပ်ခြင်းတွင် untrusted input, privileged event နှင့် third-party action တို့၏အန္တရာယ်ကို အထူးအာရုံစိုက်ပါ။</p>
+          <h2>Run နှင့် dependency failure ကို ခွဲခြားခြင်း</h2><p>Actions run စာမျက်နှာတွင် trigger, commit, job status ကိုကြည့်ပြီး မအောင်မြင်သော step ၏ log ကိုဖွင့်ပါ။ YAML parse, runner setup, dependency install, test assertion, permission denial သို့မဟုတ် timeout တို့ကို အမျိုးအစားခွဲပြီး ပထမဆုံး root error ကိုရှာပါ။</p>
+          <h2>Untrusted Input နှင့် Privileged Context</h2><p>PR title သို့မဟုတ် branch input ကို <code>${{ }}</code> ဖြင့် shell script ထဲသို့ တိုက်ရိုက်ထည့်လျှင် script injection ဖြစ်နိုင်သည်။ Untrusted value ကို intermediate environment variable မှတစ်ဆင့် quote လုပ်သုံးပါ၊ <code>pull_request_target</code> သို့မဟုတ် <code>workflow_run</code> အောက်တွင် untrusted code/artifact ကို privileged context ဖြင့် မလုပ်ဆောင်ပါနှင့်။</p>
+          <h2>ပုံမှန် Security Review</h2><p>Workflow တစ်ခုစီတွင် event filter, <code>permissions</code>, secret အသုံးပြုမှု, action pinning, cache နှင့် artifact ကို စစ်ဆေးပါ။ မမျှော်လင့်ထားသော token access နှင့် log ပေါက်ကြားမှုကို စမ်းသပ်ပြီး Actions security alert သို့မဟုတ် code scanning အကြံပြုချက်များကိုလည်း ထည့်သွင်းစဉ်းစားပါ။</p>
+        </article>
+
+
         <article class="page" id="page-quality-measure" data-group="quality" data-title="Performance ကိုတိုင်းတာခြင်း">
           <div class="progress-line"><div></div></div>
           <h1>Performance ကိုတိုင်းတာခြင်း</h1>
@@ -12929,7 +13697,7 @@ void main() {
         </div>
         <div class="footer-bottom">
           <span>© 2026 Learn_with_me · မြန်မာ Web Development လေ့လာရေး</span>
-          <span>205 သင်ခန်းစာ · Topic 16 ခု</span>
+          <span>300 သင်ခန်းစာ · Topic 17 ခု</span>
         </div>
       </div>
     </footer>
@@ -12938,7 +13706,7 @@ void main() {
       (function () {
         var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
         var sidebar = document.getElementById('sidebar');
-        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), quality: document.querySelector('[data-nav-group="quality"]') };
+        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]') };
         var navLinks = {};
         var visited = {};
         var activeGroup = 'html';
