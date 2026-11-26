@@ -2,6 +2,8 @@
 
 **မြန်မာဘာသာဖြင့် Web Development ကို အပြန်အလှန် လေ့လာနိုင်သော သင်ခန်းစာများ။** This project is a single-page, interactive web development learning guide written primarily in Burmese.
 
+**Live website:** [https://learnwithme.arkaryan.net/](https://learnwithme.arkaryan.net/)
+
 ## What’s inside
 
 The docs include guided lessons and editable, runnable examples for:
@@ -53,4 +55,4 @@ Suggestions, corrections, and beginner-friendly lesson improvements are welcome.
 
 ## SEO and social previews
 
-The HTML page includes a descriptive title, page description, topic keywords, and Open Graph/Twitter preview metadata. A canonical URL is intentionally omitted until a stable public website URL (for example, a configured GitHub Pages domain) is selected.
+The HTML page includes a descriptive title, page description, topic keywords, Open Graph/Twitter preview metadata, and the canonical URL for the live website: <https://learnwithme.arkaryan.net/>.
