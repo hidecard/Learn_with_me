@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="မြန်မာဘာသာဖြင့် Programming နှင့် နည်းပညာသင်ခန်းစာ 542 ခုကို အဆင့်လိုက်လေ့လာပါ။ Web/App development, database, Git, deployment နှင့် အခြားအကြောင်းအရာများ ပါဝင်သည်။" />
+    <meta name="description" content="မြန်မာဘာသာဖြင့် Programming နှင့် နည်းပညာသင်ခန်းစာများကို အခြေခံမှ အဆင့်မြင့်အထိ အဆင့်လိုက်လေ့လာပါ။ Python, TypeScript, Web/App development, database, Git နှင့် deployment တို့ပါဝင်သည်။" />
     <link rel="canonical" href="https://learnwithme.arkaryan.net/" />
     <meta name="keywords" content="Burmese programming tutorials, web development, app development, HTML, CSS, JavaScript, Laravel, React, Flutter, database, Git, developer tools, deployment, CI/CD, security, accessibility" />
     <meta name="author" content="Learn_with_me" />
@@ -33,10 +33,12 @@
         <span class="brand-name"><span>Learn</span> With me</span>
       </a>
       <nav class="tabs" aria-label="အပိုင်းရွေးရန်">
-        <button class="tab-btn active" data-tab="html">HTML</button>
+        <button class="tab-btn active" data-tab="html" type="button">HTML</button>
         <button class="tab-btn" data-tab="css">CSS</button>
         <button class="tab-btn" data-tab="tailwind">Tailwind</button>
         <button class="tab-btn" data-tab="js">JavaScript</button>
+        <button class="tab-btn" data-tab="python" type="button">Python</button>
+        <button class="tab-btn" data-tab="typescript" type="button">TypeScript</button>
         <button class="tab-btn" data-tab="git">Git</button>
         <button class="tab-btn" data-tab="php">PHP</button>
         <button class="tab-btn" data-tab="mysql">MySQL</button>
@@ -89,7 +91,7 @@
       </div>
       <div class="dialog-body">
         <p><strong>Learn With me</strong> က Programming နဲ့ နည်းပညာအကြောင်းအရာတွေကို မြန်မာဘာသာနဲ့ အခြေခံကစပြီး နားလည်လွယ်အောင် လေ့လာနိုင်ဖို့ ဖန်တီးထားတဲ့ သင်ယူရေး website ဖြစ်ပါတယ်။ သင်ခန်းစာတွေကို အဆင့်လိုက် စီစဉ်ထားလို့ ကိုယ့်အရှိန်နဲ့ကိုယ် ဆက်လက်လေ့လာနိုင်ပါတယ်။</p>
-        <p>Web နဲ့ App development, HTML, CSS, JavaScript, React, Laravel, Flutter, database, API, Git, deployment နဲ့ security စတဲ့ အကြောင်းအရာတွေ ပါဝင်ပါတယ်။ သင်ခန်းစာတစ်ခုချင်းစီမှာ ရှင်းလင်းချက်၊ code ဥပမာနဲ့ လက်တွေ့အသုံးချနိုင်မယ့် အချက်တွေကို ဖော်ပြထားပါတယ်။</p>
+        <p>Web နဲ့ App development, HTML, CSS, JavaScript, Python, TypeScript, React, Laravel, Flutter, database, API, Git, deployment နဲ့ security စတဲ့ အကြောင်းအရာတွေ ပါဝင်ပါတယ်။ သင်ခန်းစာတစ်ခုချင်းစီမှာ ရှင်းလင်းချက်၊ code ဥပမာနဲ့ လက်တွေ့အသုံးချနိုင်မယ့် အချက်တွေကို ဖော်ပြထားပါတယ်။</p>
         <p>Code ဥပမာတွေကို ကိုယ်တိုင်ပြင်ဆင်ပြီး စမ်းသပ်ကြည့်ပါ။ ရှာဖွေရေးနဲ့ topic menu ကိုသုံးပြီး လိုချင်တဲ့အကြောင်းအရာကို အလွယ်တကူ ရှာနိုင်ပါတယ်။</p>
       </div>
     </dialog>
@@ -156,6 +158,10 @@
         <div data-nav-group="ci"></div>
         <h2>PERFORMANCE &amp; ACCESSIBILITY</h2>
         <div data-nav-group="quality"></div>
+        <h2>PYTHON PROGRAMMING</h2>
+        <div data-nav-group="python"></div>
+        <h2>TYPESCRIPT</h2>
+        <div data-nav-group="typescript"></div>
         <p class="nav-empty" id="navEmpty">ရှာမတွေ့ပါ — တခြား keyword နဲ့ ရှာကြည့်ပါ။</p>
       </aside>
 
@@ -13373,6 +13379,20 @@ void main() {
           <p class="lede">Accessibility ကို automated scanner တစ်ခုတည်းနဲ့ မဆုံးဖြတ်နိုင်ပါ။ Tool စစ်ဆေးမှု၊ လက်တွေ့အသုံးပြုမှုနဲ့ လူသုံးစမ်းသပ်မှုတို့ကို ပေါင်းစပ်ပါ။</p>
           <h2>စမ်းသပ်မှုအလွှာ</h2><p>Automated scanner ဖြင့် ထင်ရှားတဲ့ violation ရှာပါ။ ထို့နောက် keyboard-only, zoom/reflow နဲ့ screen reader ဖြင့် အဓိက user journey ကို စမ်းပါ။ Browser/assistive technology ပေါင်းစပ်မှု အနည်းဆုံးတစ်ခုထက်ပိုစမ်းပါ။</p><h2>ပြဿနာကိုမှတ်တမ်းတင်ပါ</h2><p>ဘယ်စာမျက်နှာ၊ ဘယ် element၊ ဘယ် input နည်းလမ်း၊ ဘာဖြစ်ခဲ့သလဲနဲ့ မျှော်မှန်းရလဒ်ကို မှတ်ပါ။ Screenshot တစ်ခုတည်းမဟုတ်ဘဲ keyboard sequence သို့မဟုတ် screen reader အဆင့်များကိုလည်းရေးပါ။</p><h2>ဦးစားပေးပြင်ဆင်ပါ</h2><p>အဓိက task ကိုပိတ်ဆို့ခြင်း၊ အကြိမ်များစွာပြန်ဖြစ်ခြင်းနဲ့ user အများအပြားကိုထိခိုက်ခြင်းကို ဦးစားပေးပါ။ Fix ပြီးနောက် မူလနည်းလမ်းနဲ့ regression ကို ပြန်စမ်းပြီး ကျန်ရှိတဲ့ကန့်သတ်ချက်ကို သတ်မှတ်ပါ။</p>
         </article>
+        <article class="page" id="page-python-intro" data-group="python" data-title="Python စတင်လေ့လာရန်">
+          <div class="progress-line"><div></div></div>
+          <p class="eyebrow">LEARN WITH ME · PYTHON</p>
+          <h1>Python စတင်လေ့လာရန်</h1>
+          <p class="lede">Python ကို အခြေခံ syntax မှစပြီး data structure၊ function၊ file၊ testing နဲ့ asynchronous programming အထိ အဆင့်လိုက်လေ့လာပါ။</p>
+          <p>Basic Level လမ်းညွှန်အတိုင်း စတင်ပြီးနောက် lesson 120 ခုကို အစဉ်လိုက်ဆက်လေ့လာနိုင်ပါတယ်။</p>
+        </article>
+        <article class="page" id="page-typescript-intro" data-group="typescript" data-title="TypeScript စတင်လေ့လာရန်">
+          <div class="progress-line"><div></div></div>
+          <p class="eyebrow">LEARN WITH ME · TYPESCRIPT</p>
+          <h1>TypeScript စတင်လေ့လာရန်</h1>
+          <p class="lede">TypeScript ကို setup နဲ့ type အခြေခံမှစပြီး function၊ generics၊ async code၊ runtime validation နဲ့ production tooling အထိ အဆင့်လိုက်လေ့လာပါ။</p>
+          <p>Basic Level လမ်းညွှန်အတိုင်း စတင်ပြီးနောက် lesson 120 ခုကို အစဉ်လိုက်ဆက်လေ့လာနိုင်ပါတယ်။</p>
+        </article>
       </main>
     </div>
 
@@ -13393,12 +13413,13 @@ void main() {
         </div>
         <div class="footer-bottom">
           <span>© 2026 Learn With me · Created by <a href="https://arkaryan.net/" target="_blank" rel="noopener noreferrer">Arkar Yan</a></span>
-          <span>542 သင်ခန်းစာ · Topic 17 ခု</span>
+          <span>784 သင်ခန်းစာ · Topic 19 ခု</span>
         </div>
       </div>
     </footer>
 
     <script src="./extra-lessons.js" defer></script>
+    <script src="./learning-paths.js" defer></script>
     <script src="./script.js" defer></script>
   </body>
 </html>

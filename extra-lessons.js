@@ -294,12 +294,1265 @@
     }
   ];
 
+  function createLanguageLessons(language, units) {
+    var lessons = [];
+    units.forEach(function (unit, unitIndex) {
+      unit.topics.forEach(function (topic, topicIndex) {
+        lessons.push([
+          language + ' · ' + String(unitIndex + 1).padStart(2, '0') + '.' + String(topicIndex + 1).padStart(2, '0') + ' ' + topic,
+          unit.note + ' လေ့လာရာတွင် “' + topic + '” ကို အဓိကထားပြီး သက်ဆိုင်ရာ code ဥပမာနှင့် ချိတ်ဆက်နားလည်ပါ။',
+          'လက်တွေ့လုပ်ဆောင်ရန် — ' + topic + ' ကို အသုံးပြုသည့် အသေးစားဥပမာတစ်ခုရေးပါ။ ပုံမှန် input၊ မမှန်သော input နှင့် edge case တို့ကိုစမ်းပြီး ရလဒ်ကိုမှတ်တမ်းတင်ပါ။',
+          { unit: unit, topic: topic, unitIndex: unitIndex, topicIndex: topicIndex }
+        ]);
+      });
+    });
+    return lessons;
+  }
+
+  var pythonUnits = [
+    { title: 'Getting Started', note: 'Python ကို install/run လုပ်ပုံ၊ file တည်ဆောက်ပုံနှင့် interpreter အလုပ်လုပ်ပုံကို နားလည်ပါ။', topics: ['Python ဘာသာစကားနှင့် အသုံးပြုနိုင်သည့်နေရာများ', 'Python တပ်ဆင်ခြင်းနှင့် version စစ်ခြင်း', 'Python REPL တွင် ပထမဆုံး command ရိုက်ခြင်း', 'ပထမဆုံး .py file ဖန်တီးပြီး run ခြင်း', 'print ဖြင့် output ထုတ်ခြင်း', 'Comment နှင့် code ဖတ်ရလွယ်သောပုံစံ', 'Indentation နှင့် code block', 'Syntax error message ကိုဖတ်ခြင်း', 'Script နှင့် interactive mode ကွာခြားချက်', 'VS Code တွင် Python interpreter ရွေးခြင်း'] },
+    { title: 'Variables and Data Types', note: 'တန်ဖိုးသိမ်းဆည်းခြင်း၊ အခြေခံ data type များနှင့် type ပြောင်းလဲခြင်းကို လေ့လာပါ။', topics: ['Variable အမည်ပေးခြင်းနှင့် တန်ဖိုးသတ်မှတ်ခြင်း', 'int နှင့် float ဂဏန်းအမျိုးအစား', 'str စာသားအမျိုးအစား', 'bool မှန်/မှားတန်ဖိုး', 'None နှင့် တန်ဖိုးမရှိခြင်း', 'type ဖြင့် data type စစ်ခြင်း', 'int၊ float၊ str အဖြစ်ပြောင်းခြင်း', 'Input ကိုဖတ်ပြီးတန်ဖိုးသိမ်းခြင်း', 'f-string ဖြင့်စာသားနှင့်တန်ဖိုးပေါင်းခြင်း', 'Mutable နှင့် immutable တန်ဖိုးမိတ်ဆက်'] },
+    { title: 'Operators and Decisions', note: 'တွက်ချက်မှု၊ နှိုင်းယှဉ်မှုနှင့် အခြေအနေအလိုက် code ရွေးချယ်လုပ်ဆောင်မှုကို နားလည်ပါ။', topics: ['Arithmetic operator များ', 'Comparison operator များ', 'and၊ or၊ not ဖြင့် logic တည်ဆောက်ခြင်း', 'if ဖြင့် အခြေအနေစစ်ခြင်း', 'if/else ဖြင့် ရွေးချယ်မှုနှစ်မျိုးလုပ်ခြင်း', 'elif ဖြင့် အခြေအနေများစွာစစ်ခြင်း', 'Nested condition ကိုဖတ်လွယ်အောင်ရေးခြင်း', 'Membership နှင့် in operator', 'Identity နှင့် is ကိုသတိထားသုံးခြင်း', 'Conditional expression ရေးခြင်း'] },
+    { title: 'Loops and Iteration', note: 'ထပ်ခါတလဲလဲလုပ်ဆောင်မှု၊ loop ရပ်တန့်မှုနှင့် iteration အစဉ်ကိုလေ့လာပါ။', topics: ['for loop ဖြင့် sequence တစ်ခုလိုက်ဖတ်ခြင်း', 'range ဖြင့် အကြိမ်ရေသတ်မှတ်ခြင်း', 'while loop နှင့် ရပ်တန့်စည်းမျဉ်း', 'break ဖြင့် loop ရပ်ခြင်း', 'continue ဖြင့် iteration ကျော်ခြင်း', 'Loop အတွင်း counter စုဆောင်းခြင်း', 'Nested loop နှင့် grid data', 'enumerate ဖြင့် index နှင့်တန်ဖိုးယူခြင်း', 'zip ဖြင့် sequence နှစ်ခုတွဲဖတ်ခြင်း', 'Loop မပြီးဆုံးသောအမှားကိုရှာခြင်း'] },
+    { title: 'Collections and Data Structures', note: 'Data အများအပြားကို သင့်တော်သည့် collection ထဲတွင် သိမ်း၊ ရှာ၊ ပြင်ဆင်ပုံကို လေ့လာပါ။', topics: ['List ဖန်တီးပြီး element များရယူခြင်း', 'List slicing နှင့် index နယ်နိမိတ်', 'List ထဲသို့ထည့်ခြင်းနှင့် ဖယ်ရှားခြင်း', 'Tuple ဖြင့် မပြောင်းလဲသည့်အတွဲသိမ်းခြင်း', 'Dictionary key/value အသုံးပြုခြင်း', 'Dictionary တွင် value ရှာပြီးပြင်ခြင်း', 'Set ဖြင့် duplicate ဖယ်ရှားခြင်း', 'Nested collection ကိုလုံခြုံစွာဖတ်ခြင်း', 'List၊ tuple၊ set၊ dict ရွေးချယ်ခြင်း', 'Comprehension ဖြင့် collection ဖန်တီးခြင်း'] },
+    { title: 'Functions and Reusable Code', note: 'လုပ်ဆောင်ချက်ကို function အဖြစ်ခွဲထုတ်ပြီး input၊ return value နှင့် scope ကိုစီမံပါ။', topics: ['Function ကြေညာပြီးခေါ်သုံးခြင်း', 'Parameter နှင့် argument ကွာခြားချက်', 'return ဖြင့်ရလဒ်ပြန်ပေးခြင်း', 'Default parameter သတ်မှတ်ခြင်း', 'Keyword argument ဖြင့်ဖတ်လွယ်စေခြင်း', 'Positional နှင့် keyword-only parameter', '*args နှင့် **kwargs မိတ်ဆက်', 'Local နှင့် global scope', 'Lambda ကိုအသုံးပြုရမည့်အခြေအနေ', 'Docstring ဖြင့် function ရှင်းပြခြင်း'] },
+    { title: 'Strings and Text Processing', note: 'စာသားကိုခွဲခြမ်းခြင်း၊ ပြင်ဆင်ခြင်း၊ ရှာဖွေခြင်းနှင့် Unicode ကိုမှန်ကန်စွာကိုင်တွယ်ပါ။', topics: ['String indexing နှင့် slicing', 'စာလုံးအကြီးအသေးပြောင်းခြင်း', 'strip ဖြင့် အပို whitespace ဖယ်ခြင်း', 'split နှင့် join ဖြင့်စာသားခွဲပေါင်းခြင်း', 'String ထဲတွင်တန်ဖိုးအစားထိုးခြင်း', 'အစ/အဆုံးနှင့် substring ရှာခြင်း', 'Raw string နှင့် escape character', 'Unicode နှင့် မြန်မာစာကိုင်တွယ်ခြင်း', 'Regex ဖြင့်ပုံစံရှာဖွေခြင်း', 'Text input ကိုစစ်ဆေးပြီးသန့်စင်ခြင်း'] },
+    { title: 'Modules and Environments', note: 'Code ကို module/package ခွဲခြင်း၊ dependency စီမံခြင်းနှင့် project environment ခွဲသုံးခြင်းကို လေ့လာပါ။', topics: ['Built-in module import လုပ်ခြင်း', 'ကိုယ်ပိုင် module ဖန်တီးခြင်း', 'if __name__ == "__main__" အသုံးပြုခြင်း', 'Package နှင့် __init__.py မိတ်ဆက်', 'pip ဖြင့် package တပ်ဆင်ခြင်း', 'Virtual environment ဖန်တီးပြီး activate လုပ်ခြင်း', 'requirements.txt ထုတ်ပြီးသုံးခြင်း', 'Import path နှင့် module အမည်တိုက်မှု', 'Environment variable ဖတ်ခြင်း', 'Project folder ဖွဲ့စည်းပုံတည်ဆောက်ခြင်း'] },
+    { title: 'Files and Error Handling', note: 'ဖိုင်ကိုသိမ်း၊ ဖတ်၊ ပိတ်ပုံနှင့် error ဖြစ်ချိန် program ကိုထိန်းသိမ်းပုံကို သင်ယူပါ။', topics: ['open ဖြင့် text file ဖတ်ခြင်း', 'with ဖြင့် file ကိုလုံခြုံစွာပိတ်ခြင်း', 'File ထဲသို့ စာသားရေးခြင်း', 'Pathlib ဖြင့် file path စီမံခြင်း', 'CSV ဖိုင်ဖတ်ပြီးရေးခြင်း', 'JSON ကိုဖတ်ပြီး Python object ပြောင်းခြင်း', 'JSON data ကိုဖိုင်သိမ်းခြင်း', 'try/except ဖြင့် error ကိုင်တွယ်ခြင်း', 'else/finally ဖြင့် cleanup လုပ်ခြင်း', 'Custom exception သတ်မှတ်ခြင်း'] },
+    { title: 'Classes and Object-Oriented Python', note: 'Class၊ object၊ method နှင့် inheritance ကိုသုံးပြီး ဆက်စပ် state/behavior များကိုစုစည်းပါ။', topics: ['Class နှင့် object ဖန်တီးခြင်း', '__init__ နှင့် instance attribute', 'Instance method နှင့် self', 'Class attribute နှင့် instance attribute', 'Encapsulation နှင့် property', 'Inheritance နှင့် method override', 'super ဖြင့် parent behavior ခေါ်ခြင်း', 'Dataclass ဖြင့် data object ရေးခြင်း', 'Composition ဖြင့် class များချိတ်ခြင်း', 'Object representation နှင့် __str__'] },
+    { title: 'Iterators, Generators, and Algorithms', note: 'Data အများအပြားကို memory သက်သာစွာဖြတ်သန်းပြီး algorithm ၏ အချိန်/နေရာကုန်ကျမှုကို သုံးသပ်ပါ။', topics: ['Iterable နှင့် iterator ကွာခြားချက်', 'iter နှင့် next ကိုအသုံးပြုခြင်း', 'yield ဖြင့် generator တည်ဆောက်ခြင်း', 'Generator expression ဖြင့် lazy evaluation', 'Sorting key ဖြင့် စာရင်းစီခြင်း', 'Linear search အဆင့်လိုက်ရေးခြင်း', 'Binary search အခြေခံ', 'Stack နှင့် queue ကို collection ဖြင့်တည်ဆောက်ခြင်း', 'Big O notation မိတ်ဆက်', 'Algorithm edge case နှင့် complexity စစ်ခြင်း'] },
+    { title: 'Testing, Tooling, and Async Python', note: 'Test ရေးခြင်း၊ code quality စစ်ခြင်းနှင့် I/O အခြေပြု asynchronous task များကို စီမံပါ။', topics: ['assert ဖြင့် အခြေခံရလဒ်စစ်ခြင်း', 'unittest ဖြင့် test case ရေးခြင်း', 'pytest ဖြင့် test discovery လုပ်ခြင်း', 'Fixture ဖြင့် test data ပြင်ဆင်ခြင်း', 'Mock ဖြင့် external service ခွဲစမ်းခြင်း', 'Logging level နှင့် structured log', 'Type hint နှင့် annotation မိတ်ဆက်', 'async/await ဖြင့် asynchronous function', 'asyncio.gather ဖြင့် task များတွဲလုပ်ခြင်း', 'Project ကို format၊ lint၊ test ဖြင့်စစ်ခြင်း'] }
+  ];
+
+  var typeScriptUnits = [
+    { title: 'Getting Started', note: 'TypeScript ကို JavaScript အပေါ် type checking ထပ်ပေါင်းထားသည့်ဘာသာအဖြစ် နားလည်ပြီး project ကိုစတင်တည်ဆောက်ပါ။', topics: ['TypeScript ၏အခန်းကဏ္ဍနှင့် JavaScript ဆက်နွယ်မှု', 'Node.js နှင့် TypeScript compiler စစ်ဆေးခြင်း', 'ပထမဆုံး .ts ဖိုင်ဖန်တီးခြင်း', 'tsc ဖြင့် JavaScript ထုတ်ခြင်း', 'Node နှင့် browser အတွက် project ရွေးခြင်း', 'tsconfig.json ဖန်တီးခြင်း', 'strict mode ဖွင့်ခြင်း', 'Type error ကိုဖတ်ပြီးပြင်ခြင်း', 'Editor ထဲတွင် type hint အသုံးပြုခြင်း', 'TypeScript project folder စီစဉ်ခြင်း'] },
+    { title: 'Primitive Types and Variables', note: 'Primitive type များ၊ variable declaration နှင့် inference ကို အခြေခံမှတည်ဆောက်ပါ။', topics: ['let နှင့် const ရွေးချယ်ခြင်း', 'string type သတ်မှတ်ခြင်း', 'number type နှင့် numeric operation', 'boolean type နှင့် condition', 'null နှင့် undefined ကွာခြားချက်', 'Type inference ကိုဖတ်ခြင်း', 'Explicit annotation ရေးခြင်း', 'Literal type မိတ်ဆက်', 'unknown နှင့် any ကိုခွဲခြားခြင်း', 'never type ကိုနားလည်ခြင်း'] },
+    { title: 'Functions and Call Signatures', note: 'Function parameter၊ return type နှင့် overload ကို အသုံးပြုပြီး API ကိုရှင်းလင်းစွာဖော်ပြပါ။', topics: ['Function parameter type ရေးခြင်း', 'Return type သတ်မှတ်ခြင်း', 'Optional parameter သုံးခြင်း', 'Default parameter နှင့် rest parameter', 'Arrow function type ရေးခြင်း', 'Function type alias ဖန်တီးခြင်း', 'Callback parameter ကို type ပေးခြင်း', 'Void return ကိုသင့်တော်စွာသုံးခြင်း', 'Function overload မိတ်ဆက်', 'Generic function signature ဖတ်ခြင်း'] },
+    { title: 'Objects, Interfaces, and Type Aliases', note: 'Object shape ကို interface/type ဖြင့်ဖော်ပြပြီး property၊ readonly နှင့် composition ကို စီမံပါ။', topics: ['Object property များကို type သတ်မှတ်ခြင်း', 'Interface ဖန်တီးပြီး object စစ်ခြင်း', 'Type alias ဖြင့် object shape ရေးခြင်း', 'Optional property အသုံးပြုခြင်း', 'Readonly property ကာကွယ်ခြင်း', 'Index signature အခြေခံ', 'Interface ကို extends ဖြင့်ချဲ့ခြင်း', 'Type intersection ဖြင့်ပေါင်းခြင်း', 'Nested object type ဖတ်ခြင်း', 'Structural typing ကိုနားလည်ခြင်း'] },
+    { title: 'Unions and Type Narrowing', note: 'Union type၊ discriminant နှင့် control flow ဖြင့် ဖြစ်နိုင်သည့် type များကို လုံခြုံစွာခွဲခြားပါ။', topics: ['Union type ဖြင့်ရွေးချယ်စရာဖော်ပြခြင်း', 'typeof ဖြင့် type narrowing', 'in operator ဖြင့် property စစ်ခြင်း', 'Discriminated union တည်ဆောက်ခြင်း', 'switch ဖြင့် union အားလုံးစစ်ခြင်း', 'never ဖြင့် exhaustive check', 'User-defined type guard ရေးခြင်း', 'Assertion နှင့် type cast ကိုသတိထားခြင်း', 'unknown data ကို validate လုပ်ခြင်း', 'Nullable value ကို guard လုပ်ခြင်း'] },
+    { title: 'Arrays, Tuples, and Collections', note: 'Array၊ tuple နှင့် collection operation များကို type-safe အဖြစ်တည်ဆောက်ပါ။', topics: ['Typed array ဖန်တီးခြင်း', 'Array ထဲက item type ရယူခြင်း', 'Tuple ဖြင့် အစဉ်လိုက်တန်ဖိုးသတ်မှတ်ခြင်း', 'Readonly array ဖြင့်မပြောင်းစေခြင်း', 'map ဖြင့် type ပြောင်းခြင်း', 'filter ဖြင့် type guard အသုံးပြုခြင်း', 'reduce ကို accumulator type ဖြင့်ရေးခြင်း', 'Set နှင့် Map type သတ်မှတ်ခြင်း', 'Promise array ကိုအမျိုးအစားတပ်ခြင်း', 'Array index မရှိနိုင်မှုကိုစစ်ခြင်း'] },
+    { title: 'Generics and Reusable Types', note: 'Generic parameter ဖြင့် data type မပျောက်စေဘဲ ပြန်သုံးနိုင်သော function၊ class နှင့် interface ရေးပါ။', topics: ['Generic function တည်ဆောက်ခြင်း', 'Type parameter အမည်နှင့်အသုံးပြုပုံ', 'Generic constraint ဖြင့်လိုအပ်ချက်သတ်မှတ်ခြင်း', 'keyof ဖြင့် object key type ရယူခြင်း', 'Generic interface ရေးခြင်း', 'Generic class ဖန်တီးခြင်း', 'Default generic parameter သတ်မှတ်ခြင်း', 'Generic API response type', 'Type parameter အများအပြားအသုံးပြုခြင်း', 'Generic ကိုဖတ်လွယ်အောင်ကန့်သတ်ခြင်း'] },
+    { title: 'Classes and Object-Oriented TypeScript', note: 'Class၊ access modifier နှင့် abstract contract များကို type safety နဲ့ချိတ်ဆက်ပါ။', topics: ['Class နှင့် constructor ရေးခြင်း', 'public၊ private၊ protected ခွဲခြားခြင်း', 'readonly field သတ်မှတ်ခြင်း', 'implements ဖြင့် interface လိုက်နာခြင်း', 'extends ဖြင့် inheritance တည်ဆောက်ခြင်း', 'Abstract class မိတ်ဆက်', 'Getter နှင့် setter အသုံးပြုခြင်း', 'Static member နှင့် utility method', 'Composition ဖြင့် dependency ချိတ်ခြင်း', 'Class ကို interface နှင့် type အဖြစ်အသုံးပြုခြင်း'] },
+    { title: 'Modules, Configuration, and Tooling', note: 'Module import/export၊ compiler option နှင့် build tool များကို နားလည်ပြီး project setup ကိုမှန်ကန်စွာထားပါ။', topics: ['Named export နှင့် import', 'Default export ရွေးချယ်ခြင်း', 'Module path နှင့် alias သတ်မှတ်ခြင်း', 'ES module နှင့် CommonJS ခွဲခြားခြင်း', 'tsconfig target နှင့် module option', 'Declaration file နှင့် ambient type မိတ်ဆက်', 'Third-party package type တပ်ဆင်ခြင်း', 'Source map ဖြင့် debug လုပ်ခြင်း', 'Vite project ထဲတွင် TypeScript သုံးခြင်း', 'Build script နှင့် type-check script ခွဲခြင်း'] },
+    { title: 'Async Code, APIs, and DOM', note: 'Promise၊ fetch၊ browser DOM နှင့် event များကို type-safe နည်းဖြင့်အသုံးပြုပါ။', topics: ['Promise<T> return type ဖတ်ခြင်း', 'async/await function ရေးခြင်း', 'try/catch ဖြင့် async error ကိုင်တွယ်ခြင်း', 'fetch response ကို validate လုပ်ခြင်း', 'API response အတွက် type သတ်မှတ်ခြင်း', 'AbortController ဖြင့် request ရပ်ခြင်း', 'DOM element ကို null စစ်ပြီးအသုံးပြုခြင်း', 'Event target ကို type guard လုပ်ခြင်း', 'Form input value ကိုဖတ်ခြင်း', 'Browser storage data ကိုစစ်ပြီးပြန်ဖတ်ခြင်း'] },
+    { title: 'Advanced Types and Type Transformations', note: 'keyof၊ indexed access၊ conditional နှင့် mapped type များကို အသုံးပြုပြီး type ကိုပြောင်းလဲတည်ဆောက်ပါ။', topics: ['keyof ဖြင့် property key များယူခြင်း', 'Indexed access type ဖြင့် property type ရယူခြင်း', 'typeof ဖြင့် value မှ type ထုတ်ခြင်း', 'Mapped type ဖြင့် property ပြောင်းခြင်း', 'Conditional type အခြေခံ', 'infer ဖြင့် type အစိတ်အပိုင်းထုတ်ခြင်း', 'Template literal type မိတ်ဆက်', 'Utility type Partial နှင့် Required', 'Pick၊ Omit နှင့် Record အသုံးပြုခြင်း', 'Type complexity ကိုထိန်းပြီးရှင်းလင်းစေခြင်း'] },
+    { title: 'Testing, Runtime Safety, and Production', note: 'Compile-time type checking သည် runtime validation ကိုအစားမထိုးနိုင်ကြောင်းနားလည်ပြီး test၊ validation နှင့် release ကိုစီမံပါ။', topics: ['Compile-time နှင့် runtime error ခွဲခြားခြင်း', 'External JSON ကို schema ဖြင့်စစ်ခြင်း', 'Zod ဖြင့် input validate လုပ်ခြင်း', 'Unit test ဖြင့် function behavior စစ်ခြင်း', 'Mock ဖြင့် API dependency ခွဲခြင်း', 'Type test ဖြင့် public API စစ်ဆေးခြင်း', 'ESLint နှင့် formatter ချိတ်ဆက်ခြင်း', 'Environment variable ကို validate လုပ်ခြင်း', 'Production build အရင် type-check လုပ်ခြင်း', 'TypeScript migration ကို အဆင့်လိုက်လုပ်ခြင်း'] }
+  ];
+
+  curriculum.push({ group: 'python', lessons: createLanguageLessons('Python', pythonUnits) });
+  curriculum.push({ group: 'typescript', lessons: createLanguageLessons('TypeScript', typeScriptUnits) });
+
   var main = document.getElementById('main');
   if (!main) return;
+
+  function sampleFor(group, lesson) {
+    var title = lesson[0].toLowerCase();
+    var query = '';
+    if (group === 'python' || group === 'typescript') {
+      var meta = lesson[3] || { unitIndex: 0, topic: lesson[0] };
+      var pythonExamples = [
+        `name = input('သင့်နာမည်: ').strip()\nprint(f'မင်္ဂလာပါ {name}!')`,
+        `price_text = '2500'\nprice = int(price_text)\ntax_rate = 0.05\ntotal = price * (1 + tax_rate)\nprint(f'{total:.0f} ကျပ်')`,
+        `score = 78\nif score >= 80:\n    level = 'ကောင်း'\nelif score >= 50:\n    level = 'အောင်မြင်'\nelse:\n    level = 'ထပ်လေ့လာရန်'\nprint(level)`,
+        `lessons = ['Python', 'SQL', 'API']\nfor index, lesson_name in enumerate(lessons, start=1):\n    print(index, lesson_name)`,
+        `student = {'name': 'Aye', 'scores': [80, 92, 75]}\naverage = sum(student['scores']) / len(student['scores'])\nprint(student['name'], average)`,
+        `def calculate_total(price: float, quantity: int = 1) -> float:\n    return price * quantity\n\nprint(calculate_total(2500, quantity=2))`,
+        `text = '  Learn Python  '\nclean = text.strip().lower()\nwords = clean.split()\nprint(' '.join(words))`,
+        `from pathlib import Path\n\nproject_file = Path('notes.txt')\nproject_file.write_text('Python lesson', encoding='utf-8')\nprint(project_file.read_text(encoding='utf-8'))`,
+        `import json\n\ntry:\n    student = json.loads('{"name":"Aye","score":90}')\n    print(student['name'], student['score'])\nexcept (json.JSONDecodeError, KeyError) as error:\n    print('Data ကိုစစ်ပါ:', error)`,
+        `from dataclasses import dataclass\n\n@dataclass\nclass Lesson:\n    title: str\n    minutes: int\n\nlesson = Lesson('Python basics', 20)\nprint(lesson.title, lesson.minutes)`,
+        `import unittest\n\ndef calculate_total(price: int, quantity: int) -> int:\n    return price * quantity\n\nclass TotalTests(unittest.TestCase):\n    def test_multiplies_price_by_quantity(self):\n        self.assertEqual(calculate_total(2500, 2), 5000)\n\nif __name__ == '__main__':\n    unittest.main()`
+      ];
+      var typeScriptExamples = [
+        `const learnerName: string = 'Aye';\nconsole.log('မင်္ဂလာပါ', learnerName);`,
+        `const priceText = '2500';\nconst price: number = Number(priceText);\nconst taxRate = 0.05;\nconst total = price * (1 + taxRate);\nconsole.log(total.toFixed(0), 'ကျပ်');`,
+        `const score = 78;\nlet level: string;\nif (score >= 80) level = 'ကောင်း';\nelse if (score >= 50) level = 'အောင်မြင်';\nelse level = 'ထပ်လေ့လာရန်';\nconsole.log(level);`,
+        `const lessons: string[] = ['TypeScript', 'React', 'API'];\nlessons.forEach((lesson, index) => {\n  console.log(index + 1, lesson);\n});`,
+        `type Student = { name: string; scores: number[] };\nconst student: Student = { name: 'Aye', scores: [80, 92, 75] };\nconst average = student.scores.reduce((sum, score) => sum + score, 0) / student.scores.length;\nconsole.log(student.name, average);`,
+        `function calculateTotal(price: number, quantity = 1): number {\n  return price * quantity;\n}\nconsole.log(calculateTotal(2500, 2));`,
+        `const text = '  Learn TypeScript  ';\nconst clean = text.trim().toLowerCase();\nconst words = clean.split(/\\s+/);\nconsole.log(words.join(' '));`,
+        `type LessonFile = { path: string; content: string };\nfunction saveLesson(file: LessonFile): string {\n  return 'Saved ' + file.path + ' (' + file.content.length + ' chars)';\n}\nconsole.log(saveLesson({ path: 'notes.txt', content: 'TypeScript' }));`,
+        `type ApiResult<T> = { ok: true; data: T } | { ok: false; error: string };\nfunction showResult<T>(result: ApiResult<T>): void {\n  if (result.ok) console.log(result.data);\n  else console.error(result.error);\n}\nshowResult({ ok: true, data: ['Python', 'TypeScript'] });`,
+        `interface Lesson { title: string; minutes: number }\nclass LessonCard implements Lesson {\n  constructor(public title: string, public minutes: number) {}\n  summary(): string { return this.title + ': ' + this.minutes + ' min'; }\n}\nconsole.log(new LessonCard('TypeScript basics', 20).summary());`,
+        `type UserInput = { name?: unknown; score?: unknown };\nfunction isValidUser(value: unknown): value is { name: string; score: number } {\n  if (typeof value !== 'object' || value === null) return false;\n  const input = value as UserInput;\n  return typeof input.name === 'string' && typeof input.score === 'number';\n}\nconst payload: unknown = JSON.parse('{"name":"Aye","score":90}');\nif (isValidUser(payload)) console.log(payload.name, payload.score);`
+      ];
+      var examples = group === 'python' ? pythonExamples : typeScriptExamples;
+      query = (group === 'python' ? '# Focus: ' : '// Focus: ') + meta.topic + '\n' + examples[meta.unitIndex % examples.length];
+      return {
+        language: group === 'python' ? 'Python 3' : 'TypeScript',
+        code: query,
+        note: group === 'python'
+          ? 'ဒီဥပမာကို Python 3 နဲ့ ကိုယ့်စက်မှာ run ပါ။ Input နဲ့တန်ဖိုးတွေပြောင်းပြီး output ကိုနှိုင်းယှဉ်ပါ။'
+          : 'ဒီဥပမာကို TypeScript project မှာ strict type-check လုပ်ပါ။ tsc သို့မဟုတ် TypeScript build tool နဲ့စမ်းပါ။'
+      };
+    }
+    if (group === 'mysql') {
+      if (/cli|workbench|server.*connect/.test(title)) query = `SELECT VERSION() AS mysql_version;
+SELECT DATABASE() AS current_database;
+SHOW DATABASES;`;
+      else if (/sql script|comment|format/.test(title)) query = `-- Select only the fields needed by this report.
+SELECT id, name, price
+FROM products
+WHERE is_public = 1
+ORDER BY name;`;
+      else if (/schema.*(create|remove|drop)|database.*create/.test(title)) query = `-- Create a disposable practice schema first.
+CREATE DATABASE practice_shop CHARACTER SET utf8mb4;
+USE practice_shop;
+CREATE TABLE lessons (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(120) NOT NULL
+);
+-- Check the schema name before any DROP DATABASE command.`;
+      else if (/naming convention|အမည်ပေး/.test(title)) query = `CREATE TABLE lesson_progress (
+  lesson_id BIGINT NOT NULL,
+  student_id BIGINT NOT NULL,
+  completed_at DATETIME NULL,
+  PRIMARY KEY (lesson_id, student_id)
+);`;
+      else if (/composite primary key/.test(title)) query = `CREATE TABLE enrollments (
+  student_id BIGINT NOT NULL,
+  course_id BIGINT NOT NULL,
+  enrolled_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (student_id, course_id)
+);`;
+      else if (/auto_increment|id gap/.test(title)) query = `CREATE TABLE practice_ids (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  label VARCHAR(80) NOT NULL
+);
+INSERT INTO practice_ids (label) VALUES ('first');
+SELECT id, label FROM practice_ids;`;
+      else if (/enum|lookup table/.test(title)) query = `CREATE TABLE order_statuses (
+  id SMALLINT PRIMARY KEY,
+  code VARCHAR(24) NOT NULL UNIQUE
+);
+INSERT INTO order_statuses (id, code)
+VALUES (1, 'pending'), (2, 'paid');`;
+      else if (/character set|collation|utf8mb4/.test(title)) query = `CREATE TABLE myanmar_notes (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(160) NOT NULL
+) CHARACTER SET utf8mb4
+  COLLATE utf8mb4_0900_ai_ci;
+
+INSERT INTO myanmar_notes (title) VALUES ('မြန်မာစာ သင်ခန်းစာ');`;
+      else if (/deadlock|isolation|transaction|acid|row lock/.test(title)) query = `START TRANSACTION;
+SELECT id, stock FROM products WHERE id = 1 FOR UPDATE;
+UPDATE products SET stock = stock - 1 WHERE id = 1;
+COMMIT;`;
+      else if (/recursive cte/.test(title)) query = `WITH RECURSIVE team AS (
+  SELECT id, manager_id, name, 0 AS depth
+  FROM employees WHERE manager_id IS NULL
+  UNION ALL
+  SELECT e.id, e.manager_id, e.name, t.depth + 1
+  FROM employees e JOIN team t ON e.manager_id = t.id
+)
+SELECT name, depth FROM team;`;
+      else if (/cte|common table/.test(title)) query = `WITH monthly_sales AS (
+  SELECT customer_id, SUM(total) AS amount
+  FROM orders GROUP BY customer_id
+)
+SELECT customer_id, amount
+FROM monthly_sales ORDER BY amount DESC;`;
+      else if (/window|rank|running total/.test(title)) query = `SELECT department_id, name, salary,
+  DENSE_RANK() OVER (
+    PARTITION BY department_id ORDER BY salary DESC
+  ) AS salary_rank
+FROM employees;`;
+      else if (/case expression|conditional value/.test(title)) query = `SELECT id, total,
+  CASE WHEN total >= 100000 THEN 'large'
+       WHEN total >= 30000 THEN 'medium'
+       ELSE 'small' END AS order_size
+FROM orders;`;
+      else if (/union/.test(title)) query = `SELECT email FROM active_users
+UNION ALL
+SELECT email FROM archived_users;`;
+      else if (/exists/.test(title)) query = `SELECT c.id, c.name
+FROM customers c
+WHERE EXISTS (
+  SELECT 1 FROM orders o WHERE o.customer_id = c.id
+);`;
+      else if (/json/.test(title)) query = `SELECT id,
+  JSON_UNQUOTE(JSON_EXTRACT(options, '$.color')) AS color
+FROM products;`;
+      else if (/full-text/.test(title)) query = `SELECT id, title,
+  MATCH(title, body) AGAINST ('database index') AS score
+FROM articles
+WHERE MATCH(title, body) AGAINST ('database index');`;
+      else if (/procedure/.test(title)) query = `DELIMITER //
+CREATE PROCEDURE find_product(IN product_id INT)
+BEGIN
+  SELECT id, name, price
+  FROM products WHERE id = product_id;
+END //
+DELIMITER ;`;
+      else if (/stored function/.test(title)) query = `CREATE FUNCTION add_tax(amount DECIMAL(10,2))
+RETURNS DECIMAL(10,2) DETERMINISTIC
+RETURN amount * 1.05;`;
+      else if (/trigger/.test(title)) query = `CREATE TRIGGER products_audit
+AFTER UPDATE ON products
+FOR EACH ROW
+  INSERT INTO product_audit(product_id, old_price, new_price)
+  VALUES (OLD.id, OLD.price, NEW.price);`;
+      else if (/event scheduler/.test(title)) query = `CREATE EVENT remove_old_sessions
+ON SCHEDULE EVERY 1 DAY
+DO DELETE FROM sessions
+   WHERE last_activity < NOW() - INTERVAL 30 DAY;`;
+      else if (/view/.test(title)) query = `CREATE VIEW public_products AS
+SELECT id, name, price
+FROM products WHERE is_public = 1;
+
+SELECT * FROM public_products;`;
+      else if (/explain|invisible index|composite index|index ကို/.test(title)) query = `EXPLAIN
+SELECT id, name FROM products
+WHERE category_id = 2 AND is_public = 1;
+
+CREATE INDEX idx_products_category_public
+ON products(category_id, is_public);`;
+      else if (/date, datetime|utc|timezone/.test(title)) query = `SELECT UTC_TIMESTAMP() AS stored_utc,
+  CONVERT_TZ(UTC_TIMESTAMP(), '+00:00', '+06:30') AS yangon_time;`;
+      else if (/decimal|ငွေကြေး/.test(title)) query = `CREATE TABLE invoices (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  amount DECIMAL(12, 2) NOT NULL
+);
+SELECT amount * 1.05 AS total FROM invoices;`;
+      else if (/generated column/.test(title)) query = `CREATE TABLE order_lines (
+  quantity INT NOT NULL,
+  unit_price DECIMAL(10,2) NOT NULL,
+  line_total DECIMAL(12,2)
+    GENERATED ALWAYS AS (quantity * unit_price) STORED
+);`;
+      else if (/unique|check constraint|not null|default constraint/.test(title)) query = `CREATE TABLE members (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  age INT CHECK (age >= 0),
+  active BOOLEAN NOT NULL DEFAULT TRUE
+);`;
+      else if (/upsert/.test(title)) query = `INSERT INTO inventory (sku, quantity)
+VALUES ('BOOK-01', 5)
+ON DUPLICATE KEY UPDATE quantity = quantity + 5;`;
+      else if (/bulk insert/.test(title)) query = `INSERT INTO products (name, price)
+VALUES ('Notebook', 2500),
+       ('Pen', 800),
+       ('Ruler', 1200);`;
+      else if (/safe update/.test(title)) query = `SELECT id, stock FROM products WHERE id = 1;
+START TRANSACTION;
+UPDATE products SET stock = 9 WHERE id = 1;
+SELECT id, stock FROM products WHERE id = 1;
+ROLLBACK;`;
+      else if (/schema|database|workbench|client/.test(title)) query = `CREATE DATABASE practice_db;
+USE practice_db;
+CREATE TABLE notes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(120) NOT NULL
+);
+SHOW TABLES;`;
+      else query = `SELECT id, name, price
+FROM products
+WHERE price >= 30000
+ORDER BY price DESC
+LIMIT 5;`;
+      return { language: 'SQL', code: query, note: 'ဒီ preview က sample data ဖြင့် SQL ကို simulation လုပ်ပြသည်။ Version သို့မဟုတ် feature အပြည့်အစုံလိုသော query များကို ကိုယ်ပိုင် MySQL တွင်စမ်းပါ။' };
+    }
+
+    if (group === 'laravel') {
+      if (/artisan command/.test(title)) query = `php artisan make:command CheckOldRecords
+php artisan list
+php artisan help migrate`;
+      else if (/scheduler/.test(title)) query = `Schedule::command('reports:daily')
+    ->dailyAt('02:00')
+    ->withoutOverlapping();`;
+      else if (/signed url/.test(title)) query = `URL::temporarySignedRoute(
+    'account.confirm',
+    now()->addMinutes(30),
+    ['user' => $user->id]
+);`;
+      else if (/session driver|session fixation/.test(title)) query = `Auth::login($user);
+request()->session()->regenerate();
+
+Auth::logout();
+request()->session()->invalidate();
+request()->session()->regenerateToken();`;
+      else if (/password reset/.test(title)) query = `$status = Password::sendResetLink(
+    $request->only('email')
+);`;
+      else if (/email verification/.test(title)) query = `Route::get('/account', AccountController::class)
+    ->middleware(['auth', 'verified']);`;
+      else if (/response macro/.test(title)) query = `Response::macro('notice', function ($message) {
+    return response()->json([
+        'message' => $message,
+    ]);
+});`;
+      else if (/exception rendering|error response/.test(title)) query = `->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->render(function (DomainException $error, Request $request) {
+        return response()->json([
+            'error' => 'Request could not be completed',
+        ], 422);
+    });
+});`;
+      else if (/localization/.test(title)) query = `// resources/lang/my/messages.php
+return ['welcome' => 'ကြိုဆိုပါတယ်'];
+
+// Controller / Blade
+__('messages.welcome');`;
+      else query = `Route::get('/products/{product}',
+    [ProductController::class, 'show'])
+    ->middleware('auth');`;
+      return { language: /artisan command/.test(title) ? 'Terminal' : 'PHP · Laravel', code: query, note: 'ဤဥပမာသည် Laravel project အတွက်ဖြစ်သည်။ Route, config နှင့် framework version ကို စစ်ပြီး local environment တွင် စမ်းပါ။' };
+    }
+
+    if (group === 'api') {
+      if (/contract|openapi|schema|consumer-driven/.test(title)) query = `openapi: 3.1.0
+paths:
+  /products/{productId}:
+    get:
+      responses:
+        '200':
+          description: Product found
+        '404':
+          description: Product not found`;
+      else if (/resource uri|nested route|uri/.test(title)) query = `GET /api/users/42/orders?limit=20
+Accept: application/json`;
+      else if (/safe and idempotent|http semantics|idempotent/.test(title)) query = `GET /api/products/1
+Accept: application/json
+
+PUT /api/products/1
+Content-Type: application/json
+
+{"name":"Notebook","price":2500}`;
+      else if (/content negotiation|media type/.test(title)) query = `GET /api/products/1
+Accept: application/vnd.example.product+json`;
+      else if (/problem details|api error/.test(title)) query = `HTTP/1.1 404 Not Found
+Content-Type: application/problem+json
+
+{"type":"/errors/not-found","title":"Product not found","status":404}`;
+      else if (/envelope|bare resource/.test(title)) query = `HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"data":{"id":1,"name":"Notebook"},"request_id":"req-001"}`;
+      else if (/cursor pagination/.test(title)) query = `GET /api/products?limit=20&after=eyJpZCI6MjB9
+Accept: application/json`;
+      else if (/filter|sort|query grammar/.test(title)) query = `GET /api/products?filter[status]=active&sort=-created_at&limit=20
+Accept: application/json`;
+      else if (/sparse fieldset|field/.test(title)) query = `GET /api/products?fields[products]=name,price
+Accept: application/json`;
+      else if (/relationship|include/.test(title)) query = `GET /api/orders/42?include=items.product
+Accept: application/json`;
+      else if (/conditional get|if-none-match/.test(title)) query = `GET /api/products/1
+If-None-Match: "product-v3"
+
+HTTP/1.1 304 Not Modified`;
+      else if (/cache-control|private data/.test(title)) query = `HTTP/1.1 200 OK
+Cache-Control: private, no-store
+Vary: Authorization`;
+      else if (/retry-after|rate limit/.test(title)) query = `HTTP/1.1 429 Too Many Requests
+Retry-After: 30
+Content-Type: application/json
+
+{"error":"rate_limited","retry_after_seconds":30}`;
+      else if (/timeout|cancellation/.test(title)) query = `const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 5000);
+try {
+  const response = await fetch('/api/products', { signal: controller.signal });
+  console.log(response.status);
+} finally {
+  clearTimeout(timeout);
+}`;
+      else if (/asynchronous job|202 accepted|accepted/.test(title)) query = `HTTP/1.1 202 Accepted
+Location: /api/jobs/job-123
+Retry-After: 3
+
+{"job_id":"job-123","status":"queued"}`;
+      else if (/range request|range/.test(title)) query = `GET /files/lesson.pdf
+Range: bytes=0-1023
+
+HTTP/1.1 206 Partial Content
+Content-Range: bytes 0-1023/8192`;
+      else if (/signature|webhook|event id|replay|duplicate delivery/.test(title)) query = `POST /api/webhooks/orders
+X-Event-Id: evt_1001
+X-Signature: sha256=example
+
+{"type":"order.paid","order_id":42}`;
+      else if (/bulk operation|partial failure/.test(title)) query = `POST /api/products/bulk
+Content-Type: application/json
+
+{"items":[{"sku":"A-1","price":2500},{"sku":"B-2","price":800}]}`;
+      else if (/login|oauth|jwt|pkce|token revoke/.test(title)) query = `POST /api/login
+Content-Type: application/json
+
+{"email":"aung@example.com","password":"secret"}`;
+      else if (/delete|revoke/.test(title)) query = `DELETE /api/products/1`;
+      else if (/update|concurrency|etag/.test(title)) query = `PATCH /api/products/1
+Content-Type: application/json
+If-Match: "v3"
+
+{"stock": 18}`;
+      else if (/webhook|event contract|signature|replay/.test(title)) query = `POST /api/webhooks/orders
+Content-Type: application/json
+X-Event-Id: evt_1001
+X-Signature: sha256=example
+
+{"type":"order.paid","order_id":42}`;
+      else if (/create|bulk|multipart|upload|idempotency/.test(title)) query = `POST /api/products
+Content-Type: application/json
+Idempotency-Key: order-request-001
+
+{"name":"Notebook","price":2500,"stock":12}`;
+      else query = `GET /api/products?limit=10
+Accept: application/json`;
+      return { language: 'HTTP Request', code: query, note: 'Run လုပ်လျှင် sample API သာ simulation လုပ်ပြသည်။ Header သို့မဟုတ် workflow အချို့ကို preview ကအပြည့်အဝအကောင်အထည်မဖော်နိုင်ပါ။' };
+    }
+
+    if (group === 'react') {
+      if (/portal/.test(title)) query = `const modalRoot = document.createElement('div');
+modalRoot.id = 'modal-root';
+document.body.appendChild(modalRoot);
+function HelpDialog() {
+  return ReactDOM.createPortal(
+    <div role="dialog" aria-modal="true">Help</div>,
+    modalRoot
+  );
+}
+createRoot(document.getElementById('root')).render(<HelpDialog />);`;
+      else if (/compound component/.test(title)) query = `function Tabs({ children }) {
+  return <div className="tabs">{children}</div>;
+}
+function Tab({ children, onClick }) {
+  return <button onClick={onClick}>{children}</button>;
+}
+createRoot(document.getElementById('root')).render(
+  <Tabs><Tab>Overview</Tab><Tab>Lessons</Tab></Tabs>
+);`;
+      else if (/children composition/.test(title)) query = `function Card({ title, children }) {
+  return <section><h2>{title}</h2><div>{children}</div></section>;
+}
+createRoot(document.getElementById('root')).render(
+  <Card title="Profile"><p>Learn by building.</p></Card>
+);`;
+      else if (/useid/.test(title)) query = `function NameField() {
+  const id = React.useId();
+  return <>
+    <label htmlFor={id}>Name</label>
+    <input id={id} />
+  </>;
+}
+createRoot(document.getElementById('root')).render(<NameField />);`;
+      else if (/layouteffect/.test(title)) query = `function BoxSize() {
+  const ref = React.useRef(null);
+  const [width, setWidth] = React.useState(0);
+  React.useLayoutEffect(() => {
+    setWidth(ref.current.getBoundingClientRect().width);
+  }, []);
+  return <div ref={ref}>Width: {Math.round(width)}px</div>;
+}
+createRoot(document.getElementById('root')).render(<BoxSize />);`;
+      else if (/imperativehandle/.test(title)) query = `const SearchBox = React.forwardRef(function SearchBox(props, ref) {
+  const input = React.useRef(null);
+  React.useImperativeHandle(ref, () => ({
+    focus: () => input.current.focus()
+  }));
+  return <input ref={input} placeholder="Search" />;
+});
+createRoot(document.getElementById('root')).render(<SearchBox />);`;
+      else if (/syncexternalstore/.test(title)) query = `function OnlineStatus() {
+  const online = React.useSyncExternalStore(
+    (notify) => {
+      window.addEventListener('online', notify);
+      window.addEventListener('offline', notify);
+      return () => {
+        window.removeEventListener('online', notify);
+        window.removeEventListener('offline', notify);
+      };
+    },
+    () => navigator.onLine
+  );
+  return <p>{online ? 'Online' : 'Offline'}</p>;
+}
+createRoot(document.getElementById('root')).render(<OnlineStatus />);`;
+      else if (/usetransition/.test(title)) query = `function SearchList({ items }) {
+  const [query, setQuery] = React.useState('');
+  const [shown, setShown] = React.useState(items);
+  const [pending, startTransition] = React.useTransition();
+  function search(value) {
+    setQuery(value);
+    startTransition(() => {
+      setShown(items.filter((item) => item.includes(value)));
+    });
+  }
+  return <><input value={query} onChange={e => search(e.target.value)} />
+    {pending ? 'Updating…' : shown.join(', ')}</>;
+}`;
+      else query = `function SearchList({ items }) {
+  const [query, setQuery] = React.useState('');
+  const deferredQuery = React.useDeferredValue(query);
+  const results = items.filter((item) =>
+    item.toLowerCase().includes(deferredQuery.toLowerCase())
+  );
+  return <>
+    <input value={query} onChange={e => setQuery(e.target.value)} />
+    <ul>{results.map(item => <li key={item}>{item}</li>)}</ul>
+  </>;
+}
+createRoot(document.getElementById('root')).render(
+  <SearchList items={['HTML', 'React', 'Flutter']} />
+);`;
+      return { language: 'React JSX', code: query, note: 'React preview нь browser ထဲတွင် React/Babel သုံးသည်။ CDN မရနိုင်ပါက code ကို project ထဲတွင် run ပါ။' };
+    }
+
+    if (group === 'dart') {
+      if (/unicode|rune/.test(title)) query = `void main() {
+  const text = 'မြန်မာစာ 👋';
+  print(text.length);       // UTF-16 code unit
+  print(text.runes.length); // Unicode code point
+}`;
+      else if (/const, final/.test(title)) query = `const appName = 'Learn With me';
+final startedAt = DateTime.now();
+print('$appName started at $startedAt');`;
+      else if (/parsing/.test(title)) query = `void main() {
+  final raw = '2500';
+  final price = int.tryParse(raw);
+  if (price == null) {
+    print('တန်ဖိုးကို စစ်ဆေးပါ');
+  } else {
+    print(price * 2);
+  }
+}`;
+      else if (/enum/.test(title)) query = `enum OrderStatus { pending, paid, shipped }
+
+String label(OrderStatus status) => switch (status) {
+  OrderStatus.pending => 'စောင့်ဆိုင်းနေ',
+  OrderStatus.paid => 'ငွေပေးပြီး',
+  OrderStatus.shipped => 'ပို့ပြီး',
+};`;
+      else if (/record/.test(title)) query = `(String, int) userInfo() => ('Aye', 20);
+
+void main() {
+  final (name, age) = userInfo();
+  print('$name is $age');
+}`;
+      else if (/sealed class/.test(title)) query = `sealed class Result {}
+class Loading extends Result {}
+class Success extends Result { Success(this.value); final String value; }
+class Failure extends Result { Failure(this.message); final String message; }
+
+String label(Result result) => switch (result) {
+  Loading() => 'Loading',
+  Success(:final value) => value,
+  Failure(:final message) => message,
+};`;
+      else if (/pattern matching|switch expression/.test(title)) query = `String describe(Object value) => switch (value) {
+  int n when n > 0 => 'positive: $n',
+  String s => 'text: $s',
+  _ => 'other',
+};`;
+      else if (/type alias|typedef/.test(title)) query = `typedef PriceFormatter = String Function(num value);
+
+String kyat(num value) => '$value ကျပ်';
+void main() {
+  PriceFormatter format = kyat;
+  print(format(2500));
+}`;
+      else if (/isolate/.test(title)) query = `import 'dart:isolate';
+
+Future<void> main() async {
+  final result = await Isolate.run(() {
+    return List.generate(1000, (i) => i).reduce((a, b) => a + b);
+  });
+  print(result);
+}`;
+      else if (/future\.wait/.test(title)) query = `Future<String> loadName() async => 'Aye';
+Future<int> loadScore() async => 95;
+
+Future<void> main() async {
+  final values = await Future.wait([loadName(), loadScore()]);
+  print(values);
+}`;
+      else if (/timeout/.test(title)) query = `import 'dart:async';
+
+Future<String> loadData() async => 'ready';
+
+Future<void> main() async {
+  try {
+    final value = await loadData().timeout(const Duration(seconds: 3));
+    print(value);
+  } on TimeoutException {
+    print('တုံ့ပြန်ချိန် ကျော်လွန်သွားပါတယ်');
+  }
+}`;
+      else if (/datetime|duration/.test(title)) query = `void main() {
+  final utc = DateTime.now().toUtc();
+  final later = utc.add(const Duration(hours: 2));
+  print(utc.toIso8601String());
+  print(later.difference(utc).inMinutes);
+}`;
+      else if (/regexp/.test(title)) query = `final idPattern = RegExp(r'^[A-Z]{2}-\d{4}$');
+void main() {
+  print(idPattern.hasMatch('AB-2026'));
+  print(idPattern.hasMatch('wrong'));
+}`;
+      else if (/uri/.test(title)) query = `void main() {
+  final uri = Uri.https('example.com', '/search', {'q': 'မြန်မာစာ'});
+  print(uri);
+}`;
+      else if (/stream(?!controller| transformer)/.test(title)) query = `Stream<int> countToThree() async* {
+  for (var i = 1; i <= 3; i++) {
+    yield i;
+  }
+}
+
+Future<void> main() async {
+  await for (final value in countToThree()) {
+    print(value);
+  }
+}`;
+      else if (/collection if|spread/.test(title)) query = `void main() {
+  final showTip = true;
+  final base = ['SQL', 'Dart'];
+  final topics = [...base, if (showTip) 'Flutter'];
+  print(topics);
+}`;
+      else if (/generator/.test(title)) query = `Iterable<int> evenNumbers(int max) sync* {
+  for (var value = 0; value <= max; value += 2) {
+    yield value;
+  }
+}
+
+void main() => print(evenNumbers(6).toList());`;
+      else if (/streamcontroller|subscription/.test(title)) query = `import 'dart:async';
+
+Future<void> main() async {
+  final controller = StreamController<String>();
+  final subscription = controller.stream.listen(print);
+  controller.add('lesson started');
+  await controller.close();
+  await subscription.cancel();
+}`;
+      else if (/transformer/.test(title)) query = `Stream<int> values() async* {
+  yield* [1, 2, 3, 4];
+}
+
+Future<void> main() async {
+  final doubled = values().map((value) => value * 2);
+  print(await doubled.toList());
+}`;
+      else if (/stacktrace|rethrow|error/.test(title)) query = `Future<void> save() async {
+  try {
+    throw StateError('Save failed');
+  } catch (error, stackTrace) {
+    print('Could not save: $error');
+    print(stackTrace);
+    rethrow;
+  }
+}`;
+      else if (/uri|url/.test(title)) query = `void main() {
+  final uri = Uri.https('example.com', '/search', {'q': 'Dart basics'});
+  print(uri);
+  print(uri.queryParameters['q']);
+}`;
+      else if (/command-line|argument|exit code/.test(title)) query = `void main(List<String> args) {
+  if (args.isEmpty) {
+    print('Usage: dart run app.dart <name>');
+    return;
+  }
+  print('Hello, ' + args.first);
+}`;
+      else if (/documentation|public api/.test(title)) query = `/// Adds two values and returns the result.
+///
+/// Both values must use the same unit.
+int add(int left, int right) => left + right;
+
+void main() => print(add(2, 3));`;
+      else query = `void main() {
+  final values = <int>[3, 1, 2];
+  final doubled = values.map((value) => value * 2).toList();
+  print(doubled);
+}`;
+      return { language: 'Dart', code: query, note: 'Dart code ကို browser preview မှာ run မလုပ်ပါ။ DartPad သို့မဟုတ် local Dart project မှာ ကူးပြီးစမ်းပါ။' };
+    }
+
+    if (group === 'flutter') {
+      if (/platform channel/.test(title)) query = `const channel = MethodChannel('app/device');
+
+Future<int?> readBattery() async {
+  try {
+    return await channel.invokeMethod<int>('batteryLevel');
+  } on PlatformException catch (error) {
+    debugPrint('Platform call failed: $error');
+    return null;
+  }
+}`;
+      else if (/background task/.test(title)) query = `// Keep background work short and save progress before the app pauses.
+Future<void> syncPendingItems() async {
+  final pending = await repository.getPendingItems();
+  for (final item in pending) {
+    await repository.sync(item);
+  }
+}`;
+      else if (/permission/.test(title)) query = `final status = await Permission.camera.request();
+if (status.isGranted) {
+  openCamera();
+} else if (status.isPermanentlyDenied) {
+  openAppSettings();
+}`;
+      else if (/local notification/.test(title)) query = `await notifications.zonedSchedule(
+  1,
+  'Study reminder',
+  'Continue your lesson',
+  scheduledDate,
+  const NotificationDetails(
+    android: AndroidNotificationDetails('study', 'Study reminders'),
+  ),
+  androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+);`;
+      else if (/lifecycle/.test(title)) query = `class ScreenState extends State<Screen>
+    with WidgetsBindingObserver {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) pauseMedia();
+    if (state == AppLifecycleState.resumed) refreshData();
+  }
+}`;
+      else if (/camera|media resource/.test(title)) query = `final result = await ImagePicker().pickImage(
+  source: ImageSource.camera,
+  imageQuality: 80,
+);
+if (result != null) {
+  final file = File(result.path);
+  await uploadService.upload(file);
+}`;
+      else if (/notification/.test(title)) query = `final settings = await messaging.requestPermission();
+if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  final token = await messaging.getToken();
+  await api.registerDevice(token);
+}`;
+      else if (/sqlite|migration/.test(title)) query = `await db.execute('''
+  CREATE TABLE notes (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL
+  )
+''');`;
+      else if (/custompainter/.test(title)) query = `class RingPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = Colors.green;
+    canvas.drawCircle(size.center(Offset.zero), 24, paint);
+  }
+  @override
+  bool shouldRepaint(covariant RingPainter oldDelegate) => false;
+}`;
+      else if (/adaptive navigation|screen size/.test(title)) query = `Widget navigationFor(BoxConstraints size) {
+  if (size.maxWidth >= 900) {
+    return const NavigationRail(
+      destinations: [
+        NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
+      ],
+      selectedIndex: 0,
+    );
+  }
+  return const NavigationBar(
+    destinations: [NavigationDestination(icon: Icon(Icons.home), label: 'Home')],
+  );
+}`;
+      else if (/keyboard|mouse/.test(title)) query = `Focus(
+  autofocus: true,
+  onKeyEvent: (node, event) {
+    if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.enter) {
+      openSelectedLesson();
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  },
+  child: const ListTile(title: Text('Open lesson')),
+)`;
+      else if (/gesture arena|nested scroll/.test(title)) query = `GestureDetector(
+  behavior: HitTestBehavior.opaque,
+  onTap: () => selectLesson(),
+  child: const Padding(
+    padding: EdgeInsets.all(16),
+    child: Text('Select lesson'),
+  ),
+)`;
+      else if (/riverpod|provider/.test(title)) query = `final lessonProvider = Provider<LessonRepository>((ref) {
+  return LessonRepository(ref.watch(apiClientProvider));
+});
+
+class LessonList extends ConsumerWidget {
+  const LessonList({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lessons = ref.watch(lessonListProvider);
+    return LessonListView(lessons: lessons);
+  }
+}`;
+      else query = `class ExampleCard extends StatelessWidget {
+  const ExampleCard({super.key, required this.title});
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(child: ListTile(title: Text(title)));
+  }
+}`;
+      return { language: 'Dart · Flutter', code: query, note: 'Flutter code ကို browser preview မှာ run မလုပ်နိုင်ပါ။ VS Code သို့မဟုတ် Android Studio မှာ app ဖန်တီးပြီး emulator/ဖုန်းပေါ်မှာ စမ်းပါ။' };
+    }
+
+    if (group === 'security') {
+      if (/asset inventory|threat modeling|trust boundary|data classification|retention/.test(title)) query = `asset: student-profile
+owner: learning-team
+data: email, lesson-progress
+trust_boundary: browser -> api -> database
+retention_days: 365
+controls:
+  - access_review
+  - encrypted_backup
+  - delete_request_process`;
+      else if (/mfa|passkey|phishing/.test(title)) query = `// Verify the second factor on the server; never trust a client-side flag.
+if (!await mfaService.verify(user.id, submittedCode)) {
+  throw new AuthenticationError('Verification failed');
+}
+await sessionService.rotate(user.id);`;
+      else if (/enumeration|brute.force|rate limit|login response/.test(title)) query = `const account = await users.findByEmail(email);
+const valid = account && await passwords.verify(account, password);
+if (!valid) {
+  await limiter.recordAttempt(ipAddress, email);
+  return response.status(401).json({ error: 'Invalid credentials' });
+}
+await limiter.clearAttempts(ipAddress, email);`;
+      else if (/redirect|allowlist/.test(title)) query = `const allowedHosts = new Set(['learn.example']);
+const destination = new URL(returnTo, 'https://learn.example');
+if (!allowedHosts.has(destination.hostname)) {
+  throw new Error('Redirect destination is not allowed');
+}
+return response.redirect(destination.toString());`;
+      else if (/session fixation|session rotation|session revocation|remember.me/.test(title)) query = `await sessions.regenerateAfterLogin(user.id);
+await sessions.revokeAllForUser(user.id); // e.g. after password change
+const rememberToken = crypto.randomBytes(32).toString('hex');
+await tokenStore.saveHash(user.id, hashToken(rememberToken));`;
+      else if (/csrf|samesite/.test(title)) query = `const session = await sessions.fromCookie(request);
+if (!timingSafeEqual(request.body.csrfToken, session.csrfToken)) {
+  return response.status(403).send('Request rejected');
+}
+await updateProfile(request.body);`;
+      else if (/multi-tenant|ownership|bola|object-level/.test(title)) query = `const record = await db.records.findOne({
+  id: request.params.id,
+  tenant_id: currentUser.tenantId,
+  owner_id: currentUser.id
+});
+if (!record) return response.sendStatus(404);`;
+      else if (/xss|safe sink|trusted types|dangerous dom/.test(title)) query = `const message = document.querySelector('#message');
+// Render untrusted input as text; do not assign it to innerHTML.
+message.textContent = userProvidedMessage;`;
+      else if (/clickjacking|frame-ancestors/.test(title)) query = `Content-Security-Policy: default-src 'self'; frame-ancestors 'none'
+X-Frame-Options: DENY`;
+      else if (/command injection|argument array/.test(title)) query = `// Pass arguments separately; never concatenate user input into a shell string.
+const result = await runFile('/usr/bin/convert', [validatedPath, outputPath]);
+if (result.exitCode !== 0) throw new Error('Conversion failed');`;
+      else if (/xxe|external entity/.test(title)) query = `const parser = new XMLParser({
+  processEntities: false,
+  allowExternalEntities: false
+});
+const document = parser.parse(xmlInput);`;
+      else if (/prototype pollution|object merge/.test(title)) query = `const allowedKeys = new Set(['displayName', 'theme']);
+for (const [key, value] of Object.entries(input)) {
+  if (allowedKeys.has(key)) safeProfile[key] = value;
+}`;
+      else if (/dependency|lockfile|secret scanning|provenance|attestation/.test(title)) query = `name: supply-chain-check
+on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  scan:
+    steps:
+      - run: npm ci
+      - run: npm audit --omit=dev
+      - run: gitleaks detect --redact`;
+      else if (/log|pii|mask/.test(title)) query = `logger.info('Login attempt', {
+  userId: user.id,
+  outcome: 'success'
+  // Do not log password, access token, or full email address.
+});`;
+      else if (/error message|internal detail/.test(title)) query = `try {
+  await saveRecord(input);
+} catch (error) {
+  logger.error('Record save failed', { requestId, error });
+  return response.status(500).json({ error: 'Something went wrong', requestId });
+}`;
+      else if (/hsts|https/.test(title)) query = `Strict-Transport-Security: max-age=31536000; includeSubDomains
+// Add preload only after every subdomain supports HTTPS.`;
+      else if (/key rotation|encryption key/.test(title)) query = `const currentKey = keyStore.getActiveKey();
+const encrypted = encrypt(plaintext, currentKey);
+await keyStore.recordKeyVersion(currentKey.id);
+// Keep old keys available only while existing data is being re-encrypted.`;
+      else if (/password hashing/.test(title)) query = `// Plain text password မသိမ်းပါနှင့်။ Argon2id/bcrypt ကိုသုံးပါ။
+// Framework-ийн password hashing API (Argon2id/bcrypt)-г ашигла.
+$hash = Hash::make($plainPassword);
+if (Hash::check($candidate, $hash)) {
+    // зөв password
+}`;
+      else if (/cookie/.test(title)) query = `Set-Cookie: session=…; Secure; HttpOnly; SameSite=Lax; Path=/`;
+      else if (/content security|nonce/.test(title)) query = `Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-{per-response-random}'`;
+      else if (/cors/.test(title)) query = `const allowedOrigins = new Set(['https://learn.example']);
+if (allowedOrigins.has(request.headers.origin)) {
+  response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+}`;
+      else if (/sql|query/.test(title)) query = `$stmt = $pdo->prepare(
+    'SELECT id, name FROM users WHERE email = ?'
+);
+$stmt->execute([$email]);`;
+      else if (/upload|archive|zip/.test(title)) query = `// Store uploads outside the public web root.
+// Validate size + content signature; generate the storage name.
+$name = bin2hex(random_bytes(16));
+$storage->put($name, $validatedFile);`;
+      else if (/ssrf|dns|url/.test(title)) query = `// Allow only known hosts; reject loopback/private addresses.
+$host = parse_url($url, PHP_URL_HOST);
+if (!in_array($host, $allowedHosts, true)) {
+    throw new DomainException('Destination is not allowed');
+}`;
+      else query = `// Deny by default; check ownership for every record.
+if ($record->user_id !== $currentUser->id) {
+    abort(403);
+}`;
+      return { language: 'Security example', code: query, note: 'ဤဥပမာသည် လုံခြုံရေးကာကွယ်ပုံကို ပြထားခြင်းဖြစ်သည်။ အသုံးမပြုမီ framework API၊ hosting config နှင့် သက်ဆိုင်ရာ threat model ကို စစ်ဆေးပါ။' };
+    }
+
+    if (group === 'deploy' || group === 'ci') {
+      if (/container|multi-stage/.test(title)) query = `FROM node:22-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html`;
+      else if (/reverse proxy/.test(title)) query = `# Trust forwarded headers only from the known proxy.
+TRUSTED_PROXIES=10.0.0.0/8
+APP_URL=https://learn.example`;
+      else if (group === 'deploy' && /readiness|liveness|probe/.test(title)) query = `services:
+  web:
+    image: example/learn:1.4.0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health/ready"]
+      interval: 15s
+      timeout: 3s
+      retries: 3`;
+      else if (group === 'deploy' && /graceful shutdown|in-flight/.test(title)) query = `process.on('SIGTERM', async () => {
+  server.close(async () => {
+    await queue.stopAcceptingNewJobs();
+    await queue.finishActiveJobs();
+    process.exit(0);
+  });
+});`;
+      else if (group === 'ci' && /branch protection|required check/.test(title)) query = `required_status_checks:
+  strict: true
+  contexts: [build, unit-tests]
+required_pull_request_reviews:
+  required_approving_review_count: 1
+allow_force_pushes: false`;
+      else if (group === 'ci' && /dependency update/.test(title)) query = `name: dependency-review
+on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    steps:
+      - run: npm ci
+      - run: npm test
+      - run: npm audit --omit=dev`;
+      else if (group === 'ci' && /provenance|attestation/.test(title)) query = `jobs:
+  release:
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - run: npm run build
+      - run: attest-build ./dist`;
+      else if (group === 'ci' && /database service|integration test/.test(title)) query = `services:
+  mysql:
+    image: mysql:8.4
+    env:
+      MYSQL_ROOT_PASSWORD: test-only
+      MYSQL_DATABASE: app_test
+steps:
+  - run: npm run migrate:test
+  - run: npm run test:integration`;
+      else if (group === 'ci' && /artifact|promote|build once/.test(title)) query = `jobs:
+  build:
+    steps:
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with: { name: web-dist, path: dist/ }
+  deploy:
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: web-dist }`;
+      else if (group === 'ci' && /untrusted pull request|untrusted/.test(title)) query = `on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    steps:
+      - run: npm ci && npm test
+      # Never expose deployment secrets to untrusted PR code.`;
+      else query = `name: validate
+on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build`;
+      return { language: 'Dockerfile · YAML · Config', code: query, note: 'ဒီဥပမာကို production မှာ ချက်ချင်းမသုံးပါနဲ့။ Secret၊ version pin၊ permission နဲ့ hosting setting တွေကိုစစ်ပြီး staging မှာအရင်စမ်းပါ။' };
+    }
+
+    if (group === 'quality') {
+      if (/largest contentful|lcp|first contentful|fcp|interaction to next paint|inp|layout shift|cls|first byte|ttfb/.test(title)) query = `// Observe a page metric in the browser Performance API.
+const observer = new PerformanceObserver((entries) => {
+  for (const entry of entries.getEntries()) {
+    console.log(entry.name || entry.entryType, entry.startTime);
+  }
+});
+observer.observe({ type: 'paint', buffered: true });
+// Compare field data on the same page template before changing code.`;
+      else if (/rendering pipeline|critical rendering path/.test(title)) query = `<!-- Keep essential content in HTML and load only critical styles first. -->
+<link rel="stylesheet" href="critical.css">
+<main><h1>Learn a new topic</h1><p>Start with the basics.</p></main>
+<script src="app.js" defer></script>`;
+      else if (/lighthouse ci|performance regression/.test(title)) query = `ci:
+  collect:
+    numberOfRuns: 3
+  assert:
+    assertions:
+      largest-contentful-paint:
+        - error
+        - maxNumericValue: 2500`;
+      else if (/long task|main thread|trace/.test(title)) query = `const observer = new PerformanceObserver((entries) => {
+  entries.getEntries().forEach((entry) => {
+    console.warn('Long task:', Math.round(entry.duration), 'ms');
+  });
+});
+observer.observe({ type: 'longtask', buffered: true });`;
+      else if (/bundle|tree shaking|dependency|dynamic import/.test(title)) query = `// Load a route only when the user opens it.
+async function openSettings() {
+  const module = await import('./settings.js');
+  module.renderSettings(document.querySelector('#app'));
+}`;
+      else if (/preload|prefetch|preconnect|dns prefetch/.test(title)) query = `<link rel="preconnect" href="https://fonts.example" crossorigin>
+<link rel="preload" href="/fonts/lesson.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Preload only assets needed immediately on this page. -->`;
+      else if (/font subset|font-display/.test(title)) query = `@font-face {
+  font-family: "MyanmarLesson";
+  src: url("/fonts/myanmar-subset.woff2") format("woff2");
+  font-display: swap;
+}
+body { font-family: "MyanmarLesson", sans-serif; }`;
+      else if (/responsive image|lazy load|avif|webp/.test(title)) query = `<picture>
+  <source srcset="/images/lesson.avif" type="image/avif">
+  <source srcset="/images/lesson.webp" type="image/webp">
+  <img src="/images/lesson.jpg" alt="Lesson illustration" width="960" height="540">
+</picture>
+<!-- Add loading="lazy" only to images below the first screen. -->`;
+      else if (/cache key|cdn cache/.test(title)) query = `Cache-Control: public, max-age=31536000, immutable
+<!-- Use a content-hashed URL such as app.8f31c2.js for versioned assets. -->`;
+      else if (/brotli|gzip|compression/.test(title)) query = `# Compress text responses at the web server/CDN.
+Content-Encoding: br
+Vary: Accept-Encoding
+# Already-compressed images usually gain little from another compression pass.`;
+      else if (/accessible name|label|description/.test(title)) query = `<label for="search">သင်ခန်းစာရှာရန်</label>
+<input id="search" aria-describedby="search-help">
+<p id="search-help">ခေါင်းစဉ် သို့မဟုတ် topic ဖြင့်ရှာနိုင်ပါတယ်။</p>`;
+      else if (/link text/.test(title)) query = `<a href="/lessons/mysql-basics">MySQL အခြေခံသင်ခန်းစာများကို ကြည့်ရန်</a>
+<!-- The link still makes sense when read on its own. -->`;
+      else if (/aria role|native html|aria pattern|keyboard behavior/.test(title)) query = `<button type="button" aria-pressed="false" id="save">
+  သိမ်းရန်
+</button>
+<script>
+  document.querySelector('#save').addEventListener('click', (event) => {
+    event.currentTarget.setAttribute('aria-pressed', 'true');
+  });
+</script>`;
+      else if (/focus order|focus indicator/.test(title)) query = `:focus-visible {
+  outline: 3px solid #146c43;
+  outline-offset: 3px;
+}
+/* Keep DOM order aligned with the visible reading order. */`;
+      else if (/touch target|control spacing/.test(title)) query = `.toolbar button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  margin: 4px;
+}`;
+      else if (/forced colors/.test(title)) query = `@media (forced-colors: active) {
+  button { border: 1px solid ButtonText; }
+  :focus-visible { outline: 2px solid Highlight; }
+}`;
+      else if (/state.*color|color.*state/.test(title)) query = `<p class="status status-error">
+  <span aria-hidden="true">⚠</span>
+  <strong>Error:</strong> Email address needs checking.
+</p>`;
+      else if (/contrast/.test(title)) query = `/* Contrast is a design choice; verify the final colors with a checker. */
+:root {
+  --text: #173326;
+  --surface: #ffffff;
+}
+body { color: var(--text); background: var(--surface); }`;
+      else if (/fieldset/.test(title)) query = `<fieldset>
+  <legend>ပို့ဆောင်နည်းကို ရွေးပါ</legend>
+  <label><input type="radio" name="delivery" value="standard"> ပုံမှန်</label>
+  <label><input type="radio" name="delivery" value="express"> အမြန်</label>
+</fieldset>`;
+      else if (/live region|error/.test(title)) query = `<label for="email">အီးမေးလ်</label>
+<input id="email" aria-describedby="email-error">
+<p id="email-error" role="status">အီးမေးလ်ပုံစံကို စစ်ဆေးပါ</p>`;
+      else if (/table/.test(title)) query = `<table>
+  <caption>လစဉ်အော်ဒါ အရေအတွက်</caption>
+  <thead><tr><th scope="col">လ</th><th scope="col">အော်ဒါ</th></tr></thead>
+  <tbody><tr><th scope="row">ဇန်နဝါရီ</th><td>24</td></tr></tbody>
+</table>`;
+      else if (/language/.test(title)) query = `<html lang="my">
+  <body>မြန်မာစာ <span lang="en">Web Development</span></body>
+</html>`;
+      else if (/lazy load|responsive image/.test(title)) query = `<img
+  src="lesson-640.webp"
+  srcset="lesson-640.webp 640w, lesson-1280.webp 1280w"
+  sizes="(max-width: 700px) 100vw, 700px"
+  alt="သင်ခန်းစာနမူနာပုံ"
+  loading="lazy">`;
+      else query = `<!-- Use native HTML first; measure before optimizing. -->
+<button type="button">သင်ခန်းစာကို စတင်ပါ</button>
+<p>Load: <time>တိုင်းတာပြီးမှ ပြင်ဆင်ပါ</time></p>`;
+      return { language: 'HTML · CSS · Performance', code: query, note: 'ဒီ snippet က စတင်လေ့လာဖို့ ဥပမာပါ။ တူညီတဲ့အခြေအနေမှာ performance ကိုတိုင်းပြီး keyboard နဲ့ screen reader အသုံးပြုနိုင်မှုကိုပါ စစ်ပါ။' };
+    }
+
+    return { language: 'Code', code: '// Read the lesson, change one value, then compare the result.', note: 'ဥပမာကို သက်ဆိုင်ရာ project environment မှာ စမ်းပါ။' };
+  }
+
+  function explanationFor(group, lesson) {
+    var notes = {
+      python: 'Python သည် whitespace အရေးပါသောဘာသာစကားဖြစ်လို့ indentation ကိုတစ်သမတ်တည်းထားပါ။ Input၊ data type၊ function နဲ့ error handling ကိုခွဲကြည့်ပြီး လက်တွေ့ code ကိုအသေးစားအဆင့်များဖြင့် run ပါ။',
+      typescript: 'TypeScript သည် compile လုပ်ချိန်မှာ type ကိုစစ်ပေးသော်လည်း user/API မှဝင်လာသော data ကို runtime မှာလည်း validate လုပ်ရပါမယ်။ strict mode ဖွင့်ထားပြီး error ကိုဖတ်ကာ type ကိုတိတိကျကျ ပြင်ဆင်ပါ။',
+      mysql: 'Query ကို run မလုပ်ခင် ဘယ် table နဲ့ row တွေကို ထိခိုက်မလဲ၊ ဘယ်ရလဒ်မျှော်လင့်လဲ သတ်မှတ်ပါ။ ဖျက်ခြင်း သို့မဟုတ် ပြင်ဆင်ခြင်းပါဝင်တဲ့ query ကို sample database မှာအရင်စမ်းပါ။',
+      laravel: 'Request ဝင်လာတဲ့ route၊ validation/permission စစ်တဲ့နေရာနဲ့ response ပြန်ပို့တဲ့နေရာကို လိုက်ဖတ်ပါ။ Secret နဲ့ production config ကို ဥပမာ code ထဲမထည့်ပါနဲ့။',
+      api: 'Method၊ path၊ header၊ body နဲ့ status code တွေကို request/response သဘောတူညီချက်အဖြစ် ဖတ်ပါ။ Preview က တကယ့် server မဟုတ်ဘဲ sample API simulation ဖြစ်တာကို သတိပြုပါ။',
+      react: 'Component input၊ state ပြောင်းလဲမှုနဲ့ render ရလဒ်ကို သီးခြားစောင့်ကြည့်ပါ။ State တစ်ခုကို ပြောင်းပြီး preview ကိုပြန် run ပါ။',
+      dart: 'Type၊ nullable value နဲ့ function ရဲ့ input/output ကို စစ်ပါ။ Browser preview က Dart compiler မဟုတ်တဲ့အတွက် DartPad သို့မဟုတ် local project မှာ run ပါ။',
+      flutter: 'Widget tree၊ state နဲ့ lifecycle တို့က ဘယ်အပိုင်းကို သက်ရောက်သလဲ လိုက်ကြည့်ပါ။ Flutter project ကို emulator သို့မဟုတ် ဖုန်းပေါ်မှာ စမ်းပါ။',
+      security: 'ဒီဥပမာက လုံခြုံရေးကာကွယ်ပုံကို ပြထားပါတယ်။ Framework ရဲ့ security API နဲ့ configuration ကို စစ်ပြီးမှ ကိုယ့် project မှာအသုံးပြုပါ။',
+      deploy: 'Build artifact၊ runtime configuration နှင့် deployment target ကို သီးခြားစဉ်းစားပါ။ အရင် staging မှာ စမ်းပြီးမှ production သို့တင်ပါ။',
+      ci: 'Workflow ကို least privilege ဖြင့်စတင်ပြီး job တစ်ခုချင်း၏ input/output နှင့် secret access ကိုစစ်ပါ။ PR မှလာသော code ကို deploy secret မပေးပါနှင့်။',
+      quality: 'ပြင်ဆင်မှုမစမီ baseline တိုင်းပါ။ Performance ကိုတူညီသောအခြေအနေတွင်ပြန်တိုင်းပြီး accessibility ကို keyboard နှင့် screen reader ဖြင့်စစ်ပါ။'
+    };
+    var lessonNote = lesson
+      ? 'ဒီသင်ခန်းစာမှာ ' + lesson[1] + ' ကို လေ့လာပါမယ်။ ပြီးရင် code ဥပမာထဲက input၊ လုပ်ဆောင်ချက်နဲ့ ရလဒ်တို့ ဘယ်လိုဆက်စပ်နေသလဲ လိုက်ဖတ်ပါ။ လက်တွေ့အပိုင်းမှာ တန်ဖိုးတစ်ခုကို ပြောင်းစမ်းပြီး မျှော်မှန်းထားတဲ့ရလဒ်နဲ့ နှိုင်းယှဉ်ပါ။'
+      : '';
+    return [lessonNote, notes[group] || ''].filter(Boolean).join(' ');
+  }
+
+  function appendText(parent, tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    node.textContent = text;
+    parent.appendChild(node);
+    return node;
+  }
+
+  function codeExampleFor(group, lesson) {
+    var sample = sampleFor(group, lesson);
+    var box = document.createElement('div');
+    box.className = 'example';
+    box.dataset.language = sample.language;
+
+    var head = document.createElement('div');
+    head.className = 'ex-head';
+    appendText(head, 'span', '', 'ဥပမာ — ' + lesson[0]);
+    appendText(head, 'span', 'spacer', '');
+    var copy = appendText(head, 'button', 'mini-btn', 'Copy');
+    copy.type = 'button';
+    copy.setAttribute('data-copy', '');
+    box.appendChild(head);
+
+    var editor = document.createElement('textarea');
+    editor.className = 'code-edit';
+    editor.rows = 12;
+    editor.spellcheck = false;
+    editor.setAttribute('aria-label', 'Code example for ' + lesson[0]);
+    editor.value = sample.code;
+    box.appendChild(editor);
+
+    var actions = document.createElement('div');
+    actions.className = 'ex-actions';
+    var run = appendText(actions, 'button', 'run-btn', 'Run');
+    run.type = 'button';
+    appendText(actions, 'span', 'hint', sample.note);
+    box.appendChild(actions);
+
+    var preview = document.createElement('div');
+    preview.className = 'preview-wrap';
+    appendText(preview, 'div', 'pv-label', 'EXAMPLE PREVIEW');
+    var frame = document.createElement('iframe');
+    frame.className = 'preview';
+    frame.title = 'Code example preview: ' + lesson[0];
+    frame.setAttribute('sandbox', 'allow-scripts');
+    preview.appendChild(frame);
+    box.appendChild(preview);
+    return box;
+  }
+
+  function readingPoints(group) {
+    var points = {
+      python: ['Variable တစ်ခုချင်းစီရဲ့ type နဲ့တန်ဖိုးကို စစ်ပါ။', 'Function ရဲ့ input၊ return value နဲ့ side effect ကိုခွဲဖတ်ပါ။', 'ပုံမှန် input နဲ့ မှားယွင်းတဲ့ input နှစ်မျိုးစမ်းပြီး traceback ကိုဖတ်ပါ။'],
+      typescript: ['TypeScript က ခန့်မှန်းပေးတဲ့ type နဲ့ ကိုယ်တိုင်ကြေညာထားတဲ့ type ကိုနှိုင်းပါ။', 'Union သို့မဟုတ် nullable value ကိုအသုံးမပြုမီ narrowing/guard လုပ်ထားသလားစစ်ပါ။', 'Compile-time စစ်ဆေးမှုအပြင် runtime input validation ပါရှိသလားစစ်ပါ။'],
+      mysql: ['FROM က ဘယ် table ကိုအသုံးပြုသလဲ ရှာပါ။', 'WHERE၊ JOIN သို့မဟုတ် constraint က ဘယ် data ကိုကန့်သတ်သလဲ ခွဲဖတ်ပါ။', 'Query ရလဒ်ကို မျှော်မှန်းထားတဲ့ row တွေနဲ့ နှိုင်းယှဉ်ပါ။'],
+      laravel: ['Request က ဘယ် route သို့မဟုတ် method ထဲဝင်လာသလဲ ရှာပါ။', 'Validation၊ permission နဲ့ database ပြောင်းလဲမှု ဘယ်နေရာမှာရှိသလဲ ခွဲပါ။', 'Response နဲ့ အမှားအခြေအနေကို စမ်းသပ်ပါ။'],
+      api: ['HTTP method၊ URL path နဲ့ header တွေကို အရင်ဖတ်ပါ။', 'Request body နဲ့ response status/body ကို နှိုင်းယှဉ်ပါ။', 'မမှန်တဲ့ input သို့မဟုတ် ထပ်ပို့တဲ့ request ကိုပါ စမ်းပါ။'],
+      react: ['Component props နဲ့ state ကို ခွဲသတ်မှတ်ပါ။', 'Event handler က ဘယ် state ကိုပြောင်းသလဲ လိုက်ကြည့်ပါ။', 'Preview မှာ ပုံမှန်နဲ့ မမျှော်လင့်ထားတဲ့ state တွေကို စစ်ပါ။'],
+      dart: ['Variable type၊ nullable value နဲ့ function input/output ကိုစစ်ပါ။', 'အဓိကလုပ်ဆောင်ချက်ရဲ့ input နဲ့ output ကို ခွဲဖတ်ပါ။', 'DartPad သို့မဟုတ် local project မှာ run ပြီး ရလဒ်ကိုအတည်ပြုပါ။'],
+      flutter: ['Widget tree ထဲတွင် state ပိုင်ဆိုင်သူကိုရှာပါ။', 'Controller/resource တစ်ခုရှိပါက lifecycle ကိုလိုက်ပါ။', 'Hot reload လုပ်ပြီး screen နှင့် error state နှစ်မျိုးလုံးစမ်းပါ။'],
+      security: ['ကာကွယ်ရမည့် data နှင့် trust boundary ကိုအရင်သတ်မှတ်ပါ။', 'Input ကိုဘယ်လို validate/encode/authorize လုပ်သလဲ စစ်ပါ။', 'Allow case နှင့် deny case နှစ်မျိုးလုံးကို စမ်းသပ်ပါ။'],
+      deploy: ['Build ထွက်လာတဲ့ဖိုင်နဲ့ runtime config ကို သီးခြားစစ်ပါ။', 'Domain၊ storage၊ database နဲ့ rollback လိုအပ်ချက်တွေကိုစစ်ပါ။', 'Staging မှာ အခြေခံစစ်ဆေးမှုအောင်မှ production ကိုတင်ပါ။'],
+      ci: ['Workflow ဘယ်အချိန်စမလဲနဲ့ ဘယ် runner သုံးမလဲ သတ်မှတ်ပါ။', 'Job permission၊ secret အသုံးပြုခွင့်နဲ့ artifact dependency ကိုစစ်ပါ။', 'PR၊ failure နဲ့ release အခြေအနေတွေကို သီးခြား run ပါ။'],
+      quality: ['မပြင်ခင် baseline metric သို့မဟုတ် accessibility ပြဿနာကိုမှတ်ပါ။', 'တစ်ကြိမ်မှာ ပြောင်းလဲမှုတစ်ခုလုပ်ပြီး ရလဒ်ကိုတိုင်းပါ။', 'Keyboard၊ zoom၊ screen reader နဲ့ device အမျိုးမျိုးမှာ ပြန်စစ်ပါ။']
+    };
+    return points[group] || [];
+  }
+
+  function lessonSteps(group) {
+    var steps = {
+      python: ['Code ကို Python 3 interpreter သို့မဟုတ် virtual environment ထဲမှာ run ပါ။', 'Input၊ variable သို့မဟုတ် function တစ်ခုကို ပြောင်းပြီး output ကိုနှိုင်းပါ။', 'မမှန်တဲ့ input နဲ့ edge case ကိုစမ်းပြီး error ကိုကိုယ်တိုင်ရှင်းပြပါ။'],
+      typescript: ['Snippet ကို strict mode ဖွင့်ထားတဲ့ TypeScript project ထဲမှာထားပါ။', 'Type ကိုတစ်ခု ပြောင်းပြီး compiler ပြတဲ့ error ကိုဖတ်ကာပြင်ပါ။', 'Valid နဲ့ invalid runtime data နှစ်မျိုးစမ်းပြီး type guard/validation ကိုစစ်ပါ။'],
+      mysql: ['Code ကို sample database မှာ run လုပ်ပါ။', 'Table သို့မဟုတ် filter တန်ဖိုးတစ်ခုကို ပြောင်းပြီးပြန် run ပါ။', 'ထိခိုက်မသင့်တဲ့ row တွေ မပြောင်းသွားကြောင်းစစ်ပါ။'],
+      laravel: ['Snippet ကို သက်ဆိုင်ရာ route သို့မဟုတ် service ထဲထည့်ပါ။', 'Local environment မှာ command သို့မဟုတ် request နဲ့စမ်းပါ။', 'အောင်မြင်မှု၊ validation error နဲ့ ခွင့်မရှိတဲ့ user အခြေအနေကို စစ်ပါ။'],
+      api: ['Request method/path/header များကို စစ်ပြီး Run လုပ်ပါ။', 'Body တစ်ခု သို့မဟုတ် header တစ်ခုကိုပြောင်းပါ။', 'Status code နှင့် response body မျှော်မှန်းချက်နှင့်ကိုက်မကိုက်စစ်ပါ။'],
+      react: ['Preview ကိုဖွင့်ပြီး UI ရလဒ်ကိုကြည့်ပါ။', 'State၊ prop သို့မဟုတ် input တစ်ခုကိုပြောင်းပါ။', 'Empty/error အခြေအနေပါ ထည့်ပြီး component အလုပ်လုပ်ပုံကို စစ်ပါ။'],
+      dart: ['Code ကို DartPad သို့မဟုတ် project ထဲကူးပါ။', 'Run လုပ်ပြီး ပထမ output ကိုမှတ်ပါ။', 'Value တစ်ခုပြောင်းကာ type/error behavior ကိုစမ်းပါ။'],
+      flutter: ['Snippet ကိုသက်ဆိုင်ရာ widget/state ထဲထည့်ပါ။', 'Emulator သို့မဟုတ် ဖုန်းပေါ်တွင် run/hot reload လုပ်ပါ။', 'Loading, error နှင့် route ပိတ်ချိန် lifecycle ကိုပါစစ်ပါ။'],
+      security: ['Protected asset နှင့် attacker-controlled input ကိုခွဲပါ။', 'သတ်မှတ်ထားသော defensive control ကိုအကောင်အထည်ဖော်ပါ။', 'မမှန်သော input နှင့် ခွင့်မရှိသော user ကို deny လုပ်ကြောင်းစမ်းပါ။'],
+      deploy: ['Snippet ကို staging config တွင်စတင်အသုံးပြုပါ။', 'Build နှင့် health check ကို Run လုပ်ပါ။', 'Rollback plan အလုပ်လုပ်ကြောင်း စမ်းပြီးမှ production ကိုစဉ်းစားပါ။'],
+      ci: ['Workflow ကို branch သို့မဟုတ် PR ပေါ်တွင်စမ်းပါ။', 'Failure တစ်ခုကိုရည်ရွယ်ချက်ရှိရှိဖြစ်စေပြီး job dependency စစ်ပါ။', 'Secret မလိုသော job နှင့် deployment job permission ကိုခွဲပါ။'],
+      quality: ['Baseline ကိုမှတ်တမ်းတင်ပါ။', 'တစ်ချက်ပြင်ပြီး တူညီသော viewport/device ဖြင့်ပြန်တိုင်းပါ။', 'Performance အပြင် keyboard နှင့် accessibility behavior ကိုစစ်ပါ။']
+    };
+    return steps[group] || [];
+  }
 
   curriculum.forEach(function (course) {
     var pages = main.querySelectorAll('.page[data-group="' + course.group + '"]');
     var anchor = pages[pages.length - 1];
+    if (!anchor && (course.group === 'python' || course.group === 'typescript')) {
+      anchor = document.createElement('article');
+      anchor.className = 'page';
+      anchor.id = 'page-' + course.group + '-intro';
+      anchor.dataset.group = course.group;
+      anchor.dataset.title = course.group === 'python' ? 'Python စတင်လေ့လာရန်' : 'TypeScript စတင်လေ့လာရန်';
+      appendText(anchor, 'p', 'eyebrow', 'LEARN WITH ME · ' + course.group.toUpperCase());
+      appendText(anchor, 'h1', '', anchor.dataset.title);
+      appendText(anchor, 'p', 'lede', course.group === 'python'
+        ? 'Python ကို အခြေခံ syntax မှစပြီး data structure၊ function၊ file၊ testing နဲ့ asynchronous programming အထိ အဆင့်လိုက်လေ့လာပါ။'
+        : 'TypeScript ကို setup နဲ့ type အခြေခံမှစပြီး function၊ generics၊ async code၊ runtime validation နဲ့ production tooling အထိ အဆင့်လိုက်လေ့လာပါ။');
+      appendText(anchor, 'p', '', 'အောက်ပါ Basic Level လမ်းညွှန်အတိုင်း စတင်ပြီးနောက် lesson 120 ခုကို အစဉ်လိုက်ဆက်လေ့လာနိုင်ပါတယ်။');
+      main.appendChild(anchor);
+    }
     if (!anchor) return;
 
     var fragment = document.createDocumentFragment();
@@ -323,6 +1576,36 @@
       introduction.className = 'lede';
       introduction.textContent = lesson[1];
       page.appendChild(introduction);
+
+      appendText(page, 'h2', '', 'အယူအဆကို အသေးစိတ်နားလည်ပါ');
+      appendText(page, 'p', '', explanationFor(course.group, lesson));
+
+      appendText(page, 'h2', '', 'Step by step လေ့လာပါ');
+      var steps = document.createElement('ol');
+      lessonSteps(course.group).forEach(function (text) {
+        var item = document.createElement('li');
+        item.textContent = text;
+        steps.appendChild(item);
+      });
+      page.appendChild(steps);
+
+      appendText(page, 'h2', '', 'Code ဥပမာ');
+      page.appendChild(codeExampleFor(course.group, lesson));
+
+      appendText(page, 'h2', '', 'Code ကိုဖတ်ရှုရာတွင် စစ်ဆေးရန်');
+      var points = document.createElement('ul');
+      readingPoints(course.group).forEach(function (text) {
+        var item = document.createElement('li');
+        item.textContent = text;
+        points.appendChild(item);
+      });
+      page.appendChild(points);
+
+      var caution = document.createElement('div');
+      caution.className = 'note';
+      appendText(caution, 'strong', '', 'မှတ်ချက်');
+      appendText(caution, 'span', '', sampleFor(course.group, lesson).note);
+      page.appendChild(caution);
 
       var practiceHeading = document.createElement('h2');
       practiceHeading.textContent = 'လက်တွေ့လုပ်ဆောင်ရန်';
@@ -349,6 +1632,34 @@
       page.appendChild(checklist);
       fragment.appendChild(page);
     });
+
+    if (course.group === 'python' || course.group === 'typescript') {
+      var courseIndex = document.createElement('section');
+      courseIndex.className = 'language-course-index';
+      appendText(courseIndex, 'h2', '', 'သင်ခန်းစာ ' + course.lessons.length + ' ခု — အဆင့်လိုက်ရွေးချယ်ပါ');
+      appendText(courseIndex, 'p', '', 'Module တစ်ခုချင်းကိုဖွင့်ပြီး လေ့လာလိုသည့်ခေါင်းစဉ်ကိုနှိပ်ပါ။');
+      var currentUnit = -1;
+      var unitList = null;
+      course.lessons.forEach(function (lesson, index) {
+        var meta = lesson[3];
+        if (meta.unitIndex !== currentUnit) {
+          currentUnit = meta.unitIndex;
+          var details = document.createElement('details');
+          details.className = 'course-index-unit';
+          if (currentUnit === 0) details.open = true;
+          appendText(details, 'summary', '', String(currentUnit + 1).padStart(2, '0') + '. ' + meta.unit.title);
+          unitList = document.createElement('ol');
+          details.appendChild(unitList);
+          courseIndex.appendChild(details);
+        }
+        var item = document.createElement('li');
+        var button = appendText(item, 'button', 'course-index-link', lesson[0]);
+        button.type = 'button';
+        button.dataset.targetPage = 'page-extra-' + course.group + '-' + String(index + 1).padStart(2, '0');
+        unitList.appendChild(item);
+      });
+      anchor.appendChild(courseIndex);
+    }
 
     anchor.after(fragment);
   });

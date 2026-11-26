@@ -1,7 +1,7 @@
       (function () {
         var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
         var sidebar = document.getElementById('sidebar');
-        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]') };
+        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]'), python: document.querySelector('[data-nav-group="python"]'), typescript: document.querySelector('[data-nav-group="typescript"]') };
         var navLinks = {};
         var visited = {};
         var activeGroup = 'html';
@@ -2087,6 +2087,14 @@
             HEIGHT_PRELUDE + '</body></html>';
         }
 
+        function codeNoteDoc(code, label, note) {
+          return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+            '<style>body{margin:0;background:#0d1117;color:#e6edf3;font:13px/1.7 ui-monospace,monospace;padding:12px 14px} .label{color:#8b949e;font-size:11px;letter-spacing:.08em} .note{color:#9db0a6;margin:8px 0 12px} pre{margin:0;white-space:pre-wrap;word-break:break-word;color:#d2f4df}</style></head>' +
+            '<body><div class="label">' + esc(label || 'CODE EXAMPLE') + ' · PREVIEW</div>' +
+            '<div class="note">' + esc(note || 'ဒီ code ကို သက်ဆိုင်ရာ project environment မှာ စမ်းပါ။') + '</div>' +
+            '<pre><code>' + esc(code) + '</code></pre>' + HEIGHT_PRELUDE + '</body></html>';
+        }
+
         function runExample(ex) {
           var code = ex.querySelector('.code-edit').value;
           var iframe = ex.querySelector('iframe.preview');
@@ -2101,6 +2109,7 @@
           var isReact = page && page.dataset.group === 'react';
           var isDart = page && page.dataset.group === 'dart';
           var isFlutter = page && page.dataset.group === 'flutter';
+          var group = page ? page.dataset.group : '';
           if ((isLaravel || isAPI) && /Route::/.test(code)) {
             iframe.srcdoc = laravelRouteDoc(code);
             iframe.onload = function () {
@@ -2132,6 +2141,21 @@
               autoHeight(iframe);
               setTimeout(function () { autoHeight(iframe); }, 300);
             };
+            return;
+          }
+          if (isLaravel || group === 'security' || group === 'deploy' || group === 'ci' || group === 'quality' || group === 'python' || group === 'typescript') {
+            iframe.srcdoc = codeNoteDoc(code, ex.dataset.language, ex.querySelector('.hint').textContent);
+            iframe.onload = function () { autoHeight(iframe); };
+            return;
+          }
+          if (isMySQL && /(WITH\s+RECURSIVE|CREATE\s+(PROCEDURE|FUNCTION|TRIGGER|EVENT)|OVER\s*\(|MATCH\s*\(|GENERATED\s+ALWAYS|EXPLAIN)/i.test(code)) {
+            iframe.srcdoc = codeNoteDoc(code, 'MySQL', 'ဒီ syntax ကို preview မှာ дүр эсгэн ажиллуулахгүй. Өөрийн MySQL server မှာ version болон schema-тэй нь шалгаပါ.');
+            iframe.onload = function () { autoHeight(iframe); };
+            return;
+          }
+          if (isAPI && /(Idempotency-Key|If-Match|X-Signature|\/api\/webhooks|HTTP\/1\.1|openapi:|AbortController|Retry-After|Range:)/i.test(code)) {
+            iframe.srcdoc = codeNoteDoc(code, 'HTTP Request', 'Preview нь header-ийн бүх policy-г хэрэгжүүлэхгүй. Энэ хэсгийг API server болон integration test дээр шалгаарай.');
+            iframe.onload = function () { autoHeight(iframe); };
             return;
           }
           if (isAPI && !/fetch\s*\(/.test(code)) {
@@ -2605,7 +2629,7 @@
           var badge = document.createElement('span');
           badge.className = 'lang-badge';
           var exPage = ex.closest ? ex.closest('.page') : null;
-          badge.textContent = (exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS'));
+          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
           head.insertBefore(badge, copyBtn);
           var resetBtn = document.createElement('button');
           resetBtn.className = 'mini-btn';
@@ -2696,7 +2720,9 @@
             editors.forEach(function (ed) { if (page.contains(ed.ex)) ed.fit(); });
           });
           document.querySelectorAll('.tab-btn').forEach(function (t) {
-            t.classList.toggle('active', t.dataset.tab === page.dataset.group);
+            var isActiveTab = t.dataset.tab === page.dataset.group;
+            t.classList.toggle('active', isActiveTab);
+            if (isActiveTab && t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
           });
           window.scrollTo({ top: 0 });
           document.getElementById('main').scrollTop = 0;
@@ -2710,8 +2736,12 @@
         // Tabs jump to first page of the group
         document.querySelectorAll('.tab-btn').forEach(function (t) {
           t.addEventListener('click', function () {
-            var first = pages.filter(function (p) { return p.dataset.group === t.dataset.tab; })[0];
-            if (first) { showPage(first.id); closeNav(); }
+            var first = document.querySelector('.page[data-group="' + t.dataset.tab + '"]');
+            if (first) {
+              showPage(first.id);
+              closeNav();
+              if (t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+            }
           });
         });
 
@@ -2739,6 +2769,12 @@
             var dialog = document.getElementById(button.dataset.openDialog);
             closeNav();
             if (dialog && !dialog.open) dialog.showModal();
+          });
+        });
+        document.querySelectorAll('[data-target-page]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            var target = document.getElementById(button.dataset.targetPage);
+            if (target) { showPage(target.id); closeNav(); }
           });
         });
         document.querySelectorAll('[data-close-dialog]').forEach(function (button) {
