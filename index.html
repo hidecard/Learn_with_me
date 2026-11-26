@@ -4,19 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="မြန်မာဘာသာဖြင့် HTML, CSS, Tailwind, JavaScript, Git, PHP, MySQL, Laravel, REST API, React, Dart နှင့် Flutter ကို interactive ဥပမာများဖြင့် လေ့လာပါ။" />
-    <meta name="keywords" content="learn web development, Burmese web development, HTML tutorial, CSS tutorial, JavaScript, Tailwind CSS, Git, PHP, MySQL, Laravel, REST API, React, Dart, Flutter" />
+    <meta name="description" content="မြန်မာဘာသာဖြင့် Web Development ကို interactive သင်ခန်းစာများဖြင့် လေ့လာပါ။ HTML, JavaScript, Web Security, Deployment, Performance နှင့် Accessibility ပါဝင်သည်။" />
+    <meta name="keywords" content="Burmese web development, HTML tutorial, CSS tutorial, JavaScript tutorial, web security, GitHub Actions, web performance, web accessibility" />
     <meta name="author" content="Learn_with_me" />
     <meta name="theme-color" content="#04aa6d" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Learn_with_me" />
     <meta property="og:title" content="Learn_with_me — မြန်မာ Web Development သင်ခန်းစာများ" />
-    <meta property="og:description" content="HTML မှ Flutter အထိ Web Development ကို မြန်မာဘာသာဖြင့် interactive သင်ခန်းစာများ၊ code ဥပမာများနှင့်အတူ လေ့လာပါ။" />
+    <meta property="og:description" content="HTML မှ Flutter အထိ၊ Developer Tools, Web Security, CI/CD, Performance နှင့် Accessibility ကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Learn_with_me — မြန်မာ Web Development သင်ခန်းစာများ" />
-    <meta name="twitter:description" content="HTML, CSS, JavaScript နှင့် အခြား Web Development နည်းပညာများကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
+    <meta name="twitter:description" content="Web Development, Security, Deployment, Performance နှင့် Accessibility ကို မြန်မာဘာသာဖြင့် လေ့လာပါ။" />
     <link rel="icon" href="data:," />
-    <title>Web Dev Docs — HTML, CSS, Tailwind, JavaScript, Git, PHP, MySQL, Laravel, REST API, React, Dart &amp; Flutter</title>
+    <title>Learn_with_me | မြန်မာ Web Development သင်ခန်းစာများ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -365,6 +365,10 @@
         <button class="tab-btn" data-tab="react">React</button>
         <button class="tab-btn" data-tab="dart">Dart</button>
         <button class="tab-btn" data-tab="flutter">Flutter</button>
+        <button class="tab-btn" data-tab="devtools">DevTools</button>
+        <button class="tab-btn" data-tab="security">Security</button>
+        <button class="tab-btn" data-tab="deploy">Deploy</button>
+        <button class="tab-btn" data-tab="quality">Performance &amp; A11y</button>
       </nav>
       <div class="search-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
@@ -400,6 +404,14 @@
         <div data-nav-group="dart"></div>
         <h2>FLUTTER</h2>
         <div data-nav-group="flutter"></div>
+        <h2>DEVELOPER TOOLS</h2>
+        <div data-nav-group="devtools"></div>
+        <h2>WEB SECURITY</h2>
+        <div data-nav-group="security"></div>
+        <h2>DEPLOYMENT &amp; CI/CD</h2>
+        <div data-nav-group="deploy"></div>
+        <h2>PERFORMANCE &amp; ACCESSIBILITY</h2>
+        <div data-nav-group="quality"></div>
         <p class="nav-empty" id="navEmpty">ရှာမတွေ့ပါ — တခြား keyword နဲ့ ရှာကြည့်ပါ။</p>
       </aside>
 
@@ -12678,16 +12690,106 @@ void main() {
           <div class="tip"><strong>ဂုဏ်ယူပါတယ် — Course ပြီးဆုံးပါပြီ!</strong>Module 12 — Flutter ပြီးပါပြီ။ Module 1 HTML ကနေ စပြီး အခု သင်ဟာ HTML/CSS/Tailwind နဲ့ page ဆောက်၊ JavaScript နဲ့ အသက်သွင်း၊ Laravel + MySQL နဲ့ backend/API ဆောက်၊ React web app နဲ့ Flutter mobile app ကနေ အဲဒီ API ကို သုံးနိုင်တဲ့ full-stack developer တစ်ယောက် ဖြစ်ပါပြီ။ ဆက်လေ့လာဖို့ — ဒီ Docs ကို reference အဖြစ် ပြန်သုံး၊ ကိုယ်ပိုင် project တွေ ဆောက်ပြီး GitHub မှာ တင်ပြ၊ portfolio ကို ကြီးထွားအောင် လုပ်သွားပါ။</div>
         </article>
 
+        <article class="page" id="page-devtools-start" data-group="devtools" data-title="Browser DevTools မိတ်ဆက်">
+          <div class="progress-line"><div></div></div>
+          <h1>Browser DevTools မိတ်ဆက်</h1>
+          <p class="lede">Browser ထဲက Developer Tools (DevTools) ကိုသုံးပြီး HTML/CSS စစ်ခြင်း၊ JavaScript error ရှာခြင်း၊ network request ကြည့်ခြင်းတို့ကို လုပ်နိုင်ပါတယ်။</p>
+          <h2>DevTools ဖွင့်နည်း</h2><p>Chrome/Edge မှာ F12 သို့မဟုတ် Ctrl+Shift+I (macOS: Cmd+Option+I) ကိုနှိပ်ပါ။ Element ပေါ် right-click → Inspect နဲ့ တိကျတဲ့ element ကိုတိုက်ရိုက်စစ်နိုင်ပါတယ်။</p><h2>Panel တစ်ခုချင်း</h2><p>Elements — DOM နဲ့ style ကိုစမ်းပြင်ရန်။ Console — error နဲ့ JavaScript စမ်းရန်။ Network — request/response စစ်ရန်။ Sources — breakpoint ထားရန်။ Application — storage/cookie စစ်ရန်။</p><h2>လုံခြုံစွာစမ်းသပ်ပါ</h2><p>DevTools ထဲမှာ CSS/DOM ကို ပြင်တာက ယာယီသာဖြစ်ပြီး page ကို refresh လုပ်ရင် ပျောက်ပါတယ်။ အမြဲတမ်းပြင်ဆင်မှုကို source code ထဲမှာလုပ်ပါ။</p><ul><li>ကွန်ပျူတာနဲ့ browser version မှတ်ထားပါ။</li><li>Console error အနီရောင်စာကို ဖတ်ပြီး ပထမဆုံး error ကနေစဖြေရှင်းပါ။</li><li>Live site ပေါ်က user data ကို စမ်းသပ်ရန် မသုံးပါနဲ့။</li></ul>
+        </article>
+        <article class="page" id="page-devtools-elements-console" data-group="devtools" data-title="Elements, Styles နှင့် Console">
+          <div class="progress-line"><div></div></div>
+          <h1>Elements, Styles နှင့် Console</h1>
+          <p class="lede">DOM က browser ကတည်ဆောက်ထားတဲ့ document tree ဖြစ်ပြီး Elements panel မှာ structure နဲ့ computed style ကိုစစ်နိုင်ပါတယ်။ Console မှာ JavaScript ကို လက်ငင်းစမ်းနိုင်ပါတယ်။</p>
+          <h2>Element ကိုစစ်ဆေးပါ</h2><p>Inspect picker နဲ့ page ပေါ်က element ကိုရွေးပါ။ Styles က ဘယ် CSS rule က အနိုင်ရလဲပြတယ်။ Computed က အဆုံးသတ်တွက်ချက်ထားတဲ့ style ကိုပြတယ်။ Box model မှာ margin, border, padding နဲ့ content ကိုစစ်ပါ။</p><h2>Console မှာအချက်အလက်စစ်ပါ</h2><p>ဥပမာ <code>document.querySelector(&amp;quot;h1&amp;quot;)</code> နဲ့ element ကိုရွေး၊ <code>console.table([{name:&amp;quot;A&amp;quot;,score:10}])</code> နဲ့ data ကိုဇယားပုံစံပြပါ။ User ကထည့်တဲ့ data ကို console မှာ မလိုအပ်ဘဲ မထုတ်ပါနဲ့။</p><h2>Debug workflow</h2><p>Error message ထဲက file နဲ့ line ကိုဖွင့်ပါ။ Breakpoint တင်ပြီး step over/into နဲ့ code လိုက်ပါ။ Scope/Watch မှာ variable တန်ဖိုးစစ်ပြီး ပြင်ပြီးနောက် reload လုပ်ကာ ပြန်စမ်းပါ။</p>
+        </article>
+        <article class="page" id="page-devtools-network" data-group="devtools" data-title="Network Panel နှင့် Debugging">
+          <div class="progress-line"><div></div></div>
+          <h1>Network Panel နှင့် Debugging</h1>
+          <p class="lede">စာမျက်နှာ မတက်ခြင်း၊ API မှားခြင်း၊ image ပျောက်ခြင်းတွေမှာ Network panel က request တစ်ခုချင်းရဲ့ အခြေအနေကိုပြပါတယ်။</p>
+          <h2>Request တစ်ခုကိုဖတ်ပါ</h2><p>Network ကိုဖွင့်ပြီး page ကို reload လုပ်ပါ။ Status, Type, Initiator နဲ့ Timing ကိုကြည့်ပါ။ 2xx အောင်မြင်၊ 3xx redirect၊ 4xx client/request အမှား၊ 5xx server အမှားဖြစ်တတ်ပါတယ်။</p><h2>Headers နှင့် Response</h2><p>Request URL/method, status, request/response headers, payload နဲ့ response body ကိုစစ်ပါ။ API 401/403 ဖြစ်ရင် authentication/permission, 404 ဖြစ်ရင် URL/route, CORS error ဖြစ်ရင် server allow-origin setting ကိုစစ်ပါ။</p><h2>အသုံးဝင်တဲ့နည်းလမ်းများ</h2><p>Preserve log နဲ့ navigation ကျော်ပြီး log ထိန်းထားပါ။ Disable cache ကို DevTools ဖွင့်ထားစဉ်သာ သုံးပါ။ Slow network profile နဲ့ loading ကိုစမ်းပြီး၊ sensitive request ကို HAR အဖြစ် export/share မလုပ်မီ token နဲ့ personal data ဖယ်ရှားပါ။</p>
+        </article>
+        <article class="page" id="page-security-basics" data-group="security" data-title="Web Security အခြေခံ စဉ်းစားပုံ">
+          <div class="progress-line"><div></div></div>
+          <h1>Web Security အခြေခံ စဉ်းစားပုံ</h1>
+          <p class="lede">Security ဆိုတာ feature တစ်ခုထက် data, account နဲ့ server ကို ကာကွယ်တဲ့ လုပ်ငန်းစဉ်ပါ။ Browser validation ကိုသာ ယုံမထားဘဲ server ဘက်မှာလည်း အတည်ပြုပါ။</p>
+          <h2>အဓိကစည်းမျဉ်း</h2><p>Input အားလုံးကို မယုံပါနဲ့။ User တစ်ယောက်ချင်းစီရဲ့ permission ကို request တိုင်းမှာ စစ်ပါ။ အနည်းဆုံးလိုအပ်တဲ့ privilege ပေးပါ။ Error response မှာ secret/internal stack trace မဖော်ပြပါနဲ့။</p><h2>Threat model အတိုချုပ်</h2><p>ဘာကိုကာကွယ်မလဲ (account, personal data, payment)၊ ဘယ်သူ/ဘယ်လိုတိုက်ခိုက်နိုင်မလဲ၊ ဘယ် endpoint တွေဝင်ပေါက်လဲ၊ ဘယ် control နဲ့တားမလဲ ရေးချပါ။ Risk မြင့်တာကိုအရင်ပြင်ပါ။</p><h2>Checklist</h2><p>Project တစ်ခုချင်းအတွက် ဒီအချက်တွေကို စစ်ဆေးပါ။</p><ul><li>Server-side validation နဲ့ authorization သီးခြားစစ်ပါ။</li><li>HTTPS သုံးပြီး cookie အတွက် Secure, HttpOnly, SameSite သတ်မှတ်ပါ။</li><li>Dependency တွေ update လုပ်ပြီး backup/incident plan ထားပါ။</li></ul>
+        </article>
+        <article class="page" id="page-security-xss-sql" data-group="security" data-title="XSS နှင့် SQL Injection ကာကွယ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>XSS နှင့် SQL Injection ကာကွယ်ခြင်း</h1>
+          <p class="lede">XSS က မယုံကြည်ရတဲ့ data ကို browser မှာ code အဖြစ်လုပ်စေတာ၊ SQL Injection က query ထဲ user input ဝင်စေတာဖြစ်ပါတယ်။ Context-appropriate escaping နဲ့ prepared statement သုံးပါ။</p>
+          <h2>XSS ကာကွယ်မှု</h2><p>DOM ထဲ user text ထည့်ရာမှာ <code>textContent</code> သုံးပါ; မယုံကြည်ရတဲ့ input ကို <code>innerHTML</code> နဲ့ မထည့်ပါနဲ့။ Server-rendered HTML မှာ output ကို HTML context အလိုက် escape လုပ်ပါ။ Rich HTML လိုအပ်ရင် စမ်းသပ်ပြီးသား sanitizer သုံးပါ။</p><h2>SQL Injection ကာကွယ်မှု</h2><p>Query string ကို user input နဲ့ ပေါင်းမရေးပါနဲ့။ PDO prepared statement ဥပမာ —</p><ul><li>PDO: $stmt = $pdo-&gt;prepare(&quot;SELECT * FROM users WHERE email = ?&quot;);</li><li>$stmt-&gt;execute([$email]);</li><li>Table/column အမည်လို identifier ကို parameterize မလုပ်နိုင်ပါ; allowlist နဲ့ရွေးပါ။</li></ul><h2>အတည်ပြုခြင်းနှင့်စမ်းသပ်ခြင်း</h2><p>အလျား၊ format၊ range နဲ့ allowed values ကို server မှာစစ်ပါ။ Validation က injection ကာကွယ်ရေးအစားထိုးမဟုတ်ပါ။ မမှန်တဲ့ input ကို reject လုပ်ပြီး security regression test ထည့်ပါ။</p>
+        </article>
+        <article class="page" id="page-security-auth-csrf" data-group="security" data-title="Authentication, Authorization နှင့် CSRF">
+          <div class="progress-line"><div></div></div>
+          <h1>Authentication, Authorization နှင့် CSRF</h1>
+          <p class="lede">Authentication က “ဘယ်သူလဲ” ကိုစစ်ပြီး Authorization က “ဘာလုပ်ခွင့်ရှိလဲ” ကိုစစ်တာပါ။ Login ဝင်ထားခြင်းတစ်ခုတည်းက resource တိုင်းကိုခွင့်ပြုတယ်လို့ မဆိုလိုပါ။</p>
+          <h2>Password နှင့် Session</h2><p>Password ကို plain text မသိမ်းပါနဲ့; server framework ရဲ့ Argon2id/bcrypt password hash function သုံးပါ။ Login အောင်မြင်ပြီးနောက် session ID ပြောင်းပါ၊ logout မှာ session invalidate လုပ်ပါ၊ login ကြိုးစားမှုကို rate limit လုပ်ပါ။</p><h2>CSRF ကာကွယ်ပါ</h2><p>Cookie-based session သုံးတဲ့ state-changing request တွေမှာ CSRF token စစ်ပါ။ SameSite cookie က ကူညီပေမယ့် token နဲ့ server-side checks ကို အစားမထိုးပါ။ GET request နဲ့ data မပြောင်းပါနဲ့။</p><h2>Authorization စစ်ဆေးပါ</h2><p>ID ကို URL ထဲက ပြောင်းကြည့်တဲ့ IDOR ကာကွယ်ဖို့ server မှာ object owner/role စစ်ပါ။ UI မှာ button ဖျောက်ထားတာက access control မဟုတ်ပါ။</p><ul><li>ပုံမှန် user နဲ့ admin role နှစ်မျိုးစမ်းပါ။</li><li>တခြား user ရဲ့ record ID သုံးပြီး request လုပ်ကြည့်ပါ။</li><li>Cookie ကို Secure, HttpOnly, SameSite=Lax/Strict သတ်မှတ်ပါ။</li></ul>
+        </article>
+        <article class="page" id="page-security-secrets" data-group="security" data-title="Secrets, HTTPS နှင့် Dependency လုံခြုံရေး">
+          <div class="progress-line"><div></div></div>
+          <h1>Secrets, HTTPS နှင့် Dependency လုံခြုံရေး</h1>
+          <p class="lede">API key, database password, signing key တွေဟာ source code ထဲမှာမထည့်သင့်တဲ့ secret ဖြစ်ပါတယ်။ Public repository ထဲတစ်ခါတင်မိရင် ဖျက်ရုံနဲ့ မလုံခြုံတော့ပါ။</p>
+          <h2>Secrets ကိုစီမံပါ</h2><p>Local <code>.env</code> ကို <code>.gitignore</code> ထဲထည့်ပြီး <code>.env.example</code> မှာ value အတုသာထားပါ။ Production မှာ hosting provider ရဲ့ secret store/environment settings ကိုသုံးပါ။ Secret leak ဖြစ်လျှင် ချက်ချင်း revoke/rotate လုပ်ပြီး logs/history စစ်ပါ။</p><h2>HTTPS နှင့် Security Headers</h2><p>Production ကို HTTPS နဲ့သာဖွင့်ပါ။ HSTS ကို HTTPS အပြည့်အဝသေချာပြီးမှ စတင်ပါ။ Content-Security-Policy, frame-ancestors, X-Content-Type-Options စတဲ့ header တွေကို app နဲ့ကိုက်ညီအောင်စမ်းသပ်ပြီးမှတင်ပါ။</p><h2>Dependency များ</h2><p>Lockfile ကို commit လုပ်ပါ။ Dependency update ကို review/test လုပ်ပြီး audit tool ဖြင့် known vulnerability စစ်ပါ။ မသိတဲ့ package ကိုအလွယ်တကူမထည့်ပါနဲ့။</p><ul><li>Secret ကို public issue, screenshot, terminal output ထဲ မတင်ပါနဲ့။</li><li>အသုံးမပြုတဲ့ permission/token scope ကိုဖယ်ပါ။</li><li>Production error log ထဲ password, token, personal data မသိမ်းပါနဲ့။</li></ul>
+        </article>
+        <article class="page" id="page-deploy-plan" data-group="deploy" data-title="Deploy မလုပ်မီ Hosting ရွေးချယ်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Deploy မလုပ်မီ Hosting ရွေးချယ်ခြင်း</h1>
+          <p class="lede">Static hosting က HTML/CSS/JS ကိုပေးဆောင်ပြီး database/server မလိုတဲ့ site များအတွက် သင့်တော်ပါတယ်။ Laravel/PHP, Node API သို့မဟုတ် database ပါရင် server-capable hosting လိုပါတယ်။</p>
+          <h2>Architecture ကိုသတ်မှတ်ပါ</h2><p>Frontend သီးသန့်လား၊ API/backend လိုလား၊ database လိုလား စာရင်းလုပ်ပါ။ GitHub Pages က static files အတွက်ဖြစ်ပြီး PHP/Laravel ကို run မပေးပါ။ Backend ရှိရင် PHP/Node သို့မဟုတ် container ကိုထောက်ပံ့တဲ့ hosting ရွေးပါ။</p><h2>Release checklist</h2><p>Release တစ်ခုချင်းစီမတင်မီ အောက်ပါအချက်တွေကို စစ်ပါ။</p><ul><li>Build/production mode အောင်မြင်မှု စစ်ပါ။</li><li>Production environment variables နဲ့ database migration/backups ပြင်ဆင်ပါ။</li><li>404, HTTPS, mobile, form/API, logging နဲ့ rollback လမ်းကြောင်းကို စမ်းပါ။</li></ul><h2>Environment ခွဲပါ</h2><p>Local, staging, production ကို သီးခြားထားပါ။ Production user data ကို local test ထဲ မကူးပါနဲ့။ Database migration မလုပ်မီ backup နဲ့ backward compatibility စဉ်းစားပါ။</p>
+        </article>
+        <article class="page" id="page-deploy-pages" data-group="deploy" data-title="GitHub Pages ဖြင့် Static Site တင်ခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>GitHub Pages ဖြင့် Static Site တင်ခြင်း</h1>
+          <p class="lede">ဒီ repository ရဲ့ <code>index.html</code> လို static site ကို GitHub Pages က publish လုပ်နိုင်ပါတယ်။ GitHub Pages သည် PHP/Node server သို့မဟုတ် database ကို host မလုပ်ပါ။</p>
+          <h2>Settings မှ ဖွင့်ပါ</h2><p>Repository → Settings → Pages သို့သွားပါ။ Build and deployment အောက်မှာ Deploy from a branch ကိုရွေး၊ <code>main</code> branch နဲ့ <code>/(root)</code> ကိုရွေးပြီး Save လုပ်ပါ။</p><h2>တင်ပြီး စစ်ဆေးပါ</h2><p>Pages status မှာ publish complete ဖြစ်သည်အထိစောင့်ပြီး ပြထားတဲ့ URL ကိုဖွင့်ပါ။ URL အောက်မှာ asset path, routing, mobile layout နဲ့ browser console ကိုစမ်းပါ။ Repo အမည်က project page ဖြစ်လို့ path မှာ <code>/Learn_with_me/</code> ပါနိုင်ပါတယ်။</p><h2>Update လုပ်ခြင်း</h2><p>ပြင်ဆင်ချက်ကို <code>main</code> ထဲ commit/push လုပ်ပြီး build ပြီးနောက် live site ကို ပြန်စစ်ပါ။ Branch ကိုမရွေးခင် GitHub ကပြတဲ့ Pages source ရွေးချယ်မှုကိုစစ်ပါ။ Pages URL မရမီ canonical URL ကို မခန့်မှန်းထည့်ပါ။</p>
+        </article>
+        <article class="page" id="page-deploy-env-domain" data-group="deploy" data-title="Environment Variables, Domain နှင့် HTTPS">
+          <div class="progress-line"><div></div></div>
+          <h1>Environment Variables, Domain နှင့် HTTPS</h1>
+          <p class="lede">Production configuration ကို source code နဲ့မရောပါနဲ့။ Hosting provider ရဲ့ dashboard/secret manager ထဲမှာ environment variable ကို သတ်မှတ်ပါ။</p>
+          <h2>Environment variable</h2><p>App က <code>DATABASE_URL</code>, <code>APP_KEY</code>, API secret စတဲ့ configuration ကို environment မှဖတ်ပါ။ Frontend bundle ထဲထည့်ထားတဲ့ value က public ဖြစ်နိုင်တယ်—client-side မှာ secret ထည့်လို့မရပါ။</p><h2>Domain ချိတ်ဆက်ခြင်း</h2><p>Domain ဝယ်/စီမံသူရဲ့ DNS မှာ hosting provider ညွှန်တဲ့ record (A/AAAA/CNAME) ကိုသာထည့်ပါ။ DNS ပြောင်းလဲမှု ဖြန့်ဝေချိန်ရှိနိုင်ပြီး မှန်ကန်ကြောင်း provider dashboard နဲ့စစ်ပါ။</p><h2>HTTPS ကိုအတည်ပြုပါ</h2><p>Certificate အလုပ်လုပ်ကြောင်းစစ်ပြီး HTTP→HTTPS redirect, mixed-content warning နဲ့ cookie Secure setting စမ်းပါ။ API နဲ့ frontend origin မတူရင် CORS allowlist ကို လိုအပ်တဲ့ domain တိတိကျကျနဲ့ထားပါ။</p>
+        </article>
+        <article class="page" id="page-deploy-actions" data-group="deploy" data-title="GitHub Actions ဖြင့် CI/CD အခြေခံ">
+          <div class="progress-line"><div></div></div>
+          <h1>GitHub Actions ဖြင့် CI/CD အခြေခံ</h1>
+          <p class="lede">CI က code ပြောင်းတိုင်း build/test ကိုအလိုအလျောက်စစ်ပေးပြီး CD က အောင်မြင်တဲ့ artifact ကို publish လုပ်ပေးပါတယ်။ အရင်ဆုံး automated check ကိုတည်ဆောက်ပြီးမှ deploy ကိုချိတ်ပါ။</p>
+          <h2>Workflow အစဉ်</h2><p>CI/CD pipeline ကို အောက်ပါအဆင့်တွေနဲ့ စီစဉ်ပါ။</p><ul><li>Trigger — pull request/push မှာ run ပါ။</li><li>Install — lockfile အတိုင်း dependency တင်ပါ။</li><li>Check — lint/test/build လုပ်ပါ။</li><li>Deploy — default branch မှာ check အောင်မှ publish ပါ။</li></ul><h2>Permission နဲ့ Secret</h2><p>Workflow ကိုလိုအပ်သလောက် permission သာပေးပါ။ ဥပမာ Pages deployment လုပ်ရာမှာ <code>pages: write</code> နဲ့ <code>id-token: write</code> လိုနိုင်ပါတယ်။ Token ကို log မလုပ်ပါနဲ့။ Third-party action များကို review လုပ်ပြီး version ကို သတ်မှတ်အသုံးပြုပါ။</p><h2>Failure និង Rollback</h2><p>Action run log မှ failing step ကိုပြန်စစ်ပါ၊ failed check ကိုကျော်ပြီး deploy မလုပ်ပါနဲ့။ ယခင် stable release ကိုပြန်တင်နိုင်မယ့် commit/tag မှတ်ထားပြီး rollback ကို staging မှာ လေ့ကျင့်ပါ။</p>
+        </article>
+        <article class="page" id="page-quality-measure" data-group="quality" data-title="Performance ကိုတိုင်းတာခြင်း">
+          <div class="progress-line"><div></div></div>
+          <h1>Performance ကိုတိုင်းတာခြင်း</h1>
+          <p class="lede">မြန်တယ်လို့ထင်တာနဲ့မလုံလောက်ပါ။ Real user experience ကို Core Web Vitals နဲ့ field/lab measurement ခွဲပြီး စစ်ပါ။</p>
+          <h2>အဓိက Metrics</h2><p>LCP က အဓိက content ပေါ်ချိန်၊ INP က interaction တုံ့ပြန်ချိန်၊ CLS က layout ရုတ်တရက်ရွေ့မှုကိုတိုင်းတာတယ်။ Metric target တွေ ပြောင်းနိုင်လို့ လက်ရှိ Google guidance ကိုစစ်ပြီး p75 field data ကိုဦးစားပေးပါ။</p><h2>တိုင်းတာနည်း</h2><p>DevTools Lighthouse/Performance panel နဲ့ lab test လုပ်ပါ။ Network throttling, CPU throttling နဲ့ mobile viewport စမ်းပါ။ Field data/analytics ရှိရင် လူသုံးအတွေ့အကြုံကိုပါနှိုင်းယှဉ်ပါ။</p><h2>စနစ်တကျ ပြင်ပါ</h2><p>Baseline မှတ်တမ်းတင် → အကြီးဆုံး bottleneck ရွေး → တစ်ကြိမ်မှာတစ်ခု ပြင် → ပြန်တိုင်းပါ။ တခြားလူစက်/ကွန်ရက်ပေါ်လည်းစမ်းပြီး improvement ကို document လုပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-quality-assets" data-group="quality" data-title="Image, Font နှင့် JavaScript စွမ်းဆောင်ရည်">
+          <div class="progress-line"><div></div></div>
+          <h1>Image, Font နှင့် JavaScript စွမ်းဆောင်ရည်</h1>
+          <p class="lede">ကြီးမားတဲ့ image, render ကိုပိတ်တဲ့ script နဲ့ မလိုအပ်တဲ့ font က page loading ကိုနှေးစေနိုင်ပါတယ်။ အရင်တိုင်းပြီးမှ asset ကိုအရွယ်အစား/priority အလိုက်ပြင်ပါ။</p>
+          <h2>ပုံများ</h2><p>မှန်ကန်တဲ့ pixel size သုံး၊ WebP/AVIF အပါအဝင် သင့်တော်တဲ့ format ရွေး၊ <code>&amp;lt;img width height&amp;gt;</code> ပေးပြီး layout shift လျှော့ပါ။ Below-the-fold ပုံတွေကိုသာ lazy load လုပ်ပါ; hero/LCP image ကို lazy မလုပ်ပါနဲ့။</p><h2>CSS/JavaScript</h2><p>မသုံးတဲ့ code ဖြုတ်၊ bundle size စစ်၊ module ကိုလိုအပ်တဲ့နေရာမှသာ load လုပ်ပါ။ Third-party script ကိုလျှော့ပါ။ Long task တွေကိုခွဲပြီး user interaction မပိတ်အောင်လုပ်ပါ။</p><h2>Font/Cache</h2><p>လိုအပ်တဲ့ font weight/character subset သာထည့်ပြီး font-display စဉ်းစားပါ။ Static asset တွေကို version/hash ပါတဲ့ filename နဲ့ cache လုပ်ပါ။ Cache policy ပြောင်းပြီးနောက် update မြင်ရမှုကိုစမ်းပါ။</p>
+        </article>
+        <article class="page" id="page-quality-semantic" data-group="quality" data-title="Semantic HTML, Keyboard နှင့် Screen Reader">
+          <div class="progress-line"><div></div></div>
+          <h1>Semantic HTML, Keyboard နှင့် Screen Reader</h1>
+          <p class="lede">Accessibility (a11y) ဆိုတာ လူအမျိုးမျိုး၊ input နည်းလမ်းအမျိုးမျိုးနဲ့ ဝဘ်ကိုအသုံးပြုနိုင်အောင်လုပ်တာပါ။ Native semantic HTML ကို ARIA ထက်အရင်ရွေးပါ။</p>
+          <h2>Structure မှန်ကန်စေပါ</h2><p>Page တစ်ခုမှာ အဓိက <code>&amp;lt;main&amp;gt;</code> တစ်ခု၊ အဓိပ္ပါယ်ရှိတဲ့ heading အဆင့်စဉ်နဲ့ navigation landmark ထားပါ။ Link ကို destination အတွက်၊ button ကို action အတွက်သုံးပါ။ Image ရဲ့ရည်ရွယ်ချက်အလိုက် alt text ပေးပါ။</p><h2>Keyboard စမ်းသပ်ပါ</h2><p>Mouse မသုံးဘဲ Tab/Shift+Tab နဲ့သွား၊ Enter/Space နဲ့ activate လုပ်ပါ။ Focus မြင်သာရမယ်၊ focus order အဓိပ္ပါယ်ရှိရမယ်၊ keyboard trap မရှိရပါ။ Skip link နဲ့ dialog ထဲ focus ထိန်းသိမ်းမှုစစ်ပါ။</p><h2>ARIA ကိုသင့်တော်သလို သုံးပါ</h2><p>Native <code>&amp;lt;button&amp;gt;</code> ရဲ့ အမည်ကို ထပ်ဖော်ပြဖို့လိုမှသာ <code>aria-label</code> ထည့်ပါ။ ရိုးရိုး HTML element ကို role ထည့်ပြီး semantic ပုံစံတူလုပ်မယ့်အစား သင့်တော်တဲ့ native element ကိုရွေးပါ။ Screen reader နဲ့လည်း လက်တွေ့စမ်းသပ်ပါ။</p>
+        </article>
+        <article class="page" id="page-quality-forms" data-group="quality" data-title="Accessible Forms, Contrast နှင့် Motion">
+          <div class="progress-line"><div></div></div>
+          <h1>Accessible Forms, Contrast နှင့် Motion</h1>
+          <p class="lede">Form label, အမှားအယွင်းနဲ့ focus ကိုရှင်းလင်းစွာပြရင် လူတိုင်းဖြည့်ရလွယ်ကူပြီး အထူးသဖြင့် screen reader နဲ့ keyboard သုံးသူတွေကိုကူညီပါတယ်။</p>
+          <h2>Form များ</h2><p>Input တစ်ခုချင်းစီကို <code>&amp;lt;label for&amp;gt;</code> နဲ့ချိတ်ပါ။ Required/format လိုအပ်ချက်ကို စာသားနဲ့ဖော်ပြပါ။ Error ဖြစ်ရင် ဘယ် field၊ ဘာကြောင့်၊ ဘယ်လိုပြင်ရမလဲ အတိအကျပြောပြီး field နဲ့ချိတ်ပါ။</p><h2>Contrast နှင့် Color</h2><p>စာသားနဲ့ background contrast ကိုစစ်ပါ; အရေးကြီးတဲ့အခြေအနေကို အရောင်တစ်ခုတည်းနဲ့ မပြပါနဲ့။ Link/controls တွေကို text, icon သို့မဟုတ် shape နဲ့ပါ ခွဲခြားသိနိုင်စေပါ။ Zoom 200% နဲ့ reflow ကိုစမ်းပါ။</p><h2>Motion နှင့် စမ်းသပ်မှု</h2><p>Animation များကို လိုအပ်သလောက်သာသုံးပြီး <code>prefers-reduced-motion</code> ကိုလေးစားပါ။ Automated accessibility scan ပြီးနောက် keyboard-only, zoom, screen reader စမ်းသပ်မှုကိုပါလုပ်ပါ။ Checklist တစ်ခုတည်းက user testing ကို အစားမထိုးပါ။</p>
+        </article>
       </main>
     </div>
 
-    <footer class="colophon">Web Dev Docs — Web &amp; Mobile Development Course · Module 1 (HTML), Module 2 (CSS), Module 3 (Tailwind CSS), Module 4 (JavaScript), Module 5 (Git &amp; GitHub), Module 6 (PHP), Module 7 (MySQL), Module 8 (Laravel), Module 9 (REST API), Module 10 (React), Module 11 (Dart) &amp; Module 12 (Flutter) အတွက် လေ့လာမှု reference</footer>
+    <footer class="colophon">Web Dev Docs — Web &amp; Mobile Development Course · Module 1 (HTML), Module 2 (CSS), Module 3 (Tailwind CSS), Module 4 (JavaScript), Module 5 (Git &amp; GitHub), Module 6 (PHP), Module 7 (MySQL), Module 8 (Laravel), Module 9 (REST API), Module 10 (React), Module 11 (Dart), Module 12 (Flutter), Developer Tools, Web Security, Deployment/CI/CD, Performance &amp; Accessibility အတွက် လေ့လာမှု reference</footer>
 
     <script>
       (function () {
         var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
         var sidebar = document.getElementById('sidebar');
-        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]') };
+        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), quality: document.querySelector('[data-nav-group="quality"]') };
         var navLinks = {};
         var visited = {};
 
