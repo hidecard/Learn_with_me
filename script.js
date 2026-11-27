@@ -2095,6 +2095,49 @@
             '<pre><code>' + esc(code) + '</code></pre>' + HEIGHT_PRELUDE + '</body></html>';
         }
 
+        /* ---------- Python lessons: browser Python runtime ----------
+           Python is not a browser language, so load Pyodide in the isolated
+           preview and mirror stdout/stderr into the same visible output panel
+           used by JavaScript examples. The fallback message is intentional:
+           it tells learners when a CDN/runtime cannot be reached. */
+        function pythonDoc(code) {
+          var safeCode = JSON.stringify(code).replace(/<\//g, '<\\/');
+          return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+            '<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"><\/script>' +
+            '<style>body{margin:0;background:#0d1117;color:#e6edf3;font:13px/1.7 ui-monospace,monospace;padding:12px 14px;word-break:break-word}.label{color:#8b949e;font-size:11px;letter-spacing:.08em}.out{margin-top:8px;color:#d2f4df;white-space:pre-wrap}.err{margin-top:8px;color:#f87171;white-space:pre-wrap}</style></head>' +
+            '<body><div class="label">PYTHON 3 · OUTPUT</div><div id="status" class="out">Python runtime ကို ဖွင့်နေပါတယ်…</div><div id="output" class="out"></div>' +
+            '<script>\n' +
+            'var source=' + safeCode + ';\n' +
+            'var statusBox=document.getElementById("status"), outputBox=document.getElementById("output");\n' +
+            'function write(text, cls){var line=document.createElement("div");line.className=cls||"out";line.textContent=String(text);outputBox.appendChild(line);}\n' +
+            '(async function(){try{if(typeof loadPyodide!=="function")throw new Error("Python runtime ကို မဖွင့်နိုင်ပါ။ အင်တာနက်ချိတ်ဆက်မှုကို စစ်ပါ။");' +
+            'var py=await loadPyodide({indexURL:"https://cdn.jsdelivr.net/pyodide/v0.26.2/full/"});' +
+            'py.setStdout({batched:function(text){write(text);}});py.setStderr({batched:function(text){write(text,"err");}});' +
+            'statusBox.textContent="RUNNING…";await py.runPythonAsync("import builtins\\nbuiltins.input=lambda prompt=\\\"\\\": \\\"Aye\\\"\\n"+source);' +
+            'statusBox.textContent="✓ Python code အလုပ်လုပ်ပြီးပါပြီ";' +
+            '}catch(error){statusBox.textContent="✗ Python error";write(error&&error.message?error.message:error,"err");}})();\n' +
+            '<\/script>' + HEIGHT_PRELUDE + '</body></html>';
+        }
+
+        /* ---------- TypeScript lessons: transpile then execute ----------
+           TypeScript's type syntax is removed with the official compiler in the
+           preview. The emitted JavaScript then uses the existing console panel,
+           so learners get the same edit → Run → output flow as JavaScript. */
+        function typeScriptDoc(code) {
+          var safeCode = JSON.stringify(code).replace(/<\//g, '<\\/');
+          return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+            '<script src="https://cdn.jsdelivr.net/npm/typescript@5.7.2/lib/typescript.js"><\/script>' +
+            '<style>body{font-family:sans-serif;margin:10px;color:#1c2420} .ts-status{font:12px ui-monospace,monospace;color:#52665b;margin:8px 0}</style></head>' +
+            '<body><div class="ts-status" id="ts-status">TypeScript compile လုပ်နေပါတယ်…</div>' + JS_CONSOLE_PRELUDE +
+            '<script>\n' +
+            'var source=' + safeCode + ';var statusBox=document.getElementById("ts-status");\n' +
+            'try{if(!window.ts)throw new Error("TypeScript compiler ကို မဖွင့်နိုင်ပါ။ အင်တာနက်ချိတ်ဆက်မှုကို စစ်ပါ။");' +
+            'var result=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2020,module:ts.ModuleKind.None,strict:true}});' +
+            'statusBox.textContent="✓ TypeScript compile အောင်မြင်ပါပြီ";new Function(result.outputText)();' +
+            '}catch(error){statusBox.textContent="✗ TypeScript error";if(window.console&&console.error)console.error(error&&error.message?error.message:error);}\n' +
+            '<\/script>' + HEIGHT_PRELUDE + '</body></html>';
+        }
+
         function runExample(ex) {
           var code = ex.querySelector('.code-edit').value;
           var iframe = ex.querySelector('iframe.preview');
@@ -2109,6 +2152,8 @@
           var isReact = page && page.dataset.group === 'react';
           var isDart = page && page.dataset.group === 'dart';
           var isFlutter = page && page.dataset.group === 'flutter';
+          var isPython = page && page.dataset.group === 'python';
+          var isTypeScript = page && page.dataset.group === 'typescript';
           var group = page ? page.dataset.group : '';
           if ((isLaravel || isAPI) && /Route::/.test(code)) {
             iframe.srcdoc = laravelRouteDoc(code);
@@ -2143,7 +2188,25 @@
             };
             return;
           }
-          if (isLaravel || group === 'security' || group === 'deploy' || group === 'ci' || group === 'quality' || group === 'python' || group === 'typescript') {
+          if (isPython) {
+            iframe.srcdoc = pythonDoc(code);
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 500);
+              setTimeout(function () { autoHeight(iframe); }, 1500);
+            };
+            return;
+          }
+          if (isTypeScript) {
+            iframe.srcdoc = typeScriptDoc(code);
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 400);
+              setTimeout(function () { autoHeight(iframe); }, 1200);
+            };
+            return;
+          }
+          if (isLaravel || group === 'security' || group === 'deploy' || group === 'ci' || group === 'quality') {
             iframe.srcdoc = codeNoteDoc(code, ex.dataset.language, ex.querySelector('.hint').textContent);
             iframe.onload = function () { autoHeight(iframe); };
             return;
@@ -2389,6 +2452,28 @@
           return out;
         }
 
+        var PY_KW = { 'and': 1, 'as': 1, 'assert': 1, 'async': 1, 'await': 1, 'break': 1, 'class': 1, 'continue': 1, 'def': 1, 'del': 1, 'elif': 1, 'else': 1, 'False': 1, 'finally': 1, 'for': 1, 'from': 1, 'global': 1, 'if': 1, 'import': 1, 'in': 1, 'is': 1, 'lambda': 1, 'None': 1, 'not': 1, 'or': 1, 'pass': 1, 'raise': 1, 'return': 1, 'True': 1, 'try': 1, 'while': 1, 'with': 1, 'yield': 1 };
+
+        function highlightPython(code) {
+          var out = '', i = 0, n = code.length, m;
+          while (i < n) {
+            var c = code.charAt(i), rest = code.slice(i);
+            if (c === '#') { var e = code.indexOf('\n', i); e = e < 0 ? n : e; out += tk('com', code.slice(i, e)); i = e; continue; }
+            if (c === '"' || c === "'") {
+              var triple = code.substr(i, 3) === c + c + c, end = code.indexOf(triple ? c + c + c : c, i + (triple ? 3 : 1));
+              end = end < 0 ? n : end + (triple ? 3 : 1); out += tk('str', code.slice(i, end)); i = end; continue;
+            }
+            if ((m = /^\d[\d_]*(\.\d+)?/.exec(rest))) { out += tk('num', m[0]); i += m[0].length; continue; }
+            if ((m = /^[A-Za-z_]\w*/.exec(rest))) {
+              var word = m[0], q = i + word.length; while (q < n && /\s/.test(code.charAt(q))) q++;
+              out += PY_KW[word] ? tk('kw', word) : code.charAt(q) === '(' ? tk('fn', word) : esc(word); i += word.length; continue;
+            }
+            if ('(){}[]:,.'.indexOf(c) >= 0) { out += tk('punc', c); i++; continue; }
+            out += esc(c); i++;
+          }
+          return out;
+        }
+
         var PHP_KW = { 'echo': 1, 'print': 1, 'function': 1, 'return': 1, 'if': 1, 'elseif': 1, 'else': 1, 'foreach': 1, 'as': 1, 'for': 1, 'while': 1, 'do': 1, 'switch': 1, 'case': 1, 'default': 1, 'break': 1, 'continue': 1, 'class': 1, 'public': 1, 'private': 1, 'protected': 1, 'static': 1, 'new': 1, 'extends': 1, 'implements': 1, 'const': 1, 'try': 1, 'catch': 1, 'finally': 1, 'throw': 1, 'true': 1, 'false': 1, 'null': 1, 'and': 1, 'or': 1, 'instanceof': 1, 'use': 1, 'namespace': 1, 'require': 1, 'require_once': 1, 'include': 1, 'include_once': 1, 'global': 1, 'isset': 1, 'empty': 1, 'unset': 1, 'array': 1, 'abstract': 1, 'final': 1, 'var': 1 };
 
         function highlightPHP(code) {
@@ -2596,7 +2681,7 @@
           }
           ed.render = function () {
             var v = ta.value;
-            var hl = (edGroup === 'php' || edGroup === 'laravel') ? highlightPHP(v) : edGroup === 'mysql' ? highlightSQL(v) : (edGroup === 'api' || edGroup === 'react' || edGroup === 'flutter' || edGroup === 'project') ? highlightJS(v) : highlightHTML(v);
+            var hl = (edGroup === 'php' || edGroup === 'laravel') ? highlightPHP(v) : edGroup === 'python' ? highlightPython(v) : edGroup === 'typescript' || edGroup === 'js' || edGroup === 'api' || edGroup === 'react' || edGroup === 'flutter' || edGroup === 'project' ? highlightJS(v) : edGroup === 'mysql' ? highlightSQL(v) : highlightHTML(v);
             codeEl.innerHTML = hl + (v === '' || v.charAt(v.length - 1) === '\n' ? ' ' : '');
             var lines = v.split('\n').length, nums = '';
             for (var li = 1; li <= lines; li++) nums += '<div>' + li + '</div>';

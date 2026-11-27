@@ -382,8 +382,8 @@
         language: group === 'python' ? 'Python 3' : 'TypeScript',
         code: query,
         note: group === 'python'
-          ? 'ဒီဥပမာကို Python 3 နဲ့ ကိုယ့်စက်မှာ run ပါ။ Input နဲ့တန်ဖိုးတွေပြောင်းပြီး output ကိုနှိုင်းယှဉ်ပါ။'
-          : 'ဒီဥပမာကို TypeScript project မှာ strict type-check လုပ်ပါ။ tsc သို့မဟုတ် TypeScript build tool နဲ့စမ်းပါ။'
+          ? 'Run နှိပ်လျှင် browser ထဲက Python 3 runtime ဖြင့် output ပြပါမည်။ Input နဲ့တန်ဖိုးတွေပြောင်းပြီး output ကိုနှိုင်းယှဉ်ပါ။ အင်တာနက်မရှိလျှင် local Python 3 နဲ့ စမ်းပါ။'
+          : 'Run နှိပ်လျှင် browser ထဲမှာ TypeScript ကို compile/transpile လုပ်ပြီး output ပြပါမည်။ Type error အပြည့်အစုံစစ်ရန် strict project ထဲမှာ tsc နဲ့လည်း စမ်းပါ။'
       };
     }
     if (group === 'mysql') {
