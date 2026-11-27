@@ -1,7 +1,7 @@
       (function () {
         var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
         var sidebar = document.getElementById('sidebar');
-        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]'), python: document.querySelector('[data-nav-group="python"]'), typescript: document.querySelector('[data-nav-group="typescript"]') };
+        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]'), python: document.querySelector('[data-nav-group="python"]'), typescript: document.querySelector('[data-nav-group="typescript"]'), java: document.querySelector('[data-nav-group="java"]'), c: document.querySelector('[data-nav-group="c"]'), go: document.querySelector('[data-nav-group="go"]'), rust: document.querySelector('[data-nav-group="rust"]'), csharp: document.querySelector('[data-nav-group="csharp"]') };
         var navLinks = {};
         var visited = {};
         var activeGroup = 'html';
@@ -2087,6 +2087,25 @@
             HEIGHT_PRELUDE + '</body></html>';
         }
 
+        /* ---------- Java / C / Go / Rust / C# lessons: no browser runner ----------
+           These languages cannot run in the browser, so Run shows a note telling
+           learners the local command instead of fake output. Do not invent a
+           runtime here; the lesson articles carry the same hint. */
+        function localRunDoc(group) {
+          var info = {
+            java: ['JAVA', 'javac Main.java && java Main'],
+            c: ['C', 'gcc main.c -o main && ./main'],
+            go: ['GO', 'go run main.go'],
+            rust: ['RUST', 'cargo run'],
+            csharp: ['C#', 'dotnet run']
+          }[group] || ['CODE', ''];
+          return '<!DOCTYPE html><html><head><meta charset="utf-8"></head>' +
+            '<body style="margin:0;background:#0d1117;color:#e6edf3;font:13px/1.75 monospace;padding:12px 14px;word-break:break-word">' +
+            '<div style="color:#6e7681">' + info[0] + ' · ဒီ code ကို browser မှာ run လို့မရပါ</div>' +
+            '<div style="margin-top:8px">ဒီ code ကို ကိုယ့် computer မှာ <span style="color:#3fb950">' + info[1] + '</span> နဲ့ run ပါ။</div>' +
+            HEIGHT_PRELUDE + '</body></html>';
+        }
+
         function codeNoteDoc(code, label, note) {
           return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
             '<style>body{margin:0;background:#0d1117;color:#e6edf3;font:13px/1.7 ui-monospace,monospace;padding:12px 14px} .label{color:#8b949e;font-size:11px;letter-spacing:.08em} .note{color:#9db0a6;margin:8px 0 12px} pre{margin:0;white-space:pre-wrap;word-break:break-word;color:#d2f4df}</style></head>' +
@@ -2164,6 +2183,11 @@
           var isFlutter = page && page.dataset.group === 'flutter';
           var isPython = page && page.dataset.group === 'python';
           var isTypeScript = page && page.dataset.group === 'typescript';
+          var isJava = page && page.dataset.group === 'java';
+          var isC = page && page.dataset.group === 'c';
+          var isGo = page && page.dataset.group === 'go';
+          var isRust = page && page.dataset.group === 'rust';
+          var isCSharp = page && page.dataset.group === 'csharp';
           var group = page ? page.dataset.group : '';
           if ((isLaravel || isAPI) && /Route::/.test(code)) {
             iframe.srcdoc = laravelRouteDoc(code);
@@ -2213,6 +2237,14 @@
               autoHeight(iframe);
               setTimeout(function () { autoHeight(iframe); }, 400);
               setTimeout(function () { autoHeight(iframe); }, 1200);
+            };
+            return;
+          }
+          if (isJava || isC || isGo || isRust || isCSharp) {
+            iframe.srcdoc = localRunDoc(group);
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 300);
             };
             return;
           }
@@ -2691,7 +2723,7 @@
           }
           ed.render = function () {
             var v = ta.value;
-            var hl = (edGroup === 'php' || edGroup === 'laravel') ? highlightPHP(v) : edGroup === 'python' ? highlightPython(v) : edGroup === 'typescript' || edGroup === 'js' || edGroup === 'api' || edGroup === 'react' || edGroup === 'flutter' || edGroup === 'project' ? highlightJS(v) : edGroup === 'mysql' ? highlightSQL(v) : highlightHTML(v);
+            var hl = (edGroup === 'php' || edGroup === 'laravel') ? highlightPHP(v) : edGroup === 'python' ? highlightPython(v) : edGroup === 'typescript' || edGroup === 'js' || edGroup === 'api' || edGroup === 'react' || edGroup === 'flutter' || edGroup === 'project' || edGroup === 'java' || edGroup === 'c' || edGroup === 'go' || edGroup === 'rust' || edGroup === 'csharp' ? highlightJS(v) : edGroup === 'mysql' ? highlightSQL(v) : highlightHTML(v);
             codeEl.innerHTML = hl + (v === '' || v.charAt(v.length - 1) === '\n' ? ' ' : '');
             var lines = v.split('\n').length, nums = '';
             for (var li = 1; li <= lines; li++) nums += '<div>' + li + '</div>';
@@ -2724,7 +2756,7 @@
           var badge = document.createElement('span');
           badge.className = 'lang-badge';
           var exPage = ex.closest ? ex.closest('.page') : null;
-          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (exPage && exPage.dataset.group === 'python') ? 'PYTHON' : (exPage && exPage.dataset.group === 'typescript') ? 'TYPESCRIPT' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
+          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (exPage && exPage.dataset.group === 'python') ? 'PYTHON' : (exPage && exPage.dataset.group === 'typescript') ? 'TYPESCRIPT' : (exPage && exPage.dataset.group === 'java') ? 'JAVA' : (exPage && exPage.dataset.group === 'c') ? 'C' : (exPage && exPage.dataset.group === 'go') ? 'GO' : (exPage && exPage.dataset.group === 'rust') ? 'RUST' : (exPage && exPage.dataset.group === 'csharp') ? 'CSHARP' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
           head.insertBefore(badge, copyBtn);
           var resetBtn = document.createElement('button');
           resetBtn.className = 'mini-btn';
