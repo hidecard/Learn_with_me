@@ -339,8 +339,10 @@
     { title: 'Testing, Runtime Safety, and Production', note: 'Compile-time type checking သည် runtime validation ကိုအစားမထိုးနိုင်ကြောင်းနားလည်ပြီး test၊ validation နှင့် release ကိုစီမံပါ။', topics: ['Compile-time နှင့် runtime error ခွဲခြားခြင်း', 'External JSON ကို schema ဖြင့်စစ်ခြင်း', 'Zod ဖြင့် input validate လုပ်ခြင်း', 'Unit test ဖြင့် function behavior စစ်ခြင်း', 'Mock ဖြင့် API dependency ခွဲခြင်း', 'Type test ဖြင့် public API စစ်ဆေးခြင်း', 'ESLint နှင့် formatter ချိတ်ဆက်ခြင်း', 'Environment variable ကို validate လုပ်ခြင်း', 'Production build အရင် type-check လုပ်ခြင်း', 'TypeScript migration ကို အဆင့်လိုက်လုပ်ခြင်း'] }
   ];
 
-  curriculum.push({ group: 'python', lessons: createLanguageLessons('Python', pythonUnits) });
-  curriculum.push({ group: 'typescript', lessons: createLanguageLessons('TypeScript', typeScriptUnits) });
+  // Python lessons are now hand-written <article> pages in index.html (JS format);
+  // the generated lessons below are disabled so they do not duplicate them.
+  // TypeScript lessons are now hand-written <article> pages in index.html (JS format);
+  // the generated lessons below are disabled so they do not duplicate them.
 
   var main = document.getElementById('main');
   if (!main) return;

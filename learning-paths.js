@@ -64,18 +64,18 @@
       ['page-extra-ci-test-lint-build-gates', 'Quality Gate ထည့်ပြီး Release ကိုကာကွယ်ပါ', 'မအောင်မြင်သော check တစ်ခုကြောင့် release ရပ်သွားကြောင်းစစ်ပါ။']
     ]},
     { group: 'python', steps: [
-      ['page-extra-python-01', 'Python ကိုတပ်ဆင်ပြီး ပထမဆုံး program ရေးပါ', 'Python 3 interpreter ကိုရွေး၊ file ဖန်တီးပြီး print နဲ့ output ထုတ်ပါ။'],
-      ['page-extra-python-11', 'Variable နဲ့ data type ကိုနားလည်ပါ', 'String၊ number၊ boolean နဲ့ input ကိုခွဲပြီး type conversion စမ်းပါ။'],
-      ['page-extra-python-21', 'Operator နဲ့ condition ကိုအသုံးပြုပါ', 'if/elif/else ဖြင့် input အခြေအနေအလိုက် ရလဒ်ရွေးပါ။'],
-      ['page-extra-python-31', 'Loop နဲ့ collection ကိုတွဲသုံးပါ', 'List၊ dictionary နဲ့ for loop ဖြင့် data အစဉ်လိုက်ကိုင်တွယ်ပါ။'],
-      ['page-extra-python-51', 'Function ရေးပြီး ပြန်သုံးပါ', 'Parameter နဲ့ return value ပါသော function ကိုရေးပြီးစမ်းပါ။']
+      ['page-python-01-01', 'Python ကိုတပ်ဆင်ပြီး ပထမဆုံး program ရေးပါ', 'Python 3 interpreter ကိုရွေး၊ file ဖန်တီးပြီး print နဲ့ output ထုတ်ပါ။'],
+      ['page-python-02-01', 'Variable နဲ့ data type ကိုနားလည်ပါ', 'String၊ number၊ boolean နဲ့ input ကိုခွဲပြီး type conversion စမ်းပါ။'],
+      ['page-python-03-01', 'Operator နဲ့ condition ကိုအသုံးပြုပါ', 'if/elif/else ဖြင့် input အခြေအနေအလိုက် ရလဒ်ရွေးပါ။'],
+      ['page-python-04-01', 'Loop နဲ့ collection ကိုတွဲသုံးပါ', 'List၊ dictionary နဲ့ for loop ဖြင့် data အစဉ်လိုက်ကိုင်တွယ်ပါ။'],
+      ['page-python-06-01', 'Function ရေးပြီး ပြန်သုံးပါ', 'Parameter နဲ့ return value ပါသော function ကိုရေးပြီးစမ်းပါ။']
     ]},
     { group: 'typescript', steps: [
-      ['page-extra-typescript-01', 'TypeScript project ကိုစတင်တည်ဆောက်ပါ', 'TypeScript compiler နဲ့ tsconfig ကိုပြင်ဆင်ပြီး ပထမ .ts file ကို compile လုပ်ပါ။'],
-      ['page-extra-typescript-11', 'Primitive type နဲ့ inference ကိုဖတ်ပါ', 'String၊ number၊ boolean နဲ့ null တန်ဖိုးတွေကို type-safe သုံးပါ။'],
-      ['page-extra-typescript-21', 'Function အတွက် type သတ်မှတ်ပါ', 'Parameter၊ return value နဲ့ optional argument တို့ကိုကြေညာပါ။'],
-      ['page-extra-typescript-41', 'Union နဲ့ type narrowing ကိုသုံးပါ', 'Type guard တည်ဆောက်ပြီး ဖြစ်နိုင်သည့်အခြေအနေအားလုံးကိုစစ်ပါ။'],
-      ['page-extra-typescript-61', 'Generic ဖြင့် ပြန်သုံးနိုင်သော code ရေးပါ', 'Input type ကိုထိန်းထားသော generic function သို့မဟုတ် interface တည်ဆောက်ပါ။']
+      ['page-typescript-01-01', 'TypeScript project ကိုစတင်တည်ဆောက်ပါ', 'TypeScript compiler နဲ့ tsconfig ကိုပြင်ဆင်ပြီး ပထမ .ts file ကို compile လုပ်ပါ။'],
+      ['page-typescript-02-01', 'Primitive type နဲ့ inference ကိုဖတ်ပါ', 'String၊ number၊ boolean နဲ့ null တန်ဖိုးတွေကို type-safe သုံးပါ။'],
+      ['page-typescript-03-01', 'Function အတွက် type သတ်မှတ်ပါ', 'Parameter၊ return value နဲ့ optional argument တို့ကိုကြေညာပါ။'],
+      ['page-typescript-05-01', 'Union နဲ့ type narrowing ကိုသုံးပါ', 'Type guard တည်ဆောက်ပြီး ဖြစ်နိုင်သည့်အခြေအနေအားလုံးကိုစစ်ပါ။'],
+      ['page-typescript-07-01', 'Generic ဖြင့် ပြန်သုံးနိုင်သော code ရေးပါ', 'Input type ကိုထိန်းထားသော generic function သို့မဟုတ် interface တည်ဆောက်ပါ။']
     ]},
     { group: 'quality', steps: [
       ['page-quality-measure', 'ပြဿနာကို မပြင်မီ တိုင်းတာပါ', 'Page load ကိုစမ်းပြီး အချိန်ယူသောနေရာနှင့် metric ကိုမှတ်ပါ။'],
