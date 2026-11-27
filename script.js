@@ -7,27 +7,35 @@
         var activeGroup = 'html';
         var searchInput = document.getElementById('searchInput');
         var navEmpty = document.getElementById('navEmpty');
-
+        var courseStats = document.getElementById('courseStats');
+        if (courseStats) courseStats.textContent = pages.length.toLocaleString() + ' သင်ခန်းစာ · Topic ' + Object.keys(groups).length + ' ခု';
         function applySidebarSearch() {
           var q = searchInput.value.trim().toLowerCase();
-          var any = false;
+          var count = 0;
+          var matchingGroups = {};
           Object.keys(navLinks).forEach(function (id) {
-            var page = document.getElementById(id);
-            var matches = page.dataset.group === activeGroup && (!q || navLinks[id].dataset.search.indexOf(q) !== -1);
-            navLinks[id].style.display = matches ? '' : 'none';
-            if (matches) any = true;
+            var link = navLinks[id];
+            var pageGroup = link.dataset.group;
+            var matches = q ? link.dataset.search.indexOf(q) !== -1 : pageGroup === activeGroup;
+            link.style.display = matches ? '' : 'none';
+            if (matches) { count++; matchingGroups[pageGroup] = true; }
           });
-          navEmpty.style.display = any ? 'none' : 'block';
-        }
-
-        function showSidebarGroup(group) {
-          activeGroup = group;
           Object.keys(groups).forEach(function (key) {
-            var visible = key === group;
+            var visible = q ? !!matchingGroups[key] : key === activeGroup;
             groups[key].hidden = !visible;
             var heading = groups[key].previousElementSibling;
             if (heading && heading.tagName === 'H2') heading.hidden = !visible;
           });
+          if (q) {
+            navEmpty.textContent = count ? count.toLocaleString() + ' သင်ခန်းစာ တွေ့ရှိသည်။' : 'မတွေ့ပါ — တခြား keyword နဲ့ ရှာကြည့်ပါ။';
+            navEmpty.style.display = 'block';
+          } else {
+            navEmpty.textContent = 'ရှာမတွေ့ပါ — တခြား keyword နဲ့ ရှာကြည့်ပါ။';
+            navEmpty.style.display = 'none';
+          }
+        }
+        function showSidebarGroup(group) {
+          activeGroup = group;
           applySidebarSearch();
         }
 
@@ -36,7 +44,9 @@
           var btn = document.createElement('button');
           btn.className = 'nav-link';
           btn.dataset.pageId = page.id;
-          btn.dataset.search = (page.dataset.title + ' ' + page.dataset.group + ' ' + page.id.replace('page-', '').replace(/-/g, ' ')).toLowerCase();
+          btn.dataset.group = page.dataset.group;
+          var searchableText = Array.prototype.map.call(page.querySelectorAll('h1, h2, p, li'), function (node) { return node.textContent; }).join(' ');
+          btn.dataset.search = (page.dataset.title + ' ' + page.dataset.group + ' ' + page.id.replace('page-', '').replace(/-/g, ' ') + ' ' + searchableText).toLowerCase();
           btn.innerHTML = '<span></span><svg class="done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
           btn.querySelector('span').textContent = page.dataset.title;
           btn.addEventListener('click', function () { showPage(page.id); closeNav(); });
@@ -3117,8 +3127,11 @@
           return ed;
         }
 
-        // Wire examples
-        document.querySelectorAll('.example').forEach(function (ex) {
+        // Wire code editors only when their lesson is first opened. This avoids
+        // highlighting and binding thousands of hidden examples during startup.
+        function wireExamples(root) {
+          root.querySelectorAll('.example:not([data-wired])').forEach(function (ex) {
+            ex.dataset.wired = '1';
           var runBtn = ex.querySelector('.run-btn');
           var copyBtn = ex.querySelector('[data-copy]');
           var ed = buildEditor(ex);
@@ -3203,15 +3216,51 @@
               navigator.clipboard.writeText(ta.value).then(done, function () { document.execCommand('copy'); done(); });
             } else { document.execCommand('copy'); done(); }
           });
-        });
+          });
+        }
 
-        function showPage(id) {
-          pages.forEach(function (p) { p.classList.toggle('active', p.id === id); });
+        function lessonHashId() {
+          var match = /^#lesson=([^&]+)$/.exec(window.location.hash);
+          if (!match) return null;
+          try { return decodeURIComponent(match[1]); } catch (e) { return null; }
+        }
+
+        function showPage(id, options) {
+          var page = document.getElementById(id);
+          if (!page || !page.classList.contains('page')) return;
+          options = options || {};
+          var lessonHash = '#lesson=' + encodeURIComponent(id);
+          if (!options.fromHistory && window.location.hash !== lessonHash) {
+            window.history.pushState({ lessonId: id }, '', lessonHash);
+          }
+          pages.forEach(function (candidate) { candidate.classList.toggle('active', candidate === page); });
           Object.keys(navLinks).forEach(function (k) { navLinks[k].classList.toggle('active', k === id); });
           visited[id] = true;
           navLinks[id].classList.add('visited');
-          var page = document.getElementById(id);
+          document.body.classList.remove('welcome-view');
           showSidebarGroup(page.dataset.group);
+          document.title = page.dataset.title + ' | Learn_with_me';
+          var lede = page.querySelector('.lede');
+          var description = lede ? lede.textContent.trim().slice(0, 155) : page.dataset.title;
+          ['meta[name=description]', 'meta[property="og:description"]', 'meta[name="twitter:description"]'].forEach(function (selector) {
+            var meta = document.querySelector(selector); if (meta) meta.setAttribute('content', description);
+          });
+          if (!page.querySelector('.lesson-share-link')) {
+            var shareButton = document.createElement('button');
+            shareButton.type = 'button';
+            shareButton.className = 'lesson-share-link';
+            shareButton.textContent = 'သင်ခန်းစာ link ကူးယူရန်';
+            shareButton.setAttribute('aria-label', page.dataset.title + ' သင်ခန်းစာ link ကို ကူးယူရန်');
+            shareButton.addEventListener('click', function () {
+              var shareUrl = window.location.href.split('#')[0] + '#lesson=' + encodeURIComponent(id);
+              function copied() { shareButton.textContent = 'Link ကူးယူပြီးပါပြီ'; setTimeout(function () { shareButton.textContent = 'သင်ခန်းစာ link ကူးယူရန်'; }, 1500); }
+              if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(shareUrl).then(copied, function () { window.prompt('သင်ခန်းစာ link ကို ကူးယူပါ', shareUrl); });
+              else window.prompt('သင်ခန်းစာ link ကို ကူးယူပါ', shareUrl);
+            });
+            var titleNode = page.querySelector('h1');
+            if (titleNode) titleNode.insertAdjacentElement('afterend', shareButton);
+          }
+          wireExamples(page);
           // Auto-run examples on first view
           page.querySelectorAll('.example').forEach(function (ex) {
             if (!ex.dataset.ran) { ex.dataset.ran = '1'; runExample(ex); }
@@ -3322,5 +3371,16 @@
           document.body.classList.remove('welcome-view');
           showPage(pages[0].id);
         });
+        window.addEventListener('popstate', function () {
+          var id = lessonHashId();
+          if (id && document.getElementById(id)) showPage(id, { fromHistory: true });
+          else {
+            document.body.classList.add('welcome-view');
+            pages.forEach(function (page) { page.classList.remove('active'); });
+            Object.keys(navLinks).forEach(function (key) { navLinks[key].classList.remove('active'); });
+          }
+        });
+        var initialLessonId = lessonHashId();
+        if (initialLessonId && document.getElementById(initialLessonId)) showPage(initialLessonId, { fromHistory: true });
       })();
     

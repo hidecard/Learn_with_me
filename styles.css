@@ -479,3 +479,16 @@
         .sidebar, .progress-line > div { transition: none; }
       }
     
+
+
+/* Direct lesson sharing */
+.lesson-share-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin: 0 0 1rem; padding: .4rem .75rem;
+  border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface); color: var(--text); font: inherit;
+  font-size: .875rem; cursor: pointer;
+}
+.lesson-share-link:hover, .lesson-share-link:focus-visible {
+  border-color: var(--accent); color: var(--accent-dark); outline-offset: 2px;
+}
