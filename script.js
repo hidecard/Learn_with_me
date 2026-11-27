@@ -1,7 +1,7 @@
       (function () {
         var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
         var sidebar = document.getElementById('sidebar');
-        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]'), python: document.querySelector('[data-nav-group="python"]'), typescript: document.querySelector('[data-nav-group="typescript"]'), java: document.querySelector('[data-nav-group="java"]'), c: document.querySelector('[data-nav-group="c"]'), go: document.querySelector('[data-nav-group="go"]'), rust: document.querySelector('[data-nav-group="rust"]'), csharp: document.querySelector('[data-nav-group="csharp"]') };
+        var groups = { html: document.querySelector('[data-nav-group="html"]'), css: document.querySelector('[data-nav-group="css"]'), tailwind: document.querySelector('[data-nav-group="tailwind"]'), js: document.querySelector('[data-nav-group="js"]'), git: document.querySelector('[data-nav-group="git"]'), php: document.querySelector('[data-nav-group="php"]'), mysql: document.querySelector('[data-nav-group="mysql"]'), laravel: document.querySelector('[data-nav-group="laravel"]'), api: document.querySelector('[data-nav-group="api"]'), react: document.querySelector('[data-nav-group="react"]'), dart: document.querySelector('[data-nav-group="dart"]'), flutter: document.querySelector('[data-nav-group="flutter"]'), devtools: document.querySelector('[data-nav-group="devtools"]'), security: document.querySelector('[data-nav-group="security"]'), deploy: document.querySelector('[data-nav-group="deploy"]'), ci: document.querySelector('[data-nav-group="ci"]'), quality: document.querySelector('[data-nav-group="quality"]'), python: document.querySelector('[data-nav-group="python"]'), typescript: document.querySelector('[data-nav-group="typescript"]'), java: document.querySelector('[data-nav-group="java"]'), c: document.querySelector('[data-nav-group="c"]'), go: document.querySelector('[data-nav-group="go"]'), rust: document.querySelector('[data-nav-group="rust"]'), csharp: document.querySelector('[data-nav-group="csharp"]'), dsa: document.querySelector('[data-nav-group="dsa"]'), docker: document.querySelector('[data-nav-group="docker"]'), nodejs: document.querySelector('[data-nav-group="nodejs"]'), express: document.querySelector('[data-nav-group="express"]'), wordpress: document.querySelector('[data-nav-group="wordpress"]'), cloud: document.querySelector('[data-nav-group="cloud"]'), django: document.querySelector('[data-nav-group="django"]'), shell: document.querySelector('[data-nav-group="shell"]'), aws: document.querySelector('[data-nav-group="aws"]'), seo: document.querySelector('[data-nav-group="seo"]'), cybersecurity: document.querySelector('[data-nav-group="cybersecurity"]') };
         var navLinks = {};
         var visited = {};
         var activeGroup = 'html';
@@ -2087,7 +2087,7 @@
             HEIGHT_PRELUDE + '</body></html>';
         }
 
-        /* ---------- Java / C / Go / Rust / C# lessons: no browser runner ----------
+        /* ---------- Java / C / Go / Rust / C# / DSA / Docker / Node.js / Express / WordPress / Cloud / Django / Shell / AWS / SEO / Cyber Security lessons: no browser runner ----------
            These languages cannot run in the browser, so Run shows a note telling
            learners the local command instead of fake output. Do not invent a
            runtime here; the lesson articles carry the same hint. */
@@ -2097,12 +2097,23 @@
             c: ['C', 'gcc main.c -o main && ./main'],
             go: ['GO', 'go run main.go'],
             rust: ['RUST', 'cargo run'],
-            csharp: ['C#', 'dotnet run']
+            csharp: ['C#', 'dotnet run'],
+            dsa: ['DSA', 'node solution.js'],
+            docker: ['DOCKER', 'docker build -t app . && docker run app'],
+            nodejs: ['NODEJS', 'node app.js'],
+            express: ['EXPRESS', 'npm start'],
+            wordpress: ['WORDPRESS', 'php -S localhost:8000'],
+            cloud: ['CLOUD', '', 'ဒီ lesson က cloud console မှာ လုပ်ရမယ့် အဆင့်တွေ ဖြစ်လို့ ကိုယ့် cloud account ရဲ့ console မှာ လုပ်ပါ။'],
+            django: ['DJANGO', 'python manage.py runserver'],
+            shell: ['SHELL', 'bash script.sh'],
+            aws: ['AWS', 'aws s3 ls'],
+            seo: ['SEO', '', 'ဒီ lesson မှာ run စရာ code မဟုတ်ဘဲ SEO checklist ဖြစ်လို့ ကိုယ့် website မှာ စစ်ပါ။'],
+            cybersecurity: ['CYBERSECURITY', '', 'ဒီ lesson က လုံခြုံတဲ့ lab မှာ လက်တွေ့စမ်းရမယ့် အကြောင်းဖြစ်လို့ ကိုယ့် computer ရဲ့ သီးသန့် lab environment မှာ စမ်းပါ။']
           }[group] || ['CODE', ''];
           return '<!DOCTYPE html><html><head><meta charset="utf-8"></head>' +
             '<body style="margin:0;background:#0d1117;color:#e6edf3;font:13px/1.75 monospace;padding:12px 14px;word-break:break-word">' +
             '<div style="color:#6e7681">' + info[0] + ' · ဒီ code ကို browser မှာ run လို့မရပါ</div>' +
-            '<div style="margin-top:8px">ဒီ code ကို ကိုယ့် computer မှာ <span style="color:#3fb950">' + info[1] + '</span> နဲ့ run ပါ။</div>' +
+            (info[2] ? '<div style="margin-top:8px">' + info[2] + '</div>' : '<div style="margin-top:8px">ဒီ code ကို ကိုယ့် computer မှာ <span style="color:#3fb950">' + info[1] + '</span> နဲ့ run ပါ။</div>') +
             HEIGHT_PRELUDE + '</body></html>';
         }
 
@@ -2188,6 +2199,17 @@
           var isGo = page && page.dataset.group === 'go';
           var isRust = page && page.dataset.group === 'rust';
           var isCSharp = page && page.dataset.group === 'csharp';
+          var isDsa = page && page.dataset.group === 'dsa';
+          var isDocker = page && page.dataset.group === 'docker';
+          var isNodejs = page && page.dataset.group === 'nodejs';
+          var isExpress = page && page.dataset.group === 'express';
+          var isWordpress = page && page.dataset.group === 'wordpress';
+          var isCloud = page && page.dataset.group === 'cloud';
+          var isDjango = page && page.dataset.group === 'django';
+          var isShell = page && page.dataset.group === 'shell';
+          var isAws = page && page.dataset.group === 'aws';
+          var isSeo = page && page.dataset.group === 'seo';
+          var isCyberSecurity = page && page.dataset.group === 'cybersecurity';
           var group = page ? page.dataset.group : '';
           if ((isLaravel || isAPI) && /Route::/.test(code)) {
             iframe.srcdoc = laravelRouteDoc(code);
@@ -2240,7 +2262,7 @@
             };
             return;
           }
-          if (isJava || isC || isGo || isRust || isCSharp) {
+          if (isJava || isC || isGo || isRust || isCSharp || isDsa || isDocker || isNodejs || isExpress || isWordpress || isCloud || isDjango || isShell || isAws || isSeo || isCyberSecurity) {
             iframe.srcdoc = localRunDoc(group);
             iframe.onload = function () {
               autoHeight(iframe);
@@ -2723,7 +2745,7 @@
           }
           ed.render = function () {
             var v = ta.value;
-            var hl = (edGroup === 'php' || edGroup === 'laravel') ? highlightPHP(v) : edGroup === 'python' ? highlightPython(v) : edGroup === 'typescript' || edGroup === 'js' || edGroup === 'api' || edGroup === 'react' || edGroup === 'flutter' || edGroup === 'project' || edGroup === 'java' || edGroup === 'c' || edGroup === 'go' || edGroup === 'rust' || edGroup === 'csharp' ? highlightJS(v) : edGroup === 'mysql' ? highlightSQL(v) : highlightHTML(v);
+            var hl = (edGroup === 'php' || edGroup === 'laravel' || edGroup === 'wordpress') ? highlightPHP(v) : edGroup === 'python' || edGroup === 'django' ? highlightPython(v) : edGroup === 'typescript' || edGroup === 'js' || edGroup === 'api' || edGroup === 'react' || edGroup === 'flutter' || edGroup === 'project' || edGroup === 'java' || edGroup === 'c' || edGroup === 'go' || edGroup === 'rust' || edGroup === 'csharp' || edGroup === 'dsa' || edGroup === 'nodejs' || edGroup === 'express' ? highlightJS(v) : edGroup === 'mysql' ? highlightSQL(v) : highlightHTML(v);
             codeEl.innerHTML = hl + (v === '' || v.charAt(v.length - 1) === '\n' ? ' ' : '');
             var lines = v.split('\n').length, nums = '';
             for (var li = 1; li <= lines; li++) nums += '<div>' + li + '</div>';
@@ -2756,7 +2778,7 @@
           var badge = document.createElement('span');
           badge.className = 'lang-badge';
           var exPage = ex.closest ? ex.closest('.page') : null;
-          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (exPage && exPage.dataset.group === 'python') ? 'PYTHON' : (exPage && exPage.dataset.group === 'typescript') ? 'TYPESCRIPT' : (exPage && exPage.dataset.group === 'java') ? 'JAVA' : (exPage && exPage.dataset.group === 'c') ? 'C' : (exPage && exPage.dataset.group === 'go') ? 'GO' : (exPage && exPage.dataset.group === 'rust') ? 'RUST' : (exPage && exPage.dataset.group === 'csharp') ? 'CSHARP' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
+          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (exPage && exPage.dataset.group === 'python') ? 'PYTHON' : (exPage && exPage.dataset.group === 'typescript') ? 'TYPESCRIPT' : (exPage && exPage.dataset.group === 'java') ? 'JAVA' : (exPage && exPage.dataset.group === 'c') ? 'C' : (exPage && exPage.dataset.group === 'go') ? 'GO' : (exPage && exPage.dataset.group === 'rust') ? 'RUST' : (exPage && exPage.dataset.group === 'csharp') ? 'CSHARP' : (exPage && exPage.dataset.group === 'dsa') ? 'DSA' : (exPage && exPage.dataset.group === 'docker') ? 'DOCKER' : (exPage && exPage.dataset.group === 'nodejs') ? 'NODEJS' : (exPage && exPage.dataset.group === 'express') ? 'EXPRESS' : (exPage && exPage.dataset.group === 'wordpress') ? 'WORDPRESS' : (exPage && exPage.dataset.group === 'cloud') ? 'CLOUD' : (exPage && exPage.dataset.group === 'django') ? 'DJANGO' : (exPage && exPage.dataset.group === 'shell') ? 'SHELL' : (exPage && exPage.dataset.group === 'aws') ? 'AWS' : (exPage && exPage.dataset.group === 'seo') ? 'SEO' : (exPage && exPage.dataset.group === 'cybersecurity') ? 'CYBERSECURITY' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
           head.insertBefore(badge, copyBtn);
           var resetBtn = document.createElement('button');
           resetBtn.className = 'mini-btn';
