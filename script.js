@@ -85,6 +85,57 @@
           'window.addEventListener("error",function(e){line("Error: "+e.message,"#f87171");});' +
           '})();<\/script>';
 
+        // Node.js / Express lessons: the preview is a browser, so Node built-ins
+        // (require, process, __dirname, ...) do not exist there. This stub
+        // prelude defines them with small mocks that accept any call and return
+        // plausible values, so the lesson's own console.log output still shows.
+        // It is injected only for nodejs/express lessons, after the console
+        // prelude above, so console.table/debug/dir/count use the panel too.
+        var NODE_STUB_PRELUDE = '<script>' + "\nvar __dirname = '/home/aung/my-project';\nvar __filename = '/home/aung/my-project/app.js';\nvar process = { version: 'v20.11.0', platform: 'win32', argv: ['node', 'app.js'], env: { PORT: '3000', NODE_ENV: 'development', HOME: '/home/aung' }, cwd: function(){ return '/home/aung/my-project'; }, exit: function(){}, on: function(){}, nextTick: function(fn){ fn(); } };\nvar Buffer = { from: function(s){ return { toString: function(){ return String(s); } }; }, alloc: function(n){ return { toString: function(){ return ''; } }; }, isBuffer: function(){ return false; } };\nfunction __mockFn(name){\n  function fn(){ return __mockFn(name); }\n  fn.then = function(cb){ if (typeof cb === 'function') { try { cb({}); } catch(e){} } return fn; };\n  fn.catch = function(){ return fn; };\n  fn.toString = function(){ return '[mock ' + name + ']'; };\n  return fn;\n}\nfunction __makeMock(name){\n  var fn = function(){ return __makeMock(name); };\n  fn.toString = function(){ return '[mock ' + name + ']'; };\n  fn.then = function(cb){ return fn; };\n  fn.catch = function(){ return fn; };\n  return new Proxy(fn, {\n    get: function(t, prop){\n      if (prop === Symbol.toPrimitive) return function(){ return '[mock ' + name + ']'; };\n      if (prop === 'toJSON') return function(){ return '[mock ' + name + ']'; };\n      if (prop === 'then') return undefined;\n      if (prop === 'length') return 0;\n      if (prop === 'name') return name;\n      return __makeMock(name + '.' + String(prop));\n    },\n    apply: function(t, th, args){ return __makeMock(name + '()'); }\n  });\n}\nfunction __expressApp(){\n  var app = function(req, res, next){ if (typeof next === 'function') next(); };\n  app.route = function(){ var r = {}; ['get','post','put','delete','patch','all'].forEach(function(m){ r[m] = function(){ return r; }; }); return r; };\n  ['get','post','put','delete','patch','all','use','set','engine','listen'].forEach(function(m){\n    app[m] = function(a, b){ if (m === 'listen' && typeof b === 'function') b(); if (m === 'listen' && typeof a === 'function') a(); return app; };\n  });\n  app.Router = function(){ return __expressApp(); };\n  return app;\n}\nfunction __express(){\n  var app = __expressApp();\n  return app;\n}\n__express.json = function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n__express.urlencoded = function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n__express.static = function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n__express.Router = function(){ return __expressApp(); };\nfunction require(name){\n  if (name === 'express') return __express;\n  if (name === 'path') return { join: function(){ return Array.prototype.join.call(arguments, '/').replace(/\\/+/g, '/'); }, extname: function(p){ var i = String(p).lastIndexOf('.'); return i >= 0 ? String(p).slice(i) : ''; }, basename: function(p){ return String(p).split('/').pop(); }, dirname: function(p){ var parts = String(p).split('/'); parts.pop(); return parts.join('/') || '.'; }, resolve: function(){ return '/home/aung/my-project/' + Array.prototype.join.call(arguments, '/'); }, sep: '/' };\n  if (name === 'fs') return { readFileSync: function(p){ return String(p).indexOf('.json') >= 0 ? '[{\"id\": 1, \"title\": \"Sample todo\", \"completed\": false}]' : 'file content'; }, writeFileSync: function(){}, appendFileSync: function(){}, existsSync: function(){ return true; }, readdirSync: function(){ return [{ name: 'index.html', isDirectory: function(){ return false; }, isFile: function(){ return true; } }]; }, createReadStream: function(){ return __makeMock('fs.ReadStream'); }, createWriteStream: function(){ return __makeMock('fs.WriteStream'); }, statSync: function(){ return { isFile: function(){ return true; }, size: 123 }; },\n    readFile: function(p, enc, cb){ if (typeof enc === 'function') cb = enc; if (typeof cb === 'function') cb(null, String(p).indexOf('.json') >= 0 ? '[{\"id\": 1, \"title\": \"Sample todo\", \"completed\": false}]' : 'file content'); },\n    writeFile: function(p, data, cb){ if (typeof cb === 'function') cb(null); },\n    appendFile: function(p, data, cb){ if (typeof cb === 'function') cb(null); },\n    mkdir: function(p, o, cb){ if (typeof o === 'function') cb = o; if (typeof cb === 'function') cb(null); },\n    readdir: function(p, o, cb){ if (typeof o === 'function') cb = o; if (typeof cb === 'function') cb(null, [{ name: 'index.html', isDirectory: function(){ return false; }, isFile: function(){ return true; } }, { name: 'style.css', isDirectory: function(){ return false; }, isFile: function(){ return true; } }, { name: 'app.js', isDirectory: function(){ return false; }, isFile: function(){ return true; } }]); },\n    rename: function(a, b, cb){ if (typeof cb === 'function') cb(null); },\n    unlink: function(p, cb){ if (typeof cb === 'function') cb(null); },\n    stat: function(p, cb){ if (typeof cb === 'function') cb(null, { isFile: function(){ return true; }, size: 123 }); },\n    copyFile: function(a, b, cb){ if (typeof cb === 'function') cb(null); },\n    promises: { readFile: function(){ return Promise.resolve('file content'); }, writeFile: function(){ return Promise.resolve(); }, readdir: function(){ return Promise.resolve(['index.html','style.css','app.js']); } } };\n  if (name === 'os') return { platform: function(){ return 'win32'; }, homedir: function(){ return '/home/aung'; }, totalmem: function(){ return 8589934592; }, freemem: function(){ return 4294967296; }, cpus: function(){ return [{model:'Intel'}]; }, hostname: function(){ return 'aung-pc'; }, type: function(){ return 'Windows_NT'; }, release: function(){ return '10.0.0'; } };\n  if (name === 'http' || name === 'https') return { createServer: function(h){ return { listen: function(p, cb){ if (typeof cb === 'function') cb(); if (typeof p === 'function') p(); }, on: function(){ return this; } }; }, get: function(u, cb){ if (typeof cb === 'function') cb({ statusCode: 200, on: function(){} }); }, request: function(){ return __makeMock('http.request'); } };\n  if (name === 'events') { function EE(){ this._h = {}; this.on = function(ev, fn){ (this._h[ev] = this._h[ev] || []).push(fn); return this; }; this.once = function(ev, fn){ return this.on(ev, fn); }; this.emit = function(ev){ var a = Array.prototype.slice.call(arguments, 1); (this._h[ev] || []).forEach(function(fn){ fn.apply(null, a); }); return true; }; this.removeListener = function(ev, fn){ this._h[ev] = (this._h[ev] || []).filter(function(f){ return f !== fn; }); return this; }; this.off = this.removeListener; this.listenerCount = function(ev){ return (this._h[ev] || []).length; }; this.listeners = function(ev){ return (this._h[ev] || []).slice(); }; this.eventNames = function(){ return Object.keys(this._h); }; } EE.listenerCount = function(em, ev){ return em && em.listenerCount ? em.listenerCount(ev) : 0; }; return { EventEmitter: EE }; }\n  if (name === 'util') return { promisify: function(fn){ return function(){ return Promise.resolve(); }; }, format: function(){ return Array.prototype.join.call(arguments, ' '); }, inspect: function(v){ return String(v); } };\n  if (name === 'stream') { function Readable(){ this.on = function(){ return this; }; this.pipe = function(d){ return d; }; } Readable.from = function(arr){ var r = new Readable(); r._data = arr; return r; }; function Transform(opts){ this._buf = ''; this.write = function(chunk){ this._buf += String(chunk); if (opts && opts.transform) opts.transform.call(this, chunk, 'utf8', function(){}); return true; }; this.end = function(chunk){ if (chunk) this.write(chunk); }; this.on = function(ev, fn){ if (ev === 'data' && fn) fn(this._buf); return this; }; this.pipe = function(d){ if (d && d.write) d.write(this._buf); return d; }; } function Writable(){ this.write = function(){ return true; }; this.end = function(){}; this.on = function(){ return this; }; } return { Readable: Readable, Writable: Writable, PassThrough: Transform, Transform: Transform, pipeline: function(a, b, cb){ if (typeof cb === 'function') cb(null); } }; }\n  if (name === 'zlib') return { gzipSync: function(){ return 'gzipped'; }, gunzipSync: function(){ return 'unzipped'; }, createGzip: function(){ return { pipe: function(d){ return d; }, on: function(){ return this; } }; }, createGunzip: function(){ return { pipe: function(d){ return d; }, on: function(){ return this; } }; } };\n  if (name === 'assert' || name === 'node:assert') return { strictEqual: function(){}, equal: function(){}, ok: function(){}, deepStrictEqual: function(){}, throws: function(){} };\n  if (name === 'dotenv') return { config: function(){ return { parsed: {} }; } };\n  if (name === 'bcrypt' || name === 'bcryptjs') return { hash: function(){ return Promise.resolve('hashed-password'); }, compare: function(){ return Promise.resolve(true); }, hashSync: function(){ return 'hashed-password'; }, compareSync: function(){ return true; } };\n  if (name === 'jsonwebtoken') return { sign: function(){ return 'sample-jwt-token'; }, verify: function(){ return { id: 1, name: 'Aung Aung' }; }, decode: function(){ return { id: 1, name: 'Aung Aung', iat: 1700000000 }; } };\n  if (name === 'mongoose') return { connect: function(){ return Promise.resolve(); }, Schema: function(def){ this.paths = def || {}; }, model: function(){ return __makeMock('mongoose.Model'); } };\n  if (name === 'multer') { var m = function(opts){ function up(req, res, next){ if (typeof next === 'function') next(); } up.single = function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; }; up.array = up.single; up.fields = up.single; up.any = up.single; up.none = up.single; return up; }; m.diskStorage = function(){ return {}; }; m.memoryStorage = function(){ return {}; }; return m; }\n  if (name === 'cors') return function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n  if (name === 'helmet') return function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n  if (name === 'morgan') return function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n  if (name === 'cookie-parser') return function(){ return function(req, res, next){ if (typeof next === 'function') next(); }; };\n  if (name === 'supertest') return function(app){ return { get: function(){ return Promise.resolve({ status: 200, body: {} }); }, post: function(){ return Promise.resolve({ status: 201, body: {} }); } }; };\n  if (name === 'node:test') return { test: function(n, fn){ if (typeof fn === 'function') fn(); else if (typeof n === 'function') n(); }, describe: function(n, fn){ if (typeof fn === 'function') fn(); }, it: function(n, fn){ if (typeof fn === 'function') fn(); } };\n  return __makeMock('require:' + name);\n}\nvar module = { exports: {} };\nvar exports = module.exports;\n\nconsole.table=function(d){try{console.log(JSON.stringify(d));}catch(e){console.log(String(d));}};\nconsole.debug=console.log;\nconsole.dir=function(d){try{console.log(JSON.stringify(d));}catch(e){console.log(String(d));}};\nconsole.count=function(l){console.log((l||'default')+': 1');};\nconsole.trace=function(){console.log(Array.prototype.join.call(arguments,' '));};\nwindow.test=function(n,fn){if(typeof fn==='function'){try{fn();console.log('PASS '+n);}catch(e){console.log('FAIL '+n+': '+e.message);}}else if(typeof n==='function'){n();}};\nwindow.describe=function(n,fn){if(typeof fn==='function')fn();};\nwindow.it=function(n,fn){if(typeof fn==='function'){try{fn();console.log('PASS '+n);}catch(e){console.log('FAIL '+n+': '+e.message);}}};\nwindow.beforeEach=function(fn){if(typeof fn==='function')fn();};\nwindow.afterEach=function(fn){if(typeof fn==='function')fn();};\nwindow.jest={fn:function(impl){function f(){return impl?impl.apply(null,arguments):undefined;}f.mockResolvedValue=function(v){return function(){return Promise.resolve(v);};};f.mockRejectedValue=function(e){return function(){return Promise.reject(e);};};f.mockReturnValue=function(v){return function(){return v;};};f.mockImplementation=function(i2){return function(){return i2.apply(null,arguments);};};return f;}};\nwindow.expect=function(v){return{toBe:function(e){if(v!==e)throw new Error('expected '+e);},toEqual:function(e){if(JSON.stringify(v)!==JSON.stringify(e))throw new Error('not equal');},toBeTruthy:function(){if(!v)throw new Error('not truthy');},toHaveLength:function(n){if(!v||v.length!==n)throw new Error('expected length '+n);},toContain:function(e){if(!v||(typeof v.indexOf==='function'?v.indexOf(e)<0:true))throw new Error('does not contain');}};};\n" + '<\\/script>';
+
+        // DSA / Node.js / Express lessons: real JavaScript code — run it in the
+        // preview inside a <script> tag (lesson code is plain JS, not HTML).
+        function jsRunDoc(code, withNodeStub) {
+          return '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="font-family:sans-serif;margin:10px">' +
+            JS_CONSOLE_PRELUDE +
+            (withNodeStub ? NODE_STUB_PRELUDE : '') +
+            '<script>' + code.replace(/<\/script/gi, '<\\/script') + '<\\/script>' +
+            HEIGHT_PRELUDE + '</body></html>';
+        }
+
+        // First non-empty, non-comment line of a lesson's code.
+        function firstCodeLine(code) {
+          var lines = code.split('\n');
+          for (var i = 0; i < lines.length; i++) {
+            var s = lines[i].trim();
+            if (!s || s.charAt(0) === '#' || s.indexOf('//') === 0) continue;
+            return s;
+          }
+          return '';
+        }
+
+        // Docker lessons: Dockerfile / Compose YAML / JSON / config, not commands.
+        function isDockerfileOrConfig(code) {
+          var t = code.trim();
+          if (t.charAt(0) === '{') return true;
+          if (/^(FROM|RUN|COPY|WORKDIR|CMD|EXPOSE|ENTRYPOINT|ENV|ARG|LABEL|ADD)\b/m.test(code)) return true;
+          if (/services:/.test(code)) return true;
+          if (/^version:/m.test(code)) return true;
+          if (/^- uses:/m.test(code)) return true;
+          if (firstCodeLine(code) === '.env') return true;
+          return false;
+        }
+
+        // Django / Cyber Security lessons run in Pyodide. Pyodide has no Django
+        // and no cryptography/bcrypt packages, and the browser has no network
+        // sockets, so these preludes register small fake modules that accept
+        // any call and return plausible values (django.get_version() -> '5.0',
+        // bcrypt hash/check round-trips, Fernet encrypt/decrypt round-trips,
+        // socket.gethostbyname -> 93.184.216.34). The Django prelude also seeds
+        // the names continuation examples rely on (models, path, admin, Post...).
+        var DJANGO_PRELUDE = "import sys, types\nfrom pathlib import Path\n_DJ_SUBS = {}\ndef _djcls(name):\n    if name not in _DJ_SUBS:\n        _DJ_SUBS[name] = type(name, (_DJAny,), {})\n    return _DJ_SUBS[name]\nclass _DJMeta(type):\n    def __getattr__(cls, name):\n        return _djcls(name)\nclass _DJAny(metaclass=_DJMeta):\n    def __init__(self, *a, **k):\n        pass\n    def __getattr__(self, name):\n        return _DJAny()\n    def __call__(self, *a, **k):\n        return _DJAny()\n    def __repr__(self):\n        return 'Django stub'\n    def __str__(self):\n        return 'Django stub'\n    def __iter__(self):\n        return iter([])\n    def __len__(self):\n        return 0\n    def __bool__(self):\n        return True\n    def __enter__(self):\n        return self\n    def __exit__(self, *a):\n        return False\n    def __getitem__(self, key):\n        return _DJAny()\n    def __add__(self, other):\n        return []\n    def __radd__(self, other):\n        return []\nclass _DJMod(types.ModuleType):\n    def __getattr__(self, name):\n        return _djcls(name)\ndef _djmod(name, **attrs):\n    m = _DJMod(name)\n    for k, v in attrs.items():\n        setattr(m, k, v)\n    sys.modules[name] = m\n    return m\n_djmod('django', get_version=lambda: '5.0')\nfor _sub in ['django.db', 'django.db.models', 'django.http', 'django.shortcuts',\n             'django.urls', 'django.views', 'django.views.generic',\n             'django.contrib', 'django.contrib.auth', 'django.contrib.auth.models',\n             'django.contrib.auth.forms', 'django.contrib.auth.decorators',\n             'django.contrib.auth.mixins', 'django.contrib.auth.views',\n             'django.contrib.admin',\n             'django.conf', 'django.conf.urls', 'django.conf.urls.static',\n             'django.core', 'django.core.files', 'django.core.files.storage',\n             'django.core.paginator', 'django.test', 'django.utils',\n             'django.utils.text', 'django.forms', 'django.template',\n             'rest_framework', 'rest_framework.views', 'rest_framework.response',\n             'rest_framework.decorators', 'rest_framework.routers',\n             'rest_framework.permissions', 'rest_framework.pagination',\n             'rest_framework.filters', 'rest_framework.test',\n             'rest_framework.serializers', 'rest_framework.viewsets']:\n    _djmod(_sub)\n__file__ = '/home/aung/mysite/settings.py'\nBASE_DIR = Path('/home/aung/mysite')\n# Names used by continuation examples (import lives in an earlier lesson)\nmodels = _djcls('models')\npath = _djcls('path')\ninclude = _djcls('include')\nadmin = _djcls('admin')\nforms = _djcls('forms')\nPost = _djcls('Post')\nComment = _djcls('Comment')\nTag = _djcls('Tag')\nProfile = _djcls('Profile')\nUser = _djcls('User')\nGroup = _djcls('Group')\nPermission = _djcls('Permission')\nAbstractUser = _djcls('AbstractUser')\nrender = _djcls('render')\nredirect = _djcls('redirect')\nget_object_or_404 = _djcls('get_object_or_404')\nHttpResponse = _djcls('HttpResponse')\nJsonResponse = _djcls('JsonResponse')\nHttpResponseRedirect = _djcls('HttpResponseRedirect')\nreverse = _djcls('reverse')\nreverse_lazy = _djcls('reverse_lazy')\nlogin_required = _djcls('login_required')\nListView = _djcls('ListView')\nDetailView = _djcls('DetailView')\nCreateView = _djcls('CreateView')\nUpdateView = _djcls('UpdateView')\nDeleteView = _djcls('DeleteView')\nTestCase = _djcls('TestCase')\nClient = _djcls('Client')\nLoginRequiredMixin = _djcls('LoginRequiredMixin')\nviewsets = _djcls('viewsets')\napi_view = _djcls('api_view')\nserializers = _djcls('serializers')\nsettings = _djcls('settings')\nslugify = _djcls('slugify')\nPaginator = _djcls('Paginator')\ndefault_storage = _djcls('default_storage')\nstatic = _djcls('static')\ntemplate = _djcls('template')\nviews = _DJAny()\nrequest = _DJAny()\nuser = _DJAny()\nContactForm = _djcls('ContactForm')\nPostForm = _djcls('PostForm')\nPostSerializer = _djcls('PostSerializer')\nAPIView = _djcls('APIView')\nResponse = _djcls('Response')\n";
+        var CYBER_PRELUDE = "import sys, types, hashlib, base64\n# --- bcrypt stub (sha256-based, keeps checkpw consistent via a store) ---\n_bcrypt = types.ModuleType('bcrypt')\n_bcrypt_store = {}\ndef _gensalt(rounds=12):\n    return b'$2b$12$' + base64.b64encode(b'salt-salt-salt-salt')[:22]\ndef _hashpw(pw, salt):\n    h = b'$2b$12$' + hashlib.sha256(salt + pw).hexdigest().encode()[:53]\n    _bcrypt_store[h] = salt\n    return h\ndef _checkpw(pw, hashed):\n    salt = _bcrypt_store.get(hashed)\n    if salt is None:\n        return False\n    return _hashpw(pw, salt) == hashed\n_bcrypt.gensalt = _gensalt\n_bcrypt.hashpw = _hashpw\n_bcrypt.checkpw = _checkpw\nsys.modules['bcrypt'] = _bcrypt\n# --- cryptography.fernet stub (xor + base64, round-trips) ---\n_crypto = types.ModuleType('cryptography')\n_fernet_mod = types.ModuleType('cryptography.fernet')\ndef _xor(data, key):\n    kb = base64.urlsafe_b64decode(key)\n    return bytes(b ^ kb[i % len(kb)] for i, b in enumerate(data))\nclass _Fernet:\n    @staticmethod\n    def generate_key():\n        return base64.urlsafe_b64encode(b'0123456789abcdef0123456789abcdef')\n    def __init__(self, key):\n        self.key = key\n    def encrypt(self, data):\n        return base64.urlsafe_b64encode(_xor(data, self.key))\n    def decrypt(self, token):\n        return _xor(base64.urlsafe_b64decode(token), self.key)\n_fernet_mod.Fernet = _Fernet\n_crypto.fernet = _fernet_mod\nsys.modules['cryptography'] = _crypto\nsys.modules['cryptography.fernet'] = _fernet_mod\n# --- socket + ssl stubs (no real network in the browser) ---\nclass _FakeSocket:\n    def __init__(self, *a, **k):\n        pass\n    def connect(self, addr):\n        pass\n    def getpeercert(self):\n        return {'subject': ((('commonName', 'example.com'),),), 'notAfter': 'Dec 31 23:59:59 2026 GMT'}\n    def __enter__(self):\n        return self\n    def __exit__(self, *a):\n        return False\n    def close(self):\n        pass\n_socket = types.ModuleType('socket')\n_socket.gethostbyname = lambda h: '93.184.216.34'\n_socket.socket = _FakeSocket\nsys.modules['socket'] = _socket\n_ssl = types.ModuleType('ssl')\nclass _Ctx:\n    def wrap_socket(self, sock, server_hostname=None):\n        return sock\n_ssl.create_default_context = lambda: _Ctx()\nsys.modules['ssl'] = _ssl\n";
+
         // Preview iframes are sandboxed (allow-scripts, opaque origin), so the parent
         // cannot measure their height directly — each preview posts its own height.
         var HEIGHT_PRELUDE =
@@ -622,6 +673,7 @@
             if (t.t === 'str') { P.i++; return { k: 'str', v: t.v }; }
             if (t.t === 'dstr') { P.i++; return { k: 'dstr', v: t.v }; }
             if (t.t === 'var') { P.i++; return { k: 'var', name: t.v }; }
+            if (isId('function')) { P.i++; if (eatOp('&')) { } var cparams = parseParams(); if (isId('use')) { P.i++; expectOp('('); while (!isOp(')') && pk().t !== 'eof') P.i++; expectOp(')'); } var cbody = parseBody(); return { k: 'closure', params: cparams, body: cbody }; }
             if (t.t === 'id') {
               var lw = t.v.toLowerCase();
               if (lw === 'true') { P.i++; return { k: 'bool', v: true }; }
@@ -754,6 +806,8 @@
           return null;
         }
         function phpCallMethod(obj, name, args, st, out) {
+          if (obj && obj.__cls === '__wpstub' && obj.__methods && typeof obj.__methods[name.toLowerCase()] === 'function') return obj.__methods[name.toLowerCase()](args, st, out, obj);
+          if (obj && obj.__cls === 'WP_Query') { if (name.toLowerCase() === 'have_posts') { obj.props.set('_wpLoop', (obj.props.get('_wpLoop') || 0)); var n = obj.props.get('_wpLoop'); if (n < 2) { obj.props.set('_wpLoop', n + 1); return true; } return false; } if (name.toLowerCase() === 'the_post') return null; if (name.toLowerCase() === 'get_posts') return obj.props.get('_posts') || null; return null; }
           var found = phpFindMethod(st, obj.__cls, name);
           if (!found) throw new Error('Call to undefined method ' + obj.__cls + '::' + name + '()');
           var sc = new PhpScope(st.global);
@@ -940,6 +994,7 @@
               phpSetTarget(node.target, nv, scope, st, out);
               return node.k === 'pre' ? nv : old;
             }
+            case 'closure': return { __cls: '__closure', params: node.params, body: node.body };
             case 'call': return phpCall(node, scope, st, out);
             case 'mcall': {
               var base = phpEval(node.base, scope, st, out);
@@ -950,6 +1005,9 @@
             case 'scall': case 'cconst': return null;
             case 'new': {
               var def = phpFindClass(st, node.cls);
+              if (!def && String(node.cls).toLowerCase() === 'wp_query') { var wq = { __cls: 'WP_Query', props: new PhpArr() }; wq.props.set('found_posts', 5); wq.props.set('post_count', 3); wq.props.set('_wpLoop', 0); return wq; }
+              if (!def && String(node.cls).toLowerCase() === 'wp_user') { var wu = { __cls: '__wpstub', props: new PhpArr(), __methods: { set_role: function (aa, ss, oo, ob) { var rr = new PhpArr(); rr.push(aa[0]); ob.props.set('roles', rr); return null; } } }; wu.props.set('ID', (node.args[0] ? phpEval(node.args[0], scope, st, out) : 1)); wu.props.set('user_login', 'aung'); var wr0 = new PhpArr(); wr0.push('subscriber'); wu.props.set('roles', wr0); return wu; }
+              if (!def && String(node.cls).toLowerCase() === 'wp_user_query') { var wuq = { __cls: '__wpstub', props: new PhpArr(), __methods: { get_total: function () { return 2; }, get_results: function () { var gr = new PhpArr(); gr.push(phpStubObj({ ID: 2, user_login: 'may' })); gr.push(phpStubObj({ ID: 3, user_login: 'aye' })); return gr; } } }; wuq.props.set('total', 2); return wuq; }
               if (!def) throw new Error('Class "' + node.cls + '" ကို မတွေ့ပါ');
               var obj = { __cls: def.name, props: new PhpArr() };
               var chain = [], cd2 = def, guard = 0;
@@ -965,6 +1023,9 @@
           return null;
         }
 
+
+        function wpOpt(st, k) { if (!st.wpOptions) st.wpOptions = { blogname: 'My WordPress Site', blogdescription: 'Just another WordPress site' }; var v = st.wpOptions[k]; return v !== undefined && v !== null ? v : ''; }
+        function phpStubObj(props, methods) { var o = { __cls: '__wpstub', props: new PhpArr(), __methods: methods || {} }; Object.keys(props || {}).forEach(function (k) { o.props.set(k, props[k]); }); return o; }
         function phpCall(node, scope, st, out) {
           var name = node.name, lname = name.toLowerCase();
           if (lname === 'isset') return node.args.every(function (an) { return phpIsset(an, scope, st, out); });
@@ -972,6 +1033,101 @@
           var args = node.args.map(function (an) { return phpEval(an, scope, st, out); });
           var a0 = args[0], a1 = args[1], a2 = args[2];
           switch (lname) {
+
+            case 'get_bloginfo': { var bk = phpStr(a0); if (bk === 'name') return wpOpt(st, 'blogname'); if (bk === 'description') return wpOpt(st, 'blogdescription'); if (bk === 'url') return 'https://example.com'; if (bk === 'wpurl') return 'https://example.com'; if (bk === 'version') return '6.7'; if (bk === 'language') return 'my'; if (bk === 'charset') return 'UTF-8'; if (bk === 'admin_email') return 'admin@example.com'; if (bk === 'stylesheet_url') return 'https://example.com/wp-content/themes/twentytwentyfour/style.css'; if (bk === 'template_url') return 'https://example.com/wp-content/themes/twentytwentyfour'; return wpOpt(st, bk); }
+            case 'bloginfo': return phpStr(a0) === 'name' ? wpOpt(st, 'blogname') : wpOpt(st, 'blogdescription');
+            case 'home_url': return 'https://example.com' + (a0 === null || a0 === undefined || a0 === '' ? '' : '/' + phpStr(a0).replace(/^\//, ''));
+            case 'site_url': return 'https://example.com' + (a0 === null || a0 === undefined || a0 === '' ? '' : '/' + phpStr(a0).replace(/^\//, ''));
+            case 'get_permalink': return 'https://example.com/sample-post/';
+            case 'get_the_title': return a0 ? 'Sample Post ' + phpStr(a0) : 'Sample Post';
+            case 'get_the_excerpt': return 'WordPress ကို တစ်ပတ်အတွင်း အခြေခံမှ စတင်လေ့လာနိုင်မယ့် လမ်းညွှန်။';
+            case 'get_the_content': return 'Sample post content — WordPress နဲ့ ရေးထားတဲ့ စာသား။';
+            case 'the_title': out.push('Sample Post'); return '';
+            case 'the_content': out.push('Sample post content — WordPress နဲ့ ရေးထားတဲ့ စာသား။'); return '';
+            case 'the_excerpt': out.push('WordPress ကို တစ်ပတ်အတွင်း အခြေခံမှ စတင်လေ့လာနိုင်မယ့် လမ်းညွှန်။'); return '';
+            case 'the_permalink': out.push('https://example.com/sample-post/'); return '';
+            case 'get_theme_mod': { var tm = st.wpThemeMods ? st.wpThemeMods[phpStr(a0)] : undefined; return tm !== undefined && tm !== null ? tm : (a1 !== undefined && a1 !== null ? a1 : ''); }
+            case 'set_theme_mod': if (!st.wpThemeMods) st.wpThemeMods = {}; st.wpThemeMods[phpStr(a0)] = a1; return true;
+            case 'get_option': { var ov = st.wpOptions ? st.wpOptions[phpStr(a0)] : undefined; return ov !== undefined && ov !== null ? ov : (a1 !== undefined && a1 !== null ? a1 : ''); }
+            case 'update_option': if (!st.wpOptions) st.wpOptions = {}; st.wpOptions[phpStr(a0)] = a1; return true;
+            case 'delete_option': if (st.wpOptions) delete st.wpOptions[phpStr(a0)]; return true;
+            case 'add_action': case 'add_filter': case 'remove_action': case 'remove_filter': case 'do_action': return true;
+            case 'add_theme_support': case 'register_nav_menus': case 'register_sidebar': case 'register_post_type': case 'register_taxonomy': return true;
+            case 'wp_insert_post': return a0 instanceof PhpArr && a0.get('ID') ? a0.get('ID') : 1;
+            case 'wp_update_post': return a0 instanceof PhpArr && a0.get('ID') ? a0.get('ID') : 1;
+            case 'update_post_meta': if (!st.wpPostMeta) st.wpPostMeta = {}; st.wpPostMeta[phpStr(a0) + '|' + phpStr(a1)] = a2; return true;
+            case 'get_post_meta': { var pm = st.wpPostMeta ? st.wpPostMeta[phpStr(a0) + '|' + phpStr(a1)] : undefined; return pm !== undefined ? pm : ''; }
+            case 'delete_post_meta': if (st.wpPostMeta) delete st.wpPostMeta[phpStr(a0) + '|' + phpStr(a1)]; return true;
+            case 'wp_trash_post': case 'wp_untrash_post': case 'wp_delete_post': return true;
+            case 'wp_set_password': case 'wp_create_user': return 1;
+            case 'set_post_thumbnail': case 'wp_set_post_categories': case 'wp_set_post_tags': case 'wp_set_object_terms': case 'flush_rewrite_rules': case 'switch_theme': return true;
+            case 'get_stylesheet': return 'twentytwentyfour-child';
+            case 'get_template': return 'twentytwentyfour';
+            case 'get_template_directory_uri': return 'https://example.com/wp-content/themes/twentytwentyfour';
+            case 'get_stylesheet_directory_uri': return 'https://example.com/wp-content/themes/twentytwentyfour-child';
+            case 'wp_get_theme': return phpStubObj({}, { get: function (aa) { return aa[0] === 'Name' ? 'Twenty Twenty-Four' : aa[0] === 'Version' ? '1.0' : '1.0'; } });
+            case 'get_header_image': return 'https://example.com/wp-content/uploads/header.jpg';
+            case 'get_custom_header': return phpStubObj({ width: 1200, height: 400 });
+            case 'wp_get_attachment_url': return 'https://example.com/wp-content/uploads/image.jpg';
+            case 'get_the_post_thumbnail_url': return 'https://example.com/wp-content/uploads/sample.jpg';
+            case 'wp_upload_dir': { var ud = new PhpArr(); ud.set('basedir', '/home/aung/wordpress/wp-content/uploads'); ud.set('baseurl', 'https://example.com/wp-content/uploads'); return ud; }
+            case 'get_post': return phpStubObj({ ID: a0 || 1, post_title: 'Sample Post', post_content: 'Sample post content.', post_excerpt: 'Sample excerpt.' });
+            case 'get_posts': { var gp = new PhpArr(); gp.push(phpStubObj({ ID: 1, post_title: 'Sample Post 1' })); gp.push(phpStubObj({ ID: 2, post_title: 'Sample Post 2' })); return gp; }
+            case 'have_posts': { st.wpLoop = (st.wpLoop || 0); if (st.wpLoop < 2) { st.wpLoop++; return true; } return false; }
+            case 'the_post': return null;
+            case 'wp_reset_postdata': case 'wp_reset_query': st.wpLoop = 0; return null;
+            case 'get_site_transient': { var tr = phpStubObj({}); var resp = new PhpArr(); resp.push('twentytwentyfour'); tr.props.set('response', resp); return tr; }
+            case 'get_plugins': { var pl = new PhpArr(); pl.set('hello.php', 'Hello Dolly'); return pl; }
+            case 'activate_plugin': case 'deactivate_plugins': case 'delete_plugins': return true;
+            case 'wp_create_nav_menu': return 1;
+            case 'get_nav_menu_locations': { var nl = new PhpArr(); nl.set('primary', 2); return nl; }
+            case 'set_nav_menu_locations': return true;
+            case 'the_widget': return '';
+            case 'is_active_sidebar': return true;
+            case 'dynamic_sidebar': return true;
+            case 'wp_enqueue_style': case 'wp_enqueue_script': return true;
+            case 'get_header': case 'get_footer': case 'get_sidebar': return '';
+            case 'wp_head': case 'wp_footer': return '';
+            case 'is_single': case 'is_user_logged_in': return true;
+            case 'is_page': case 'is_home': case 'is_admin': case 'is_front_page': case 'is_archive': return false;
+            case 'current_user_can': return true;
+            case 'sanitize_title': return phpStr(a0).toLowerCase().trim().replace(/[^a-z0-9\u1000-\u109f]+/g, '-').replace(/^-+|-+$/g, '');
+            case 'sanitize_file_name': return phpStr(a0).replace(/\s+/g, '-').replace(/[^A-Za-z0-9.\-_\u1000-\u109f]/g, '');
+            case 'sanitize_text_field': return phpStr(a0).replace(/<[^>]*>/g, '').trim();
+            case 'esc_html': case 'esc_attr': return phpStr(a0).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            case 'esc_url': return phpStr(a0);
+            case '__': return a0;
+            case '_e': out.push(phpStr(a0)); return '';
+            case 'do_shortcode': return '';
+            case 'wp_is_mobile': return false;
+            case 'get_page_template_slug': return '';
+            case 'wc_get_page_id': return a0 === 'shop' ? 2 : a0 === 'cart' ? 3 : a0 === 'checkout' ? 4 : a0 === 'myaccount' ? 5 : 2;
+            case 'class_exists': return phpStr(a0) === 'WP_Query';
+            case 'function_exists': return false;
+            case 'phpversion': return '8.3.0';
+            case 'wp_get_post_revisions': { var rev = new PhpArr(); rev.push(phpStubObj({ post_date: '2026-01-05 10:30:00' })); rev.push(phpStubObj({ post_date: '2026-01-04 09:00:00' })); return rev; }
+            case 'wp_update_nav_menu_item': return 1;
+            case 'wp_nav_menu': return '<ul><li>ပင်မ စာစ်မ်ဘာ</li><li>ကျန်န်ုတ်အ ကြေင်း</li></ul>';
+            case 'file_exists': case 'is_dir': case 'is_file': return true;
+            case 'wp_delete_attachment': return true;
+            case 'add_image_size': return true;
+            case 'wp_generate_password': return 'Xk9#mQ2vLp7!zR4w';
+            case 'get_core_updates': { var cu = new PhpArr(); cu.push(phpStubObj({ version: '6.8' })); return cu; }
+            case 'get_woocommerce_currency': return wpOpt(st, 'woocommerce_currency') || 'MMK';
+            case 'wc_get_order': return phpStubObj({ ID: a0 || 101 }, { get_status: function () { return 'processing'; }, get_total: function () { return '15000'; }, get_id: function () { return 101; } });
+            case 'update_user_meta': if (!st.wpUserMeta) st.wpUserMeta = {}; st.wpUserMeta[phpStr(a0) + '|' + phpStr(a1)] = a2; return true;
+            case 'get_user_meta': { var um = st.wpUserMeta ? st.wpUserMeta[phpStr(a0) + '|' + phpStr(a1)] : undefined; return um !== undefined ? um : ''; }
+            case 'delete_user_meta': if (st.wpUserMeta) delete st.wpUserMeta[phpStr(a0) + '|' + phpStr(a1)]; return true;
+            case 'wp_delete_user': return true;
+            case 'get_author_posts_url': return 'https://example.com/author/aung-aung/';
+            case 'count_user_posts': return 5;
+            case 'get_current_user_id': return 1;
+            case 'wp_get_current_user': return phpStubObj({ ID: 1, user_login: 'aung' }, { });
+            case 'get_avatar': return '';
+            case 'get_search_form': return '<form>Search</form>';
+            case 'get_post_type': return 'post';
+            case 'get_post_status': return 'publish';
+            case 'get_comment_count': { var cc = new PhpArr(); cc.set('approved', 3); return cc; }
             case 'count': return a0 instanceof PhpArr ? a0.size : (a0 === null || a0 === undefined ? 0 : 1);
             case 'strlen': return phpStr(a0).length;
             case 'trim': return phpStr(a0).trim();
@@ -1210,6 +1366,8 @@
           var g = new PhpScope(null);
           st.global = g;
           phpSeedSuperglobals(g);
+          g.setVar('wp_version', '6.7');
+          (function () { var roles = new PhpArr(); function roleObj(n) { var r = new PhpArr(); r.set('name', n); return r; } roles.set('administrator', roleObj('Administrator')); roles.set('editor', roleObj('Editor')); roles.set('author', roleObj('Author')); roles.set('contributor', roleObj('Contributor')); roles.set('subscriber', roleObj('Subscriber')); var wr = { __cls: '__wpstub', props: new PhpArr(), __methods: {} }; wr.props.set('roles', roles); g.setVar('wp_roles', wr); })();
           prog.forEach(function (s) {
             if (s.k === 'func') st.funcs[s.name.toLowerCase()] = s;
             if (s.k === 'class') phpRegisterClass(st, s);
@@ -1795,8 +1953,99 @@
         /* ---------- Laravel lessons: simulated terminal (Composer / Artisan) ----------
            Laravel cannot run in a browser, so command examples show sample
            terminal output, like the Git lessons. Real runs need PHP + Composer. */
-        function shellSampleOutput(cmd) {
+
+        // Bash simulation helpers: expand $VAR / ${VAR} / $(date ...) / $((...)).
+        function shellVarVal(k, vars) {
+          if (vars && Object.prototype.hasOwnProperty.call(vars, k)) return vars[k];
+          if (k === 'BASH_VERSION') return '5.2.21';
+          if (k === 'HOME') return '/home/aung';
+          if (k === 'USER') return 'aung';
+          if (k === 'PWD') return '/home/aung/my-project';
+          if (k === 'HOSTNAME') return 'aung-pc';
+          if (k === '0') return 'bash';
+          return '';
+        }
+        function shellDateStr(fmt) {
+          var d = new Date();
+          function pad(n) { return (n < 10 ? '0' : '') + n; }
+          if (fmt === '+%Y-%m-%d') return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+          if (fmt === '+%H:%M:%S') return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+          if (fmt === '+%Y') return '' + d.getFullYear();
+          var off = -d.getTimezoneOffset();
+          var sign = off >= 0 ? '+' : '-';
+          var tz = sign + pad(Math.floor(Math.abs(off) / 60)) + pad(Math.abs(off) % 60);
+          return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds()) + ' ' + tz + ' ' + d.getFullYear();
+        }
+        function expandShell(text, vars) {
+          text = text.replace(/\$\(\s*date\s*([^)]*)\)/g, function (m, fmt) { return shellDateStr((fmt || '').trim()); });
+          text = text.replace(/\$\(\(([^)]*)\)\)/g, function (m, expr) {
+            if (!/^[0-9+\-*/%()\s]+$/.test(expr)) return '';
+            try { return String(Function('return (' + expr + ')')()); } catch (e) { return ''; }
+          });
+          text = text.replace(/\$\([^)]*\)/g, '');
+          text = text.replace(/\$\{([A-Za-z_][A-Za-z0-9_]*)\}/g, function (m, k) { return shellVarVal(k, vars); });
+          text = text.replace(/\$([A-Za-z_][A-Za-z0-9_]*)/g, function (m, k) { return shellVarVal(k, vars); });
+          text = text.replace(/\$@/g, '').replace(/\$\*/g, '').replace(/\$\#/g, '0').replace(/\$\?/g, '0');
+          return text;
+        }
+        function stripShellQuotes(s) {
+          s = s.trim();
+          if ((s.charAt(0) === '"' && s.slice(-1) === '"') || (s.charAt(0) === "'" && s.slice(-1) === "'")) return s.slice(1, -1);
+          return s;
+        }
+        function shellSampleOutput(cmd, vars) {
           var m;
+          if (/^echo\b/.test(cmd)) {
+            var s = cmd.replace(/^echo\s+/, '').replace(/\s+$/, '').replace(/^-n\s+/, '');
+            var single = s.charAt(0) === "'" && s.slice(-1) === "'";
+            if (!single) s = expandShell(s, vars);
+            return stripShellQuotes(s);
+          }
+          if (/^pwd\b/.test(cmd)) return '/home/aung/my-project';
+          if (/^whoami\b/.test(cmd)) return 'aung';
+          if (/^hostname\b/.test(cmd)) return 'aung-pc';
+          if (/^date\b/.test(cmd)) { var dm = /^date\s+(.*)$/.exec(cmd); return shellDateStr(dm ? dm[1].trim() : ''); }
+          if (/^printenv\s+([A-Za-z_][A-Za-z0-9_]*)/.test(cmd)) { var pm = /^printenv\s+([A-Za-z_][A-Za-z0-9_]*)/.exec(cmd); return shellVarVal(pm[1], vars); }
+          if (/^printenv\b/.test(cmd)) return 'HOME=/home/aung\nUSER=aung\nSHELL=/bin/bash';
+          if (/^env\b/.test(cmd)) return 'HOME=/home/aung\nUSER=aung\nSHELL=/bin/bash';
+          if (/^ls\b/.test(cmd)) { if (/ -l/.test(cmd)) return 'total 12\ndrwxr-xr-x 2 aung aung 4096 Nov 28 00:00 my-project\n-rw-r--r-- 1 aung aung   42 Nov 28 00:00 notes.txt\n-rw-r--r-- 1 aung aung  128 Nov 28 00:00 hello.sh'; return 'hello.sh  index.html  notes.txt  style.css'; }
+          if (/^cat\s+/.test(cmd)) { var cf = cmd.replace(/^cat\s+/, '').trim(); return '--- ' + cf + ' ---\nမင်္ဂလာပါ\nHello World'; }
+          if (/^(head|tail)\b/.test(cmd)) return 'မင်္ဂလာပါ\nHello World';
+          if (/^grep\s+/.test(cmd)) return 'မင်္ဂလာပါ — ဒီစာကြောင်းမှာ ရှာတဲ့စာသား ပါပါတယ်';
+          if (/^find\b/.test(cmd)) return './notes.txt\n./hello.sh\n./index.html';
+          if (/^sort\b/.test(cmd)) return 'Aye\nMg\nSu';
+          if (/^wc\b/.test(cmd)) return '  3  12  48 notes.txt';
+          if (/^ps\b/.test(cmd)) return '  PID TTY          TIME CMD\n 1234 pts/0    00:00:00 bash\n 2345 pts/0    00:00:00 node';
+          if (/^df\b/.test(cmd)) return 'Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1        50G   20G   28G  42% /';
+          if (/^du\b/.test(cmd)) return '4.0K\t./my-project';
+          if (/^uname\b/.test(cmd)) return 'Linux aung-pc 6.8.0 x86_64 GNU/Linux';
+          if (/^id\b/.test(cmd)) return 'uid=1000(aung) gid=1000(aung) groups=1000(aung)';
+          if (/^read\s/.test(cmd)) { var rp = /-p\s+"([^"]*)"/.exec(cmd); return (rp ? rp[1] : '') + 'Aye'; }
+          if (/^bash --version/.test(cmd)) return 'GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)';
+          if (/^bash -x\s/.test(cmd)) return '+ echo "မင်္ဂလာပါ"';
+          if (/^docker --version/.test(cmd)) return 'Docker version 27.3.1, build ce12230';
+          if (/^docker ps/.test(cmd)) return 'CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES\na1b2c3d4e5f6   myapp     "node app.js"   2 hours ago   Up 2 hours   0.0.0.0:3000->3000/tcp   myapp';
+          if (/^docker images/.test(cmd)) return 'REPOSITORY   TAG       IMAGE ID       CREATED       SIZE\nmyapp        latest    a1b2c3d4e5f6   2 hours ago   125MB';
+          if (/^docker build/.test(cmd)) return 'Sending build context to Docker daemon\nStep 1/5 : FROM node:20\n ---> Using cache\nSuccessfully built a1b2c3d4e5f6\nSuccessfully tagged myapp:latest';
+          if (/^docker run/.test(cmd)) return 'Hello from Docker!\nThis message shows that your installation appears to be working correctly.';
+          if (/^docker (pull|push|stop|start|rm|rmi|logs|exec|inspect|compose|volume|network)/.test(cmd)) return '(Docker command executed — sample output)';
+          if (/^aws sts get-caller-identity/.test(cmd)) return '{\n    "UserId": "AIDACKCEVSQ6C2EXAMPLE",\n    "Account": "123456789012",\n    "Arn": "arn:aws:iam::123456789012:user/aung"\n}';
+          if (/^aws s3 ls/.test(cmd)) return '2026-11-28 00:00:00  learn-aye-bucket\n2026-11-28 00:00:00  myapp-backups';
+          if (/^aws s3 /.test(cmd)) return 'upload: ./index.html to s3://learn-aye-bucket/index.html';
+          if (/^aws ec2 describe-instances/.test(cmd)) return '{\n    "Reservations": [\n        {\n            "Instances": [\n                {\n                    "InstanceId": "i-0123456789abcdef0",\n                    "State": { "Name": "running" }\n                }\n            ]\n        }\n    ]\n}';
+          if (/^aws /.test(cmd)) return '(AWS command executed — sample output)';
+          if (/^gcloud /.test(cmd)) return '(gcloud command executed — sample output)';
+          if (/^az /.test(cmd)) return '(az command executed — sample output)';
+          if (/^kubectl /.test(cmd)) return 'NAME        READY   STATUS    RESTARTS   AGE\nmyapp-pod   1/1     Running   0          2h';
+          if (/^terraform /.test(cmd)) return 'Terraform v1.9.0\nApply complete! Resources: 1 added, 0 changed, 0 destroyed.';
+          if (/^mysql\s/.test(cmd)) return 'Welcome to the MySQL monitor. Commands end with ; or \\g.\nmysql> ';
+          if (/^redis-cli\s/.test(cmd)) return 'OK';
+          if (/^sam\s/.test(cmd)) return 'SAM CLI, version 1.120.0\nBuild Succeeded';
+          if (/^yum\s/.test(cmd)) return 'Loaded plugins\nNothing to do';
+          if (/^winget install/.test(cmd)) return 'Found Docker Desktop [Docker.DockerDesktop]\nSuccessfully installed';
+          if (/^brew install/.test(cmd)) return '==> Downloading...\nDocker was successfully installed!';
+          if (/^hadolint\s/.test(cmd)) return 'Dockerfile:1 DL3008 warning: Pin versions in apt get install';
+
           if ((m = /^composer create-project\s+\S+\s+(\S+)/.exec(cmd))) return 'Creating a "laravel/laravel" project at "./' + m[1] + '"\nInstalling laravel/laravel (v11.x)\n  - Extracting archive\n> @php artisan key:generate --ansi\n\nApplication key set successfully.\nApplication ready! Build something amazing.';
           if (/^composer create-project/.test(cmd)) return 'Creating a "laravel/laravel" project\nInstalling laravel/laravel (v11.x)\n  - Extracting archive\nApplication key set successfully.\nApplication ready! Build something amazing.';
           if ((m = /^composer require\s+(\S+)/.exec(cmd))) return 'Using version ^1.0 for ' + m[1] + '\n  - Installing ' + m[1] + ': Extracting archive\nPackage operations: 1 install, 0 updates, 0 removals\nGenerating optimized autoload files';
@@ -1845,6 +2094,7 @@
 
         function shellTerminalDoc(code) {
           var html = '';
+          var vars = {};
           code.split('\n').forEach(function (raw) {
             var line = raw.replace(/\s+$/, '');
             if (!line.trim()) return;
@@ -1853,9 +2103,22 @@
               html += '<div style="color:#6e7681;font-style:italic">' + esc(line) + '</div>';
               return;
             }
+            var am = /^(export\s+)?([A-Za-z_][A-Za-z0-9_]*)=([\s\S]*)$/.exec(t);
+            if (am) {
+              vars[am[2]] = expandShell(stripShellQuotes(am[3]), vars);
+              html += '<div style="color:#8b949e">' + esc(line) + '</div>';
+              return;
+            }
+            if (/^(if|then|else|elif|fi|for|do|done|while|until|case|esac|select|function)\b/.test(t) || /\{\s*$/.test(t) || t === '}' || /^set\s+-[a-z]+/.test(t) || /^umask\b/.test(t)) {
+              var fm = /^for\s+(\w+)\s+in\s+([^;]+);?\s*do/.exec(t);
+              if (fm) { var items = fm[2].trim().split(/\s+/); if (items.length) vars[fm[1]] = items[0]; }
+              html += '<div style="color:#8b949e">' + esc(line) + '</div>';
+              return;
+            }
             html += '<div><span style="color:#3fb950;font-weight:bold">$</span> ' + esc(line) + '</div>';
-            var out = shellSampleOutput(t) || gitSampleOutput(t);
+            var out = shellSampleOutput(t, vars) || gitSampleOutput(t);
             if (out) html += '<div style="color:#8b949e">' + esc(out) + '</div>';
+            if (/^read\s/.test(t)) { var toks = t.split(/\s+/); vars[toks[toks.length - 1]] = 'Aye'; }
           });
           if (!html) html = '<div style="color:#8b949e">Command တွေ ရေးပြီး Run နှိပ်ပါ</div>';
           return '<!DOCTYPE html><html><head><meta charset="utf-8"></head>' +
@@ -2140,20 +2403,27 @@
            instead. Do not downgrade below 0.26.4, and do not "fix" this by
            adding allow-same-origin to the iframe: that would let user-edited
            code reach the parent page. */
-        function pythonDoc(code) {
+        function pythonDoc(code, prelude, rewriteRelative, label) {
           var safeCode = JSON.stringify(code).replace(/<\//g, '<\\/');
+          var safePrelude = prelude ? JSON.stringify(prelude).replace(/<\//g, '<\\/') : '""';
           return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
             '<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"><\/script>' +
             '<style>body{margin:0;background:#0d1117;color:#e6edf3;font:13px/1.7 ui-monospace,monospace;padding:12px 14px;word-break:break-word}.label{color:#8b949e;font-size:11px;letter-spacing:.08em}.out{margin-top:8px;color:#d2f4df;white-space:pre-wrap}.err{margin-top:8px;color:#f87171;white-space:pre-wrap}</style></head>' +
-            '<body><div class="label">PYTHON 3 · OUTPUT</div><div id="status" class="out">Python runtime ကို ဖွင့်နေပါတယ်…</div><div id="output" class="out"></div>' +
+            '<body><div class="label">' + (label || 'PYTHON 3') + ' · OUTPUT</div><div id="status" class="out">Python runtime ကို ဖွင့်နေပါတယ်…</div><div id="output" class="out"></div>' +
             '<script>\n' +
             'var source=' + safeCode + ';\n' +
+            'var prelude=' + safePrelude + ';\n' +
+            'var rewriteRelative=' + (rewriteRelative ? 'true' : 'false') + ';\n' +
+            'if (rewriteRelative) {\n' +
+            'source = source.replace(/^from \\.(\\w+) import (.+)$/gm, function (m, mod, names) { return names.split(",").map(function (n) { var p = n.trim().split(/\\s+as\\s+/); return (p[1] || p[0]) + " = _DJAny"; }).join("\\n"); });\n' +
+            'source = source.replace(/^from \\. import (.+)$/gm, function (m, names) { return names.split(",").map(function (n) { var p = n.trim().split(/\\s+as\\s+/); return (p[1] || p[0]) + " = _DJAny()"; }).join("\\n"); });\n' +
+            '}\n' +
             'var statusBox=document.getElementById("status"), outputBox=document.getElementById("output");\n' +
             'function write(text, cls){var line=document.createElement("div");line.className=cls||"out";line.textContent=String(text);outputBox.appendChild(line);}\n' +
             '(async function(){try{if(typeof loadPyodide!=="function")throw new Error("Python runtime ကို မဖွင့်နိုင်ပါ။ အင်တာနက်ချိတ်ဆက်မှုကို စစ်ပါ။");' +
             'var py=await loadPyodide({indexURL:"https://cdn.jsdelivr.net/pyodide/v0.26.4/full/"});' +
             'py.setStdout({batched:function(text){write(text);}});py.setStderr({batched:function(text){write(text,"err");}});' +
-            'statusBox.textContent="RUNNING…";await py.runPythonAsync("import builtins\\nbuiltins.input=lambda prompt=\\\"\\\": \\\"Aye\\\"\\n"+source);' +
+            'statusBox.textContent="RUNNING…";await py.runPythonAsync("import builtins\\nbuiltins.input=lambda prompt=\\\"\\\": \\\"Aye\\\"\\n"+(prelude?prelude+"\\n":"")+source);' +
             'statusBox.textContent="✓ Python code အလုပ်လုပ်ပြီးပါပြီ";' +
             '}catch(error){statusBox.textContent="✗ Python error";write(error&&error.message?error.message:error,"err");}})();\n' +
             '<\/script>' + HEIGHT_PRELUDE + '</body></html>';
@@ -2262,7 +2532,89 @@
             };
             return;
           }
-          if (isJava || isC || isGo || isRust || isCSharp || isDsa || isDocker || isNodejs || isExpress || isWordpress || isCloud || isDjango || isShell || isAws || isSeo || isCyberSecurity) {
+          if (isDsa) {
+            iframe.srcdoc = jsRunDoc(code, false);
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 300);
+              setTimeout(function () { autoHeight(iframe); }, 1200);
+            };
+            return;
+          }
+          if (isNodejs || isExpress) {
+            iframe.srcdoc = jsRunDoc(code, true);
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 300);
+              setTimeout(function () { autoHeight(iframe); }, 1200);
+            };
+            return;
+          }
+          if (isWordpress) {
+            if (code.indexOf('<?php') < 0 && code.indexOf('<?=') < 0) {
+              if (/^\s*</.test(code) && /<(h1|h2|h3|p|div|img|a\s|ul|ol|li|form|button|section|article|span|table)[\s>]/.test(code)) {
+                iframe.srcdoc = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="font-family:sans-serif;margin:10px">' + code + HEIGHT_PRELUDE + '</body></html>';
+              } else {
+                iframe.srcdoc = codeNoteDoc(code, 'WordPress', 'ဒီ lesson က WordPress shortcode / block / .htaccess နမူနာ ဖြစ်လို့ ကိုယ့် WordPress site မှာ စမ်းပါ။');
+              }
+            } else {
+              iframe.srcdoc = phpOutputDoc(code);
+            }
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 300);
+            };
+            return;
+          }
+          if (isDjango || isCyberSecurity) {
+            var firstLine = firstCodeLine(code);
+            if (isDjango && /^(pip(\s|$)|python(\s|$)|python3(\s|$)|django-admin\b|source(\s|$)|cd(\s|$)|mkdir(\s|$)|code(\s|$)|git(\s|$)|npm(\s|$)|node(\s|$))/.test(firstLine)) {
+              iframe.srcdoc = shellTerminalDoc(code);
+            } else if (isDjango && /^(\{%|\{\{)/.test(firstLine)) {
+              iframe.srcdoc = codeNoteDoc(code, 'DJANGO TEMPLATE', 'ဒီ lesson က Django template နမူနာ ဖြစ်လို့ ကိုယ့် Django project ရဲ့ template ဖိုင်မှာ စမ်းပါ။');
+            } else if (isDjango && /^</.test(firstLine)) {
+              iframe.srcdoc = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="font-family:sans-serif;margin:10px">' + code + HEIGHT_PRELUDE + '</body></html>';
+            } else if (isCyberSecurity && (/^(function\s|const\s|let\s|var\s)/.test(firstLine) || /(document|window)\./.test(code))) {
+              iframe.srcdoc = jsRunDoc(code, false);
+            } else if (!firstLine) {
+              iframe.srcdoc = codeNoteDoc(code, isDjango ? 'DJANGO' : 'CYBERSECURITY', 'ဒီ lesson မှာ run စရာ code မဟုတ်ဘဲ မှတ်စု / checklist ဖြစ်ပါတယ်။');
+            } else {
+              iframe.srcdoc = pythonDoc(code, isDjango ? DJANGO_PRELUDE : CYBER_PRELUDE, isDjango, isDjango ? 'DJANGO' : 'CYBERSECURITY');
+            }
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 500);
+              setTimeout(function () { autoHeight(iframe); }, 1500);
+            };
+            return;
+          }
+          if (isShell || isDocker || isCloud || isAws) {
+            if ((isDocker && isDockerfileOrConfig(code)) || ((isAws || isDocker) && code.trim().charAt(0) === '{') || (isCloud && !firstCodeLine(code))) {
+              iframe.srcdoc = codeNoteDoc(code, group.toUpperCase(), 'ဒီ lesson က config / document နမူနာ ဖြစ်လို့ သက်ဆိုင်ရာ project မှာ စမ်းပါ။');
+            } else if ((isCloud || isAws) && /lambda_handler/.test(code)) {
+              iframe.srcdoc = pythonDoc(code);
+            } else {
+              iframe.srcdoc = shellTerminalDoc(code);
+            }
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 300);
+            };
+            return;
+          }
+          if (isSeo) {
+            if (/<(h1|h2|h3|p|div|img|a\s|ul|ol|li|form|button|section|article|span|table|video)[\s>]/.test(code)) {
+              iframe.srcdoc = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="font-family:sans-serif;margin:10px">' + code + HEIGHT_PRELUDE + '</body></html>';
+            } else {
+              iframe.srcdoc = codeNoteDoc(code, 'SEO', 'ဒီ lesson မှာ SEO checklist / မှတ်စု ဖြစ်လို့ ကိုယ့် website မှာ စစ်ပါ။');
+            }
+            iframe.onload = function () {
+              autoHeight(iframe);
+              setTimeout(function () { autoHeight(iframe); }, 300);
+            };
+            return;
+          }
+          if (isJava || isC || isGo || isRust || isCSharp) {
             iframe.srcdoc = localRunDoc(group);
             iframe.onload = function () {
               autoHeight(iframe);
