@@ -2099,11 +2099,21 @@
            Python is not a browser language, so load Pyodide in the isolated
            preview and mirror stdout/stderr into the same visible output panel
            used by JavaScript examples. The fallback message is intentional:
-           it tells learners when a CDN/runtime cannot be reached. */
+           it tells learners when a CDN/runtime cannot be reached.
+           Version note: use Pyodide 0.26.4, not 0.26.2. The preview iframe is
+           sandboxed (allow-scripts, no allow-same-origin), and 0.26.2 crashed
+           on load there: its environment check read window.sessionStorage,
+           which throws a SecurityError in a sandboxed iframe without
+           allow-same-origin, so loadPyodide was never defined and every Run
+           showed "Python runtime ကို မဖွင့်နိုင်ပါ". Fixed upstream in 0.26.4
+           (pyodide/pyodide#5186), which checks "sessionStorage" in window
+           instead. Do not downgrade below 0.26.4, and do not "fix" this by
+           adding allow-same-origin to the iframe: that would let user-edited
+           code reach the parent page. */
         function pythonDoc(code) {
           var safeCode = JSON.stringify(code).replace(/<\//g, '<\\/');
           return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
-            '<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"><\/script>' +
+            '<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"><\/script>' +
             '<style>body{margin:0;background:#0d1117;color:#e6edf3;font:13px/1.7 ui-monospace,monospace;padding:12px 14px;word-break:break-word}.label{color:#8b949e;font-size:11px;letter-spacing:.08em}.out{margin-top:8px;color:#d2f4df;white-space:pre-wrap}.err{margin-top:8px;color:#f87171;white-space:pre-wrap}</style></head>' +
             '<body><div class="label">PYTHON 3 · OUTPUT</div><div id="status" class="out">Python runtime ကို ဖွင့်နေပါတယ်…</div><div id="output" class="out"></div>' +
             '<script>\n' +
@@ -2111,7 +2121,7 @@
             'var statusBox=document.getElementById("status"), outputBox=document.getElementById("output");\n' +
             'function write(text, cls){var line=document.createElement("div");line.className=cls||"out";line.textContent=String(text);outputBox.appendChild(line);}\n' +
             '(async function(){try{if(typeof loadPyodide!=="function")throw new Error("Python runtime ကို မဖွင့်နိုင်ပါ။ အင်တာနက်ချိတ်ဆက်မှုကို စစ်ပါ။");' +
-            'var py=await loadPyodide({indexURL:"https://cdn.jsdelivr.net/pyodide/v0.26.2/full/"});' +
+            'var py=await loadPyodide({indexURL:"https://cdn.jsdelivr.net/pyodide/v0.26.4/full/"});' +
             'py.setStdout({batched:function(text){write(text);}});py.setStderr({batched:function(text){write(text,"err");}});' +
             'statusBox.textContent="RUNNING…";await py.runPythonAsync("import builtins\\nbuiltins.input=lambda prompt=\\\"\\\": \\\"Aye\\\"\\n"+source);' +
             'statusBox.textContent="✓ Python code အလုပ်လုပ်ပြီးပါပြီ";' +
@@ -2714,7 +2724,7 @@
           var badge = document.createElement('span');
           badge.className = 'lang-badge';
           var exPage = ex.closest ? ex.closest('.page') : null;
-          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
+          badge.textContent = ex.dataset.language || ((exPage && exPage.dataset.group === 'git') ? 'TERMINAL' : (exPage && exPage.dataset.group === 'php') ? 'PHP' : (exPage && exPage.dataset.group === 'mysql') ? 'SQL' : (exPage && exPage.dataset.group === 'laravel') ? 'LARAVEL' : (exPage && exPage.dataset.group === 'api') ? 'API / JSON' : (exPage && exPage.dataset.group === 'react') ? 'REACT / JSX' : (exPage && exPage.dataset.group === 'dart') ? 'DART' : (exPage && exPage.dataset.group === 'flutter') ? 'FLUTTER' : (exPage && exPage.dataset.group === 'tailwind') ? 'TAILWIND' : (exPage && exPage.dataset.group === 'js') ? 'JAVASCRIPT' : (exPage && exPage.dataset.group === 'python') ? 'PYTHON' : (exPage && exPage.dataset.group === 'typescript') ? 'TYPESCRIPT' : (/<style[\s>]/i.test(ed.original) ? 'HTML + CSS' : (ed.original.indexOf('<') >= 0 ? 'HTML' : 'CSS')));
           head.insertBefore(badge, copyBtn);
           var resetBtn = document.createElement('button');
           resetBtn.className = 'mini-btn';
